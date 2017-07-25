@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "postinstall": "cd client && yarn install"
+  },
+
+  "name": "hatch-site",
+  "private": true,
+  "dependencies": {}
+}
