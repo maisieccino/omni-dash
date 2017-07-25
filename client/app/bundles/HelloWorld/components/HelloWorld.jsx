@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
 const HelloWorld = ({ name, updateName }) => (
   <div>
@@ -15,7 +15,7 @@ const HelloWorld = ({ name, updateName }) => (
         id="name"
         type="text"
         value={name}
-        onChange={(e) => updateName(e.target.value)}
+        onChange={e => updateName(e.target.value)}
       />
     </form>
   </div>

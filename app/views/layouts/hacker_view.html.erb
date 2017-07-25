@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hatch</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all' %>
+    <%= javascript_include_tag 'application' %>
+    <%= javascript_pack_tag 'webpack-bundle' %>
+  </head>
+
+  <body data-no-turbolink>
+    <%= yield %>
+  </body>
+</html>

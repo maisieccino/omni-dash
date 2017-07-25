@@ -1,9 +1,17 @@
 {
   "scripts": {
-    "postinstall": "cd client && yarn install"
+    "postinstall": "cd client && yarn install",
+    "lint": "eslint ./ --ext .js --ext .jsx --cache --ignore-path .gitignore"
   },
-
   "name": "hatch-site",
   "private": true,
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.1.0",
+    "flow": "^0.2.3"
+  }
 }
