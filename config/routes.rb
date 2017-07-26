@@ -1,9 +1,15 @@
 Rails.application.routes.draw do
+  root "unauthenticated#index"
+
   devise_for :users, path: "auth", controllers: {
     sessions: "users/sessions"
   }
 
-  root "hacker_view#index"
+  scope :auth do
+    get "is_signed_in", to: "auth#signed_in?"
+  end
+
+  get "hackers", to: "hacker_view#index"
   get "hello_world", to: "hello_world#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

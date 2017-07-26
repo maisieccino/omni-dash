@@ -36,6 +36,13 @@ const config = {
 
   resolve: {
     extensions: [".js", ".jsx"],
+    alias: {
+      libs: resolve(__dirname, "app", "libs"),
+    },
+    modules: [
+      "client/app",
+      "client/node_modules",
+    ],
   },
 
   plugins: [
