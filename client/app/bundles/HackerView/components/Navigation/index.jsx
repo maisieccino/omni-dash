@@ -1,18 +1,10 @@
-import React, { Component } from "react";
+/* eslint react/prop-types: 0 */
+import React from "react";
 
-export default class Navigation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      index: 0,
-    };
-  }
+const Navigation = () => (
+  <nav>
+    <p><a rel="nofollow" data-method="delete" href="/auth/sign_out">Sign Out</a></p>
+  </nav>
+);
 
-  render() {
-    return (
-      <nav>
-        <p><a rel="nofollow" data-method="delete" href="/auth/sign_out">Sign Out</a></p>
-      </nav>
-    );
-  }
-}
+export default Navigation;

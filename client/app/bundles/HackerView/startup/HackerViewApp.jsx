@@ -1,13 +1,17 @@
 // @flow
 import React from "react";
 import { Provider } from "react-redux";
+import createHistory from "history/createBrowserHistory";
 import configureStore from "../store/hackerViewStore";
-import HackerView from "../components/HackerView";
+import HackerViewContainer from "../containers/HackerViewContainer";
 
-const HackerViewApp = props => (
-  <Provider store={configureStore(props)}>
-    <HackerView history={history} />
-  </Provider>
-);
+const HackerViewApp = (props) => {
+  const store = configureStore(props);
+  const history = createHistory({ basename: "/hackers" });
+
+  return (<Provider store={store}>
+    <HackerViewContainer history={history} />
+  </Provider>);
+};
 
 export default HackerViewApp;

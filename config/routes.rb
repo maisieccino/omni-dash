@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   end
 
   get "hackers", to: "hacker_view#index"
+  match "hackers/*path", to: "hacker_view#index", via: :all
+
   get "hello_world", to: "hello_world#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

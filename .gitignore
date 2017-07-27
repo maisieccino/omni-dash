@@ -40,3 +40,4 @@ client/app/libs/i18n/default.js
 
 # Ignore vendor/bundle
 vendor/bundle
+.eslintcache
