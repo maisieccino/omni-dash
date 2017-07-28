@@ -1,20 +1,23 @@
 language: ruby
 rvm:
-  - 2.4.1
+- 2.4.1
 services:
-  - postgresql
+- postgresql
 env:
-  - RAILS_ENV=test
+- RAILS_ENV=test
 install:
-  - bundle install
-  - nvm install stable && nvm alias default stable
-  - npm install npm@latest -g
-  - npm install -g yarn
-  - npm --version
-  - yarn install
+- bundle install
+- nvm install stable && nvm alias default stable
+- npm install npm@latest -g
+- npm install -g yarn
+- npm --version
+- yarn install
 before_script:
-  - cp config/database.travis.yml config/database.yml
-  - cp .env.travis .env
+- cp config/database.travis.yml config/database.yml
+- cp .env.travis .env
 script:
-  - bundle exec rake db:test:prepare
-  - bundle exec rspec
+- bundle exec rake db:test:prepare
+- bundle exec rspec
+notifications:
+  slack:
+    secure: RUYgttMJZsR0YhEa6SgnM70PLmGVDLDo7yyv1lnZnUONP3IdwrYNXSLiuH41oKsD6q0FbY4oGdZ4D+zmumB/g6G2iJ498Z2gXCnuYrLsGFuOznI4Cfh5fdcPbSUkcQu2Xk1pIXkBgwqmP9z3IlhAyRGWWlE44idPWLnngXlm82lT6HDQFOxsaDVsqtQ8OuGgirM0Nc1ekqKfNzbpg7Yzrqt/VyvjMXLUY5I9iid4qw2WgoXn654SrEunpv/KRrFwgSJ0levIMS41o9xt2tXfSAf5miHYNwRvrkDbK7I6UUR8XOiDWZlecTDdgMqxKUxtmEbSt/1LY3KLXoFu1ior3sRPTAg6U5tSz0WeDK7J1znX+A435lVkZn7R+YuX9EEK0NIPAuIeI4sLV1D5jrlA/jCUnNIrCuUmppA24i84EcjcZ6EmsgkuvmYEp75+LgbmiK3Z++FYG3eOtoR/dUHIOqvvEQzbIqHKuOlnclk4BgQ0WE+MW7uSDMOiUq/+4101DV3SloH9I70QdCABOk817v1Pi0662eBVWgYSp/0C3hfbiITlGqRoHl+eTGohcfx8qhmQhA2Tel+dxf/8AU5D/+YGTU4QXCx08FQcQysADoJ82utNTPoSi9FK8CvQk1Ai02JGq0YqCrIdIS82xNTiAfzqHGc62zdBNM7FGyWWCFg=
