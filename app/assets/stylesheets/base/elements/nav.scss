@@ -1,0 +1,25 @@
+nav {
+  background-color: $color-fg;
+  width: 100%;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+
+  img {
+    height: 3.5rem;
+    margin: $page-margin-horz;
+  }
+
+  a {
+    font-family: $font-title;
+    font-size: 1.25rem;
+    color: $color-bg;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    text-transform: lowercase;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

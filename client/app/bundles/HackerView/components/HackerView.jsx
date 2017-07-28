@@ -12,9 +12,10 @@ const HackerView = ({ user, history }) => (
   <ConnectedRouter history={history} >
     <div>
       <Navigation />
-      <Link to="/test">Hello</Link>
-      <Route exact path="/" render={() => <HomePage user={user} />} />
-      <Route path="/test" component={TestPage} />
+      <div className="page">
+        <Route exact path="/" render={() => <HomePage user={user} />} />
+        <Route path="/test" component={TestPage} />
+      </div>
     </div>
   </ConnectedRouter>
 );
