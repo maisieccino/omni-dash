@@ -1,12 +1,12 @@
 /* eslint react/prop-types: 0 */
 import React from "react";
 import { Route } from "react-router";
-import { Link } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
 
 import Navigation from "./Navigation";
 import HomePage from "./HomePage";
-import TestPage from "./TestPage";
+import CoursesPage from "./CoursesPage";
+import InfoPage from "./InfoPage";
 
 const HackerView = ({ user, history }) => (
   <ConnectedRouter history={history} >
@@ -14,7 +14,8 @@ const HackerView = ({ user, history }) => (
       <Navigation />
       <div className="page">
         <Route exact path="/" render={() => <HomePage user={user} />} />
-        <Route path="/test" component={TestPage} />
+        <Route path="/courses" component={CoursesPage} />
+        <Route path="/info" component={InfoPage} />
       </div>
     </div>
   </ConnectedRouter>

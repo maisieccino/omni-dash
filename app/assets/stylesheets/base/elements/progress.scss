@@ -1,0 +1,32 @@
+progress {
+  // thanks:
+  // https://codepen.io/matt-west/pen/bpzEy
+
+  $bg: darken($color-card, 20);
+  $fg: $color-accent;
+  $br: 0.2rem;
+
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  /* Firefox */
+  border: none;
+  background-color: $bg;
+  border-radius: $br;
+
+  &::-webkit-progress-bar {
+    background-color: $bg;
+    border-radius: $br;
+  }
+
+  &::-webkit-progress-value {
+    background-color: $fg;
+    border-radius: $br;
+  }
+
+  &::-moz-progress-bar {
+    background-color: $fg;
+    border-radius: $br;
+  }
+}

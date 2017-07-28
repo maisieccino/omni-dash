@@ -6,7 +6,9 @@ const Navigation = () => (
   <nav>
     <img alt="" src="/assets/hatch_logo.png" />
     <Link to="/">Home</Link>
-    <Link to="/test">Test</Link>
+    <Link to="/courses">Courses</Link>
+    <Link to="/info">Event Info</Link>
+    <Link to="/help">Request Help</Link>
     <a rel="nofollow" data-method="delete" href="/auth/sign_out">Sign Out</a>
   </nav>
 );

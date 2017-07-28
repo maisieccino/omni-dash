@@ -1,5 +1,8 @@
 # Hatch Site
-The one-stop shop for the Hatch hackathon.
+[![Build Status](https://travis-ci.org/hatchucl/hatch-site.svg?branch=master)](https://travis-ci.org/hatchucl/hatch-site)
+[![Code Climate](https://codeclimate.com/github/hatchucl/hatch-site/badges/gpa.svg)](https://codeclimate.com/github/hatchucl/hatch-site)
+
+The one-stop shop for all information, news, and courses for the upcoming Hatch hackathon.
 
 # Getting up and running
 

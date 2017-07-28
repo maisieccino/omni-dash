@@ -17,6 +17,14 @@ nav {
     margin: 0 0.5rem;
     text-decoration: none;
     text-transform: lowercase;
+    max-width: 5rem;
+    word-spacing: 5rem;
+    text-align: center;
+
+    &.active {
+      color: $color-accent;
+      text-decoration: underline;
+    }
 
     &:hover {
       text-decoration: underline;
