@@ -1,11 +1,12 @@
 /* eslint react/prop-types: 0 */
 import React from "react";
+import FeedContainer from "./FeedContainer";
 
 const HomePage = ({ user }) => (
   <div>
     <h1>Hello, <span className="accent">{ user.first_name }</span>.</h1>
 
-    <div className="feed">
+    {/* <div className="feed">
       <div className="feed-card flex-card">
         <div className="card-body">
           <section className="card-section">
@@ -43,7 +44,9 @@ const HomePage = ({ user }) => (
         </div>
       </div>
 
-    </div>
+    </div> */}
+
+    <FeedContainer />
   </div>
 );
 
