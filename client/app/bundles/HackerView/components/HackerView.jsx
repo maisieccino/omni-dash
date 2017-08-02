@@ -7,6 +7,7 @@ import Navigation from "./Navigation";
 import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
 import InfoPage from "./InfoPage";
+import ProfilePage from "./ProfilePage";
 
 const HackerView = ({ user, history }) => (
   <ConnectedRouter history={history} >
@@ -16,7 +17,9 @@ const HackerView = ({ user, history }) => (
         <Route exact path="/" render={() => <HomePage user={user} />} />
         <Route path="/courses" component={CoursesPage} />
         <Route path="/info" component={InfoPage} />
+        <Route path="/profile" component={ProfilePage} />
       </div>
+      <Navigation className="nav-bottom" removeRoutes={["Sign Out"]} />
     </div>
   </ConnectedRouter>
 );

@@ -1,18 +1,35 @@
 /* eslint react/prop-types: 0 */
+// @flow
 import React from "react";
-import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { generate } from "shortid";
+import routes from "./routes";
 
-const Navigation = () => (
-  <nav>
+const Navigation = ({ className, removeRoutes }) => {
+  // filter routes down using the removeRoutes prop.
+  // If removeRoutes is empty, skip this to save rendering.
+  const navRoutes = removeRoutes ?
+    routes
+      .filter(route => !removeRoutes.includes(route.props.children))
+      .map(route => React.cloneElement(route, { key: generate() }))
+    : routes;
+
+  return (<nav className={className}>
     <div>
       <img alt="" src="/assets/hatch_logo.png" />
-      <Link to="/">Home</Link>
-      <Link to="/courses">Courses</Link>
-      <Link to="/info">Event</Link>
-      <Link to="/profile">Profile</Link>
-      <a rel="nofollow" data-method="delete" href="/auth/sign_out">Sign Out</a>
+      { navRoutes }
     </div>
-  </nav>
-);
+  </nav>);
+};
+
+Navigation.propTypes = {
+  className: PropTypes.string,
+  removeRoutes: PropTypes.arrayOf(PropTypes.string),
+};
+
+Navigation.defaultProps = {
+  className: "",
+  removeRoutes: [],
+};
 
 export default Navigation;

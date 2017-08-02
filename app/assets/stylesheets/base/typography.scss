@@ -9,3 +9,20 @@ p, a, li {
   font-family: $font-body;
   font-weight: 400;
 }
+
+.fancy-title {
+  color: $color-accent;
+  position: relative;
+  margin: 0 0 1.25rem 0;
+  font-size: 1.75rem;
+
+  &:after {
+    position: absolute;
+    content: "";
+    top: 125%;
+    left: 0;
+    width: 2rem;
+    height: 0.4rem;
+    background-color: $color-accent;
+  }
+}
