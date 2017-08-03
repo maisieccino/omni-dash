@@ -10,13 +10,22 @@ The one-stop shop for all information, news, and courses for the upcoming Hatch 
 
 * Ruby 2.3 or later (Matt is developing using 2.4.1)
 * Yarn or NPM (yarn is recommended)
-* PostgreSQL server, either local or otherwise
+* PostgreSQL server, either local or otherwise (MacOS users use https://postgresapp.com/)
 
 Some gems you'll need beforehand:
 * `foreman` (for running webpack + rails + livereload)
 * `bundler` (for grabbing project dependencies)
+* `guard` (for running livereload)
 
 ## Install gems and javascript dependencies
+**NOTE**
+
+If you're using MacOS with Postgres.app, you need to configure bundler like so:
+
+```bash
+$ bundle config build.pg --with-pg-config=/Applications/Postgres.app/Contents/Versions/latest/bin/pg_config
+```
+
 Get Rails + dependencies (you can run `bundle install` instead, but this keeps
 your local files nice and tidy):
 
