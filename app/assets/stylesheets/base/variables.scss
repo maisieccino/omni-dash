@@ -1,7 +1,7 @@
 // colours
 $color-bg: #FFFFFE;
 $color-fg: #000000;
-$color-card: #CCCCCC;
+$color-card: #ECECEC;
 $color-accent: #FF004C;
 
 // typography
@@ -9,4 +9,8 @@ $font-title: "Karla", "Arial", sans-serif;
 $font-body: "Yantramanav", "Arial", sans-serif;
 
 // layout
+$page-max-width: 1000px;
 $page-margin-horz: 1.5rem;
+// width at which nav switches to bottom nav instead of top nav.
+$navigation-switch-width: 600px;
+$bottom-nav-height: 4rem;

@@ -1,7 +1,14 @@
 // main content container
 
 .page {
-  margin: 0 $page-margin-horz;
+  margin: 2rem auto 0;
+  padding: 0 $page-margin-horz calc(#{$bottom-nav-height} + 1rem);
+  max-width: $page-max-width;
+  z-index: 0;
+
+  @include respond-to($navigation-switch-width) {
+    padding: 0 $page-margin-horz;
+  }
 
   // typography
   h1, h2, h3, h4, h5, h6 {
@@ -11,4 +18,5 @@
       color: $color-accent;
     }
   }
+
 }

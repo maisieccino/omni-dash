@@ -4,8 +4,9 @@ progress {
 
   $bg: darken($color-card, 20);
   $fg: $color-accent;
-  $br: 0.2rem;
+  $br: 0.4rem;
 
+  height: 1.5rem;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

@@ -1,6 +1,6 @@
 .feed-card {
   background-color: $color-card;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1rem;
 
   margin-top: 3rem;
 
@@ -9,20 +9,7 @@
   }
 
   h2 {
-    color: $color-accent;
-    position: relative;
-    margin: 0 0 1.25rem 0;
-    font-size: 1.75rem;
-
-    &:after {
-      position: absolute;
-      content: "";
-      top: 125%;
-      left: 0;
-      width: 2rem;
-      height: 0.4rem;
-      background-color: $color-accent;
-    }
+    @extend .fancy-title;
   }
 
   h3 {
@@ -39,12 +26,22 @@
     display: flex;
     flex-direction: column;
 
+    @include respond-to($page-max-width) {
+      flex-direction: row;
+    }
+
     section.card-section {
       // first card section has no top margin
       &:nth-of-type(1) {
         margin-top: 0;
       }
       margin-top: 1rem;
+
+      @include respond-to($page-max-width) {
+        margin-top: 0;
+        flex-grow: 1;
+      }
+
     }
   }
 
@@ -53,6 +50,7 @@
     justify-content: space-between;
     align-items: center;
     margin-top: 1rem;
+    font-size: 1.2rem;
 
     p {
       text-align: center;
@@ -60,7 +58,7 @@
 
     progress {
       flex-grow: 1;
-      margin: 0 5%;
+      margin: 0 2%;
     }
   }
 }

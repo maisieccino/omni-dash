@@ -1,33 +1,80 @@
 nav {
   background-color: $color-fg;
+  position: fixed;
+  bottom: 0;
+  height: $bottom-nav-height;
   width: 100%;
-  height: 5rem;
-  display: flex;
-  align-items: center;
+  padding: 0;
+  flex-direction: row;
+  z-index: 5;
 
   img {
-    height: 3.5rem;
-    margin: $page-margin-horz;
+    display: none;
+  }
+
+  div {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    align-items: stretch;
+    display: flex;
+    flex-direction: row;
   }
 
   a {
     font-family: $font-title;
-    font-size: 1.25rem;
-    color: $color-bg;
-    margin: 0 0.5rem;
     text-decoration: none;
     text-transform: lowercase;
-    max-width: 5rem;
-    word-spacing: 5rem;
+    font-size: 1.25rem;
+    color: $color-bg;
+    max-width: none;
+    flex-grow: 1;
     text-align: center;
+    transition: all 0.25s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0;
 
-    &.active {
-      color: $color-accent;
-      text-decoration: underline;
+    &:hover, &.active {
+      color: $color-bg;
+      text-decoration: none;
+      background-color: $color-accent;
+    }
+  }
+
+  @include respond-to($navigation-switch-width) {
+    height: 5rem;
+    position: inherit;
+
+    div {
+      max-width: $page-max-width;
+    align-items: center;
     }
 
-    &:hover {
-      text-decoration: underline;
+    img {
+      display: inline;
+      height: 3.5rem;
+      margin-right: $page-margin-horz;
+    }
+
+    a {
+      margin: 0 0.5rem;
+      max-width: 5rem;
+      word-spacing: 5rem;
+      text-align: center;
+
+      &.active {
+        color: $color-accent;
+        background-color: transparent;
+        text-decoration: underline;
+      }
+
+      &:hover {
+        text-decoration: underline;
+        background-color: inherit;
+      }
     }
   }
 }
