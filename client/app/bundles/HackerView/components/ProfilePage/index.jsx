@@ -16,7 +16,13 @@ const InfoPage = () => (
         <p>Hatch organiser, javascripter, runner</p>
         <div className="header-buttons">
           <button>Settings</button>
-          <button>Sign Out</button>
+          <a
+            href="/auth/sign_out"
+            data-method="delete"
+            className="button"
+          >
+            Sign Out
+          </a>
         </div>
       </div>
     </header>

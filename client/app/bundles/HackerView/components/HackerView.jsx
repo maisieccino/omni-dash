@@ -19,7 +19,6 @@ const HackerView = ({ user, history }) => (
         <Route path="/info" component={InfoPage} />
         <Route path="/profile" component={ProfilePage} />
       </div>
-      <Navigation className="nav-bottom" removeRoutes={["Sign Out"]} />
     </div>
   </ConnectedRouter>
 );
