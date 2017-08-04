@@ -76,6 +76,12 @@ $ foreman start -f Procfile.dev
 
 Now visit `http://localhost:3000` to see the app!
 
+# Email tester
+Install the `mailcatcher` gem as described on the [project website](https://mailcatcher.me/)
+
+Then run the gem to start the mailserver and open the web interface to intercept
+app emails.
+
 # Testing
 
 Rails tests are run with `rspec`:

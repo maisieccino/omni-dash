@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root "unauthenticated#index"
 
   devise_for :users, path: "auth", controllers: {
-    sessions: "users/sessions"
+    sessions: "users/sessions",
+    registrations: "users/registrations"
   }
 
   scope :auth do

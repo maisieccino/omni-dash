@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170728230308) do
+ActiveRecord::Schema.define(version: 20170804200240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invite_codes", force: :cascade do |t|
+    t.string "code"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_invite_codes_on_code"
+    t.index ["email"], name: "index_invite_codes_on_email", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
@@ -30,6 +41,18 @@ ActiveRecord::Schema.define(version: 20170728230308) do
     t.inet "current_sign_in_ip"
     t.inet "last_sign_in_ip"
     t.string "last_name"
+    t.text "bio"
+    t.string "phone_number"
+    t.text "dietary_info"
+    t.integer "coding_experience"
+    t.string "contact_twitter"
+    t.string "contact_facebook"
+    t.string "contact_website"
+    t.string "contact_linkedin"
+    t.string "contact_devpost"
+    t.string "contact_github"
+    t.boolean "admin", default: false
+    t.boolean "mentor", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

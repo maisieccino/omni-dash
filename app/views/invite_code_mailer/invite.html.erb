@@ -1,0 +1,22 @@
+<h1>Welcome to Hatch!</h1>
+<p>Dear <%= @invite_code.first_name %>,</p>
+<p>This email contains information for signing up to the Hatch online dashboard.
+  From here, you'll be able to learn from our coding courses, keep up to date
+  on the latest news and updates from the venue, as well as keeping track of
+  workshops and events that happen during the weekend.</p>
+
+<p>To create your account, either follow the link below:</p>
+
+<p><a href="<%= new_user_registration_url(code: @invite_code.code) %>">Login link</a></p>
+
+<p>Or you can visit the sign up page and enter your access code:</p>
+
+<p>URL: <%= new_user_registration_url %></p>
+
+<p>Code: <%= @invite_code.code %></p>
+
+<p>We look forward to seeing you at Hatch!</p>
+
+<p>Kind regards,</p>
+
+<p>The Hatch x UCL team</p>
