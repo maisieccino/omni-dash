@@ -52,18 +52,36 @@ RAILS_DB_HOST=localhost
 RAILS_DB_PORT=5432
 RAILS_DB_USER=postgres
 RAILS_DB_PASS=
+RAILS_ADMIN_USER_EMAIL=admin@example.com
+RAILS_ADMIN_USER_FIRSTNAME=Admin
+RAILS_ADMIN_USER_LASTNAME=User
+RAILS_ADMIN_USER_PASS=password
 ```
 
 * `RAILS_DB_HOST` - Leave as `localhost` if you're running locally.
 * `RAILS_DB_PORT` - Leave this unchanged unless you changed the port.
 * `RAILS_DB_USER` - Username for the database. It's normally `postgres`.
 * `RAILS_DB_PASS` - Password for the database user, if it exists.
+* `RAILS_ADMIN_USER_EMAIL` - Email address for admin account
+* `RAILS_ADMIN_USER_FIRSTNAME` - First name of the admin account
+* `RAILS_ADMIN_USER_LASTNAME` - Last name of the admin account
+* `RAILS_ADMIN_USER_PASS` - Password of the admin account
+
+We recommend leaving the `RAILS_ADMIN_USER` settings as the default values when
+developing. Never set the real password in your env file. You'll see why
+shortly.
 
 Create the development and test databases, and migrate the tables.
 
 ```bash
 $ bundle exec rake db:create
 $ bundle exec rake db:migrate
+```
+
+Create the admin user, using the real password instead of `<password>` here.
+
+```bash
+$ RAILS_ADMIN_USER_PASS=<password> bundle exec rake db:seed
 ```
 
 # Run in development mode
@@ -75,6 +93,12 @@ $ foreman start -f Procfile.dev
 ```
 
 Now visit `http://localhost:3000` to see the app!
+
+# Email tester
+Install the `mailcatcher` gem as described on the [project website](https://mailcatcher.me/)
+
+Then run the gem to start the mailserver and open the web interface to intercept
+app emails.
 
 # Testing
 

@@ -19,6 +19,7 @@ AllCops:
     - 'bin/**/*'
     - 'Procfile.*'
     - !ruby/regexp /old_and_unused\.rb$/
+    - 'Guardfile'
 
 Metrics/LineLength:
   Max: 120
@@ -34,3 +35,10 @@ Style/StringLiterals:
 
 Style/Documentation:
   Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '[]'

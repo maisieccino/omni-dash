@@ -1,16 +1,24 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_form_params, only: [:new]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    @code = InviteCode.find_by(code: params[:code]) if params[:code]
+    super
+  end
 
   # POST /resource
   def create
-    print params
-    super
+    code = InviteCode.find_by(code: params[:user][:access_code], email: params[:user][:email])
+    params[:user].delete :access_code
+    if code
+      super
+    else
+      flash[:alert] = "You either did not provide an access code or it was incorrect. Double check your email!"
+      redirect_to(new_user_registration_path)
+    end
   end
 
   # GET /resource/edit
@@ -39,14 +47,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
+  def configure_sign_up_form_params
+    params.permit(:code)
+  end
+
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[first_name last_name access_code])
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[first_name last_name access_code])
   end
 
   # The path used after sign up.

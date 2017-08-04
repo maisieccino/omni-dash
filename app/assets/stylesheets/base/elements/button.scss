@@ -9,6 +9,7 @@ button, input[type="submit"], .button {
   border-radius: 0.3rem;
   text-decoration: none;
   text-align: center;
+  display: inline-block;
 
   &:hover {
     background-color: lighten($color-accent, 20);
