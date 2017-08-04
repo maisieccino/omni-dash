@@ -66,6 +66,7 @@ RAILS_ADMIN_USER_PASS=password
 * `RAILS_ADMIN_USER_FIRSTNAME` - First name of the admin account
 * `RAILS_ADMIN_USER_LASTNAME` - Last name of the admin account
 * `RAILS_ADMIN_USER_PASS` - Password of the admin account
+* `RAILS_MAILER_FROM` - "From" address for emails. Ignore for dev environment
 
 We recommend leaving the `RAILS_ADMIN_USER` settings as the default values when
 developing. Never set the real password in your env file. You'll see why
