@@ -1,14 +1,58 @@
 require "rails_helper"
-require "pp"
 
 RSpec.describe "Users API", type: :request do
+  let(:user_params) do
+    attributes_for(:user)
+  end
   let(:user) { create(:user) }
   # test that admin can see extra info
   let(:admin_user) { create(:user, admin: true) }
   # other user to test what fields are available to other users
   let(:other_user) { create(:user) }
 
-  describe "GET /user/:id" do
+  describe "POST /users" do
+    it "should be forbidden if not signed in" do
+      post users_path, params: user_params.to_json, headers: json_headers
+      expect(response).to have_http_status(403)
+    end
+
+    it "should be forbidden if not admin" do
+      sign_in user
+      post users_path, params: user_params.to_json, headers: json_headers
+      expect(response).to have_http_status(403)
+    end
+
+    it "should be successful if signed in as admin" do
+      sign_in admin_user
+      post users_path, params: user_params.to_json, headers: json_headers
+      expect(response).to have_http_status(201)
+    end
+
+    it "shouldn't be successful if invalid params" do
+      user_params = { first_name: "Matt" }
+      sign_in admin_user
+      post users_path, params: user_params.to_json, headers: json_headers
+      expect(response).to have_http_status(422)
+    end
+  end
+
+  describe "GET /users" do
+    it "should never be allowed" do
+      get users_path
+      expect(response).to have_http_status(403)
+
+      sign_in user
+      get users_path
+      expect(response).to have_http_status(405)
+      sign_out user
+
+      sign_in admin_user
+      get users_path
+      expect(response).to have_http_status(405)
+    end
+  end
+
+  describe "GET /users/:id" do
     it "allows user to view all of their own details when logged in" do
       sign_in user
       get user_path(user[:id])
@@ -78,6 +122,37 @@ RSpec.describe "Users API", type: :request do
       expect(json["coding_experience"]).to eq(other_user[:coding_experience])
 
       expect(json["password"]).to be_nil
+    end
+  end
+
+  describe "PUT /users/:id/" do
+    let(:update_params) { { first_name: "Matt" } }
+    let(:password_params) { { password: "hunter2" } }
+    it "allows user to update their own info" do
+      sign_in user
+      put user_path(user[:id]), params: update_params.to_json, headers: json_headers
+      expect(response).to have_http_status(204)
+      user_obj = User.find(user[:id])
+      expect(user_obj[:first_name]).to eq("Matt")
+    end
+
+    it "allows admin to update user info" do
+      sign_in admin_user
+      put user_path(user[:id]), params: update_params.to_json, headers: json_headers
+      expect(response).to have_http_status(204)
+      user_obj = User.find(user[:id])
+      expect(user_obj[:first_name]).to eq("Matt")
+    end
+
+    it "doesn't allow other users to update info" do
+      sign_in other_user
+      put user_path(user[:id]), params: update_params.to_json, headers: json_headers
+      expect(response).to have_http_status(403)
+    end
+
+    it "doesn't allow unauthenticated users to update info" do
+      put user_path(user[:id]), params: update_params.to_json, headers: json_headers
+      expect(response).to have_http_status(403)
     end
   end
 end
