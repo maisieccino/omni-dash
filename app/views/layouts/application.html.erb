@@ -13,11 +13,8 @@
   <body>
     <%= render "shared/nav" %>
     <div class="page">
-      <% if notice %>
-        <p class="notice"><%= notice %></p>
-      <% end %>
-      <% if alert %>
-        <p class="alert"><%= alert %></p>
+      <% flash.each do |name, msg| %>
+        <p class="<%= name %>"><%= msg %></p>
       <% end %>
       <%= yield %>
     </div>

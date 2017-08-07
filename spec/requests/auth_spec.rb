@@ -64,4 +64,30 @@ RSpec.describe "Auth Endpoints", type: :request do
       end
     end
   end
+
+  describe "DELETE /auth" do
+    let(:user) { create(:user) }
+
+    it "allows users to deactivate their own account" do
+      sign_in user
+      delete user_registration_path
+      expect(response).to have_http_status(302)
+      expect(flash[:success]).to be_present
+      expect(flash[:success]).to include("success", "deactivated")
+
+      expect(User.find_by_id(user[:id])[:deleted_at]).to_not be_nil
+
+      # check that user gets signed out because their account got deactivated
+      get user_path(user[:id])
+      expect(response).to have_http_status(403)
+    end
+
+    it "prevents users from signing in again" do
+      sign_in user
+      delete user_registration_path
+      expect(response).to have_http_status(302)
+      expect(flash[:success]).to be_present
+      expect(flash[:success]).to include("success", "deactivated")
+    end
+  end
 end

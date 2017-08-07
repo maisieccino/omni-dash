@@ -155,4 +155,37 @@ RSpec.describe "Users API", type: :request do
       expect(response).to have_http_status(403)
     end
   end
+
+  describe "DELETE /users" do
+    it "allows admins to deactivate a user" do
+      sign_in admin_user
+      delete user_path(user[:id])
+      expect(response).to have_http_status(204)
+      expect(User.find_by_id(user[:id])).to_not be_nil
+
+      # check that user isn't found via API
+      get user_path(user[:id])
+      expect(response).to have_http_status(404)
+    end
+
+    it "does not allow other users to delete a user" do
+      sign_in user
+      delete user_path(other_user[:id])
+      expect(response).to have_http_status(403)
+
+      # check not actually deleted
+      get user_path(other_user[:id])
+      expect(response).to have_http_status(200)
+    end
+
+    it "does not allow users to /delete themselves (use auth path instead)" do
+      sign_in user
+      delete user_path(user[:id])
+      expect(response).to have_http_status(403)
+
+      # check not actually deleted
+      get user_path(user[:id])
+      expect(response).to have_http_status(200)
+    end
+  end
 end
