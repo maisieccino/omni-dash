@@ -21,6 +21,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def show_self
+    @user = User.find_by_id(current_user[:id])
+    json_response(@user)
+  end
+
   def update
     return head :forbidden unless current_user[:id] == @user[:id] || current_user.admin?
     @user.update(user_params)

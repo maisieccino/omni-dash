@@ -125,6 +125,32 @@ RSpec.describe "Users API", type: :request do
     end
   end
 
+  describe "GET /users/me" do
+    it "allows user to view all of their own details when logged in" do
+      sign_in user
+      get user_me_path
+
+      expect(response).to have_http_status(200)
+      expect(json).to_not be_empty
+      expect(json["email"]).to eq(user[:email])
+      expect(json["first_name"]).to eq(user[:first_name])
+      expect(json["last_name"]).to eq(user[:last_name])
+      expect(json["bio"]).to eq(user[:bio])
+      expect(json["phone_number"]).to eq(user[:phone_number])
+      expect(json["dietary_info"]).to eq(user[:dietary_info])
+      expect(json["coding_experience"]).to eq(user[:coding_experience])
+      expect(json["contact_twitter"]).to eq(user[:coding_experience])
+      expect(json["admin"]).to eq(user[:admin])
+      expect(json["mentor"]).to eq(user[:mentor])
+      expect(json["password"]).to be_nil
+    end
+
+    it "prevents access when not signed in" do
+      get user_me_path
+      expect(response).to have_http_status(403)
+    end
+  end
+
   describe "PUT /users/:id/" do
     let(:update_params) { { first_name: "Matt" } }
     let(:password_params) { { password: "hunter2" } }
@@ -142,6 +168,7 @@ RSpec.describe "Users API", type: :request do
       expect(response).to have_http_status(204)
       user_obj = User.find(user[:id])
       expect(user_obj[:first_name]).to eq("Matt")
+      expect(user_obj[:last_name]).to eq(user[:last_name])
     end
 
     it "doesn't allow other users to update info" do
