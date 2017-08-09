@@ -1,0 +1,34 @@
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.input-addon {
+  padding-right: 0.1rem;
+  background-color: darken($color-card, 10);
+  font-size: 1.1rem;
+  padding: 0.25rem 0.4rem;
+}
+
+input[type="text"] {
+  font-family: $font-body;
+  font-size: 1.1rem;
+  transition: all 0.25s ease-in-out;
+  border: none;
+  border-bottom: $color-accent solid 0;
+  outline: none;
+  padding: 0.25rem;
+  position: relative;
+
+  &:focus {
+    // border-bottom: $color-accent solid 0.2rem;
+    background-color: $color-bg;
+    background-color: $color-card;
+  }
+}
+
+.input-group {
+  border: $color-fg solid 1px;
+  display: inline-block;
+}

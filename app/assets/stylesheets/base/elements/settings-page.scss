@@ -30,5 +30,14 @@
 
   .settings-pane {
     @extend .profile-body;
+
+    h2 {
+      font-size: 1.6rem;
+      color: inherit;
+      margin: 1.5rem 0 0;
+      &:after {
+        display: none;
+      }
+    }
   }
 }

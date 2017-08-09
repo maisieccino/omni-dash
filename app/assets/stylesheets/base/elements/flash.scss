@@ -25,6 +25,14 @@
   border-color: darken($color, 40);
 }
 
+.warning {
+  @extend .flash;
+  $color: #d6b772;
+  background-color: $color;
+  color: darken($color, 40);
+  border-color: darken($color, 40);
+}
+
 .success {
   @extend .flash;
   $color: #7cf299;
