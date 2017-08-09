@@ -8,6 +8,7 @@ import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
 import InfoPage from "./InfoPage";
 import ProfilePage from "./ProfilePage";
+import SettingsPage from "./SettingsPage";
 import TopNav from "./Navigation/TopNav";
 
 const HackerView = ({ user, history }) => (
@@ -20,6 +21,7 @@ const HackerView = ({ user, history }) => (
         <Route path="/courses" component={CoursesPage} />
         <Route path="/info" component={InfoPage} />
         <Route path="/profile" component={ProfilePage} />
+        <Route path="/settings" component={SettingsPage} />
       </div>
     </div>
   </ConnectedRouter>

@@ -1,6 +1,7 @@
 /* eslint camelcase: 0 */
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const bioText = bio => bio || <i>This user has not yet provided a bio.</i>;
 
@@ -18,7 +19,13 @@ const Header = ({ first_name, last_name, bio, isFetching }) => (
       <h1>{ first_name } { last_name }</h1>
       <p>{ bioText(bio) }</p>
       <div className="header-buttons">
-        <button disabled={isFetching}>Settings</button>
+        <Link
+          to="/settings"
+          className="button"
+          disabled={isFetching}
+        >
+          Settings
+        </Link>
         <a
           href="/auth/sign_out"
           data-method="delete"

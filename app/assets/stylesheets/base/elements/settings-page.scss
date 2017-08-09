@@ -1,0 +1,34 @@
+.settings-main {
+  @extend .profile-main;
+
+  .settings-nav {
+    @extend .profile-sidebar;
+    margin-right: 1rem;
+    border-right: solid 1px $color-accent;
+
+    a {
+      font-family: $font-title;
+      display: block;
+      padding: 0.5rem 0.5rem;
+      text-decoration: none;
+      color: $color-accent;
+      background-color: $color-bg;
+      transition: all 0.25s ease-in-out;
+      border-radius: 0.5rem 0 0 0.5rem;
+
+      &:hover {
+        background-color: $color-card;
+        text-decoration: underline;
+      }
+
+      &.active {
+        background-color: $color-accent;
+        color: $color-bg;
+      }
+    }
+  }
+
+  .settings-pane {
+    @extend .profile-body;
+  }
+}

@@ -18,6 +18,7 @@ TopNav.defaultProps = {
 };
 
 const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
+  href: state.pageNav.abovePath,
   visible: state.pageNav.showBackButton,
 });
 

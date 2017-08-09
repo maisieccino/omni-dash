@@ -6,7 +6,7 @@ import * as pageNavActions from "../../actions/pageNavActions";
 
 import ProfileViewPage from "./ProfileViewPage";
 
-class InfoPage extends Component {
+class ProfilePage extends Component {
   componentWillMount() {
     this.props.getUser();
   }
@@ -23,14 +23,14 @@ class InfoPage extends Component {
   }
 }
 
-InfoPage.propTypes = {
+ProfilePage.propTypes = {
   user: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool,
   getUser: PropTypes.func.isRequired,
   updateBackButton: PropTypes.func.isRequired,
 };
 
-InfoPage.defaultProps = {
+ProfilePage.defaultProps = {
   isFetching: false,
 };
 
@@ -41,7 +41,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 
 const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch(userActions.fetchUser()),
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", true)),
+  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(InfoPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

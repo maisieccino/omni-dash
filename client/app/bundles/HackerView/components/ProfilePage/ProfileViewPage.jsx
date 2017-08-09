@@ -7,7 +7,7 @@ import Sidebar from "./Sidebar";
 
 const ProfileViewPage = ({ user, isFetching }) => (
   <div>
-    { isFetching && <p>LOADING...</p> }
+    { isFetching && <p>REFRESHING...</p> }
     <Header isFetching={isFetching} {...user} />
     <div className="profile-main">
       <Sidebar {...user} />
