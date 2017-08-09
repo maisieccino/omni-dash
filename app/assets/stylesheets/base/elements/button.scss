@@ -19,4 +19,10 @@ button, input[type="submit"], .button {
   &:active {
     background-color: darken($color-accent, 20);
   }
+
+  &:disabled, &.disabled {
+    background-color: grayscale($color-accent);
+    color: $color-card;
+    cursor: not-allowed;
+  }
 }

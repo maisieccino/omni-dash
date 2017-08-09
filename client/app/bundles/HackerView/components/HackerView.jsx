@@ -8,12 +8,14 @@ import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
 import InfoPage from "./InfoPage";
 import ProfilePage from "./ProfilePage";
+import TopNav from "./Navigation/TopNav";
 
 const HackerView = ({ user, history }) => (
   <ConnectedRouter history={history} >
     <div>
       <Navigation />
       <div className="page">
+        <TopNav />
         <Route exact path="/" render={() => <HomePage user={user} />} />
         <Route path="/courses" component={CoursesPage} />
         <Route path="/info" component={InfoPage} />

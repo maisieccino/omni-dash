@@ -2,34 +2,23 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as userActions from "../../actions/userActions";
+import * as pageNavActions from "../../actions/pageNavActions";
 
-import Header from "./Header";
-import Sidebar from "./Sidebar";
+import ProfileViewPage from "./ProfileViewPage";
 
 class InfoPage extends Component {
   componentWillMount() {
     this.props.getUser();
   }
 
+  componentDidMount() {
+    this.props.updateBackButton();
+  }
+
   render() {
     const { user, isFetching } = this.props;
     return (
-      <div>
-        { isFetching && <p>LOADING...</p> }
-        <Header {...user} />
-        <div className="profile-main">
-          <Sidebar {...user} />
-
-          <div className="profile-body">
-            <h2>Your Team At Hatch</h2>
-            <p>
-              You don’t appear to have a team registered for hatch yet!
-              Make sure you create/join your team before hacking ends.
-            </p>
-            <button>Create A Team</button>
-          </div>
-        </div>
-      </div>
+      <ProfileViewPage user={user} isFetching={isFetching} />
     );
   }
 }
@@ -38,6 +27,7 @@ InfoPage.propTypes = {
   user: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool,
   getUser: PropTypes.func.isRequired,
+  updateBackButton: PropTypes.func.isRequired,
 };
 
 InfoPage.defaultProps = {
@@ -51,6 +41,7 @@ const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
 
 const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch(userActions.fetchUser()),
+  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", true)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InfoPage);
