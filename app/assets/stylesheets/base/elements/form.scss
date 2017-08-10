@@ -20,6 +20,8 @@ input[type="text"] {
   outline: none;
   padding: 0.25rem;
   position: relative;
+  display: inline;
+  flex-grow: 1;
 
   &:focus {
     // border-bottom: $color-accent solid 0.2rem;
@@ -30,5 +32,10 @@ input[type="text"] {
 
 .input-group {
   border: $color-fg solid 1px;
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+
+  @include respond-to(900px) {
+    display: inline-block;
+  }
 }

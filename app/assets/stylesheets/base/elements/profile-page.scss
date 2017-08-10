@@ -48,6 +48,7 @@
 
     button, .button {
       min-width: 40%;
+      width: auto !important;
 
       @include respond-to(800px) {
         min-width: 15rem;
