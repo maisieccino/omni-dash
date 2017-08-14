@@ -33,7 +33,6 @@ export default (state = {}, action = null) => {
     }
 
     case constants.SET_IS_UPDATING: {
-      console.log("updating...");
       return {
         ...state,
         isUpdating: true,
@@ -52,8 +51,8 @@ export default (state = {}, action = null) => {
       return {
         ...state,
         isUpdating: false,
-        error: error,
-      }
+        error,
+      };
     }
 
     default: {
