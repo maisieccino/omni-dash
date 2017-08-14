@@ -32,6 +32,12 @@ class UsersController < ApplicationController
     head :no_content
   end
 
+  def update_self
+    @user = User.find_by_id(current_user[:id])
+    @user.update(user_params)
+    head :no_content
+  end
+
   def destroy
     return head :forbidden unless current_user.admin?
     @user.soft_delete

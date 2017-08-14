@@ -2,8 +2,10 @@ import * as constants from "../constants/userConstants";
 
 export const initialState = {
   isFetching: false,
+  isUpdating: false,
   user: {},
-  fetchUserError: "",
+  userChangedFields: {},
+  error: "",
 };
 
 export default (state = {}, action = null) => {
@@ -28,6 +30,30 @@ export default (state = {}, action = null) => {
         isFetching: false,
         error,
       });
+    }
+
+    case constants.SET_IS_UPDATING: {
+      console.log("updating...");
+      return {
+        ...state,
+        isUpdating: true,
+      };
+    }
+
+    case constants.UPDATE_USER_SUCCESS: {
+      return {
+        ...state,
+        isUpdating: false,
+        userChangedFields: {},
+      };
+    }
+
+    case constants.UPDATE_USER_FAILURE: {
+      return {
+        ...state,
+        isUpdating: false,
+        error: error,
+      }
     }
 
     default: {

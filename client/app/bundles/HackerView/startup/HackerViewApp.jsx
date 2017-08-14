@@ -8,7 +8,10 @@ import { initialStates } from "../reducers";
 
 const HackerViewApp = (props) => {
   const store = configureStore(Object.assign({}, initialStates, props));
-  const history = createHistory({ basename: "/hackers" });
+  const history = createHistory({
+    basename: "/hackers",
+    forceRefresh: false,
+  });
 
   return (<Provider store={store}>
     <HackerViewContainer history={history} />

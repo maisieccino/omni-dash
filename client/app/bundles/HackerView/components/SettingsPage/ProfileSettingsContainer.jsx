@@ -1,6 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import * as actions from "../../actions/userActions";
 
-const ProfileSettingsContainer = () => (
+const ProfileSettingsContainer = ({ saveChanges }) => (
   <div className="settings-pane">
     <div className="warning">Settings are not finished yet. Check back soon!</div>
     <h1>Profile Settings</h1>
@@ -39,8 +42,20 @@ const ProfileSettingsContainer = () => (
       <span className="input-addon">github.com/</span>
       <input id="user-contact-github" type="text" placeholder="Jane Doe" />
     </div>
-    <p><button>Save</button></p>
+    <p><button onClick={() => saveChanges()}>Save</button></p>
   </div>
 );
 
-export default ProfileSettingsContainer;
+ProfileSettingsContainer.propTypes = {
+  saveChanges: PropTypes.func,
+};
+
+ProfileSettingsContainer.defaultProps = {
+  saveChanges: () => {},
+};
+
+const mapDispatchToProps = dispatch => ({
+  saveChanges: () => dispatch(actions.updateUser({ first_name: "Matthew" })),
+});
+
+export default connect(state => state, mapDispatchToProps)(ProfileSettingsContainer);
