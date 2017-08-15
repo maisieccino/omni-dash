@@ -7,6 +7,7 @@ import Navigation from "./Navigation";
 import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
 import EventPage from "./EventPage";
+import NotificationsPage from "./NotificationsPage";
 import ProfilePage from "./ProfilePage";
 import SettingsPage from "./SettingsPage";
 import TopNav from "./Navigation/TopNav";
@@ -20,6 +21,7 @@ const HackerView = ({ user, history }) => (
         <Route exact path="/" render={() => <HomePage user={user} />} />
         <Route path="/courses" component={CoursesPage} />
         <Route path="/event" component={EventPage} />
+        <Route path="/notifications" component={NotificationsPage} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/settings" component={SettingsPage} />
       </div>

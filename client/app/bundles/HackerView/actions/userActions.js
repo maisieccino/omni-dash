@@ -22,8 +22,18 @@ export const fetchUser = () => ((dispatch) => {
     .catch(error => dispatch(fetchUserFailure(error.message)));
 });
 
+export const changeSettingValues = values => ({
+  type: constants.CHANGE_SETTING_VALUES,
+  values,
+});
+
 export const setIsUpdating = () => ({
   type: constants.SET_IS_UPDATING,
+});
+
+export const setUpdateSuccess = (success = false) => ({
+  type: constants.SET_UPDATE_SUCCESS,
+  success,
 });
 
 export const updateUserSuccess = () => ({
@@ -43,6 +53,12 @@ export const updateUserFailure = error => ({
 export const updateUser = (data = {}) => ((dispatch) => {
   dispatch(setIsUpdating());
   return Requests.jsonPutRequest(constants.USER_ME_PATH, data)
+    .then(() =>
+      // fake delay
+      new Promise((res) => {
+        setTimeout(() => res(), 1000);
+      }),
+    )
     .then(() => {
       dispatch(updateUserSuccess());
       dispatch(fetchUser());

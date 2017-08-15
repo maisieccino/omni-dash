@@ -56,4 +56,5 @@ export const jsonPutRequest = async (path, body, headers = {}) => fetch(path, {
 export default {
   getMetaContent,
   jsonGetRequest,
+  jsonPutRequest,
 };

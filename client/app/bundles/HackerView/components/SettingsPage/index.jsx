@@ -5,6 +5,7 @@ import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { generate } from "shortid";
 import * as pageNavActions from "../../actions/pageNavActions";
+import { setUpdateSuccess } from "../../actions/userActions";
 
 import NavItem from "./NavItem";
 import ProfileSettingsContainer from "./ProfileSettingsContainer";
@@ -26,10 +27,16 @@ const routes = [
 class SettingsPage extends Component {
   static propTypes = {
     updateBackButton: PropTypes.func.isRequired,
+    setUserUpdateSuccess: PropTypes.func,
+  }
+
+  static defaultProps = {
+    setUserUpdateSuccess: () => {},
   }
 
   componentDidMount() {
     this.props.updateBackButton();
+    this.props.setUserUpdateSuccess(false);
   }
 
   render() {
@@ -42,11 +49,13 @@ class SettingsPage extends Component {
           </aside>
 
           {/* programmatically generate routes from array */}
-          { routes.map(route => (<Route
-            key={generate()}
-            path={route.to}
-            component={route.component}
-          />)) }
+          { routes.map(route => (
+            <Route
+              key={generate()}
+              path={route.to}
+              component={route.component}
+            />
+          )) }
           <Route exact path="/settings" render={() => <Redirect to="/settings/profile" />} />
         </div>
       </div>
@@ -54,10 +63,11 @@ class SettingsPage extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ownProps;
+const mapStateToProps = (state, ownProps) => (ownProps);
 
 const mapDispatchToProps = dispatch => ({
   updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/profile", true)),
+  setUserUpdateSuccess: success => dispatch(setUpdateSuccess(success)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);

@@ -30,5 +30,6 @@ button, input[type="submit"], .button {
 
   @include respond-to(550px) {
     width: auto;
+    min-width: 5rem;
   }
 }

@@ -1,3 +1,6 @@
+$edited-fg: #8f791d;
+$edited-bg: lighten($edited-fg, 50);
+
 label {
   display: block;
   font-weight: bold;
@@ -22,11 +25,32 @@ input[type="text"] {
   position: relative;
   display: inline;
   flex-grow: 1;
+  background-color: transparent;
+
+  &::selection {
+    background-color: $color-accent;
+    color: $color-bg;
+  }
 
   &:focus {
     // border-bottom: $color-accent solid 0.2rem;
-    background-color: $color-bg;
-    background-color: $color-card;
+    background-color: rgba($color-fg, 0.1);
+  }
+}
+
+textarea {
+  @extend input[type="text"];
+  width: 100%;
+  min-height: 5rem;
+  border: $color-fg solid 1px;
+
+  &.edited {
+    border-color: $edited-fg;
+    background-color: $edited-bg;
+
+    &:focus {
+      background-color: desaturate(darken($edited-bg, 10), 30);
+    }
   }
 }
 
@@ -37,5 +61,10 @@ input[type="text"] {
 
   @include respond-to(900px) {
     display: inline-block;
+  }
+
+  &.edited {
+    border-color: $edited-fg;
+    background-color: $edited-bg;
   }
 }

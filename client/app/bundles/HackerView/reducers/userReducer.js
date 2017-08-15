@@ -3,13 +3,20 @@ import * as constants from "../constants/userConstants";
 export const initialState = {
   isFetching: false,
   isUpdating: false,
+  updateSuccess: false,
   user: {},
   userChangedFields: {},
   error: "",
 };
 
-export default (state = {}, action = null) => {
-  const { type, user, error } = action;
+export default (state = initialState, action = null) => {
+  const {
+    type,
+    user,
+    error,
+    success,
+    values: updatedValues,
+  } = action;
 
   switch (type) {
     case constants.SET_IS_FETCHING: {
@@ -36,6 +43,7 @@ export default (state = {}, action = null) => {
       return {
         ...state,
         isUpdating: true,
+        updateSuccess: false,
       };
     }
 
@@ -44,6 +52,7 @@ export default (state = {}, action = null) => {
         ...state,
         isUpdating: false,
         userChangedFields: {},
+        updateSuccess: true,
       };
     }
 
@@ -52,6 +61,23 @@ export default (state = {}, action = null) => {
         ...state,
         isUpdating: false,
         error,
+      };
+    }
+
+    case constants.SET_UPDATE_SUCCESS: {
+      return {
+        ...state,
+        updateSuccess: success,
+      };
+    }
+
+    case constants.CHANGE_SETTING_VALUES: {
+      return {
+        ...state,
+        userChangedFields: {
+          ...state.userChangedFields,
+          ...updatedValues,
+        },
       };
     }
 
