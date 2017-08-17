@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def create
     return head :forbidden unless current_user.admin?
-    @user = User.create!(user_params)
+    @user = User.create!(user_create_params)
     json_response(@user, :created)
   end
 
@@ -32,6 +32,12 @@ class UsersController < ApplicationController
     head :no_content
   end
 
+  def update_self
+    @user = User.find_by_id(current_user[:id])
+    @user.update(user_params)
+    head :no_content
+  end
+
   def destroy
     return head :forbidden unless current_user.admin?
     @user.soft_delete
@@ -48,14 +54,39 @@ class UsersController < ApplicationController
     json_response({ message: "User not found" }, :not_found) if @user[:deleted_at]
   end
 
+  def user_create_params
+    params.permit(
+      :admin,
+      :first_name,
+      :last_name,
+      :email,
+      :password,
+      :mentor,
+      :contact_twitter,
+      :contact_facebook,
+      :contact_website,
+      :contact_linkedin,
+      :contact_linkedin,
+      :contact_devpost,
+      :contact_github,
+      :bio
+    )
+  end
+
   def user_params
     params.permit(
       :first_name,
       :last_name,
       :email,
-      :password,
-      :admin,
-      :mentor
+      :mentor,
+      :contact_twitter,
+      :contact_facebook,
+      :contact_website,
+      :contact_linkedin,
+      :contact_linkedin,
+      :contact_devpost,
+      :contact_github,
+      :bio
     )
   end
 end

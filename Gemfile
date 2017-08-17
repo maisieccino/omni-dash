@@ -72,3 +72,5 @@ gem "mini_racer", platforms: :ruby
 gem "webpacker_lite"
 
 gem "devise"
+
+gem "font-awesome-sass"

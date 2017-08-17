@@ -1,16 +1,15 @@
 import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
 import userReducer, { initialState as userState } from "./userReducer";
+import pageNavReducer, { initialState as pageNavState } from "./pageNavReducer";
 
 export const initialStates = {
   user: userState,
-  pageIndex: 0,
+  pageNav: pageNavState,
 };
 
-const pageIndex = (state = 0) => state;
-
 export default combineReducers({
-  pageIndex,
   user: userReducer,
+  pageNav: pageNavReducer,
   routerReducer,
 });

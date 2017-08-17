@@ -1,18 +1,11 @@
-/* eslint react/prop-types: 0 */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import FeedContainer from "./FeedContainer";
 import * as pageNavActions from "../../actions/pageNavActions";
 
-class HomePage extends Component {
+class NotificationsPage extends Component {
   static propTypes = {
     updateBackButton: PropTypes.func.isRequired,
-    user: PropTypes.shape(),
-  }
-
-  static defaultProps = {
-    user: {},
   }
 
   componentDidMount() {
@@ -20,11 +13,10 @@ class HomePage extends Component {
   }
 
   render() {
-    const { user } = this.props;
     return (
       <div>
-        <h1>Hello, <span className="accent">{ user.first_name }</span>.</h1>
-        <FeedContainer />
+        <h1>Your Notifications</h1>
+        <p><i>You have no notifications. Hooray!</i></p>
       </div>
     );
   }
@@ -36,4 +28,4 @@ const mapDispatchToProps = dispatch => ({
   updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(NotificationsPage);

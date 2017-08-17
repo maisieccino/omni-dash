@@ -10,6 +10,8 @@ button, input[type="submit"], .button {
   text-decoration: none;
   text-align: center;
   display: inline-block;
+  box-sizing: border-box;
+  width: 100%;
 
   &:hover {
     background-color: lighten($color-accent, 20);
@@ -18,5 +20,16 @@ button, input[type="submit"], .button {
 
   &:active {
     background-color: darken($color-accent, 20);
+  }
+
+  &:disabled, &.disabled {
+    background-color: grayscale($color-accent);
+    color: $color-card;
+    cursor: not-allowed;
+  }
+
+  @include respond-to(550px) {
+    width: auto;
+    min-width: 5rem;
   }
 }

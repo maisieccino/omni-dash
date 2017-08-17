@@ -1,0 +1,56 @@
+.settings-main {
+  @extend .profile-main;
+  flex-direction: column;
+
+  .settings-nav {
+    @extend .profile-sidebar;
+
+    a {
+      font-family: $font-title;
+      display: block;
+      padding: 0.5rem 0.5rem;
+      text-decoration: none;
+      color: $color-accent;
+      background-color: $color-bg;
+      transition: all 0.25s ease-in-out;
+      border-radius: 0.5rem;
+
+      &:hover {
+        background-color: $color-card;
+        text-decoration: underline;
+      }
+
+      &.active {
+        background-color: $color-accent;
+        color: $color-bg;
+      }
+    }
+  }
+
+  .settings-pane {
+    @extend .profile-body;
+
+    h2 {
+      font-size: 1.6rem;
+      color: inherit;
+      margin: 1.5rem 0 0;
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  @include respond-to(900px) {
+    // make sidebar a sidebar
+    flex-direction: row;
+
+    .settings-nav {
+      margin-right: 1rem;
+      border-right: solid 1px $color-accent;
+
+      a {
+        border-radius: 0.5rem 0 0 0.5rem;
+      }
+    }
+  }
+}

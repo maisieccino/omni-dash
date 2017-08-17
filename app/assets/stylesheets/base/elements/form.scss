@@ -1,0 +1,70 @@
+$edited-fg: #8f791d;
+$edited-bg: lighten($edited-fg, 50);
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.input-addon {
+  padding-right: 0.1rem;
+  background-color: darken($color-card, 10);
+  font-size: 1.1rem;
+  padding: 0.25rem 0.4rem;
+}
+
+input[type="text"] {
+  font-family: $font-body;
+  font-size: 1.1rem;
+  transition: all 0.25s ease-in-out;
+  border: none;
+  border-bottom: $color-accent solid 0;
+  outline: none;
+  padding: 0.25rem;
+  position: relative;
+  display: inline;
+  flex-grow: 1;
+  background-color: transparent;
+
+  &::selection {
+    background-color: $color-accent;
+    color: $color-bg;
+  }
+
+  &:focus {
+    // border-bottom: $color-accent solid 0.2rem;
+    background-color: rgba($color-fg, 0.1);
+  }
+}
+
+textarea {
+  @extend input[type="text"];
+  width: 100%;
+  min-height: 5rem;
+  border: $color-fg solid 1px;
+
+  &.edited {
+    border-color: $edited-fg;
+    background-color: $edited-bg;
+
+    &:focus {
+      background-color: desaturate(darken($edited-bg, 10), 30);
+    }
+  }
+}
+
+.input-group {
+  border: $color-fg solid 1px;
+  display: flex;
+  flex-direction: row;
+
+  @include respond-to(900px) {
+    display: inline-block;
+  }
+
+  &.edited {
+    border-color: $edited-fg;
+    background-color: $edited-bg;
+  }
+}
