@@ -1,5 +1,5 @@
 class HackerViewController < ApplicationController
-  layout "hacker_view"
+  layout "react"
 
   def index
     redirect_to root_path unless user_signed_in?
