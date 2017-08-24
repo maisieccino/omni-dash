@@ -16,23 +16,43 @@ import WithdrawContainer from "./WithdrawContainer";
 import FeedbackContainer from "./FeedbackContainer";
 
 const routes = [
-  { to: "/settings/profile", label: "Profile", component: ProfileSettingsContainer },
+  {
+    to: "/settings/profile",
+    label: "Profile",
+    component: ProfileSettingsContainer
+  },
   { to: "/settings/team", label: "Team", component: TeamSettingsContainer },
-  { to: "/settings/privacy", label: "Privacy", component: PrivacySettingsContainer },
-  { to: "/settings/notifications", label: "Notifications", component: NotificationsSettingsContainer },
-  { to: "/settings/withdraw", label: "Withdraw Your Place", component: WithdrawContainer },
-  { to: "/settings/feedback", label: "Send Feedback", component: FeedbackContainer },
+  {
+    to: "/settings/privacy",
+    label: "Privacy",
+    component: PrivacySettingsContainer
+  },
+  {
+    to: "/settings/notifications",
+    label: "Notifications",
+    component: NotificationsSettingsContainer
+  },
+  {
+    to: "/settings/withdraw",
+    label: "Withdraw Your Place",
+    component: WithdrawContainer
+  },
+  {
+    to: "/settings/feedback",
+    label: "Send Feedback",
+    component: FeedbackContainer
+  }
 ];
 
 class SettingsPage extends Component {
   static propTypes = {
     updateBackButton: PropTypes.func.isRequired,
-    setUserUpdateSuccess: PropTypes.func,
-  }
+    setUserUpdateSuccess: PropTypes.func
+  };
 
   static defaultProps = {
-    setUserUpdateSuccess: () => {},
-  }
+    setUserUpdateSuccess: () => {}
+  };
 
   componentDidMount() {
     this.props.updateBackButton();
@@ -45,29 +65,34 @@ class SettingsPage extends Component {
         <div className="settings-main">
           <aside className="settings-nav">
             {/* programmatically generate navbar from array */}
-            { routes.map(route => <NavItem key={generate()} {...route} />) }
+            {routes.map(route => <NavItem key={generate()} {...route} />)}
           </aside>
 
           {/* programmatically generate routes from array */}
-          { routes.map(route => (
+          {routes.map(route =>
             <Route
               key={generate()}
               path={route.to}
               component={route.component}
             />
-          )) }
-          <Route exact path="/settings" render={() => <Redirect to="/settings/profile" />} />
+          )}
+          <Route
+            exact
+            path="/settings"
+            render={() => <Redirect to="/settings/profile" />}
+          />
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => (ownProps);
+const mapStateToProps = (state, ownProps) => ownProps;
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/profile", true)),
-  setUserUpdateSuccess: success => dispatch(setUpdateSuccess(success)),
+  updateBackButton: () =>
+    dispatch(pageNavActions.pageHasNavigated("/profile", true)),
+  setUserUpdateSuccess: success => dispatch(setUpdateSuccess(success))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);

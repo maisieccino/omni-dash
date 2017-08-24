@@ -1,10 +1,9 @@
 /* eslint react/prop-types: 0 */
 import React from "react";
 
-const Feed = ({ children }) => (
+const Feed = ({ children }) =>
   <div className="feed">
     {children}
-  </div>
-);
+  </div>;
 
 export default Feed;

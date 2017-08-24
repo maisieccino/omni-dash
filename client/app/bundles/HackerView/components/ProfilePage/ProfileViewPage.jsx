@@ -5,9 +5,9 @@ import PropTypes from "prop-types";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
-const ProfileViewPage = ({ user, isFetching }) => (
+const ProfileViewPage = ({ user, isFetching }) =>
   <div>
-    { isFetching && <p>REFRESHING...</p> }
+    {isFetching && <p>REFRESHING...</p>}
     <Header isFetching={isFetching} {...user} />
     <div className="profile-main">
       <Sidebar {...user} />
@@ -15,22 +15,21 @@ const ProfileViewPage = ({ user, isFetching }) => (
       <div className="profile-body">
         <h2>Your Team At Hatch</h2>
         <p>
-          You don’t appear to have a team registered for hatch yet!
-          Make sure you create/join your team before hacking ends.
+          You don’t appear to have a team registered for hatch yet! Make sure
+          you create/join your team before hacking ends.
         </p>
         <button>Create A Team</button>
       </div>
     </div>
-  </div>
-);
+  </div>;
 
 ProfileViewPage.propTypes = {
   user: PropTypes.shape().isRequired,
-  isFetching: PropTypes.bool,
+  isFetching: PropTypes.bool
 };
 
 ProfileViewPage.defaultProps = {
-  isFetching: false,
+  isFetching: false
 };
 
 export default ProfileViewPage;

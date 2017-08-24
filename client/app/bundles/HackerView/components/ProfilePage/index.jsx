@@ -17,9 +17,7 @@ class ProfilePage extends Component {
 
   render() {
     const { user, isFetching } = this.props;
-    return (
-      <ProfileViewPage user={user} isFetching={isFetching} />
-    );
+    return <ProfileViewPage user={user} isFetching={isFetching} />;
   }
 }
 
@@ -27,21 +25,22 @@ ProfilePage.propTypes = {
   user: PropTypes.shape().isRequired,
   isFetching: PropTypes.bool,
   getUser: PropTypes.func.isRequired,
-  updateBackButton: PropTypes.func.isRequired,
+  updateBackButton: PropTypes.func.isRequired
 };
 
 ProfilePage.defaultProps = {
-  isFetching: false,
+  isFetching: false
 };
 
-const mapStateToProps = (state, ownProps) => Object.assign({}, ownProps, {
-  user: state.user.user,
-  isFetching: state.user.isFetching,
-});
+const mapStateToProps = (state, ownProps) =>
+  Object.assign({}, ownProps, {
+    user: state.user.user,
+    isFetching: state.user.isFetching
+  });
 
 const mapDispatchToProps = dispatch => ({
   getUser: () => dispatch(userActions.fetchUser()),
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
+  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

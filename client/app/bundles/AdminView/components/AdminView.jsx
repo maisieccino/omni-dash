@@ -12,8 +12,8 @@ import ProfilePage from "./ProfilePage";
 import SettingsPage from "./SettingsPage";
 import TopNav from "./Navigation/TopNav";
 
-const AdminView = ({ user, history }) => (
-  <ConnectedRouter history={history} >
+const AdminView = ({ user, history }) =>
+  <ConnectedRouter history={history}>
     <div>
       <Navigation />
       <div className="page">
@@ -26,7 +26,6 @@ const AdminView = ({ user, history }) => (
         <Route path="/settings" component={SettingsPage} />
       </div>
     </div>
-  </ConnectedRouter>
-);
+  </ConnectedRouter>;
 
 export default AdminView;

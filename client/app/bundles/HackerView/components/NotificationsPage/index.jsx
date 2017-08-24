@@ -5,8 +5,8 @@ import * as pageNavActions from "../../actions/pageNavActions";
 
 class NotificationsPage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func.isRequired,
-  }
+    updateBackButton: PropTypes.func.isRequired
+  };
 
   componentDidMount() {
     this.props.updateBackButton();
@@ -16,7 +16,9 @@ class NotificationsPage extends Component {
     return (
       <div>
         <h1>Your Notifications</h1>
-        <p><i>You have no notifications. Hooray!</i></p>
+        <p>
+          <i>You have no notifications. Hooray!</i>
+        </p>
       </div>
     );
   }
@@ -25,7 +27,7 @@ class NotificationsPage extends Component {
 const mapStateToProps = (state, ownProps) => ownProps;
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
+  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationsPage);

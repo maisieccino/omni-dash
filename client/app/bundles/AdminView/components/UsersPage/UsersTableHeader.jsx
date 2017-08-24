@@ -1,6 +1,6 @@
 import React from "react";
 
-export default () => (
+export default () =>
   <thead>
     <tr>
       <td>ID</td>
@@ -9,5 +9,4 @@ export default () => (
       <td>Email</td>
       <td>Actions</td>
     </tr>
-  </thead>
-);
+  </thead>;

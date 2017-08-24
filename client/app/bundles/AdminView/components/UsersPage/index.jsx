@@ -11,13 +11,13 @@ class UsersPage extends Component {
     updateBackButton: PropTypes.func.isRequired,
     getUsers: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape()),
-    isFetching: PropTypes.bool,
-  }
+    isFetching: PropTypes.bool
+  };
 
   static defaultProps = {
     users: [],
-    isFetching: false,
-  }
+    isFetching: false
+  };
 
   componentDidMount() {
     this.props.updateBackButton();
@@ -29,39 +29,29 @@ class UsersPage extends Component {
       <div>
         <h1>Users</h1>
         <p>
-          <button
-            onClick={() => this.props.getUsers()}
-          >
-            Refresh
-          </button>
+          <button onClick={() => this.props.getUsers()}>Refresh</button>
         </p>
-        <p>
-          Manage Hatch users.
-        </p>
-        { this.props.isFetching ?
-          (<p>Loading users...</p>) :
-          <UsersTable users={this.props.users} />
-        }
+        <p>Manage Hatch users.</p>
+        {this.props.isFetching
+          ? <p>Loading users...</p>
+          : <UsersTable users={this.props.users} />}
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  const {
-    isFetching,
-    users,
-  } = state.users;
+const mapStateToProps = state => {
+  const { isFetching, users } = state.users;
 
   return {
     isFetching,
-    users,
+    users
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
-  getUsers: () => dispatch(fetchUsers()),
+  getUsers: () => dispatch(fetchUsers())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersPage);

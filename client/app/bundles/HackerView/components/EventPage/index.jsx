@@ -5,8 +5,8 @@ import * as pageNavActions from "../../actions/pageNavActions";
 
 class EventPage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func.isRequired,
-  }
+    updateBackButton: PropTypes.func.isRequired
+  };
 
   componentDidMount() {
     this.props.updateBackButton();
@@ -19,7 +19,8 @@ class EventPage extends Component {
         <button>View Full Map</button>
 
         <h1>Live Event Page</h1>
-        <p>A live event page, featuring DJ information, a timeline of events, and
+        <p>
+          A live event page, featuring DJ information, a timeline of events, and
           most importantly a big countdown clock.
         </p>
         <button>View Live Page</button>
@@ -31,10 +32,13 @@ class EventPage extends Component {
         </p>
         <button>Get Support</button>
 
-        <h1>Your Guide To <span className="accent">Hatch</span>.</h1>
-        <p>A complete guide to everything going on at hatch, including important
-          information about the venue as well as emergency contact information and
-          schedule.
+        <h1>
+          Your Guide To <span className="accent">Hatch</span>.
+        </h1>
+        <p>
+          A complete guide to everything going on at hatch, including important
+          information about the venue as well as emergency contact information
+          and schedule.
         </p>
         <button>View The Guide</button>
       </div>
@@ -45,7 +49,7 @@ class EventPage extends Component {
 const mapStateToProps = (state, ownProps) => ownProps;
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
+  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventPage);

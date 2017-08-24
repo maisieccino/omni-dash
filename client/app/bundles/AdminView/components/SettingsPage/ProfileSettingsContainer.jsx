@@ -8,7 +8,7 @@ class ProfileSettingsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      saveButtonClicked: false,
+      saveButtonClicked: false
     };
   }
 
@@ -23,7 +23,7 @@ class ProfileSettingsContainer extends Component {
       error,
       updateSuccess,
       userFields,
-      userChangedFields,
+      userChangedFields
     } = this.props;
     return (
       <div className="settings-pane">
@@ -32,21 +32,24 @@ class ProfileSettingsContainer extends Component {
             when={this.props.isUnsaved}
             message="Are you sure you want to leave this page? You'll lose unsaved information."
           />
-          { !isUpdating && !error && updateSuccess && <div className="success">
-            Settings saved successfully!
-          </div>}
+          {!isUpdating &&
+            !error &&
+            updateSuccess &&
+            <div className="success">Settings saved successfully!</div>}
           <h1>Profile Settings</h1>
           <h2>Basic Information</h2>
           <label htmlFor="user-first-name">First Name</label>
           <div
-            className={`input-group ${userChangedFields.first_name && "edited"}`}
+            className={`input-group ${userChangedFields.first_name &&
+              "edited"}`}
           >
             <input
               value={userFields.first_name}
               id="user-first-name"
               type="text"
               placeholder="First Name..."
-              onChange={e => this.props.updateValues({ first_name: e.target.value })}
+              onChange={e =>
+                this.props.updateValues({ first_name: e.target.value })}
             />
           </div>
           <label htmlFor="user-first-name">Last Name</label>
@@ -58,7 +61,8 @@ class ProfileSettingsContainer extends Component {
               type="text"
               placeholder="Last Name..."
               value={userFields.last_name}
-              onChange={e => this.props.updateValues({ last_name: e.target.value })}
+              onChange={e =>
+                this.props.updateValues({ last_name: e.target.value })}
             />
           </div>
           <h2>Your Social Media Profiles</h2>
@@ -68,7 +72,8 @@ class ProfileSettingsContainer extends Component {
           </p>
           <label htmlFor="user-contact-twitter">Twitter</label>
           <div
-            className={`input-group ${userChangedFields.contact_twitter && "edited"}`}
+            className={`input-group ${userChangedFields.contact_twitter &&
+              "edited"}`}
           >
             <span className="input-addon">@</span>
             <input
@@ -76,12 +81,14 @@ class ProfileSettingsContainer extends Component {
               type="text"
               placeholder="hatchucl"
               value={userFields.contact_twitter}
-              onChange={e => this.props.updateValues({ contact_twitter: e.target.value })}
+              onChange={e =>
+                this.props.updateValues({ contact_twitter: e.target.value })}
             />
           </div>
           <label htmlFor="user-contact-linkedin">LinkedIn</label>
           <div
-            className={`input-group ${userChangedFields.contact_linkedin && "edited"}`}
+            className={`input-group ${userChangedFields.contact_linkedin &&
+              "edited"}`}
           >
             <span className="input-addon">linkedin.com/in/</span>
             <input
@@ -89,12 +96,14 @@ class ProfileSettingsContainer extends Component {
               type="text"
               placeholder="Jane Doe"
               value={userFields.contact_linkedin}
-              onChange={e => this.props.updateValues({ contact_linkedin: e.target.value })}
+              onChange={e =>
+                this.props.updateValues({ contact_linkedin: e.target.value })}
             />
           </div>
           <label htmlFor="user-contact-devpost">Devpost</label>
           <div
-            className={`input-group ${userChangedFields.contact_devpost && "edited"}`}
+            className={`input-group ${userChangedFields.contact_devpost &&
+              "edited"}`}
           >
             <span className="input-addon">devpost.com/</span>
             <input
@@ -102,12 +111,14 @@ class ProfileSettingsContainer extends Component {
               type="text"
               placeholder="Jane Doe"
               value={userFields.contact_devpost}
-              onChange={e => this.props.updateValues({ contact_devpost: e.target.value })}
+              onChange={e =>
+                this.props.updateValues({ contact_devpost: e.target.value })}
             />
           </div>
           <label htmlFor="user-contact-github">GitHub</label>
           <div
-            className={`input-group ${userChangedFields.contact_github && "edited"}`}
+            className={`input-group ${userChangedFields.contact_github &&
+              "edited"}`}
           >
             <span className="input-addon">github.com/</span>
             <input
@@ -115,7 +126,8 @@ class ProfileSettingsContainer extends Component {
               type="text"
               placeholder="Jane Doe"
               value={userFields.contact_github}
-              onChange={e => this.props.updateValues({ contact_github: e.target.value })}
+              onChange={e =>
+                this.props.updateValues({ contact_github: e.target.value })}
             />
           </div>
           <h2>Bio</h2>
@@ -130,10 +142,13 @@ class ProfileSettingsContainer extends Component {
             value={userFields.bio}
             onChange={e => this.props.updateValues({ bio: e.target.value })}
           />
-          <p><button disabled={isUpdating} onClick={() => this.saveForm()}>
-            { !isUpdating && "Save" }
-            { isUpdating && (<i aria-label="Loading" className="fa fa-refresh spinner" />) }
-          </button></p>
+          <p>
+            <button disabled={isUpdating} onClick={() => this.saveForm()}>
+              {!isUpdating && "Save"}
+              {isUpdating &&
+                <i aria-label="Loading" className="fa fa-refresh spinner" />}
+            </button>
+          </p>
         </form>
       </div>
     );
@@ -148,7 +163,7 @@ ProfileSettingsContainer.propTypes = {
   error: PropTypes.string,
   updateSuccess: PropTypes.bool,
   updateValues: PropTypes.func,
-  isUnsaved: PropTypes.bool,
+  isUnsaved: PropTypes.bool
 };
 
 ProfileSettingsContainer.defaultProps = {
@@ -159,7 +174,7 @@ ProfileSettingsContainer.defaultProps = {
   error: "",
   updateSuccess: false,
   updateValues: () => {},
-  isUnsaved: false,
+  isUnsaved: false
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -172,16 +187,18 @@ const mapStateToProps = (state, ownProps) => {
     updateSuccess: state.user.updateSuccess,
     userFields: {
       ...state.user.user,
-      ...state.user.userChangedFields,
+      ...state.user.userChangedFields
     },
     userChangedFields: state.user.userChangedFields,
-    isUnsaved,
+    isUnsaved
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   saveChanges: (data = {}) => dispatch(actions.updateUser(data)),
-  updateValues: values => dispatch(actions.changeSettingValues(values)),
+  updateValues: values => dispatch(actions.changeSettingValues(values))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileSettingsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(
+  ProfileSettingsContainer
+);
