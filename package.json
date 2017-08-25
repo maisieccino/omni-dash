@@ -2,6 +2,7 @@
   "scripts": {
     "postinstall": "cd client && yarn install",
     "lint": "eslint ./ --ext .js --ext .jsx --cache --ignore-path .gitignore",
+    "lint:force": "eslint ./ --ext .js --ext .jsx --ignore-path .gitignore",
     "lint:staged": "lint-staged",
     "format": "prettier --write --trailing-comma all \"client/app/**/*.{js,jsx}\"",
     "precommit": "npm run lint && npm run lint:staged"

@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { generate } from "shortid";
-import * as pageNavActions from "../../actions/pageNavActions";
-import { setUpdateSuccess } from "../../actions/userActions";
+import * as pageNavActions from "libs/actions/pageNavActions";
+import { setUpdateSuccess } from "libs/actions/userActions";
 
 import NavItem from "./NavItem";
 import ProfileSettingsContainer from "./ProfileSettingsContainer";

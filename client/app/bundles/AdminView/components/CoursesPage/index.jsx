@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as pageNavActions from "../../actions/pageNavActions";
+import * as pageNavActions from "libs/actions/pageNavActions";
 
 class EventsPage extends Component {
   static propTypes = {

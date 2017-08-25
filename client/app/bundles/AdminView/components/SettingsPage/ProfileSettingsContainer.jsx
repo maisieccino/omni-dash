@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Prompt } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actions from "../../actions/userActions";
+import * as actions from "libs/actions/userActions";
 
 class ProfileSettingsContainer extends Component {
   constructor(props) {

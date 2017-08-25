@@ -1,5 +1,5 @@
 import Requests from "libs/utils/Requests";
-import * as constants from "../constants/userConstants";
+import * as constants from "libs/constants/userConstants";
 
 export const setIsFetching = () => ({
   type: constants.SET_IS_FETCHING,

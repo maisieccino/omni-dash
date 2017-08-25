@@ -2,8 +2,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as userActions from "../../actions/userActions";
-import * as pageNavActions from "../../actions/pageNavActions";
+import * as userActions from "libs/actions/userActions";
+import * as pageNavActions from "libs/actions/pageNavActions";
 
 import ProfileViewPage from "./ProfileViewPage";
 
