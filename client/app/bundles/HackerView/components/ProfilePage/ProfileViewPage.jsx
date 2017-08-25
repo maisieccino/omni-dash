@@ -25,11 +25,11 @@ const ProfileViewPage = ({ user, isFetching }) =>
 
 ProfileViewPage.propTypes = {
   user: PropTypes.shape().isRequired,
-  isFetching: PropTypes.bool
+  isFetching: PropTypes.bool,
 };
 
 ProfileViewPage.defaultProps = {
-  isFetching: false
+  isFetching: false,
 };
 
 export default ProfileViewPage;

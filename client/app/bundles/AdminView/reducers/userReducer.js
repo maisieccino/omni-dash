@@ -6,7 +6,7 @@ export const initialState = {
   updateSuccess: false,
   user: {},
   userChangedFields: {},
-  error: ""
+  error: "",
 };
 
 export default (state = initialState, action = null) => {
@@ -15,21 +15,21 @@ export default (state = initialState, action = null) => {
   switch (type) {
     case constants.SET_IS_FETCHING: {
       return Object.assign({}, state, {
-        isFetching: true
+        isFetching: true,
       });
     }
 
     case constants.FETCH_USER_SUCCESS: {
       return Object.assign({}, state, {
         isFetching: false,
-        user
+        user,
       });
     }
 
     case constants.FETCH_USER_FAILURE: {
       return Object.assign({}, state, {
         isFetching: false,
-        error
+        error,
       });
     }
 
@@ -37,7 +37,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isUpdating: true,
-        updateSuccess: false
+        updateSuccess: false,
       };
     }
 
@@ -46,7 +46,7 @@ export default (state = initialState, action = null) => {
         ...state,
         isUpdating: false,
         userChangedFields: {},
-        updateSuccess: true
+        updateSuccess: true,
       };
     }
 
@@ -54,14 +54,14 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isUpdating: false,
-        error
+        error,
       };
     }
 
     case constants.SET_UPDATE_SUCCESS: {
       return {
         ...state,
-        updateSuccess: success
+        updateSuccess: success,
       };
     }
 
@@ -70,8 +70,8 @@ export default (state = initialState, action = null) => {
         ...state,
         userChangedFields: {
           ...state.userChangedFields,
-          ...updatedValues
-        }
+          ...updatedValues,
+        },
       };
     }
 

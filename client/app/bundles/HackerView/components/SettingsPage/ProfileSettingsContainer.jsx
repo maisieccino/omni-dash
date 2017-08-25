@@ -8,7 +8,7 @@ class ProfileSettingsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      saveButtonClicked: false
+      saveButtonClicked: false,
     };
   }
 
@@ -23,7 +23,7 @@ class ProfileSettingsContainer extends Component {
       error,
       updateSuccess,
       userFields,
-      userChangedFields
+      userChangedFields,
     } = this.props;
     return (
       <div className="settings-pane">
@@ -163,7 +163,7 @@ ProfileSettingsContainer.propTypes = {
   error: PropTypes.string,
   updateSuccess: PropTypes.bool,
   updateValues: PropTypes.func,
-  isUnsaved: PropTypes.bool
+  isUnsaved: PropTypes.bool,
 };
 
 ProfileSettingsContainer.defaultProps = {
@@ -174,7 +174,7 @@ ProfileSettingsContainer.defaultProps = {
   error: "",
   updateSuccess: false,
   updateValues: () => {},
-  isUnsaved: false
+  isUnsaved: false,
 };
 
 const mapStateToProps = (state, ownProps) => {
@@ -187,18 +187,18 @@ const mapStateToProps = (state, ownProps) => {
     updateSuccess: state.user.updateSuccess,
     userFields: {
       ...state.user.user,
-      ...state.user.userChangedFields
+      ...state.user.userChangedFields,
     },
     userChangedFields: state.user.userChangedFields,
-    isUnsaved
+    isUnsaved,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   saveChanges: (data = {}) => dispatch(actions.updateUser(data)),
-  updateValues: values => dispatch(actions.changeSettingValues(values))
+  updateValues: values => dispatch(actions.changeSettingValues(values)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-  ProfileSettingsContainer
+  ProfileSettingsContainer,
 );

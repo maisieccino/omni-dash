@@ -24,7 +24,7 @@ const contactInfo = user =>
         value={user[key]}
         prefix={getContactPrefix(key)}
         key={generate()}
-      />
+      />,
     );
 
 const Sidebar = props =>
@@ -36,13 +36,13 @@ const Sidebar = props =>
 Sidebar.propTypes = {
   contact_twitter: PropTypes.string,
   contact_website: PropTypes.string,
-  contact_linkedin: PropTypes.string
+  contact_linkedin: PropTypes.string,
 };
 
 Sidebar.defaultProps = {
   contact_twitter: "",
   contact_website: "",
-  contact_linkedin: ""
+  contact_linkedin: "",
 };
 
 export default Sidebar;

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    json_response(User.all, :ok)
+    json_response(User.all.select { |i| i.deleted_at.nil? }, :ok)
   end
 
   def show

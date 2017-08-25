@@ -15,11 +15,11 @@ const ContactInfoItem = ({ name, prefix, value }) =>
 ContactInfoItem.propTypes = {
   name: PropTypes.string.isRequired,
   prefix: PropTypes.string,
-  value: PropTypes.string.isRequired
+  value: PropTypes.string.isRequired,
 };
 
 ContactInfoItem.defaultProps = {
-  prefix: ""
+  prefix: "",
 };
 
 export default ContactInfoItem;

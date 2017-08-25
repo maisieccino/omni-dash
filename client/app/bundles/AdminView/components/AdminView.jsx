@@ -21,6 +21,10 @@ const AdminView = ({ user, history }) =>
         <Route exact path="/" render={() => <HomePage user={user} />} />
         <Route path="/profile" component={ProfilePage} />
         <Route path="/users" component={UsersPage} />
+        <Route
+          path="/user/:id"
+          render={props => <ProfilePage showBackButton {...props} />}
+        />
         <Route path="/events" component={EventsPage} />
         <Route path="/courses" component={CoursesPage} />
         <Route path="/settings" component={SettingsPage} />

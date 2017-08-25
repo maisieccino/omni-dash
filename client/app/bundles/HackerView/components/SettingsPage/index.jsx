@@ -19,39 +19,39 @@ const routes = [
   {
     to: "/settings/profile",
     label: "Profile",
-    component: ProfileSettingsContainer
+    component: ProfileSettingsContainer,
   },
   { to: "/settings/team", label: "Team", component: TeamSettingsContainer },
   {
     to: "/settings/privacy",
     label: "Privacy",
-    component: PrivacySettingsContainer
+    component: PrivacySettingsContainer,
   },
   {
     to: "/settings/notifications",
     label: "Notifications",
-    component: NotificationsSettingsContainer
+    component: NotificationsSettingsContainer,
   },
   {
     to: "/settings/withdraw",
     label: "Withdraw Your Place",
-    component: WithdrawContainer
+    component: WithdrawContainer,
   },
   {
     to: "/settings/feedback",
     label: "Send Feedback",
-    component: FeedbackContainer
-  }
+    component: FeedbackContainer,
+  },
 ];
 
 class SettingsPage extends Component {
   static propTypes = {
     updateBackButton: PropTypes.func.isRequired,
-    setUserUpdateSuccess: PropTypes.func
+    setUserUpdateSuccess: PropTypes.func,
   };
 
   static defaultProps = {
-    setUserUpdateSuccess: () => {}
+    setUserUpdateSuccess: () => {},
   };
 
   componentDidMount() {
@@ -74,7 +74,7 @@ class SettingsPage extends Component {
               key={generate()}
               path={route.to}
               component={route.component}
-            />
+            />,
           )}
           <Route
             exact
@@ -92,7 +92,7 @@ const mapStateToProps = (state, ownProps) => ownProps;
 const mapDispatchToProps = dispatch => ({
   updateBackButton: () =>
     dispatch(pageNavActions.pageHasNavigated("/profile", true)),
-  setUserUpdateSuccess: success => dispatch(setUpdateSuccess(success))
+  setUserUpdateSuccess: success => dispatch(setUpdateSuccess(success)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPage);

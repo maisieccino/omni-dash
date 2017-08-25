@@ -10,7 +10,7 @@ const HackerViewApp = props => {
   const store = configureStore(Object.assign({}, initialStates, props));
   const history = createHistory({
     basename: "/hackers",
-    forceRefresh: false
+    forceRefresh: false,
   });
 
   return (

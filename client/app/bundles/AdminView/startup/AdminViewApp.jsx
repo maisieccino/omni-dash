@@ -10,7 +10,7 @@ const AdminViewApp = props => {
   const store = configureStore(Object.assign({}, initialStates, props));
   const history = createHistory({
     basename: "/admin",
-    forceRefresh: false
+    forceRefresh: false,
   });
 
   return (

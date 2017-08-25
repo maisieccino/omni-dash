@@ -20,7 +20,7 @@ const HelloWorld = ({ name, updateName }) =>
 
 HelloWorld.propTypes = {
   name: PropTypes.string.isRequired,
-  updateName: PropTypes.func.isRequired
+  updateName: PropTypes.func.isRequired,
 };
 
 export default HelloWorld;

@@ -11,12 +11,12 @@ class UsersPage extends Component {
     updateBackButton: PropTypes.func.isRequired,
     getUsers: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape()),
-    isFetching: PropTypes.bool
+    isFetching: PropTypes.bool,
   };
 
   static defaultProps = {
     users: [],
-    isFetching: false
+    isFetching: false,
   };
 
   componentDidMount() {
@@ -45,13 +45,13 @@ const mapStateToProps = state => {
 
   return {
     isFetching,
-    users
+    users,
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
-  getUsers: () => dispatch(fetchUsers())
+  getUsers: () => dispatch(fetchUsers()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersPage);

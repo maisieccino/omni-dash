@@ -23,11 +23,11 @@ export const jsonGetRequest = async (path, headers = {}) =>
   fetch(path, {
     headers: {
       Accept: "application/json",
-      ...headers
+      ...headers,
     },
-    credentials: "include"
+    credentials: "include",
   }).then(
-    res => (res.ok ? res.json() : Promise.reject("Bad network response"))
+    res => (res.ok ? res.json() : Promise.reject("Bad network response")),
   );
 
 /**
@@ -44,20 +44,20 @@ export const jsonPutRequest = async (path, body, headers = {}) =>
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      ...headers
+      ...headers,
     },
     body: JSON.stringify({
       ...body,
-      authenticity_token: getMetaContent("csrf-token")
+      authenticity_token: getMetaContent("csrf-token"),
     }),
-    credentials: "include"
+    credentials: "include",
   }).then(
     res =>
-      res.ok ? Promise.resolve("ok") : Promise.reject("Bad network response")
+      res.ok ? Promise.resolve("ok") : Promise.reject("Bad network response"),
   );
 
 export default {
   getMetaContent,
   jsonGetRequest,
-  jsonPutRequest
+  jsonPutRequest,
 };

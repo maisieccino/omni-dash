@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { generate } from "shortid";
 
 import UsersTableHeader from "./UsersTableHeader";
@@ -25,10 +26,12 @@ const UsersTable = props => {
               {user.email}
             </td>
             <td>
-              <button>View Profile</button>
+              <Link className="button" to={`/user/${user.id}`}>
+                View Profile
+              </Link>
               <button>Edit</button>
             </td>
-          </tr>
+          </tr>,
         )}
       </tbody>
     </table>
@@ -36,11 +39,11 @@ const UsersTable = props => {
 };
 
 UsersTable.propTypes = {
-  users: PropTypes.arrayOf(PropTypes.shape())
+  users: PropTypes.arrayOf(PropTypes.shape()),
 };
 
 UsersTable.defaultProps = {
-  users: []
+  users: [],
 };
 
 export default UsersTable;

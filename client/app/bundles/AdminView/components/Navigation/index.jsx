@@ -26,12 +26,12 @@ const Navigation = ({ className, removeRoutes }) => {
 
 Navigation.propTypes = {
   className: PropTypes.string,
-  removeRoutes: PropTypes.arrayOf(PropTypes.string)
+  removeRoutes: PropTypes.arrayOf(PropTypes.string),
 };
 
 Navigation.defaultProps = {
   className: "",
-  removeRoutes: []
+  removeRoutes: [],
 };
 
 export default Navigation;

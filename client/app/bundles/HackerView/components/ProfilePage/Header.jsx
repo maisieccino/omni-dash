@@ -10,7 +10,7 @@ const Header = ({ first_name, last_name, bio, isFetching }) =>
     <div className="profile-image-container">
       <div
         style={{
-          backgroundImage: "url(/assets/hatch_logo.png)"
+          backgroundImage: "url(/assets/hatch_logo.png)",
         }}
         className="profile-image"
       />
@@ -37,14 +37,14 @@ Header.propTypes = {
   first_name: PropTypes.string,
   last_name: PropTypes.string,
   bio: PropTypes.string,
-  isFetching: PropTypes.bool
+  isFetching: PropTypes.bool,
 };
 
 Header.defaultProps = {
   first_name: "",
   last_name: "",
   bio: "This user does not currently have a bio",
-  isFetching: false
+  isFetching: false,
 };
 
 export default Header;

@@ -5,7 +5,7 @@ import * as pageNavActions from "../../actions/pageNavActions";
 
 class EventsPage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func.isRequired
+    updateBackButton: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -28,7 +28,7 @@ class EventsPage extends Component {
 const mapStateToProps = (state, ownProps) => ownProps;
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false))
+  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventsPage);

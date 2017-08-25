@@ -7,7 +7,7 @@
     "precommit": "npm run lint && npm run lint:staged"
   },
   "lint-staged": {
-    "*.{js,jsx}": ["prettier --write", "git add"]
+    "*.{js,jsx}": ["prettier --write --trailing-comma all", "git add"]
   },
   "name": "hatch-site",
   "private": true,

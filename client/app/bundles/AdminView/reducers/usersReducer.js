@@ -3,7 +3,7 @@ import * as constants from "../constants/usersConstants";
 export const initialState = {
   isFetching: false,
   users: [],
-  error: ""
+  error: "",
 };
 
 export default (state = initialState, action = null) => {
@@ -14,7 +14,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isFetching: true,
-        error: ""
+        error: "",
       };
     }
 
@@ -22,7 +22,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isFetching: false,
-        users
+        users,
       };
     }
 
@@ -30,7 +30,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isFetching: false,
-        error
+        error,
       };
     }
 

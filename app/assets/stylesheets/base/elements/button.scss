@@ -1,4 +1,6 @@
-button, input[type="submit"], .button {
+button,
+input[type="submit"],
+.button {
   border: none;
   font-weight: 600;
   background-color: $color-accent;
@@ -6,12 +8,17 @@ button, input[type="submit"], .button {
   font-size: 1.25rem;
   margin-top: 0.5rem;
   padding: 0.75rem;
+  font-family: $font-body;
   border-radius: 0.3rem;
   text-decoration: none;
   text-align: center;
   display: inline-block;
   box-sizing: border-box;
   width: 100%;
+
+  td & {
+    margin-right: 0.3rem;
+  }
 
   &:hover {
     background-color: lighten($color-accent, 20);
@@ -22,7 +29,8 @@ button, input[type="submit"], .button {
     background-color: darken($color-accent, 20);
   }
 
-  &:disabled, &.disabled {
+  &:disabled,
+  &.disabled {
     background-color: grayscale($color-accent);
     color: $color-card;
     cursor: not-allowed;

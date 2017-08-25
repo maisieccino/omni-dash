@@ -7,11 +7,11 @@ import * as pageNavActions from "../../actions/pageNavActions";
 class HomePage extends Component {
   static propTypes = {
     updateBackButton: PropTypes.func.isRequired,
-    user: PropTypes.shape()
+    user: PropTypes.shape(),
   };
 
   static defaultProps = {
-    user: {}
+    user: {},
   };
 
   componentDidMount() {
@@ -34,7 +34,7 @@ class HomePage extends Component {
 const mapStateToProps = (state, ownProps) => ownProps;
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false))
+  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

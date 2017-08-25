@@ -18,21 +18,21 @@ const NavItem = ({ to, label, icon }, { router }) =>
 NavItem.propTypes = {
   to: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
-  icon: PropTypes.string
+  icon: PropTypes.string,
 };
 
 NavItem.defaultProps = {
-  icon: "fa-home"
+  icon: "fa-home",
 };
 
 NavItem.contextTypes = {
   router: PropTypes.shape({
     history: PropTypes.shape({
       location: PropTypes.shape({
-        pathname: PropTypes.string.isRequired
-      }).isRequired
-    }).isRequired
-  }).isRequired
+        pathname: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+  }).isRequired,
 };
 
 export default NavItem;

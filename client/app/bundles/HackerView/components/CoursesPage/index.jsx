@@ -5,7 +5,7 @@ import * as pageNavActions from "../../actions/pageNavActions";
 
 class CoursesPage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func.isRequired
+    updateBackButton: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -27,7 +27,7 @@ class CoursesPage extends Component {
 const mapStateToProps = (state, ownProps) => ownProps;
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false))
+  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CoursesPage);

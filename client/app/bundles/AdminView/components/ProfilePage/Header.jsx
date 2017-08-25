@@ -5,12 +5,19 @@ import { Link } from "react-router-dom";
 
 const bioText = bio => bio || <i>This user has not yet provided a bio.</i>;
 
-const Header = ({ admin, first_name, last_name, bio, isFetching }) =>
+const Header = ({
+  admin,
+  first_name,
+  last_name,
+  bio,
+  isFetching,
+  isOwnProfile,
+}) =>
   <header className="profile-header">
     <div className="profile-image-container">
       <div
         style={{
-          backgroundImage: "url(/assets/hatch_logo.png)"
+          backgroundImage: "url(/assets/hatch_logo.png)",
         }}
         className="profile-image"
       />
@@ -23,14 +30,15 @@ const Header = ({ admin, first_name, last_name, bio, isFetching }) =>
       <p>
         {bioText(bio)}
       </p>
-      <div className="header-buttons">
-        <Link to="/settings" className="button" disabled={isFetching}>
-          Settings
-        </Link>
-        <a href="/auth/sign_out" data-method="delete" className="button">
-          Sign Out
-        </a>
-      </div>
+      {isOwnProfile &&
+        <div className="header-buttons">
+          <Link to="/settings" className="button" disabled={isFetching}>
+            Settings
+          </Link>
+          <a href="/auth/sign_out" data-method="delete" className="button">
+            Sign Out
+          </a>
+        </div>}
     </div>
   </header>;
 
@@ -39,7 +47,8 @@ Header.propTypes = {
   last_name: PropTypes.string,
   bio: PropTypes.string,
   isFetching: PropTypes.bool,
-  admin: PropTypes.bool
+  admin: PropTypes.bool,
+  isOwnProfile: PropTypes.bool,
 };
 
 Header.defaultProps = {
@@ -47,7 +56,8 @@ Header.defaultProps = {
   last_name: "",
   bio: "This user does not currently have a bio",
   isFetching: false,
-  admin: false
+  admin: false,
+  isOwnProfile: false,
 };
 
 export default Header;

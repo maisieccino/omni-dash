@@ -45,7 +45,7 @@ const configureStoreDev = initialState => {
   const store = createStore(
     reducer,
     state,
-    composeEnhancers(applyMiddleware(...middlewares))
+    composeEnhancers(applyMiddleware(...middlewares)),
   );
 
   if (module.hot) {

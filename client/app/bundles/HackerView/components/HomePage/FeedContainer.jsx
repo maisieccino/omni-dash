@@ -14,14 +14,14 @@ class FeedContainer extends Component {
             name: "React Workshop",
             startTime: "18:00",
             endTime: "19:00",
-            location: "Gustav Tuck Lecture Theatre"
+            location: "Gustav Tuck Lecture Theatre",
           },
           nextEvent: {
             name: "Pitching Your Hack",
             startTime: "18:30",
             endTime: "18:40",
-            location: "Main Quad Marquee"
-          }
+            location: "Main Quad Marquee",
+          },
         },
         {
           type: "currentLesson",
@@ -29,17 +29,17 @@ class FeedContainer extends Component {
             courseName: "Intro To React",
             lessonName: "Making Components",
             lessonsCompleted: 5,
-            totalLessons: 7
-          }
-        }
-      ]
+            totalLessons: 7,
+          },
+        },
+      ],
     };
   }
 
   render() {
     // map cards to their respective drawables.
     const cards = this.state.feedItems.map(item =>
-      <Card key={generate()} {...item} />
+      <Card key={generate()} {...item} />,
     );
 
     return (

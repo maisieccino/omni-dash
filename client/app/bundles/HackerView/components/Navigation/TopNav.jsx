@@ -13,18 +13,18 @@ const TopNav = ({ href, visible }) =>
 
 TopNav.propTypes = {
   href: PropTypes.string,
-  visible: PropTypes.bool
+  visible: PropTypes.bool,
 };
 
 TopNav.defaultProps = {
   href: "/",
-  visible: false
+  visible: false,
 };
 
 const mapStateToProps = (state, ownProps) =>
   Object.assign({}, ownProps, {
     href: state.pageNav.abovePath,
-    visible: state.pageNav.showBackButton
+    visible: state.pageNav.showBackButton,
   });
 
 export default connect(mapStateToProps)(TopNav);
