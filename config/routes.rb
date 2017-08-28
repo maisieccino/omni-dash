@@ -16,8 +16,6 @@ Rails.application.routes.draw do
   get "admin", to: "admin_view#index"
   match "admin/*path", to: "admin_view#index", via: :all
 
-  get "hello_world", to: "hello_world#index"
-
   get "/users/me", to: "users#show_self", as: :user_me, via: :get
   put "/users/me", to: "users#update_self", as: :user_me_update, via: :put
   resources :users

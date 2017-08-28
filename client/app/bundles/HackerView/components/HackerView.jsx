@@ -4,12 +4,12 @@ import { Route } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
 import SettingsPage from "libs/components/SettingsPage";
+import ProfilePage from "libs/components/ProfilePage";
 import Navigation from "./Navigation";
 import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
 import EventPage from "./EventPage";
 import NotificationsPage from "./NotificationsPage";
-import ProfilePage from "./ProfilePage";
 import TopNav from "./Navigation/TopNav";
 
 const HackerView = ({ user, history }) =>
@@ -23,6 +23,10 @@ const HackerView = ({ user, history }) =>
         <Route path="/event" component={EventPage} />
         <Route path="/notifications" component={NotificationsPage} />
         <Route path="/profile" component={ProfilePage} />
+        <Route
+          path="/user/:id"
+          render={props => <ProfilePage showBackButton {...props} />}
+        />
         <Route path="/settings" component={SettingsPage} />
       </div>
     </div>
