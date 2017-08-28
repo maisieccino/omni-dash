@@ -9,12 +9,14 @@ import pageNavReducer, {
 import usersReducer, { initialState as usersState } from "./usersReducer";
 
 export const initialStates = {
+  current_user: {},
   user: userState,
   users: usersState,
   pageNav: pageNavState,
 };
 
 export default combineReducers({
+  current_user: (state = {}) => state,
   user: userReducer,
   users: usersReducer,
   pageNav: pageNavReducer,

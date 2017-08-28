@@ -3,13 +3,13 @@ import React from "react";
 import { Route } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
+import SettingsPage from "libs/components/SettingsPage";
 import Navigation from "./Navigation";
 import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
 import EventPage from "./EventPage";
 import NotificationsPage from "./NotificationsPage";
 import ProfilePage from "./ProfilePage";
-import SettingsPage from "./SettingsPage";
 import TopNav from "./Navigation/TopNav";
 
 const HackerView = ({ user, history }) =>
