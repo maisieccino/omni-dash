@@ -1,16 +1,16 @@
 class UsersController < ApplicationController
   before_action :json_authenticate_user
+  before_action :admin_only, only: %i[create index destroy]
   before_action :set_user, only: %i[show update destroy]
   before_action :user_not_deleted, only: %i[show update destroy]
 
   def create
-    return head :forbidden unless current_user.admin?
     @user = User.create!(user_create_params)
     json_response(@user, :created)
   end
 
   def index
-    head :method_not_allowed
+    json_response(User.all.select { |i| i.deleted_at.nil? }, :ok)
   end
 
   def show
@@ -39,12 +39,15 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    return head :forbidden unless current_user.admin?
     @user.soft_delete
     head :no_content
   end
 
   private
+
+  def admin_only
+    return head :forbidden unless current_user.admin?
+  end
 
   def set_user
     @user = User.find(params[:id])

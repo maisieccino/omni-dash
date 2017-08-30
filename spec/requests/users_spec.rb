@@ -37,18 +37,22 @@ RSpec.describe "Users API", type: :request do
   end
 
   describe "GET /users" do
-    it "should never be allowed" do
+    it "should be forbidden for unauthenticated users" do
       get users_path
       expect(response).to have_http_status(403)
+    end
 
+    it "should be forbidden for non-admin users" do
       sign_in user
       get users_path
-      expect(response).to have_http_status(405)
+      expect(response).to have_http_status(403)
       sign_out user
+    end
 
+    it "should be allowed for admin users" do
       sign_in admin_user
       get users_path
-      expect(response).to have_http_status(405)
+      expect(response).to have_http_status(200)
     end
   end
 

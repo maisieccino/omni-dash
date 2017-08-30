@@ -6,7 +6,7 @@ import * as pageNavActions from "../../actions/pageNavActions";
 class NotificationsPage extends Component {
   static propTypes = {
     updateBackButton: PropTypes.func.isRequired,
-  }
+  };
 
   componentDidMount() {
     this.props.updateBackButton();
@@ -16,7 +16,9 @@ class NotificationsPage extends Component {
     return (
       <div>
         <h1>Your Notifications</h1>
-        <p><i>You have no notifications. Hooray!</i></p>
+        <p>
+          <i>You have no notifications. Hooray!</i>
+        </p>
       </div>
     );
   }

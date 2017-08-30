@@ -1,5 +1,5 @@
 import Requests from "libs/utils/Requests";
-import * as constants from "../constants/userConstants";
+import * as constants from "libs/constants/userConstants";
 
 export const setIsFetching = () => ({
   type: constants.SET_IS_FETCHING,
@@ -15,12 +15,13 @@ export const fetchUserFailure = error => ({
   error,
 });
 
-export const fetchUser = () => ((dispatch) => {
+export const fetchUser = id => dispatch => {
   dispatch(setIsFetching());
-  return Requests.jsonGetRequest(constants.USER_ME_PATH)
+  const uri = id ? `/users/${id}/` : constants.USER_ME_PATH;
+  return Requests.jsonGetRequest(uri)
     .then(json => dispatch(fetchUserSuccess(json)))
     .catch(error => dispatch(fetchUserFailure(error.message)));
-});
+};
 
 export const changeSettingValues = values => ({
   type: constants.CHANGE_SETTING_VALUES,
@@ -50,18 +51,19 @@ export const updateUserFailure = error => ({
  * @param  {Object} [data={}] Updated information to send
  * @return {Promise}           Resolves or fails
  */
-export const updateUser = (data = {}) => ((dispatch) => {
+export const updateUser = (data = {}) => dispatch => {
   dispatch(setIsUpdating());
   return Requests.jsonPutRequest(constants.USER_ME_PATH, data)
-    .then(() =>
-      // fake delay
-      new Promise((res) => {
-        setTimeout(() => res(), 1000);
-      }),
+    .then(
+      () =>
+        // fake delay
+        new Promise(res => {
+          setTimeout(() => res(), 1000);
+        }),
     )
     .then(() => {
       dispatch(updateUserSuccess());
       dispatch(fetchUser());
     })
     .catch(err => dispatch(updateUserFailure(err.message)));
-});
+};

@@ -13,6 +13,9 @@ Rails.application.routes.draw do
   get "hackers", to: "hacker_view#index"
   match "hackers/*path", to: "hacker_view#index", via: :all
 
+  get "admin", to: "admin_view#index"
+  match "admin/*path", to: "admin_view#index", via: :all
+
   get "hello_world", to: "hello_world#index"
 
   get "/users/me", to: "users#show_self", as: :user_me, via: :get

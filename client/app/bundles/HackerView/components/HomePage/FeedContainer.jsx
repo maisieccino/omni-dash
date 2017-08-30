@@ -38,12 +38,15 @@ class FeedContainer extends Component {
 
   render() {
     // map cards to their respective drawables.
-    const cards = this.state.feedItems
-      .map(item => <Card key={generate()} {...item} />);
+    const cards = this.state.feedItems.map(item =>
+      <Card key={generate()} {...item} />,
+    );
 
-    return (<Feed>
-      { cards }
-    </Feed>);
+    return (
+      <Feed>
+        {cards}
+      </Feed>
+    );
   }
 }
 

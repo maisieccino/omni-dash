@@ -10,13 +10,7 @@ export const initialState = {
 };
 
 export default (state = initialState, action = null) => {
-  const {
-    type,
-    user,
-    error,
-    success,
-    values: updatedValues,
-  } = action;
+  const { type, user, error, success, values: updatedValues } = action;
 
   switch (type) {
     case constants.SET_IS_FETCHING: {

@@ -1,16 +1,14 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-const HelloWorld = ({ name, updateName }) => (
+const HelloWorld = ({ name, updateName }) =>
   <div>
     <h3>
       Hello, {name}!
     </h3>
     <hr />
-    <form >
-      <label htmlFor="name">
-        Say hello to:
-      </label>
+    <form>
+      <label htmlFor="name">Say hello to:</label>
       <input
         id="name"
         type="text"
@@ -18,8 +16,7 @@ const HelloWorld = ({ name, updateName }) => (
         onChange={e => updateName(e.target.value)}
       />
     </form>
-  </div>
-);
+  </div>;
 
 HelloWorld.propTypes = {
   name: PropTypes.string.isRequired,

@@ -6,17 +6,21 @@ import * as pageNavActions from "../../actions/pageNavActions";
 class CoursesPage extends Component {
   static propTypes = {
     updateBackButton: PropTypes.func.isRequired,
-  }
+  };
 
   componentDidMount() {
     this.props.updateBackButton();
   }
 
   render() {
-    return (<div>
-      <h1>Skill Tree</h1>
-      <h1>Workshops At <span className="accent">Hatch</span>.</h1>
-    </div>);
+    return (
+      <div>
+        <h1>Skill Tree</h1>
+        <h1>
+          Workshops At <span className="accent">Hatch</span>.
+        </h1>
+      </div>
+    );
   }
 }
 

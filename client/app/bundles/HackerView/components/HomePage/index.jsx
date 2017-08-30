@@ -9,11 +9,11 @@ class HomePage extends Component {
   static propTypes = {
     updateBackButton: PropTypes.func.isRequired,
     user: PropTypes.shape(),
-  }
+  };
 
   static defaultProps = {
     user: {},
-  }
+  };
 
   componentDidMount() {
     this.props.updateBackButton();
@@ -23,7 +23,9 @@ class HomePage extends Component {
     const { user } = this.props;
     return (
       <div>
-        <h1>Hello, <span className="accent">{ user.first_name }</span>.</h1>
+        <h1>
+          Hello, <span className="accent">{user.first_name}</span>.
+        </h1>
         <FeedContainer />
       </div>
     );

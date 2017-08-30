@@ -3,17 +3,17 @@ import React from "react";
 import { Route } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
+import SettingsPage from "libs/components/SettingsPage";
 import Navigation from "./Navigation";
 import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
 import EventPage from "./EventPage";
 import NotificationsPage from "./NotificationsPage";
 import ProfilePage from "./ProfilePage";
-import SettingsPage from "./SettingsPage";
 import TopNav from "./Navigation/TopNav";
 
-const HackerView = ({ user, history }) => (
-  <ConnectedRouter history={history} >
+const HackerView = ({ user, history }) =>
+  <ConnectedRouter history={history}>
     <div>
       <Navigation />
       <div className="page">
@@ -26,7 +26,6 @@ const HackerView = ({ user, history }) => (
         <Route path="/settings" component={SettingsPage} />
       </div>
     </div>
-  </ConnectedRouter>
-);
+  </ConnectedRouter>;
 
 export default HackerView;
