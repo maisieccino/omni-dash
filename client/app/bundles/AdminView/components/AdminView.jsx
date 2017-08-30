@@ -4,12 +4,12 @@ import { Route } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
 import SettingsPage from "libs/components/SettingsPage";
+import ProfilePage from "libs/components/ProfilePage";
 import Navigation from "./Navigation";
 import HomePage from "./HomePage";
 import UsersPage from "./UsersPage";
 import EventsPage from "./EventsPage";
 import CoursesPage from "./CoursesPage";
-import ProfilePage from "./ProfilePage";
 import TopNav from "./Navigation/TopNav";
 
 const AdminView = ({ current_user: user, history }) =>
