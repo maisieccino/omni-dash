@@ -19,4 +19,6 @@ Rails.application.routes.draw do
   get "/users/me", to: "users#show_self", as: :user_me, via: :get
   put "/users/me", to: "users#update_self", as: :user_me_update, via: :put
   resources :users
+
+  resources :competitions
 end

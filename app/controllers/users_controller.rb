@@ -45,10 +45,6 @@ class UsersController < ApplicationController
 
   private
 
-  def admin_only
-    return head :forbidden unless current_user.admin?
-  end
-
   def set_user
     @user = User.find(params[:id])
   end
