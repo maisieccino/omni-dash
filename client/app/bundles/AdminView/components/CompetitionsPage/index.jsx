@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as pageNavActions from "libs/actions/pageNavActions";
 
-class EventsPage extends Component {
+class CompetitionsPage extends Component {
   static propTypes = {
     updateBackButton: PropTypes.func.isRequired,
   };
@@ -15,7 +15,7 @@ class EventsPage extends Component {
   render() {
     return (
       <div>
-        <h1>Events</h1>
+        <h1>Hackathons</h1>
         <p>Manage all hackathons stored on the system.</p>
         <h2>Current Event</h2>
         <p>Hatch x UCL 2017</p>
@@ -31,4 +31,4 @@ const mapDispatchToProps = dispatch => ({
   updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(CompetitionsPage);

@@ -65,4 +65,44 @@ RSpec.describe "Competitions API", type: :request do
       expect(json["name"]).to eq(my_competition["name"])
     end
   end
+
+  describe "PUT /competitions/:id" do
+    let(:updated_params) { { name: "hatch x UCL" } }
+
+    it "should be forbidden if not signed in" do
+      put competition_path(competition_id), params: updated_params.to_json, headers: json_headers
+      expect(response).to have_http_status(403)
+    end
+
+    it "should be forbidden if not admin" do
+      sign_in user
+      put competition_path(competition_id), params: updated_params.to_json, headers: json_headers
+      expect(response).to have_http_status(403)
+    end
+
+    it "should be successful if admin" do
+      sign_in admin_user
+      put competition_path(competition_id), params: updated_params.to_json, headers: json_headers
+      expect(response).to have_http_status(204)
+    end
+  end
+
+  describe "DELETE /competitions/:id" do
+    it "should be forbidden if not signed in" do
+      delete competition_path(competition_id), headers: json_headers
+      expect(response).to have_http_status(403)
+    end
+
+    it "should be forbidden if not admin" do
+      sign_in user
+      delete competition_path(competition_id), headers: json_headers
+      expect(response).to have_http_status(403)
+    end
+
+    it "should be successful if admin" do
+      sign_in admin_user
+      delete competition_path(competition_id), headers: json_headers
+      expect(response).to have_http_status(204)
+    end
+  end
 end
