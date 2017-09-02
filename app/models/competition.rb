@@ -3,9 +3,12 @@ class Competition < ApplicationRecord
 
   validates_presence_of %i[name start_time end_time]
 
+  class CompetitionExistsError < StandardError
+  end
+
   private
 
   def confirm_singleton
-    raise Exception, "Only one competition allowed to be stored at a time" if Competition.count > 0
+    raise CompetitionExistsError, "Only one competition allowed to be stored at a time" if Competition.count > 0
   end
 end

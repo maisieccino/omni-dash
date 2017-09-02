@@ -1,22 +1,19 @@
-class CompetitionsController < ApplicationController
+class CompetitionController < ApplicationController
   before_action :json_authenticate_user
   before_action :admin_only, only: %i[create update destroy]
 
   before_action :set_competition, only: %i[show update destroy]
-  before_action :competition_not_deleted, only: %i[show update destroy]
 
   def create
     @competition = Competition.create!(competition_params)
     json_response(@competition, :created)
+  rescue Competition::CompetitionExistsError
+    json_response({ message: "Competition already exists" }, :bad_request)
   end
 
   def destroy
     @competition.destroy
     head :no_content
-  end
-
-  def index
-    json_response(Competition.all.select { |c| c.deleted_at.nil? }, :ok)
   end
 
   def show
@@ -30,10 +27,6 @@ class CompetitionsController < ApplicationController
 
   private
 
-  def competition_not_deleted
-    json_response({ message: "Competition not found" }, :not_found) if @competition[:deleted_at]
-  end
-
   def competition_params
     params.permit(
       :name,
@@ -46,6 +39,7 @@ class CompetitionsController < ApplicationController
   end
 
   def set_competition
-    @competition = Competition.find(params[:id])
+    return json_response({ message: "Competition not found" }, :not_found) if Competition.count.zero?
+    @competition = Competition.first
   end
 end

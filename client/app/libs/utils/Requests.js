@@ -27,7 +27,8 @@ export const jsonGetRequest = async (path, headers = {}) =>
     },
     credentials: "include",
   }).then(
-    res => (res.ok ? res.json() : Promise.reject("Bad network response")),
+    res =>
+      res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`),
   );
 
 /**
@@ -53,7 +54,7 @@ export const jsonPutRequest = async (path, body, headers = {}) =>
     credentials: "include",
   }).then(
     res =>
-      res.ok ? Promise.resolve("ok") : Promise.reject("Bad network response"),
+      res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`),
   );
 
 export default {

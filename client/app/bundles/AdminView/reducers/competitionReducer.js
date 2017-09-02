@@ -1,16 +1,16 @@
-import * as constants from "../constants/competitionsConstants";
+import * as constants from "../constants/competitionConstants";
 
 export const initialState = {
   isFetching: false,
-  competitions: [],
+  competition: {},
   error: "",
 };
 
 export default (state = initialState, action = null) => {
-  const { type, competitions, error } = action;
+  const { type, competition, error } = action;
 
   switch (type) {
-    case constants.SET_IS_FETCHING_COMPETITIONS: {
+    case constants.SET_IS_FETCHING_COMPETITION: {
       return {
         ...state,
         isFetching: true,
@@ -18,15 +18,15 @@ export default (state = initialState, action = null) => {
       };
     }
 
-    case constants.FETCH_COMPETITIONS_SUCCESS: {
+    case constants.FETCH_COMPETITION_SUCCESS: {
       return {
         ...state,
         isFetching: false,
-        competitions,
+        competition,
       };
     }
 
-    case constants.FETCH_COMPETITIONS_FAILURE: {
+    case constants.FETCH_COMPETITION_FAILURE: {
       return {
         ...state,
         isFetching: false,

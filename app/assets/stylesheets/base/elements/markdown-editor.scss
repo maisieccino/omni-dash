@@ -1,0 +1,51 @@
+.markdown-editor {
+  & > div {
+    display: flex;
+    flex-direction: row;
+
+    & > * {
+      flex: 1;
+    }
+  }
+
+  /* helper text. make smaller. */
+  & > p {
+    margin: 0;
+  }
+
+  .input-container {
+    p {
+      margin: 0;
+    }
+
+    textarea {
+      flex: 1;
+      max-height: 20rem;
+      font-family: $font-code;
+      font-size: 1rem;
+    }
+
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .preview-container {
+    p {
+      margin: 0;
+    }
+
+    .preview {
+      max-height: 20rem;
+      border: 1px solid $color-fg;
+      padding: 0.5rem;
+      flex: 1;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+
+    margin-left: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+}

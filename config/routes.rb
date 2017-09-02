@@ -20,5 +20,8 @@ Rails.application.routes.draw do
   put "/users/me", to: "users#update_self", as: :user_me_update, via: :put
   resources :users
 
-  resources :competitions
+  get "/competition", to: "competition#show"
+  post "/competition", to: "competition#create"
+  put "/competition", to: "competition#update"
+  delete "/competition", to: "competition#destroy"
 end

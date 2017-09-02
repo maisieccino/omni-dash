@@ -8,7 +8,7 @@ import ProfilePage from "libs/components/ProfilePage";
 import Navigation from "./Navigation";
 import HomePage from "./HomePage";
 import UsersPage from "./UsersPage";
-import CompetitionsPage from "./CompetitionsPage";
+import EventPage from "./EventPage";
 import CoursesPage from "./CoursesPage";
 import TopNav from "./Navigation/TopNav";
 
@@ -25,7 +25,7 @@ const AdminView = ({ current_user: user, history }) =>
           path="/user/:id"
           render={props => <ProfilePage showBackButton {...props} />}
         />
-        <Route path="/competitions" component={CompetitionsPage} />
+        <Route path="/event" component={EventPage} />
         <Route path="/courses" component={CoursesPage} />
         <Route path="/settings" component={SettingsPage} />
       </div>
