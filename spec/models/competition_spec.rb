@@ -14,4 +14,10 @@ RSpec.describe Competition, type: :model do
     expect(competition).to respond_to(:capacity)
     expect(competition).to respond_to(:location)
   end
+
+  it "should only allow one competition object at any one time" do
+    comp1 = create(:competition)
+    expect(comp1).to_not be_nil
+    expect{ create(:competition) }.to raise_error(Exception)
+  end
 end

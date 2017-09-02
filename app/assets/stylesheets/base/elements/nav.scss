@@ -43,7 +43,8 @@ nav {
       margin-bottom: 0.2rem;
     }
 
-    &:hover, &.active {
+    &:hover,
+    &.active {
       color: $color-fg;
       text-decoration: none;
       background-color: $color-accent;
@@ -87,6 +88,7 @@ nav {
       &:hover {
         text-decoration: underline;
         background-color: inherit;
+        color: $color-accent;
       }
     }
   }

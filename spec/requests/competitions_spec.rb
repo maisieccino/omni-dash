@@ -2,12 +2,13 @@ require "rails_helper"
 
 RSpec.describe "Competitions API", type: :request do
   let(:competition_params) { attributes_for(:competition) }
-  let!(:my_competition) { create(:competition) }
-  let(:competition_id) { my_competition["id"] }
   let(:user) { create(:user) }
   let(:admin_user) { create(:user, admin: true) }
 
   describe "GET /competitions" do
+    let!(:my_competition) { create(:competition) }
+    let(:competition_id) { my_competition["id"] }
+
     it "should be forbidden if not signed in" do
       get competitions_path, headers: json_headers
       expect(response).to have_http_status(403)
@@ -53,6 +54,9 @@ RSpec.describe "Competitions API", type: :request do
   end
 
   describe "GET /competitions/:id" do
+    let!(:my_competition) { create(:competition) }
+    let(:competition_id) { my_competition["id"] }
+
     it "should be forbidden if not signed in" do
       get competition_path(competition_id), headers: json_headers
       expect(response).to have_http_status(403)
@@ -67,6 +71,8 @@ RSpec.describe "Competitions API", type: :request do
   end
 
   describe "PUT /competitions/:id" do
+    let!(:my_competition) { create(:competition) }
+    let(:competition_id) { my_competition["id"] }
     let(:updated_params) { { name: "hatch x UCL" } }
 
     it "should be forbidden if not signed in" do
@@ -88,6 +94,9 @@ RSpec.describe "Competitions API", type: :request do
   end
 
   describe "DELETE /competitions/:id" do
+    let!(:my_competition) { create(:competition) }
+    let(:competition_id) { my_competition["id"] }
+
     it "should be forbidden if not signed in" do
       delete competition_path(competition_id), headers: json_headers
       expect(response).to have_http_status(403)
