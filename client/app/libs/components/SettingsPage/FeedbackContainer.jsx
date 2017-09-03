@@ -1,7 +1,7 @@
 import React from "react";
 
 const FeedbackContainer = () =>
-  <div className="settings-pane">
+  <div className="splitview-pane">
     <h1>Submit Feedback</h1>
     <p>
       <em>

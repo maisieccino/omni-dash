@@ -28,3 +28,32 @@ export const fetchCompetition = () => async dispatch => {
     );
   }
 };
+
+export const setIsSavingCompetition = () => ({
+  type: constants.SET_IS_SAVING_COMPETITION,
+});
+
+export const saveCompetitionSuccess = competition => ({
+  type: constants.SAVE_COMPETITION_SUCCESS,
+  competition,
+});
+
+export const saveCompetitionFailure = error => ({
+  type: constants.SAVE_COMPETITION_FAILURE,
+  error,
+});
+
+export const saveCompetition = competition => async dispatch => {
+  dispatch(setIsSavingCompetition());
+  try {
+    const json = await Requests.jsonPostRequest(
+      constants.COMPETITION_PATH,
+      competition,
+    );
+    return dispatch(saveCompetitionSuccess(json));
+  } catch (error) {
+    return dispatch(
+      saveCompetitionFailure(typeof error === "string" ? error : error.message),
+    );
+  }
+};

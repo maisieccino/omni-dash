@@ -1,7 +1,7 @@
 import React from "react";
 
 const WithdrawContainer = () =>
-  <div className="settings-pane">
+  <div className="splitview-pane">
     <h1>Withdraw Your Place</h1>
     <p>
       <em>

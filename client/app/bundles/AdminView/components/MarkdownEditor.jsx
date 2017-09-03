@@ -5,16 +5,13 @@ import marked from "marked";
 
 const MarkdownEditor = ({ id, value, onChange }) =>
   <div className="markdown-editor">
-    <p>
-      You can enter Markdown-formatted text here.{" "}
-      <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">
-        What{"'"}s this?
-      </a>
-    </p>
     <div>
       <div className="input-container">
         <p>
-          <strong>Input</strong>
+          You can enter Markdown-formatted text here.{" "}
+          <a href="https://help.github.com/articles/basic-writing-and-formatting-syntax/">
+            What{"'"}s this?
+          </a>
         </p>
         <textarea
           id={id}

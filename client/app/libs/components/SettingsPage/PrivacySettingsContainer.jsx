@@ -1,7 +1,7 @@
 import React from "react";
 
 const PrivacySettingsContainer = () =>
-  <div className="settings-pane">
+  <div className="splitview-pane">
     <h1>Privacy Settings</h1>
     <p>
       <em>
