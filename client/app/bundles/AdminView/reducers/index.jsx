@@ -8,7 +8,7 @@ import pageNavReducer, {
 } from "libs/reducers/pageNavReducer";
 import competitionReducer, {
   initialState as competitionState,
-} from "./competitionReducer";
+} from "libs/reducers/competitionReducer";
 import usersReducer, { initialState as usersState } from "./usersReducer";
 
 export const initialStates = {

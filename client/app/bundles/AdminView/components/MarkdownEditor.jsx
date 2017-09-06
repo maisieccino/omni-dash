@@ -3,6 +3,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import marked from "marked";
 
+marked.setOptions({
+  sanitize: true,
+  gfm: true,
+});
+
 const MarkdownEditor = ({ id, value, onChange }) =>
   <div className="markdown-editor">
     <div>

@@ -57,3 +57,29 @@ export const saveCompetition = competition => async dispatch => {
     );
   }
 };
+
+export const setIsDeletingCompetition = () => ({
+  type: constants.SET_IS_DELETING_COMPETITION,
+});
+
+export const deleteCompetitionSuccess = () => ({
+  type: constants.DELETE_COMPETITION_SUCCESS,
+});
+
+export const deleteCompetitionFailure = () => ({
+  type: constants.DELETE_COMPETITION_FAILURE,
+});
+
+export const deleteCompetition = () => async dispatch => {
+  dispatch(setIsDeletingCompetition());
+  try {
+    await Requests.jsonDeleteRequest(constants.COMPETITION_PATH);
+    return dispatch(deleteCompetitionSuccess());
+  } catch (error) {
+    return dispatch(
+      deleteCompetitionFailure(
+        typeof error === "string" ? error : error.message,
+      ),
+    );
+  }
+};

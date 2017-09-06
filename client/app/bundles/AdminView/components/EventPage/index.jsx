@@ -5,7 +5,7 @@ import * as pageNavActions from "libs/actions/pageNavActions";
 import {
   fetchCompetition,
   saveCompetition,
-} from "../../actions/competitionActions";
+} from "libs/actions/competitionActions";
 
 import EventPageView from "./EventPageView";
 import CreateEvent from "./CreateEvent";
@@ -15,13 +15,11 @@ class EventPage extends Component {
     updateBackButton: PropTypes.func.isRequired,
     getCompetition: PropTypes.func.isRequired,
     saveCompetition: PropTypes.func.isRequired,
-    competition: PropTypes.shape(),
     isSaving: PropTypes.bool,
     error: PropTypes.string,
   };
 
   static defaultProps = {
-    competition: {},
     isSaving: false,
     error: "",
   };
@@ -49,7 +47,7 @@ class EventPage extends Component {
           any important information.
         </p>
         {!this.props.error.length > 0
-          ? <EventPageView competition={this.props.competition} />
+          ? <EventPageView />
           : <div>
               <h2>Create New Event</h2>
               <CreateEvent
@@ -62,14 +60,10 @@ class EventPage extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  ...state.competition,
-});
-
 const mapDispatchToProps = dispatch => ({
   updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
   getCompetition: () => dispatch(fetchCompetition()),
   saveCompetition: competition => dispatch(saveCompetition(competition)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EventPage);
+export default connect(() => ({}), mapDispatchToProps)(EventPage);

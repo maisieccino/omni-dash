@@ -9,7 +9,7 @@ const routes = [
   {
     to: "/event/current",
     label: "Current Event",
-    render: props => <CurrentEvent {...props} />,
+    component: CurrentEvent,
   },
   {
     to: "/event/edit",
@@ -33,7 +33,7 @@ const routes = [
   },
 ];
 
-const EventPageView = props =>
+const EventPageView = () =>
   <div className="splitview-main">
     <aside className="splitview-nav">
       {/* programmatically generate navbar from array */}
@@ -41,18 +41,12 @@ const EventPageView = props =>
     </aside>
 
     {/* programmatically generate routes from array */}
-    {routes.map(route => <Route key={generate()} {...route} {...props} />)}
+    {routes.map(route => <Route key={generate()} {...route} />)}
     <Route
       exact
       path="/event"
       render={() => <Redirect to="/event/current" />}
     />
   </div>;
-
-EventPageView.propTypes = {};
-
-EventPageView.defaultProps = {
-  competition: {},
-};
 
 export default EventPageView;

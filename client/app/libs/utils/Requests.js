@@ -83,9 +83,30 @@ export const jsonPostRequest = async (path, body, headers = {}) =>
       res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`),
   );
 
+/**
+ * Send a JSON-encoded DELETE request to an endpoint. Also deals with Rails CSRF
+ * protection.
+ * @param  {string}  path         The endpoint to send request to
+ * @param  {Object}  [headers={}] Additional headers to add to request
+ * @return {Promise}              Promise that contains JSON response if successful
+ */
+export const jsonDeleteRequest = async (path, headers = {}) =>
+  fetch(path, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      ...headers,
+    },
+    credentials: "include",
+  }).then(
+    res =>
+      res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`),
+  );
+
 export default {
   getMetaContent,
   jsonGetRequest,
   jsonPutRequest,
   jsonPostRequest,
+  jsonDeleteRequest,
 };

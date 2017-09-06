@@ -1,5 +1,5 @@
-/* eslint react/prop-types: 0 */
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Route } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
@@ -12,24 +12,50 @@ import EventPage from "./EventPage";
 import NotificationsPage from "./NotificationsPage";
 import TopNav from "./Navigation/TopNav";
 
-const HackerView = ({ user, history }) =>
-  <ConnectedRouter history={history}>
-    <div>
-      <Navigation />
-      <div className="page">
-        <TopNav />
-        <Route exact path="/" render={() => <HomePage user={user} />} />
-        <Route path="/courses" component={CoursesPage} />
-        <Route path="/event" component={EventPage} />
-        <Route path="/notifications" component={NotificationsPage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route
-          path="/user/:id"
-          render={props => <ProfilePage showBackButton {...props} />}
-        />
-        <Route path="/settings" component={SettingsPage} />
-      </div>
-    </div>
-  </ConnectedRouter>;
+class HackerView extends Component {
+  static propTypes = {
+    fetchCompetition: PropTypes.func,
+    current_user: PropTypes.shape(),
+    history: PropTypes.shape(),
+  };
+
+  static defaultProps = {
+    fetchCompetition: () => {},
+    current_user: {},
+    history: {},
+  };
+
+  componentDidMount() {
+    this.props.fetchCompetition();
+  }
+
+  render() {
+    const { current_user: currentUser, history } = this.props;
+    return (
+      <ConnectedRouter history={history}>
+        <div>
+          <Navigation />
+          <div className="page">
+            <TopNav />
+            <Route
+              exact
+              path="/"
+              render={() => <HomePage user={currentUser} />}
+            />
+            <Route path="/courses" component={CoursesPage} />
+            <Route path="/event" component={EventPage} />
+            <Route path="/notifications" component={NotificationsPage} />
+            <Route path="/profile" component={ProfilePage} />
+            <Route
+              path="/user/:id"
+              render={props => <ProfilePage showBackButton {...props} />}
+            />
+            <Route path="/settings" component={SettingsPage} />
+          </div>
+        </div>
+      </ConnectedRouter>
+    );
+  }
+}
 
 export default HackerView;
