@@ -4,6 +4,7 @@ import { generate } from "shortid";
 
 import NavItem from "libs/components/SplitViewNavItem";
 import CurrentEvent from "./CurrentEvent";
+import DeleteEvent from "./DeleteEvent";
 
 const routes = [
   {
@@ -30,6 +31,7 @@ const routes = [
   {
     to: "/event/delete",
     label: "Delete Event",
+    component: DeleteEvent,
   },
 ];
 
@@ -41,7 +43,7 @@ const EventPageView = () =>
     </aside>
 
     {/* programmatically generate routes from array */}
-    {routes.map(route => <Route key={generate()} {...route} />)}
+    {routes.map(route => <Route key={generate()} path={route.to} {...route} />)}
     <Route
       exact
       path="/event"

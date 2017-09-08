@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import CurrentEventsCard from "./CurrentEventsCard";
 import CurrentLessonCard from "./CurrentLessonCard";
 import CountdownCard from "./CountdownCard";
+import DirectionsCard from "./DirectionsCard";
 
 const Card = props => {
   const { type } = props;
   const styles = ["feed-card"];
 
-  console.log(props);
   switch (type) {
     case "currentEvents":
       styles.push("flex-card");
@@ -17,6 +17,8 @@ const Card = props => {
       return <CurrentLessonCard className={styles.join(" ")} {...props} />;
     case "countdown":
       return <CountdownCard className={styles.join(" ")} {...props} />;
+    case "directions":
+      return <DirectionsCard className={styles.join(" ")} {...props} />;
     default:
       return <div />;
   }

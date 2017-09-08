@@ -95,8 +95,12 @@ export const jsonDeleteRequest = async (path, headers = {}) =>
     method: "DELETE",
     headers: {
       Accept: "application/json",
+      "Content-Type": "application/json",
       ...headers,
     },
+    body: JSON.stringify({
+      authenticity_token: getMetaContent("csrf-token"),
+    }),
     credentials: "include",
   }).then(
     res =>

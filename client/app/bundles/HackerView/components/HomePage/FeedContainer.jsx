@@ -30,6 +30,10 @@ class FeedContainer extends Component {
         startTime: competition.start_time,
         name: competition.name,
       });
+      feedItems.push({
+        type: "directions",
+        location: competition.location,
+      });
     } else {
       feedItems.push({
         type: "currentEvents",

@@ -17,11 +17,13 @@ class EventPage extends Component {
     saveCompetition: PropTypes.func.isRequired,
     isSaving: PropTypes.bool,
     error: PropTypes.string,
+    competitionExists: PropTypes.bool,
   };
 
   static defaultProps = {
     isSaving: false,
     error: "",
+    competitionExists: false,
   };
 
   componentDidMount() {
@@ -46,7 +48,7 @@ class EventPage extends Component {
           Create/manage the current event along with its timetable, venue, and
           any important information.
         </p>
-        {!this.props.error.length > 0
+        {this.props.competitionExists > 0
           ? <EventPageView />
           : <div>
               <h2>Create New Event</h2>
@@ -60,10 +62,14 @@ class EventPage extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  competitionExists: Object.keys(state.competition.competition).length > 0,
+});
+
 const mapDispatchToProps = dispatch => ({
   updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
   getCompetition: () => dispatch(fetchCompetition()),
   saveCompetition: competition => dispatch(saveCompetition(competition)),
 });
 
-export default connect(() => ({}), mapDispatchToProps)(EventPage);
+export default connect(mapStateToProps, mapDispatchToProps)(EventPage);

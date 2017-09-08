@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
+import { Route, Redirect } from "react-router-dom";
 
 import MarkdownEditor from "../MarkdownEditor";
 
@@ -152,6 +153,7 @@ class CreateEvent extends Component {
               : "Create"}
           </button>
         </p>
+        <Route exact path="/event/*" render={() => <Redirect to="/event" />} />
       </form>
     );
   }

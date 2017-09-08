@@ -96,6 +96,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isDeleting: false,
+        competition: {},
       };
     }
 
