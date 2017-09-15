@@ -1,5 +1,6 @@
 class Competition < ApplicationRecord
   before_create :confirm_singleton
+  has_many :invite_codes
 
   validates_presence_of %i[name start_time end_time]
 
