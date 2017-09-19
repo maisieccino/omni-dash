@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates_presence_of :first_name, :last_name, :email
-  after_create :create_attendee
+  after_create :update_invite_code
 
   def public_attributes_to_json
     to_json(only:
@@ -25,14 +25,11 @@ class User < ApplicationRecord
     ])
   end
 
-  # TODO: Add code to create attendee if invite code exists
-  def create_attendee
+  def update_invite_code
     invite_code = InviteCode.find_by(email: email)
-    print invite_code
     return if invite_code.nil?
-    # invite_code.used = true
-    # invite_code.save
-    # self.attendee.create
+    invite_code.used = true
+    invite_code.save
   end
 
   def soft_delete

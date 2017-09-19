@@ -1,27 +1,28 @@
 # Note: Base output directory of /public is assumed for static files
 default: &default
   manifest: manifest.json
+  compile: false
+  cache_manifest: false
   # Used in your webpack configuration. Must be created in the
   # webpack_public_output_dir folder
 
 development:
   <<: *default
+  compile: true
   # generated files for development, in /public/webpack/development
-  webpack_public_output_dir: webpack/development
-
-  # Default is localhost:3500
-  hot_reloading_host: localhost:3500
-
-  # Developer note: considering removing this option so it can ONLY be turned by using an ENV value.
-  # Default is false, ENV 'HOT_RELOAD' will always override
-  hot_reloading_enabled_by_default: false
+  public_output_path: webpack/development
+  dev_server:
+    host: localhost
+    port: 3500
+    hmr: true
 
 test:
   <<: *default
   # generated files for tests, in /public/webpack/test
-  webpack_public_output_dir: webpack/test
+  public_output_path: webpack/test
 
 production:
   <<: *default
   # generated files for tests, in /public/webpack/production
-  webpack_public_output_dir: webpack/production
+  public_output_path: webpack/production
+  cache_manifest: true

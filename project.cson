@@ -1,0 +1,5 @@
+{
+  settings:
+    "linter-eslint":
+      advancedLocalNodeModules: "client/node_modules"
+}

@@ -8,12 +8,12 @@ const { resolve } = require("path");
 const ManifestPlugin = require("webpack-manifest-plugin");
 const webpackConfigLoader = require("react-on-rails/webpackConfigLoader");
 
-const configPath = resolve("..", "config");
-const { devBuild, manifest, webpackOutputPath, webpackPublicOutputDir } =
-  webpackConfigLoader(configPath);
+const configPath = resolve(__dirname, "..", "config");
+const { output, settings } = webpackConfigLoader(configPath);
+const devBuild = process.env.NODE_ENV !== "production";
+const hmr = settings.dev_server.hmr;
 
 const config = {
-
   context: resolve(__dirname),
 
   entry: {
@@ -27,23 +27,18 @@ const config = {
   },
 
   output: {
-    // Name comes from the entry section.
-    filename: "[name]-[hash].js",
-
-    // Leading slash is necessary
-    publicPath: `/${webpackPublicOutputDir}`,
-    path: webpackOutputPath,
+    filename: hmr ? "[name]-[hash].js" : "[name]-[chunkhash].js",
+    chunkFilename: "[name]-[chunkhash].chunk.js",
+    publicPath: output.publicPath,
+    path: output.path,
   },
 
   resolve: {
     extensions: [".js", ".jsx"],
-    // alias: {
-    //   libs: resolve(__dirname, "app", "libs"),
-    // },
-    modules: [
-      "client/app",
-      "client/node_modules",
-    ],
+    alias: {
+      libs: resolve(__dirname, "app", "libs"),
+    },
+    modules: ["client/app", "client/node_modules"],
   },
 
   plugins: [
@@ -51,7 +46,10 @@ const config = {
       NODE_ENV: "development", // use 'development' unless process.env.NODE_ENV is defined
       DEBUG: false,
     }),
-    new ManifestPlugin({ fileName: manifest, writeToFileEmit: true }),
+    new ManifestPlugin({
+      publicPath: output.publicPath,
+      writeToFileEmit: true,
+    }),
   ],
 
   module: {

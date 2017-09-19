@@ -1,4 +1,4 @@
-import Requests from "libs/utils/Requests";
+import { jsonGetRequest } from "libs/utils/Requests";
 import * as constants from "../constants/usersConstants";
 
 export const setIsFetchingUsers = () => ({
@@ -17,7 +17,7 @@ export const fetchUsersFailure = error => ({
 
 export const fetchUsers = () => dispatch => {
   dispatch(setIsFetchingUsers());
-  return Requests.jsonGetRequest(constants.USERS_PATH)
+  return jsonGetRequest(constants.USERS_PATH)
     .then(json => dispatch(fetchUsersSuccess(json)))
     .catch(error => dispatch(fetchUsersFailure(error.message)));
 };

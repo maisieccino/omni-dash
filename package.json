@@ -1,33 +1,14 @@
 {
   "scripts": {
     "postinstall": "cd client && yarn install",
-    "lint": "eslint ./ --ext .js --ext .jsx --cache --ignore-path .gitignore",
-    "lint:force": "eslint ./ --ext .js --ext .jsx --ignore-path .gitignore",
-    "lint:staged": "lint-staged",
-    "format": "prettier --write --trailing-comma all \"client/app/**/*.{js,jsx}\"",
-    "precommit": "npm run lint && npm run lint:staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx}": [
-      "prettier --write --trailing-comma all",
-      "git add"
-    ]
+    "lint": "cd client && yarn run lint",
+    "lint:force": "cd client && yarn run lint:force",
+    "lint:staged": "cd client && yarn run lint:staged",
+    "format": "cd client && yarn run format",
+    "precommit": "cd client && yarn run precommit"
   },
   "name": "hatch-site",
   "private": true,
   "dependencies": {},
-  "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "eslint": "^4.3.0",
-    "eslint-config-airbnb": "^15.1.0",
-    "eslint-config-prettier": "^2.3.0",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.1.0",
-    "flow": "^0.2.3",
-    "husky": "^0.14.3",
-    "lint-staged": "^4.0.3",
-    "prettier": "^1.5.3",
-    "tern": "^0.21.0"
-  }
+  "devDependencies": {}
 }

@@ -5,6 +5,7 @@ import { generate } from "shortid";
 import NavItem from "libs/components/SplitViewNavItem";
 import CurrentEvent from "./CurrentEvent";
 import DeleteEvent from "./DeleteEvent";
+import Attendees from "./Attendees";
 
 const routes = [
   {
@@ -23,6 +24,7 @@ const routes = [
   {
     to: "/event/attendees",
     label: "Attendees",
+    component: Attendees,
   },
   {
     to: "/event/email",

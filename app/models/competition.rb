@@ -7,6 +7,16 @@ class Competition < ApplicationRecord
   class CompetitionExistsError < StandardError
   end
 
+  def attendees
+    attendees = invite_codes
+    attendees.map do |a|
+      print a.email
+      return { first_name: a.first_name, last_name: a.last_name, email: a.email } unless a.used
+      u = User.find_by(email: a.email)
+      { first_name: u.first_name, last_name: u.last_name, email: u.email }
+    end
+  end
+
   private
 
   def confirm_singleton
