@@ -16,6 +16,11 @@ input[type="submit"],
   box-sizing: border-box;
   width: 100%;
 
+  &.square {
+    width: 3rem;
+    min-width: 3rem;
+  }
+
   td & {
     margin-right: 0.3rem;
   }
