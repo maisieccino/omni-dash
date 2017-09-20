@@ -11,7 +11,7 @@ const webpackConfigLoader = require("react-on-rails/webpackConfigLoader");
 const configPath = resolve(__dirname, "..", "config");
 const { output, settings } = webpackConfigLoader(configPath);
 const devBuild = process.env.NODE_ENV !== "production";
-const hmr = settings.dev_server.hmr;
+const hmr = settings.dev_server ? settings.dev_server.hmr : false;
 
 const config = {
   context: resolve(__dirname),
