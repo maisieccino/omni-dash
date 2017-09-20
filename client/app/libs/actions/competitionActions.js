@@ -1,4 +1,8 @@
-import Requests from "libs/utils/Requests";
+import {
+  jsonGetRequest,
+  jsonPostRequest,
+  jsonDeleteRequest,
+} from "libs/utils/Requests";
 import * as constants from "../constants/competitionConstants";
 
 export const setIsFetchingCompetition = () => ({
@@ -18,7 +22,7 @@ export const fetchCompetitionFailure = error => ({
 export const fetchCompetition = () => async dispatch => {
   dispatch(setIsFetchingCompetition());
   try {
-    const json = await Requests.jsonGetRequest(constants.COMPETITION_PATH);
+    const json = await jsonGetRequest(constants.COMPETITION_PATH);
     return dispatch(fetchCompetitionSuccess(json));
   } catch (error) {
     return dispatch(
@@ -46,10 +50,7 @@ export const saveCompetitionFailure = error => ({
 export const saveCompetition = competition => async dispatch => {
   dispatch(setIsSavingCompetition());
   try {
-    const json = await Requests.jsonPostRequest(
-      constants.COMPETITION_PATH,
-      competition,
-    );
+    const json = await jsonPostRequest(constants.COMPETITION_PATH, competition);
     return dispatch(saveCompetitionSuccess(json));
   } catch (error) {
     return dispatch(
@@ -73,7 +74,7 @@ export const deleteCompetitionFailure = () => ({
 export const deleteCompetition = () => async dispatch => {
   dispatch(setIsDeletingCompetition());
   try {
-    await Requests.jsonDeleteRequest(constants.COMPETITION_PATH);
+    await jsonDeleteRequest(constants.COMPETITION_PATH);
     return dispatch(deleteCompetitionSuccess());
   } catch (error) {
     return dispatch(

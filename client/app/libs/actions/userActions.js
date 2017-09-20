@@ -1,4 +1,4 @@
-import Requests from "libs/utils/Requests";
+import { jsonGetRequest, jsonPutRequest } from "libs/utils/Requests";
 import * as constants from "libs/constants/userConstants";
 
 export const setIsFetching = () => ({
@@ -18,7 +18,7 @@ export const fetchUserFailure = error => ({
 export const fetchUser = id => dispatch => {
   dispatch(setIsFetching());
   const uri = id ? `/users/${id}/` : constants.USER_ME_PATH;
-  return Requests.jsonGetRequest(uri)
+  return jsonGetRequest(uri)
     .then(json => dispatch(fetchUserSuccess(json)))
     .catch(error => dispatch(fetchUserFailure(error.message)));
 };
@@ -53,7 +53,7 @@ export const updateUserFailure = error => ({
  */
 export const updateUser = (data = {}) => dispatch => {
   dispatch(setIsUpdating());
-  return Requests.jsonPutRequest(constants.USER_ME_PATH, data)
+  return jsonPutRequest(constants.USER_ME_PATH, data)
     .then(
       () =>
         // fake delay

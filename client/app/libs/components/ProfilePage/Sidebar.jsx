@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { generate } from "shortid";
 import ContactInfoItem from "./ContactInfoItem";
 
@@ -18,26 +17,23 @@ const contactInfo = user =>
   Object.keys(user)
     .filter(key => key.match("contact_"))
     .filter(key => user[key])
-    .map(key =>
+    .map(key => (
       <ContactInfoItem
         name={key.replace("contact_", "")}
         value={user[key]}
         prefix={getContactPrefix(key)}
         key={generate()}
-      />,
-    );
+      />
+    ));
 
-const Sidebar = props =>
+const Sidebar = props => (
   <aside className="profile-sidebar">
     <h2>Contact Info</h2>
     {contactInfo(props)}
-  </aside>;
+  </aside>
+);
 
-Sidebar.propTypes = {
-  contact_twitter: PropTypes.string,
-  contact_website: PropTypes.string,
-  contact_linkedin: PropTypes.string,
-};
+Sidebar.propTypes = {};
 
 Sidebar.defaultProps = {
   contact_twitter: "",
