@@ -1,5 +1,5 @@
 // fonts
-@import url('https://fonts.googleapis.com/css?family=Karla:400,400i|Yantramanav:400,700');
+@import url('https://fonts.googleapis.com/css?family=Karla:400,400i|Yantramanav:400,700|Fira+Mono');
 
 // vars
 @import "base/variables";
@@ -13,8 +13,11 @@
 @import "base/elements/flash";
 @import "base/elements/button";
 @import "base/elements/form";
+@import "base/elements/markdown-editor";
 @import "base/elements/progress";
 @import "base/elements/nav";
 @import "base/elements/feed";
 @import "base/elements/profile-page";
-@import "base/elements/settings-page";
+@import "base/elements/split-view";
+@import "base/elements/table";
+@import "base/elements/modal";

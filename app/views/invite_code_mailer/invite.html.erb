@@ -1,6 +1,6 @@
-<h1>Welcome to Hatch!</h1>
+<h1>You're invited to <%= @competition_name %>!</h1>
 <p>Dear <%= @invite_code.first_name %>,</p>
-<p>This email contains information for signing up to the Hatch online dashboard.
+<p>This email contains information for signing up to our online dashboard.
   From here, you'll be able to learn from our coding courses, keep up to date
   on the latest news and updates from the venue, as well as keeping track of
   workshops and events that happen during the weekend.</p>
@@ -15,8 +15,8 @@
 
 <p>Code: <%= @invite_code.code %></p>
 
-<p>We look forward to seeing you at Hatch!</p>
+<p>We look forward to seeing you at the event!</p>
 
 <p>Kind regards,</p>
 
-<p>The Hatch x UCL team</p>
+<p>The <%= @competition_name %> team</p>

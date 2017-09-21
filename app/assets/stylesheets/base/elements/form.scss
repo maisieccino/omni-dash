@@ -14,7 +14,12 @@ label {
   padding: 0.25rem 0.4rem;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="time"],
+input[type="number"] {
   font-family: $font-body;
   font-size: 1.1rem;
   transition: all 0.25s ease-in-out;

@@ -26,7 +26,7 @@ class ProfileSettingsContainer extends Component {
       userChangedFields,
     } = this.props;
     return (
-      <div className="settings-pane">
+      <div className="splitview-pane">
         <form>
           <Prompt
             when={this.props.isUnsaved}

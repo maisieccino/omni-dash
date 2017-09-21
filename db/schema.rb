@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170806231901) do
+ActiveRecord::Schema.define(version: 20170915183738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "competitions", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer "capacity"
+    t.string "location"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "deleted_at"
+  end
 
   create_table "invite_codes", force: :cascade do |t|
     t.string "code"
@@ -22,7 +34,10 @@ ActiveRecord::Schema.define(version: 20170806231901) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "competition_id"
+    t.boolean "used", default: false
     t.index ["code"], name: "index_invite_codes_on_code"
+    t.index ["competition_id"], name: "index_invite_codes_on_competition_id"
     t.index ["email"], name: "index_invite_codes_on_email", unique: true
   end
 
@@ -58,4 +73,5 @@ ActiveRecord::Schema.define(version: 20170806231901) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "invite_codes", "competitions"
 end

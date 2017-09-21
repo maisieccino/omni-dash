@@ -1,8 +1,8 @@
-.settings-main {
+.splitview-main {
   @extend .profile-main;
   flex-direction: column;
 
-  .settings-nav {
+  .splitview-nav {
     @extend .profile-sidebar;
 
     a {
@@ -27,7 +27,7 @@
     }
   }
 
-  .settings-pane {
+  .splitview-pane {
     @extend .profile-body;
 
     h2 {
@@ -44,7 +44,7 @@
     // make sidebar a sidebar
     flex-direction: row;
 
-    .settings-nav {
+    .splitview-nav {
       margin-right: 1rem;
       border-right: solid 1px $color-accent;
 

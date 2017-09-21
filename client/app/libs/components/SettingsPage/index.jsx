@@ -7,7 +7,7 @@ import { generate } from "shortid";
 import { setUpdateSuccess } from "libs/actions/userActions";
 import * as pageNavActions from "../../actions/pageNavActions";
 
-import NavItem from "./NavItem";
+import NavItem from "../SplitViewNavItem";
 import ProfileSettingsContainer from "./ProfileSettingsContainer";
 import TeamSettingsContainer from "./TeamSettingsContainer";
 import PrivacySettingsContainer from "./PrivacySettingsContainer";
@@ -62,8 +62,8 @@ class SettingsPage extends Component {
   render() {
     return (
       <div>
-        <div className="settings-main">
-          <aside className="settings-nav">
+        <div className="splitview-main">
+          <aside className="splitview-nav">
             {/* programmatically generate navbar from array */}
             {routes.map(route => <NavItem key={generate()} {...route} />)}
           </aside>

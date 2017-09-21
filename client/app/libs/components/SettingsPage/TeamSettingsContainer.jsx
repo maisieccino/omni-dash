@@ -1,7 +1,7 @@
 import React from "react";
 
 const TeamSettingsContainer = () =>
-  <div className="settings-pane">
+  <div className="splitview-pane">
     <h1>Team Settings</h1>
     <p>
       <em>

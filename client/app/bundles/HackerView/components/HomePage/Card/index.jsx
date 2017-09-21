@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import CurrentEventsCard from "./CurrentEventsCard";
 import CurrentLessonCard from "./CurrentLessonCard";
+import CountdownCard from "./CountdownCard";
+import DirectionsCard from "./DirectionsCard";
 
 const Card = props => {
   const { type } = props;
@@ -13,6 +15,10 @@ const Card = props => {
       return <CurrentEventsCard className={styles.join(" ")} {...props} />;
     case "currentLesson":
       return <CurrentLessonCard className={styles.join(" ")} {...props} />;
+    case "countdown":
+      return <CountdownCard className={styles.join(" ")} {...props} />;
+    case "directions":
+      return <DirectionsCard className={styles.join(" ")} {...props} />;
     default:
       return <div />;
   }

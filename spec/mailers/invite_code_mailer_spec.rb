@@ -8,7 +8,7 @@ RSpec.describe InviteCodeMailer, type: :mailer do
       email = InviteCodeMailer.invite(invite_code)
 
       expect(email.to).to eq([invite_code.email])
-      expect(email.subject).to eq("Welcome to Hatch!")
+      expect(email.subject).to eq("Welcome to the hackathon!")
     end
   end
 end

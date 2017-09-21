@@ -13,4 +13,8 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[name provider uid])
   end
+
+  def admin_only
+    return head :forbidden unless current_user.admin?
+  end
 end

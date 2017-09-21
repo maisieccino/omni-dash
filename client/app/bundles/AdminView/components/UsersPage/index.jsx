@@ -29,12 +29,16 @@ class UsersPage extends Component {
       <div>
         <h1>Users</h1>
         <p>
-          <button onClick={() => this.props.getUsers()}>Refresh</button>
+          <button className="square" onClick={() => this.props.getUsers()}>
+            <i className="fa fa-refresh" />
+          </button>
         </p>
         <p>Manage Hatch users.</p>
-        {this.props.isFetching
-          ? <p>Loading users...</p>
-          : <UsersTable users={this.props.users} />}
+        {this.props.isFetching ? (
+          <p>Loading users...</p>
+        ) : (
+          <UsersTable users={this.props.users} />
+        )}
       </div>
     );
   }

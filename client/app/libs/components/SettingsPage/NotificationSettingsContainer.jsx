@@ -1,7 +1,7 @@
 import React from "react";
 
 const NotificationsSettingsContainer = () =>
-  <div className="settings-pane">
+  <div className="splitview-pane">
     <h1>Notifications Settings</h1>
     <p>
       <em>
