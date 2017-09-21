@@ -42,12 +42,24 @@ RSpec.describe "Competition Invite API", type: :request do
       sign_in admin_user
       post competition_invites_path, params: invite_params.to_json, headers: json_headers
       expect(response).to have_http_status(:created)
+      expect(json["used"]).to eq(false)
       invites = competition.invite_codes
       expect(invites.length).to eq(1)
     end
 
-    it "should not create invitation if user already exists" do
+    it "should create invitation if user already exists but set used to true" do
       sign_in admin_user
+      post competition_invites_path, params: user.to_json, headers: json_headers
+      expect(response).to have_http_status(:created)
+      expect(json["used"]).to eq(true)
+    end
+
+    it "should not create invitation if invite already exists" do
+      sign_in admin_user
+      post competition_invites_path, params: user.to_json, headers: json_headers
+      expect(response).to have_http_status(:created)
+      expect(json["used"]).to eq(true)
+      # try to make it again
       post competition_invites_path, params: user.to_json, headers: json_headers
       expect(response).to have_http_status(:bad_request)
     end

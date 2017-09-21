@@ -3,7 +3,9 @@ import {
   jsonPostRequest,
   jsonDeleteRequest,
 } from "libs/utils/Requests";
-import * as constants from "../constants/competitionConstants";
+import * as constants from "../../constants/competitionConstants";
+
+export * from "./attendeesActions";
 
 export const setIsFetchingCompetition = () => ({
   type: constants.SET_IS_FETCHING_COMPETITION,

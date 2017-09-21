@@ -12,15 +12,19 @@ class CompetitionController < ApplicationController
   end
 
   def list_attendees
-    json_response(@competition.invite_codes, :ok)
+    json_response(@competition.attendees, :ok)
   end
 
   def invite_attendee
+    # check to see if invitecode already exists
+    invite_params = invite_attendee_params
+    code = @competition.invite_codes.find_by(email: invite_params[:email])
+    return json_response({ message: "This email has already been invited" }, :bad_request) if code
     # check email, see if user already exists.
     # if not, create a new InviteCode
-    user = User.find_by(email: invite_attendee_params[:email])
-    return json_response({ message: "This user already exists" }, :bad_request) unless user.nil?
-    invite = @competition.invite_codes.create!(invite_attendee_params)
+    user = User.find_by(email: invite_params[:email])
+    invite_params[:used] = !!user
+    invite = @competition.invite_codes.create!(invite_params)
     json_response(invite, :created)
   end
 
@@ -52,7 +56,7 @@ class CompetitionController < ApplicationController
   end
 
   def invite_attendee_params
-    params.permit(:email, :first_name, :last_name)
+    params.permit(:email, :first_name, :last_name, :used)
   end
 
   def set_competition

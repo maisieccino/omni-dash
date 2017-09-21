@@ -44,5 +44,6 @@ input[type="submit"],
   @include respond-to(550px) {
     width: auto;
     min-width: 5rem;
+    margin-top: 0;
   }
 }

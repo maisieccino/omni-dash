@@ -1,11 +1,16 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import {generate} from "shortid";
+import {fetchCompetitionAttendees} from "libs/actions/competitionActions";
+// import { Modal } from "libs/components";
 
 import AttendeeTableHeader from "./AttendeeTableHeader";
 
 class Attendees extends Component {
   static propTypes = {
     attendees: PropTypes.arrayOf(PropTypes.shape()),
+    fetchAttendees: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -14,6 +19,9 @@ class Attendees extends Component {
 
   componentDidMount() {
     // check for attendee list and call action if not yet loaded.
+    if (this.props.attendees.length === 0) {
+      this.props.fetchAttendees();
+    }
   }
 
   render() {
@@ -28,7 +36,7 @@ class Attendees extends Component {
           <AttendeeTableHeader />
           <tbody>
             {attendees.map(attendee => (
-              <tr>
+              <tr key={generate()}>
                 <td>{attendee.first_name}</td>
                 <td>{attendee.last_name}</td>
                 <td>{attendee.email}</td>
@@ -36,9 +44,18 @@ class Attendees extends Component {
             ))}
           </tbody>
         </table>
+        {/* <Modal /> */}
       </div>
     );
   }
 }
 
-export default Attendees;
+const mapStateToProps = state => {
+  return {attendees: state.competition.attendees.attendees};
+};
+
+const mapDispatchToProps = dispatch => ({
+  fetchAttendees: () => dispatch(fetchCompetitionAttendees()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Attendees);

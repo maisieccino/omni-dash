@@ -1,6 +1,6 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import * as pageNavActions from "libs/actions/pageNavActions";
 import {
   fetchCompetition,
@@ -23,7 +23,7 @@ class EventPage extends Component {
   static defaultProps = {
     isSaving: false,
     error: "",
-    competitionExists: false,
+    competitionExists: true,
   };
 
   componentDidMount() {
@@ -38,32 +38,36 @@ class EventPage extends Component {
           (not including if competition doesn't yet exist)
         */}
         {this.props.error &&
-          this.props.error !== "404 Not Found" &&
+        this.props.error !== "404 Not Found" && (
           <div className="alert">
             <strong>Error:</strong> {this.props.error}
-          </div>}
+          </div>
+        )}
 
         <h1>Your Event</h1>
         <p>
           Create/manage the current event along with its timetable, venue, and
           any important information.
         </p>
-        {this.props.competitionExists > 0
-          ? <EventPageView />
-          : <div>
-              <h2>Create New Event</h2>
-              <CreateEvent
-                onClickSave={this.props.saveCompetition}
-                isSaving={this.props.isSaving}
-              />
-            </div>}
+        {this.props.competitionExists ? (
+          <EventPageView />
+        ) : (
+          <div>
+            <h2>Create New Event</h2>
+            <CreateEvent
+              onClickSave={this.props.saveCompetition}
+              isSaving={this.props.isSaving}
+            />
+          </div>
+        )}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  competitionExists: Object.keys(state.competition.competition).length > 0,
+  error: state.competition.error,
+  competitionExists: state.competition.competitionExists,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -29,10 +29,11 @@ class CreateEvent extends Component {
   }
 
   onStartDateChange(e) {
+    const old = this.state.start_time;
     const start = moment(
       `${e.target.value} ${this.state.start_time.format("HH:mm")}`,
     );
-    this.setState({ start_time: start });
+    this.setState({ start_time: start.isValid() ? start : old });
   }
 
   onStartTimeChange(e) {
@@ -43,10 +44,11 @@ class CreateEvent extends Component {
   }
 
   onEndDateChange(e) {
+    const old = this.state.end_time;
     const end = moment(
       `${e.target.value} ${this.state.end_time.format("HH:mm")}`,
     );
-    this.setState({ end_time: end });
+    this.setState({ end_time: end.isValid() ? end : old });
   }
 
   onEndTimeChange(e) {
@@ -148,9 +150,11 @@ class CreateEvent extends Component {
 
         <p>
           <button onClick={() => this.props.onClickSave(this.state)}>
-            {this.props.isSaving
-              ? <i aria-label="Loading" className="fa fa-refresh spinner" />
-              : "Create"}
+            {this.props.isSaving ? (
+              <i aria-label="Loading" className="fa fa-refresh spinner" />
+            ) : (
+              "Create"
+            )}
           </button>
         </p>
         <Route exact path="/event/*" render={() => <Redirect to="/event" />} />

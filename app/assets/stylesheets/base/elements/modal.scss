@@ -1,0 +1,71 @@
+.modal-wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba($color-fg, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .modal {
+    $modal-pad: 1rem;
+    background-color: $color-bg;
+    border: 1px solid darken($color-card, 20);
+    width: 85vw;
+    padding: 1rem;
+    border-radius: $border-radius;
+    box-shadow: 0 3px 7px 0 black;
+
+    @include respond-to(800px) {
+      min-width: 20rem;
+      max-width: 40rem;
+      width: auto;
+    }
+
+    .modal-header {
+      border-radius: $border-radius $border-radius 0 0;
+      margin: (-$modal-pad) (-$modal-pad) 0 (-$modal-pad);
+      padding: $modal-pad;
+      background-color: $color-card;
+      color: $color-fg;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+
+      button.modal-close {
+        width: 3rem;
+        min-width: auto;
+      }
+
+      h1 {
+        margin: 0;
+      }
+    }
+
+    .modal-body {
+      margin: 1rem 0;
+    }
+
+    .modal-footer {
+      margin: 0 (-$modal-pad) (-$modal-pad) (-$modal-pad);
+      border-radius: 0 0 $border-radius $border-radius;
+      display: flex;
+      flex-direction: row;
+
+      button {
+        flex: 1;
+        border-radius: 0;
+        &:nth-of-type(1) {
+          border-radius: 0 0 0 $border-radius;
+        }
+
+        &:last-of-type {
+          border-radius: 0 0 $border-radius 0;
+        }
+      }
+    }
+  }
+}

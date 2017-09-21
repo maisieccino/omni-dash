@@ -1,10 +1,15 @@
-import * as constants from "../constants/competitionConstants";
+import * as constants from "../../constants/competitionConstants";
+import attendeesReducer, {
+  initialState as attendeesState,
+} from "./attendeesReducer";
 
 export const initialState = {
   isFetching: false,
   isSaving: false,
   isDeleting: false,
+  competitionExists: true,
   competition: {},
+  attendees: attendeesState,
   error: "",
 };
 
@@ -16,6 +21,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isFetching: true,
+        competitionExists: true,
         error: "",
       };
     }
@@ -24,6 +30,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isFetching: false,
+        competitionExists: true,
         competition,
       };
     }
@@ -32,6 +39,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isFetching: false,
+        competitionExists: false,
         error,
       };
     }
@@ -96,6 +104,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isDeleting: false,
+        competitionExists: false,
         competition: {},
       };
     }
@@ -105,6 +114,15 @@ export default (state = initialState, action = null) => {
         ...state,
         isDeleting: false,
         error,
+      };
+    }
+
+    case constants.SET_IS_FETCHING_COMPETITION_ATTENDEES:
+    case constants.FETCH_COMPETITION_ATTENDEES_SUCCESS:
+    case constants.FETCH_COMPETITION_ATTENDEES_FAILURE: {
+      return {
+        ...state,
+        attendees: attendeesReducer(state.attendees, action),
       };
     }
 
