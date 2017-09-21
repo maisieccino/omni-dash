@@ -50,9 +50,9 @@ class Attendees extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {attendees: state.competition.attendees.attendees};
-};
+const mapStateToProps = state => ({
+  attendees: state.competition.attendees.attendees,
+});
 
 const mapDispatchToProps = dispatch => ({
   fetchAttendees: () => dispatch(fetchCompetitionAttendees()),
