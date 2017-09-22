@@ -8,7 +8,7 @@ marked.setOptions({
   gfm: true,
 });
 
-const MarkdownEditor = ({ id, value, onChange }) =>
+const MarkdownEditor = ({ id, value, onChange }) => (
   <div className="markdown-editor">
     <div>
       <div className="input-container">
@@ -35,7 +35,8 @@ const MarkdownEditor = ({ id, value, onChange }) =>
         />
       </div>
     </div>
-  </div>;
+  </div>
+);
 
 MarkdownEditor.propTypes = {
   value: PropTypes.string,

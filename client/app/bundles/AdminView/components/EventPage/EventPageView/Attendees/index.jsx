@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { generate } from "shortid";
+import { Link } from "react-router-dom";
 import { fetchCompetitionAttendees } from "libs/actions/competitionActions";
 import { Modal } from "libs/components";
 
@@ -43,13 +44,13 @@ class Attendees extends Component {
       <div className="splitview-pane">
         <div className="title-bar">
           <h1>Attendees </h1>
-          <button
-            className="square"
-            onClick={() => this.setState({ isInviteModalOpen: true })}
-            title="Add new attendee"
+          <Link
+            to="/event/attendees/add"
+            title="Add New Attendee"
+            className="square button"
           >
             <i className="fa fa-plus" />
-          </button>
+          </Link>
           <button
             className="square"
             disabled={this.props.isLoading}
@@ -89,6 +90,10 @@ class Attendees extends Component {
           <Modal
             onCloseButtonClick={() =>
               this.setState({ isInviteModalOpen: false })}
+            choices={[
+              <button className="primary">Okay</button>,
+              <button>Cancel</button>,
+            ]}
           />
         )}
       </div>

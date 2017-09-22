@@ -61,12 +61,22 @@
         border-radius: 0;
         &:nth-of-type(1) {
           border-radius: 0 0 0 $border-radius;
-          border-right: 0.1rem solid darken($color-accent, 20);
         }
 
         &:last-of-type {
           border-radius: 0 0 $border-radius 0;
-          border-left: 0.1rem solid darken($color-accent, 20);
+        }
+
+        &:not(.primary) {
+          background-color: $color-card;
+          color: $color-fg;
+          &:hover {
+            background-color: lighten($color-card, 10);
+          }
+
+          &:active {
+            background-color: darken($color-card, 10);
+          }
         }
       }
     }

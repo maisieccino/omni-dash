@@ -4,8 +4,9 @@ import { generate } from "shortid";
 
 import NavItem from "libs/components/SplitViewNavItem";
 import CurrentEvent from "./CurrentEvent";
-import DeleteEvent from "./DeleteEvent";
 import Attendees from "./Attendees";
+import ContactAttendees from "./ContactAttendees";
+import DeleteEvent from "./DeleteEvent";
 
 const routes = [
   {
@@ -31,6 +32,7 @@ const routes = [
   {
     to: "/event/email",
     label: "Contact Attendees",
+    component: ContactAttendees,
   },
   {
     to: "/event/delete",

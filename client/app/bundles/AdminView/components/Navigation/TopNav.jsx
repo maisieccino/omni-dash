@@ -8,10 +8,11 @@ const TopNav = ({ href, visible }, { router }) => {
   const backPath = query.get("backPath") || href;
   return (
     <div>
-      {visible &&
-        <Link className="button" to={backPath}>
-          Back
-        </Link>}
+      {visible && (
+        <Link className="square button" to={backPath}>
+          <i className="fa fa-arrow-left" aria-label="Navigate back" />
+        </Link>
+      )}
     </div>
   );
 };

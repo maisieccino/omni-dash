@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { Route, Redirect } from "react-router-dom";
 
-import MarkdownEditor from "../MarkdownEditor";
+import MarkdownEditor from "libs/components/MarkdownEditor";
 
 class CreateEvent extends Component {
   static propTypes = {

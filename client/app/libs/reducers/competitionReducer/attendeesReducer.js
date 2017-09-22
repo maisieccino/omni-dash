@@ -2,6 +2,7 @@ import * as constants from "../../constants/competitionConstants";
 
 export const initialState = {
   isFetching: false,
+  isInviting: false,
   error: "",
   attendees: [],
 };
@@ -32,6 +33,29 @@ export default (state = initialState, action = null) => {
         isFetching: false,
         error: "",
         attendees,
+      };
+    }
+
+    case constants.SET_IS_INVITING_COMPETITION_ATTENDEE: {
+      return {
+        ...state,
+        isInviting: true,
+        error: "",
+      };
+    }
+
+    case constants.INVITE_COMPETITION_ATTENDEE_FAILURE: {
+      return {
+        ...state,
+        isInviting: false,
+        error,
+      };
+    }
+
+    case constants.INVITE_COMPETITION_ATTENDEE_SUCCESS: {
+      return {
+        ...state,
+        isInviting: false,
       };
     }
 

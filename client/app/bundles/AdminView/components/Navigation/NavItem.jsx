@@ -3,7 +3,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-// TODO: Add icons
 const NavItem = ({ to, label, icon, ...rest }, { router }) => {
   const match = rest.match || `${to}$`;
   return (
@@ -12,9 +11,7 @@ const NavItem = ({ to, label, icon, ...rest }, { router }) => {
       className={router.history.location.pathname.match(match) ? "active" : ""}
     >
       <i className={`nav-icon fa fa-${icon}`} aria-hidden="true" />
-      <span className="nav-label">
-        {label}
-      </span>
+      <span className="nav-label">{label}</span>
     </Link>
   );
 };
