@@ -3,12 +3,19 @@
     "postinstall": "cd client && yarn install",
     "lint": "cd client && yarn run lint",
     "lint:force": "cd client && yarn run lint:force",
-    "lint:staged": "cd client && yarn run lint:staged",
+    "lint:staged": "lint-staged",
     "format": "cd client && yarn run format",
-    "precommit": "cd client && yarn run precommit"
+    "precommit": "(cd client && yarn run precommit) && yarn run lint:staged"
   },
   "name": "hatch-site",
   "private": true,
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "husky": "^0.14.3",
+    "lint-staged": "^4.0.3",
+    "prettier": "^1.5.3"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": ["prettier --write --trailing-comma all", "git add"]
+  }
 }
