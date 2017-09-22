@@ -2,11 +2,18 @@ table {
   width: 100%;
 
   thead {
-    background-color: $color-accent;
+    background-color: $color-fg;
     color: $color-bg;
 
     td {
+      font-weight: bold;
       padding: 0.25rem;
+      &:first-of-type {
+        border-radius: $border-radius 0 0 0;
+      }
+      &:last-of-type {
+        border-radius: 0 $border-radius 0 0;
+      }
     }
   }
 

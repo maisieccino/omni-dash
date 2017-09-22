@@ -34,7 +34,7 @@ class Attendees extends Component {
 
   componentDidMount() {
     // check for attendee list and call action if not yet loaded.
-    if (this.props.attendees.length === 0) {
+    if (this.props.attendees.length === 0 && !this.props.isLoading) {
       this.props.fetchAttendees();
     }
   }

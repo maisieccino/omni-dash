@@ -65,12 +65,11 @@
 
 .profile-main {
   // just make it one column if mobile
-  margin-top: 2rem;
-  display: flex;
+  @extend .splitview-main;
   flex-direction: column-reverse;
 
   aside.profile-sidebar {
-    flex: none;
+    @extend .splitview-nav;
 
     .contact-info-item {
       h3 {
@@ -83,8 +82,7 @@
   }
 
   .profile-body {
-    flex: none;
-    margin-bottom: 1rem;
+    @extend .splitview-pane;
   }
 
   h2:not(.not-fancy) {
@@ -96,19 +94,5 @@
   p {
     font-size: 1.2rem;
     margin: 0.5rem 0;
-  }
-
-  @include respond-to(900px) {
-    // make sidebar a sidebar
-    flex-direction: row;
-
-    aside.profile-sidebar {
-      flex: 2 2 0px;
-      margin-bottom: 0;
-    }
-
-    .profile-body {
-      flex: 7 7 0px;
-    }
   }
 }

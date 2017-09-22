@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import moment from "moment";
 import * as pageNavActions from "libs/actions/pageNavActions";
 import { fetchUsers } from "../../actions/usersActions";
 
@@ -12,11 +13,13 @@ class UsersPage extends Component {
     getUsers: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape()),
     isFetching: PropTypes.bool,
+    lastUpdated: PropTypes.shape(),
   };
 
   static defaultProps = {
     users: [],
     isFetching: false,
+    lastUpdated: null,
   };
 
   componentDidMount() {
@@ -25,10 +28,17 @@ class UsersPage extends Component {
   }
 
   render() {
+    const { lastUpdated } = this.props;
     return (
       <div>
         <div className="title-bar">
           <h1>Users</h1>
+          <p>
+            <i>
+              Last updated:{" "}
+              {lastUpdated ? moment(lastUpdated).format("HH:mm:ss") : "Never"}
+            </i>
+          </p>
           <button
             disabled={this.props.isFetching}
             className="square"
@@ -54,11 +64,12 @@ class UsersPage extends Component {
 }
 
 const mapStateToProps = state => {
-  const { isFetching, users } = state.users;
+  const { isFetching, users, lastUpdated } = state.users;
 
   return {
     isFetching,
     users,
+    lastUpdated,
   };
 };
 

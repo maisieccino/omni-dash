@@ -1,9 +1,10 @@
 .splitview-main {
-  @extend .profile-main;
   flex-direction: column;
+  margin-top: 2rem;
+  display: flex;
 
   .splitview-nav {
-    @extend .profile-sidebar;
+    flex: none;
 
     a {
       font-family: $font-title;
@@ -28,7 +29,8 @@
   }
 
   .splitview-pane {
-    @extend .profile-body;
+    flex: none;
+    margin-bottom: 1rem;
 
     h2 {
       font-size: 1.6rem;
@@ -42,15 +44,20 @@
 
   @include respond-to(900px) {
     // make sidebar a sidebar
-    flex-direction: row;
+    flex-direction: row !important;
 
     .splitview-nav {
+      flex: 2 2 0px !important;
+      margin-bottom: 0;
       margin-right: 1rem;
       border-right: solid 1px $color-accent;
 
       a {
         border-radius: 0.5rem 0 0 0.5rem;
       }
+    }
+    .splitview-pane {
+      flex: 7 7 0px !important;
     }
   }
 }
