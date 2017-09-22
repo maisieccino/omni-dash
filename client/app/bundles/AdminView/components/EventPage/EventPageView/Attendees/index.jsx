@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import moment from "moment";
 import { generate } from "shortid";
 import { Link } from "react-router-dom";
 import { fetchCompetitionAttendees } from "libs/actions/competitionActions";
@@ -14,12 +15,14 @@ class Attendees extends Component {
     fetchAttendees: PropTypes.func.isRequired,
     isLoading: PropTypes.bool,
     error: PropTypes.string,
+    lastUpdated: PropTypes.shape(),
   };
 
   static defaultProps = {
     attendees: [],
     isLoading: false,
     error: "",
+    lastUpdated: null,
   };
 
   constructor(props) {
@@ -40,10 +43,17 @@ class Attendees extends Component {
     const attendees = this.props.attendees.sort(
       (a, b) => a.first_name > b.first_name,
     );
+    const { lastUpdated } = this.props;
     return (
       <div className="splitview-pane">
         <div className="title-bar">
           <h1>Attendees </h1>
+          <p>
+            <i>
+              Last updated:{" "}
+              {lastUpdated ? moment(lastUpdated).format("HH:mm:ss") : "Never"}
+            </i>
+          </p>
           <Link
             to="/event/attendees/add"
             title="Add New Attendee"
@@ -105,6 +115,7 @@ const mapStateToProps = state => ({
   attendees: state.competition.attendees.attendees,
   error: state.competition.attendees.error,
   isLoading: state.competition.attendees.isFetching,
+  lastUpdated: state.competition.attendees.lastUpdated,
 });
 
 const mapDispatchToProps = dispatch => ({

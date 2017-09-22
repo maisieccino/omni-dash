@@ -5,6 +5,7 @@ export const initialState = {
   isInviting: false,
   error: "",
   attendees: [],
+  lastUpdated: null,
 };
 
 export default (state = initialState, action = null) => {
@@ -33,6 +34,7 @@ export default (state = initialState, action = null) => {
         isFetching: false,
         error: "",
         attendees,
+        lastUpdated: new Date(),
       };
     }
 
