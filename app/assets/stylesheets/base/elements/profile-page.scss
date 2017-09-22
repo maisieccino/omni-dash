@@ -39,14 +39,20 @@
     flex-direction: column;
     flex: 3 3 0px;
     justify-content: center;
+
+    h1 {
+      margin-top: 1rem;
+    }
   }
 
   .header-buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 1rem;
 
-    button, .button {
+    button,
+    .button {
       min-width: 40%;
       width: auto !important;
 
@@ -97,12 +103,12 @@
     flex-direction: row;
 
     aside.profile-sidebar {
-      flex: 1 1 0px;
+      flex: 2 2 0px;
       margin-bottom: 0;
     }
 
     .profile-body {
-      flex: 3 3 0px;
+      flex: 7 7 0px;
     }
   }
 }

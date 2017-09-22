@@ -27,13 +27,22 @@ class UsersPage extends Component {
   render() {
     return (
       <div>
-        <h1>Users</h1>
-        <p>
-          <button className="square" onClick={() => this.props.getUsers()}>
-            <i className="fa fa-refresh" />
+        <div className="title-bar">
+          <h1>Users</h1>
+          <button
+            disabled={this.props.isFetching}
+            className="square"
+            title="Refresh"
+            onClick={() => this.props.getUsers()}
+          >
+            <i
+              className={`fa fa-refresh ${this.props.isFetching && "spinner"}`}
+            />
           </button>
-        </p>
-        <p>Manage Hatch users.</p>
+          <a href="/users" className="square button" title="View JSON Data">
+            <i className="fa fa-code" />
+          </a>
+        </div>
         {this.props.isFetching ? (
           <p>Loading users...</p>
         ) : (

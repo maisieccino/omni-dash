@@ -19,6 +19,7 @@ export const fetchCompetitionAttendees = () => async dispatch => {
   dispatch(setIsFetchingCompetitionAttendees());
   try {
     const json = await jsonGetRequest(constants.COMPETITION_INVITES_PATH);
+    await new Promise(res => setTimeout(res, 1000));
     return dispatch(fetchCompetitionAttendeesSuccess(json));
   } catch (error) {
     return dispatch(fetchCompetitionAttendeesFailure(error));

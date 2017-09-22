@@ -3,17 +3,29 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const NavItem = ({ label, to }, { router }) =>
-  <Link
-    to={to}
-    className={router.history.location.pathname === to ? "active" : ""}
-  >
-    {label}
-  </Link>;
+const NavItem = ({ label, to, ...rest }, { router }) => {
+  const match = rest.match || `${to}$`;
+  return (
+    <Link
+      to={to}
+      className={router.history.location.pathname.match(match) ? "active" : ""}
+    >
+      {label}
+    </Link>
+  );
+};
 
 NavItem.propTypes = {
   label: PropTypes.string.isRequired,
   to: PropTypes.string.isRequired,
+  match: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape(), // e.g. regex
+  ]),
+};
+
+NavItem.defaultProps = {
+  match: null,
 };
 
 NavItem.contextTypes = {

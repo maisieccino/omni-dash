@@ -34,8 +34,9 @@ class ProfileSettingsContainer extends Component {
           />
           {!isUpdating &&
             !error &&
-            updateSuccess &&
-            <div className="success">Settings saved successfully!</div>}
+            updateSuccess && (
+              <div className="success">Settings saved successfully!</div>
+            )}
           <h1>Profile Settings</h1>
           <h2>Basic Information</h2>
           <label htmlFor="user-first-name">First Name</label>
@@ -145,8 +146,9 @@ class ProfileSettingsContainer extends Component {
           <p>
             <button disabled={isUpdating} onClick={() => this.saveForm()}>
               {!isUpdating && "Save"}
-              {isUpdating &&
-                <i aria-label="Loading" className="fa fa-refresh spinner" />}
+              {isUpdating && (
+                <i aria-label="Loading" className="fa fa-refresh spinner" />
+              )}
             </button>
           </p>
         </form>
@@ -186,6 +188,7 @@ const mapStateToProps = (state, ownProps) => {
     error: state.user.error,
     updateSuccess: state.user.updateSuccess,
     userFields: {
+      bio: "",
       ...state.user.user,
       ...state.user.userChangedFields,
     },

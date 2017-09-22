@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import { generate } from "shortid";
 
 import NavItem from "libs/components/SplitViewNavItem";
@@ -9,8 +9,10 @@ import Attendees from "./Attendees";
 
 const routes = [
   {
-    to: "/event/current",
+    to: "/event",
+    match: "/event/?$",
     label: "Current Event",
+    exact: true,
     component: CurrentEvent,
   },
   {
@@ -37,7 +39,7 @@ const routes = [
   },
 ];
 
-const EventPageView = () =>
+const EventPageView = () => (
   <div className="splitview-main">
     <aside className="splitview-nav">
       {/* programmatically generate navbar from array */}
@@ -45,12 +47,13 @@ const EventPageView = () =>
     </aside>
 
     {/* programmatically generate routes from array */}
-    {routes.map(route => <Route key={generate()} path={route.to} {...route} />)}
-    <Route
-      exact
-      path="/event"
-      render={() => <Redirect to="/event/current" />}
-    />
-  </div>;
+    <Switch>
+      {routes.map(route => (
+        <Route key={generate()} path={route.to} {...route} />
+      ))}
+      <Route render={() => <Redirect to="/event" />} />
+    </Switch>
+  </div>
+);
 
 export default EventPageView;

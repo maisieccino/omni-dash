@@ -3,42 +3,44 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-  <div class="field">
-    <%= f.label :email %><br />
+  <%= f.label :email %>
+  <div class="input-group">
     <%= f.email_field :email, autofocus: true, value: @code.try(:email) %>
   </div>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
+  <%= f.label :first_name %>
+  <div class="input-group">
     <%= f.text_field :first_name, value: @code.try(:first_name) %>
   </div>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
+  <%= f.label :last_name %>
+  <div class="input-group">
     <%= f.text_field :last_name, value: @code.try(:last_name) %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
+  <%= f.label :password %>
+  <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+  <% end %>
+  <div class="input-group">
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
+  <%= f.label :password_confirmation %>
+  <div class="input-group">
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
-  <div class="field">
-    <%= f.label :access_code %><br/>
+  <%= f.label :access_code %>
+  <div class="input-group">
     <%= f.text_field :access_code, value: @code.try(:code), readonly: !@code.try(:code).nil? %>
   </div>
 
-  <div class="actions">
+  <p>
     <%= f.submit "Sign up" %>
-  </div>
+  </p>
+
+  <hr />
 <% end %>
 
 <%= render "devise/shared/links" %>
