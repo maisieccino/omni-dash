@@ -45,8 +45,8 @@ export const jsonGetRequest = async (path, headers = {}) => {
  * @param  {Object}  [headers={}] Additional headers to add to request
  * @return {Promise}              Promise that contains JSON response if successful
  */
-export const jsonPutRequest = async (path, body, headers = {}) =>
-  fetch(path, {
+export const jsonPutRequest = async (path, body, headers = {}) => {
+  const res = await fetch(path, {
     method: "PUT",
     headers: {
       Accept: "application/json",
@@ -58,10 +58,21 @@ export const jsonPutRequest = async (path, body, headers = {}) =>
       authenticity_token: getMetaContent("csrf-token"),
     }),
     credentials: "include",
-  }).then(
-    res =>
-      res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`),
-  );
+  });
+  let json;
+  try {
+    json = await res.json();
+  } catch (e) {
+    json = {};
+  }
+  if (res.ok) {
+    return json;
+  }
+  if (json.message) {
+    throw new Error(`Error code ${res.status}: ${json.message}`);
+  }
+  throw new Error(`${res.status} ${res.statusText}`);
+};
 
 /**
  * Send a JSON-encoded POST request to an endpoint. Also deals with Rails CSRF

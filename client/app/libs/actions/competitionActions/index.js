@@ -1,6 +1,7 @@
 import {
   jsonGetRequest,
   jsonPostRequest,
+  jsonPutRequest,
   jsonDeleteRequest,
 } from "libs/utils/Requests";
 import * as constants from "../../constants/competitionConstants";
@@ -57,6 +58,35 @@ export const saveCompetition = competition => async dispatch => {
   } catch (error) {
     return dispatch(
       saveCompetitionFailure(typeof error === "string" ? error : error.message),
+    );
+  }
+};
+
+export const setIsUpdatingCompetition = () => ({
+  type: constants.SET_IS_UPDATING_COMPETITION,
+});
+
+export const updateCompetitionSuccess = () => ({
+  type: constants.UPDATE_COMPETITION_SUCCESS,
+});
+
+export const updateCompetitionFailure = error => ({
+  type: constants.UPDATE_COMPETITION_FAILURE,
+  error,
+});
+
+export const updateCompetition = competition => async dispatch => {
+  dispatch(setIsUpdatingCompetition());
+  try {
+    await jsonPutRequest(constants.COMPETITION_PATH, competition);
+    await new Promise(res => setTimeout(res, 1000));
+    dispatch(updateCompetitionSuccess());
+    return dispatch(fetchCompetition());
+  } catch (error) {
+    return dispatch(
+      updateCompetitionFailure(
+        typeof error === "string" ? error : error.message,
+      ),
     );
   }
 };

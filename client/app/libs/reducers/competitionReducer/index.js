@@ -7,6 +7,7 @@ export const initialState = {
   isFetching: false,
   isSaving: false,
   isDeleting: false,
+  isUpdating: false,
   competitionExists: true,
   competition: {},
   attendees: attendeesState,
@@ -80,7 +81,6 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isUpdating: false,
-        competition,
       };
     }
 
