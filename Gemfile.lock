@@ -93,6 +93,7 @@ GEM
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
     formatador (0.2.5)
+    geocoder (1.4.4)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     guard (2.14.1)
@@ -281,6 +282,7 @@ DEPENDENCIES
   factory_girl_rails (~> 4.0)
   faker
   font-awesome-sass
+  geocoder
   guard
   guard-livereload (~> 2.5)
   jbuilder (~> 2.5)

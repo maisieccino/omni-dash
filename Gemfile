@@ -74,3 +74,5 @@ gem "webpacker"
 gem "devise"
 
 gem "font-awesome-sass"
+
+gem "geocoder"
