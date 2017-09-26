@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925145245) do
+ActiveRecord::Schema.define(version: 20170926170505) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,10 +37,11 @@ ActiveRecord::Schema.define(version: 20170925145245) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "competition_id"
-    t.boolean "used", default: false
+    t.bigint "user_id"
     t.index ["code"], name: "index_invite_codes_on_code"
     t.index ["competition_id"], name: "index_invite_codes_on_competition_id"
     t.index ["email"], name: "index_invite_codes_on_email", unique: true
+    t.index ["user_id"], name: "index_invite_codes_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -76,4 +77,5 @@ ActiveRecord::Schema.define(version: 20170925145245) do
   end
 
   add_foreign_key "invite_codes", "competitions"
+  add_foreign_key "invite_codes", "users"
 end

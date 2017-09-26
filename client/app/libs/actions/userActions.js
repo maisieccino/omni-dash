@@ -1,4 +1,8 @@
-import { jsonGetRequest, jsonPutRequest } from "libs/utils/Requests";
+import {
+  jsonGetRequest,
+  jsonPutRequest,
+  jsonDeleteRequest,
+} from "libs/utils/Requests";
 import * as constants from "libs/constants/userConstants";
 
 export const setIsFetching = () => ({
@@ -66,4 +70,30 @@ export const updateUser = (data = {}) => dispatch => {
       dispatch(fetchUser());
     })
     .catch(err => dispatch(updateUserFailure(err.message)));
+};
+
+export const setIsDeletingUser = () => ({
+  type: constants.SET_IS_DELETING_USER,
+});
+
+export const deleteUserSuccess = () => ({
+  type: constants.DELETE_USER_SUCCESS,
+});
+
+export const deleteUserFailure = error => ({
+  type: constants.DELETE_USER_FAILURE,
+  error,
+});
+
+export const deleteUser = id => async dispatch => {
+  dispatch(setIsDeletingUser());
+  try {
+    await jsonDeleteRequest(id ? `/users/${id}` : constants.USER_ME_PATH);
+    await new Promise(res => setTimeout(res, 1000));
+    return dispatch(deleteUserSuccess());
+  } catch (error) {
+    return dispatch(
+      deleteUserFailure(typeof error === "string" ? error : error.message),
+    );
+  }
 };

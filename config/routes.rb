@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get "/users/me", to: "users#show_self", as: :user_me, via: :get
   put "/users/me", to: "users#update_self", as: :user_me_update, via: :put
+  get "/users/deleted", to: "users#index_deleted"
+  delete "/users/:id/destroy", to: "users#hard_destroy"
   resources :users
 
   get "/competition", to: "competition#show"

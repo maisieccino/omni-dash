@@ -3,6 +3,7 @@ import * as constants from "../constants/userConstants";
 export const initialState = {
   isFetching: false,
   isUpdating: false,
+  isDeleting: false,
   updateSuccess: false,
   user: {},
   userChangedFields: {},
@@ -62,6 +63,30 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         updateSuccess: success,
+      };
+    }
+
+    case constants.SET_IS_DELETING_USER: {
+      return {
+        ...state,
+        isDeleting: true,
+        error,
+      };
+    }
+
+    case constants.DELETE_USER_SUCCESS: {
+      return {
+        ...state,
+        isDeleting: false,
+        error: "",
+      };
+    }
+
+    case constants.DELETE_USER_FAILURE: {
+      return {
+        ...state,
+        isDeleting: false,
+        error: true,
       };
     }
 

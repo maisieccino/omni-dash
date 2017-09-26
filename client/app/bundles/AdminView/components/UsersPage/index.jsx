@@ -56,7 +56,10 @@ class UsersPage extends Component {
         {this.props.isFetching ? (
           <p>Loading users...</p>
         ) : (
-          <UsersTable users={this.props.users} />
+          <UsersTable
+            users={this.props.users}
+            refreshTable={() => this.props.getUsers()}
+          />
         )}
       </div>
     );

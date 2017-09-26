@@ -57,6 +57,7 @@
       flex-direction: row;
 
       button {
+        margin: 0;
         flex: 1;
         border-radius: 0;
         &:nth-of-type(1) {

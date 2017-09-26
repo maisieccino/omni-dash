@@ -3,6 +3,11 @@ class InviteCode < ApplicationRecord
   before_save :generate_code
   after_create :send_email
   belongs_to :competition, optional: true
+  belongs_to :user, optional: true
+
+  def used
+    !user.nil?
+  end
 
   protected
 

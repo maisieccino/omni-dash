@@ -1,38 +1,32 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { generate } from "shortid";
 
 import UsersTableHeader from "./UsersTableHeader";
+import UserActions from "./UserActions";
 
-const UsersTable = props => {
-  const users = props.users.sort((a, b) => a.id > b.id);
+const UsersTable = ({ users, refreshTable }) => {
+  const usersArray = users.sort((a, b) => a.id > b.id);
   return (
     <table>
       <UsersTableHeader />
       <tbody>
-        {users.map(user =>
+        {usersArray.map(user => (
           <tr key={generate()}>
-            <td>
-              {user.id}
-            </td>
-            <td>
-              {user.first_name}
-            </td>
-            <td>
-              {user.last_name}
-            </td>
-            <td>
-              {user.email}
-            </td>
-            <td>
-              <Link className="button" to={`/user/${user.id}`}>
-                View Profile
-              </Link>
-              <button>Edit</button>
-            </td>
-          </tr>,
-        )}
+            <td>{user.id}</td>
+            <td>{user.first_name}</td>
+            <td>{user.last_name}</td>
+            <td>{user.email}</td>
+            <UserActions
+              userId={user.id}
+              firstName={user.first_name}
+              lastName={user.last_name}
+              onDeleteUser={() => {
+                refreshTable();
+              }}
+            />
+          </tr>
+        ))}
       </tbody>
     </table>
   );
@@ -40,10 +34,12 @@ const UsersTable = props => {
 
 UsersTable.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape()),
+  refreshTable: PropTypes.func,
 };
 
 UsersTable.defaultProps = {
   users: [],
+  refreshTable: () => {},
 };
 
 export default UsersTable;

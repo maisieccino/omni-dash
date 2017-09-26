@@ -10,12 +10,15 @@ marked.setOptions({
   gfm: true,
 });
 
-const CurrentEvent = ({ competition }) =>
+const generateMapsUrl = (lat, long) => {
+  const query = encodeURIComponent(`${lat},${long}`);
+  return `https://www.google.com/maps/search/?api=1&query=${query}`;
+};
+
+const CurrentEvent = ({ competition }) => (
   <div className="splitview-pane">
     <h1>Current Event</h1>
-    <h2>
-      {competition.name}
-    </h2>
+    <h2>{competition.name}</h2>
     <p>
       <strong>Start:</strong>{" "}
       {moment(competition.start_time).format("MMMM Do YYYY, h:mm a")}
@@ -25,8 +28,14 @@ const CurrentEvent = ({ competition }) =>
       {moment(competition.end_time).format("MMMM Do YYYY, h:mm a")}
     </p>
     <h2>Location</h2>
+    <p>{competition.location || <i>To be confirmed</i>}</p>
     <p>
-      {competition.location || <i>To be confirmed</i>}
+      <a
+        href={generateMapsUrl(competition.latitude, competition.longitude)}
+        className="button"
+      >
+        View Map
+      </a>
     </p>
     <h2>Description</h2>
     <div
@@ -34,7 +43,8 @@ const CurrentEvent = ({ competition }) =>
         __html: marked(competition.description || ""),
       }}
     />
-  </div>;
+  </div>
+);
 
 CurrentEvent.propTypes = {
   competition: PropTypes.shape(),

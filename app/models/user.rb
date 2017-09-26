@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   validates_presence_of :first_name, :last_name, :email
   after_create :update_invite_code
+  has_one :invite_code, dependent: :destroy
 
   def public_attributes_to_json
     to_json(only:
@@ -28,7 +29,7 @@ class User < ApplicationRecord
   def update_invite_code
     invite_code = InviteCode.find_by(email: email)
     return if invite_code.nil?
-    invite_code.used = true
+    invite_code.user = self
     invite_code.save
   end
 
