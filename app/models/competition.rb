@@ -20,8 +20,12 @@ class Competition < ApplicationRecord
     attendees = invite_codes
     attendees.map do |a|
       print a.email
-      return { first_name: a.first_name, last_name: a.last_name, email: a.email, has_account: false } unless a.used
-      u = User.find_by(email: a.email)
+      unless a.user_is_present?
+        return {
+          first_name: a.first_name, last_name: a.last_name, email: a.email, has_account: false
+        }
+      end
+      u = a.user
       { first_name: u.first_name, last_name: u.last_name, email: u.email, has_account: true }
     end
   end
