@@ -68,7 +68,7 @@ textarea {
   flex-direction: row;
 
   @include respond-to(900px) {
-    display: inline-block;
+    width: 50%;
   }
 
   &.edited {

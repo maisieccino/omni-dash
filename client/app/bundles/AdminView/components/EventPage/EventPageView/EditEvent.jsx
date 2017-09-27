@@ -12,6 +12,7 @@ class EditEvent extends Component {
   static propTypes = {
     name: PropTypes.string,
     description: PropTypes.string,
+    location: PropTypes.string,
     isUpdating: PropTypes.bool,
     error: PropTypes.string,
     fetchCompetition: PropTypes.func.isRequired,
@@ -21,6 +22,7 @@ class EditEvent extends Component {
   static defaultProps = {
     name: "",
     description: "",
+    location: "",
     isUpdating: false,
     error: "",
   };
@@ -30,7 +32,7 @@ class EditEvent extends Component {
     this.state = {
       name: props.name || "",
       description: props.description || "",
-      location: "",
+      location: props.location || "",
       success: false,
     };
   }
@@ -46,6 +48,7 @@ class EditEvent extends Component {
       this.setState({
         name: nextProps.name,
         description: nextProps.description,
+        location: nextProps.location,
       });
     }
 
@@ -57,12 +60,19 @@ class EditEvent extends Component {
 
   onClickSave(e) {
     e.preventDefault();
-    const { name: oldName, description: oldDescription } = this.props;
-    const { name, description } = this.state;
+    const {
+      name: oldName,
+      description: oldDescription,
+      location: oldLocation,
+    } = this.props;
+    const { name, description, location } = this.state;
+    // add params if changed by user.
     const params = {
       name: name !== oldName ? name : null,
       description: description !== oldDescription ? description : null,
+      location: location !== oldLocation ? location : null,
     };
+    // remove any null values so they're not cleared on the server.
     Object.keys(params).forEach(key => {
       if (params[key] === null || params[key] === undefined) {
         delete params[key];
@@ -75,9 +85,10 @@ class EditEvent extends Component {
     const {
       name: oldName,
       description: oldDescription,
+      location: oldLocation,
       isUpdating,
     } = this.props;
-    const { name, description, success } = this.state;
+    const { name, description, location, success } = this.state;
     return (
       <div className="splitview-pane">
         <h1>Edit Event</h1>
@@ -104,9 +115,21 @@ class EditEvent extends Component {
             disabled={isUpdating}
             value={description}
             onChange={val => this.setState({ description: val })}
-            className={`input-group ${description !== oldDescription &&
-              "edited"}`}
+            className={`${description !== oldDescription ? "edited" : ""}`}
           />
+          <label htmlFor="competition-location">Location</label>
+          <div
+            className={`input-group ${location !== oldLocation && "edited"}`}
+          >
+            <input
+              type="text"
+              id="competition-location"
+              disabled={isUpdating}
+              placeholder="Location..."
+              value={location}
+              onChange={e => this.setState({ location: e.target.value })}
+            />
+          </div>
           <p>
             <button disabled={isUpdating} onClick={e => this.onClickSave(e)}>
               {isUpdating ? <i className="fa fa-refresh spinner" /> : "Save"}
@@ -121,6 +144,7 @@ class EditEvent extends Component {
 const mapStateToProps = state => ({
   name: state.competition.competition.name,
   description: state.competition.competition.description || "",
+  location: state.competition.competition.location,
   isUpdating: state.competition.isUpdating,
   error: state.competition.error,
 });

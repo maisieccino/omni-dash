@@ -17,7 +17,12 @@ const generateMapsUrl = (lat, long) => {
 
 const CurrentEvent = ({ competition }) => (
   <div className="splitview-pane">
-    <h1>Current Event</h1>
+    <div className="title-bar">
+      <h1>Current Event</h1>
+      <a href="/competition" className="square button" title="View raw data">
+        <i className="fa fa-code" />
+      </a>
+    </div>
     <h2>{competition.name}</h2>
     <p>
       <strong>Start:</strong>{" "}
