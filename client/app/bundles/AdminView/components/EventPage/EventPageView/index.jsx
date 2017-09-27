@@ -5,6 +5,7 @@ import { generate } from "shortid";
 import NavItem from "libs/components/SplitViewNavItem";
 import CurrentEvent from "./CurrentEvent";
 import EditEvent from "./EditEvent";
+import Timeline from "./Timeline";
 import Attendees from "./Attendees";
 import ContactAttendees from "./ContactAttendees";
 import DeleteEvent from "./DeleteEvent";
@@ -25,6 +26,7 @@ const routes = [
   {
     to: "/event/timeline",
     label: "Timeline",
+    component: Timeline,
   },
   {
     to: "/event/attendees",
