@@ -21,7 +21,7 @@ class Competition < ApplicationRecord
     attendees = invite_codes
     attendees.map do |a|
       print a.email
-      unless a.user_is_present?
+      if a.user.nil?
         return {
           first_name: a.first_name, last_name: a.last_name, email: a.email, has_account: false
         }
