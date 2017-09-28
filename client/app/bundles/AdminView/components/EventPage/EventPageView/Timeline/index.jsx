@@ -6,6 +6,18 @@ import TimelineComponent, {
   TimelineHeader,
 } from "libs/components/Timeline";
 
+const itemActions = (
+  <div className="button-group">
+    <button>View</button>
+    <button className="square">
+      <i className="fa fa-edit" />
+    </button>
+    <button className="square">
+      <i className="fa fa-trash" />
+    </button>
+  </div>
+);
+
 const items = [
   <TimelineItem
     name="How To Use APIs"
@@ -14,6 +26,7 @@ const items = [
     key={0}
   >
     <p>Learn how you can use APIs to give your project super powers!</p>
+    {itemActions}
   </TimelineItem>,
   <TimelineItem
     name="Hosting Your App on AWS"
@@ -25,12 +38,21 @@ const items = [
       AWS is a popular service you can use to host your app on the cloud for
       others to use.
     </p>
+    {itemActions}
   </TimelineItem>,
 ];
 
 const Timeline = () => (
   <div className="splitview-pane">
-    <h1>Event Timeline</h1>
+    <div className="title-bar">
+      <h1>Event Timeline</h1>
+      <button className="square">
+        <i className="fa fa-refresh" />
+      </button>
+      <button className="square">
+        <i className="fa fa-code" />
+      </button>
+    </div>
     <TimelineComponent editable>
       <TimelineHeader>Friday 24th November</TimelineHeader>
       <TimelineItem
@@ -42,6 +64,7 @@ const Timeline = () => (
           In this workshop, we{"'"}ll dive straight into the world of React and
           you{"'"}ll build a responsive, interactive webapp.
         </p>
+        {itemActions}
       </TimelineItem>
 
       <TimelineGroup items={items} />

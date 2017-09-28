@@ -1,10 +1,11 @@
 .timeline-add-button {
   $speed: 0.25s;
   $size: 2.5rem;
+  $border-width: 0.5rem;
   width: $size;
   height: $size;
   position: absolute;
-  background: darken($color-card, 40);
+  background-color: darken($color-card, 40);
   color: $color-bg;
   border-radius: 50%;
   right: $line-thickness - ($size / 2);
@@ -12,10 +13,14 @@
   justify-content: center;
   align-items: center;
   transform-origin: 50% 50%;
-  transition: transform $speed ease-in-out;
   transform: scale(0);
   cursor: pointer;
   z-index: 10;
+  border-color: $color-accent;
+  border-style: solid;
+  border-width: 0;
+  transition: transform $speed ease-in-out, border-width $speed ease-in-out,
+    right $speed ease-in-out, background-color $speed ease-in-out;
 
   i {
     transition: transform $speed ease-in-out;
@@ -26,8 +31,14 @@
   }
 
   &.active {
+    right: $line-thickness - ($size / 2) - $border-width;
+    border-width: 0.5rem;
+    background-color: $color-fg;
+    transition: transform $speed ease-in-out, border-width $speed ease-in-out,
+      right $speed ease-in-out, background-color $speed ease-in-out,
+      top $speed ease-in-out;
     i {
-      transform: rotate(360deg);
+      transform: rotate(225deg);
     }
   }
 }

@@ -7,6 +7,7 @@
   z-index: 0;
   box-shadow: 0 3px 5px $color-card;
   margin-top: 1rem;
+  border-radius: $border-radius;
 
   &:first-child {
     margin-top: 0;
@@ -38,6 +39,7 @@
     background-color: $color-fg;
     border-radius: 50%;
     top: 1.5rem - ($size / 2) + $border-width;
+    pointer-events: none;
   }
 
   .timeline-item-header {

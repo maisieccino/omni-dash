@@ -26,6 +26,14 @@ input[type="submit"],
     margin-right: 0.3rem;
   }
 
+  .button-group & {
+    margin-right: 0.3rem;
+
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+
   &:hover {
     background-color: lighten($color-accent, 20);
     cursor: pointer;

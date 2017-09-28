@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+// tales a CSS rem value and converts it to pixels.
 const remToPx = rem =>
   rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 
@@ -10,19 +11,32 @@ class Timeline extends Component {
     this.state = {
       mouseY: 0,
       showMouseButton: false,
+      mouseButtonOpened: false,
     };
+    this.buttonBorderWidth = remToPx(0.5);
+    this.paddingSize = remToPx(2);
   }
 
   onMouseMove(e) {
-    // update add button's position based on mouse position
-    // and component coordinates.
-    const coords = this.element.getBoundingClientRect();
-    this.setState({ mouseY: e.clientY - coords.y - remToPx(2) });
+    if (!this.state.mouseButtonOpened && this.props.editable) {
+      // update add button's position based on mouse position
+      // and component coordinates.
+      const coords = this.element.getBoundingClientRect();
+      this.setState({ mouseY: e.clientY - coords.y - this.paddingSize });
+    }
+  }
+
+  onAddButtonClick() {
+    const { mouseButtonOpened, mouseY } = this.state;
+    if (!mouseButtonOpened) {
+      this.setState({ mouseY: mouseY - this.buttonBorderWidth });
+    }
+    this.setState({ mouseButtonOpened: !mouseButtonOpened });
   }
 
   render() {
     const { children, editable } = this.props;
-    const { showMouseButton, mouseY: y } = this.state;
+    const { mouseButtonOpened, showMouseButton, mouseY: y } = this.state;
     return (
       <div
         className="timeline"
@@ -39,9 +53,14 @@ class Timeline extends Component {
           <div className="timeline-line" />
           {editable && (
             <div
-              className={`timeline-add-button ${showMouseButton
+              role="button"
+              className={`timeline-add-button ${mouseButtonOpened ||
+              showMouseButton
                 ? "visible"
-                : ""}`}
+                : ""}
+                ${mouseButtonOpened ? "active" : ""}
+                `}
+              onClick={() => this.onAddButtonClick()}
               style={{ top: y }}
             >
               <i className="fa fa-plus" />
