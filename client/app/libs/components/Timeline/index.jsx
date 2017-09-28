@@ -52,8 +52,7 @@ class Timeline extends Component {
         >
           <div className="timeline-line" />
           {editable && (
-            <div
-              role="button"
+            <button
               className={`timeline-add-button ${mouseButtonOpened ||
               showMouseButton
                 ? "visible"
@@ -64,7 +63,7 @@ class Timeline extends Component {
               style={{ top: y }}
             >
               <i className="fa fa-plus" />
-            </div>
+            </button>
           )}
         </div>
         <div className="timeline-content">{children}</div>

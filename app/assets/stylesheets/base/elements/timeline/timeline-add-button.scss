@@ -3,6 +3,7 @@
   $size: 2.5rem;
   $border-width: 0.5rem;
   width: $size;
+  min-width: 0;
   height: $size;
   position: absolute;
   background-color: darken($color-card, 40);
@@ -21,6 +22,8 @@
   border-width: 0;
   transition: transform $speed ease-in-out, border-width $speed ease-in-out,
     right $speed ease-in-out, background-color $speed ease-in-out;
+  box-sizing: content-box;
+  padding: 0;
 
   i {
     transition: transform $speed ease-in-out;
