@@ -1,0 +1,33 @@
+.timeline-add-button {
+  $speed: 0.25s;
+  $size: 2.5rem;
+  width: $size;
+  height: $size;
+  position: absolute;
+  background: darken($color-card, 40);
+  color: $color-bg;
+  border-radius: 50%;
+  right: $line-thickness - ($size / 2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform-origin: 50% 50%;
+  transition: transform $speed ease-in-out;
+  transform: scale(0);
+  cursor: pointer;
+  z-index: 10;
+
+  i {
+    transition: transform $speed ease-in-out;
+  }
+
+  &.visible {
+    transform: none;
+  }
+
+  &.active {
+    i {
+      transform: rotate(360deg);
+    }
+  }
+}

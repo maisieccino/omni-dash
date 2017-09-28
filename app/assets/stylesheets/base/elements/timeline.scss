@@ -2,16 +2,20 @@
   $line-thickness: 0.5rem;
   width: 100%;
   border: 0.05rem $color-fg solid;
-  padding: 0.25rem;
+  padding: 0.75rem;
   display: flex;
   flex-direction: row;
   align-items: stretch;
   min-height: 10rem;
+  overflow: hidden;
 
   .timeline-side {
     flex: 1;
     display: flex;
     justify-content: flex-end;
+    position: relative;
+
+    @import "timeline/timeline-add-button";
 
     .timeline-line {
       $thickness: $line-thickness;
@@ -26,6 +30,8 @@
     flex-basis: 5;
     flex: 5;
 
-    @import "timeline/timeline-item.scss";
+    @import "timeline/timeline-item";
+    @import "timeline/timeline-group";
+    @import "timeline/timeline-header";
   }
 }
