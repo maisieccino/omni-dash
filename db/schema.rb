@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926170505) do
+ActiveRecord::Schema.define(version: 20170928173457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,17 @@ ActiveRecord::Schema.define(version: 20170926170505) do
     t.float "latitude"
     t.float "longitude"
     t.string "location"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "competition_id"
+    t.index ["competition_id"], name: "index_events_on_competition_id"
   end
 
   create_table "invite_codes", force: :cascade do |t|
@@ -76,6 +87,7 @@ ActiveRecord::Schema.define(version: 20170926170505) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "events", "competitions"
   add_foreign_key "invite_codes", "competitions"
   add_foreign_key "invite_codes", "users"
 end

@@ -1,6 +1,7 @@
 class Competition < ApplicationRecord
   before_create :confirm_singleton
   has_many :invite_codes, dependent: :delete_all
+  has_many :events, dependent: :delete_all
   validates_presence_of %i[name start_time end_time]
   geocoded_by :location
   reverse_geocoded_by :latitude, :longitude, address: :location
