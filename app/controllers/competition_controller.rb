@@ -1,8 +1,11 @@
 class CompetitionController < ApplicationController
   before_action :json_authenticate_user
-  before_action :admin_only, only: %i[create list_attendees invite_attendee update destroy]
-  before_action :set_competition, only: %i[show list_attendees invite_attendee update destroy]
+  before_action :admin_only, only: %i[create list_attendees invite_attendee update destroy create_event update_event]
+  before_action :admin_only, except: %i[show list_events]
+  before_action :set_competition, except: %i[create]
+  before_action :set_event, only: %i[update_event delete_event]
   before_action :invite_attendee_params, only: :invite_attendees
+  before_action :event_params, only: :create_event
 
   def create
     @competition = Competition.create!(competition_params)
@@ -42,6 +45,25 @@ class CompetitionController < ApplicationController
     head :no_content
   end
 
+  def list_events
+    json_response(@competition.events, :ok)
+  end
+
+  def create_event
+    @event = @competition.events.create(event_params)
+    json_response(@event, :created)
+  end
+
+  def update_event
+    @event.update(event_params)
+    head :no_content
+  end
+
+  def delete_event
+    @event.destroy
+    head :no_content
+  end
+
   private
 
   def competition_params
@@ -55,6 +77,15 @@ class CompetitionController < ApplicationController
     )
   end
 
+  def event_params
+    params.permit(
+      :name,
+      :description,
+      :start_time,
+      :end_time
+    )
+  end
+
   def invite_attendee_params
     params.permit(:email, :first_name, :last_name)
   end
@@ -62,5 +93,10 @@ class CompetitionController < ApplicationController
   def set_competition
     return json_response({ message: "Competition not found" }, :not_found) if Competition.count.zero?
     @competition = Competition.first
+  end
+
+  def set_event
+    @event = @competition.events.find(params[:id])
+    return json_response({ message: "Event not found" }, :not_found) if @event.nil?
   end
 end
