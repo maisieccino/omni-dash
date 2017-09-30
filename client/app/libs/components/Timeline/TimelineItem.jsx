@@ -19,8 +19,14 @@ const TimelineItem = ({ name, startTime, endTime, children }) => {
 
 TimelineItem.propTypes = {
   name: PropTypes.string,
-  startTime: PropTypes.instanceOf(moment),
-  endTime: PropTypes.instanceOf(moment),
+  startTime: PropTypes.oneOfType([
+    PropTypes.instanceOf(moment),
+    PropTypes.string,
+  ]),
+  endTime: PropTypes.oneOfType([
+    PropTypes.instanceOf(moment),
+    PropTypes.string,
+  ]),
   children: PropTypes.node,
 };
 
