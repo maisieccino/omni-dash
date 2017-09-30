@@ -43,8 +43,8 @@ RSpec.describe "Competition Event API", type: :request do
 
   describe "PUT /competitions/events/:id" do
     let!(:event) { create(:event, competition: competition) }
-    let(:event_params) { {name: "My cool event" }.to_json }
-    
+    let(:event_params) { { name: "My cool event" }.to_json }
+
     it "should be forbidden if not logged in" do
       put competition_event_path(event[:id]), params: event_params, headers: json_headers
       expect(response).to have_http_status(:forbidden)

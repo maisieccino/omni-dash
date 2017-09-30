@@ -1,44 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import moment from "moment";
-import { generate } from "shortid";
-import TimelineComponent, {
-  TimelineItem,
-  TimelineHeader,
-} from "libs/components/Timeline";
-
-import ItemActions from "./ItemActions";
-
-const createEventsList = events => {
-  const dates = {};
-  events.forEach(event => {
-    const date = moment(event.start_time).format("YYYY-MM-DD");
-    if (!dates[date]) {
-      dates[date] = [event];
-    } else {
-      dates[date].push(event);
-    }
-  });
-
-  return Object.keys(dates)
-    .sort((a, b) => moment(a) > moment(b))
-    .map(date => (
-      <div key={generate()}>
-        <TimelineHeader>{moment(date).format("dddd Do MMMM")}</TimelineHeader>
-        {dates[date].map(event => (
-          <TimelineItem
-            name={event.name}
-            key={generate()}
-            startTime={event.start_time}
-            endTime={event.end_time}
-          >
-            <p>{event.description || ""}</p>
-            <ItemActions />
-          </TimelineItem>
-        ))}
-      </div>
-    ));
-};
+import { Link } from "react-router-dom";
+import Timeline from "libs/components/Timeline";
 
 const TimelineView = ({ error, events, fetchEvents, isFetching }) => (
   <div className="splitview-pane">
@@ -49,6 +12,9 @@ const TimelineView = ({ error, events, fetchEvents, isFetching }) => (
     )}
     <div className="title-bar">
       <h1>Event Timeline</h1>
+      <Link className="button square" to="/addEvent">
+        <i className="fa fa-plus" />
+      </Link>
       <button className="square" onClick={() => fetchEvents()}>
         <i disabled={isFetching} className="fa fa-refresh" />
       </button>
@@ -56,7 +22,7 @@ const TimelineView = ({ error, events, fetchEvents, isFetching }) => (
         <i className="fa fa-code" />
       </a>
     </div>
-    <TimelineComponent editable>{createEventsList(events)}</TimelineComponent>
+    <Timeline events={events} editable />
   </div>
 );
 

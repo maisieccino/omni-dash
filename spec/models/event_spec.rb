@@ -6,7 +6,7 @@ RSpec.describe Event, type: :model do
 
   let!(:competition) { create(:competition) }
   it "should validate successfully" do
-    expect(build(:event, competition: competition )).to be_valid
+    expect(build(:event, competition: competition)).to be_valid
   end
 
   it "should fail validation if start date later than end date" do

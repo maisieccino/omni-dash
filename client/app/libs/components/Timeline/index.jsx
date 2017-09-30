@@ -1,5 +1,10 @@
 import React, { Component } from "react";
+import moment from "moment";
+import { generate } from "shortid";
 import PropTypes from "prop-types";
+import ItemActions from "./ItemActions";
+import TimelineHeader from "./TimelineHeader";
+import TimelineItem from "./TimelineItem";
 
 // tales a CSS rem value and converts it to pixels.
 const remToPx = rem =>
@@ -34,8 +39,41 @@ class Timeline extends Component {
     this.setState({ mouseButtonOpened: !mouseButtonOpened });
   }
 
+  createEventsList() {
+    const { events } = this.props;
+    const dates = {};
+    events.forEach(event => {
+      const date = moment(event.start_time).format("YYYY-MM-DD");
+      if (!dates[date]) {
+        dates[date] = [event];
+      } else {
+        dates[date].push(event);
+      }
+    });
+
+    return Object.keys(dates)
+      .sort((a, b) => moment(a) > moment(b))
+      .map(date => [
+        <TimelineHeader key={generate()}>
+          {moment(date).format("dddd Do MMMM")}
+        </TimelineHeader>,
+        dates[date].map(event => (
+          <TimelineItem
+            name={event.name}
+            key={generate()}
+            startTime={event.start_time}
+            endTime={event.end_time}
+          >
+            <p>{event.description || ""}</p>
+            <ItemActions />
+          </TimelineItem>
+        )),
+      ])
+      .reduce((bigArray, array) => [...bigArray, ...array], []);
+  }
+
   render() {
-    const { children, editable } = this.props;
+    const { editable } = this.props;
     const { mouseButtonOpened, showMouseButton, mouseY: y } = this.state;
     return (
       <div
@@ -66,19 +104,19 @@ class Timeline extends Component {
             </button>
           )}
         </div>
-        <div className="timeline-content">{children}</div>
+        <div className="timeline-content">{this.createEventsList()}</div>
       </div>
     );
   }
 }
 
 Timeline.propTypes = {
-  children: PropTypes.node,
+  events: PropTypes.arrayOf(PropTypes.shape()),
   editable: PropTypes.bool,
 };
 
 Timeline.defaultProps = {
-  children: null,
+  events: [],
   editable: false,
 };
 

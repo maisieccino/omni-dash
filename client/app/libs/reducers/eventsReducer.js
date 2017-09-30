@@ -2,7 +2,9 @@ import * as constants from "libs/constants/eventsConstants";
 
 export const initialState = {
   isFetching: false,
+  isCreating: false,
   events: [],
+  event: {},
   error: "",
 };
 
@@ -31,6 +33,30 @@ const eventsReducer = (state = initialState, action = null) => {
         ...state,
         isFetching: false,
         events,
+      };
+    }
+
+    case constants.SET_IS_CREATING_EVENT: {
+      return {
+        ...state,
+        isCreating: true,
+        error: "",
+      };
+    }
+
+    case constants.CREATE_EVENT_FAILURE: {
+      return {
+        ...state,
+        isCreating: false,
+        error,
+      };
+    }
+
+    case constants.CREATE_EVENT_SUCCESS: {
+      return {
+        ...state,
+        isCreating: false,
+        event,
       };
     }
 

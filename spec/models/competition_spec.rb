@@ -21,6 +21,5 @@ RSpec.describe Competition, type: :model do
     expect { create(:competition) }.to raise_error(Exception)
   end
 
-  # create some events and test current_event, next_event
-
+  # TODO: create some events and test current_event, next_event
 end

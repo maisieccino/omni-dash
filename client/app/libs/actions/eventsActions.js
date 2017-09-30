@@ -1,5 +1,5 @@
 import * as constants from "libs/constants/eventsConstants";
-import { jsonGetRequest } from "libs/utils/Requests";
+import { jsonGetRequest, jsonPostRequest } from "libs/utils/Requests";
 
 export const setIsFetchingEvents = () => ({
   type: constants.SET_IS_FETCHING_EVENTS,
@@ -23,6 +23,32 @@ export const fetchEvents = () => async dispatch => {
   } catch (error) {
     return dispatch(
       fetchEventsFailure(typeof error === "string" ? error : error.message),
+    );
+  }
+};
+
+export const setIsCreatingEvent = () => ({
+  type: constants.SET_IS_CREATING_EVENT,
+});
+
+export const createEventSuccess = event => ({
+  type: constants.CREATE_EVENT_SUCCESS,
+  event,
+});
+
+export const createEventFailure = error => ({
+  type: constants.CREATE_EVENT_FAILURE,
+  error,
+});
+
+export const createEvent = params => async dispatch => {
+  dispatch(setIsCreatingEvent());
+  try {
+    const event = await jsonPostRequest(constants.EVENTS_PATH, params);
+    return dispatch(createEventSuccess(event));
+  } catch (error) {
+    return dispatch(
+      createEventFailure(typeof error === "string" ? error : error.message),
     );
   }
 };

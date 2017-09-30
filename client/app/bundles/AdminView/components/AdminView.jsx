@@ -12,6 +12,7 @@ import UsersPage from "./UsersPage";
 import EventPage from "./EventPage";
 import CoursesPage from "./CoursesPage";
 import AddAttendeePage from "./AddAttendeePage";
+import AddEventPage from "./AddEventPage";
 import TopNav from "./Navigation/TopNav";
 
 const AdminView = ({ current_user: user, history }) => (
@@ -30,6 +31,7 @@ const AdminView = ({ current_user: user, history }) => (
           />
           <Route path="/event/attendees/add" component={AddAttendeePage} />
           <Route path="/event" component={EventPage} />
+          <Route path="/addEvent" component={AddEventPage} />
           <Route path="/courses" component={CoursesPage} />
           <Route path="/settings" component={SettingsPage} />
         </Switch>

@@ -14,6 +14,7 @@ const MarkdownEditor = ({
   onChange,
   className,
   disabled,
+  placeholder,
   ...rest
 }) => (
   <div className="markdown-editor" {...rest}>
@@ -27,7 +28,7 @@ const MarkdownEditor = ({
         </p>
         <textarea
           id={id}
-          placeholder="Enter a description for this event..."
+          placeholder={placeholder}
           onChange={e => onChange(e.target.value)}
           value={value}
           disabled={disabled}
@@ -52,6 +53,7 @@ MarkdownEditor.propTypes = {
   onChange: PropTypes.func,
   id: PropTypes.string.isRequired,
   className: PropTypes.string,
+  placeholder: PropTypes.string,
   disabled: PropTypes.bool,
 };
 
@@ -59,6 +61,7 @@ MarkdownEditor.defaultProps = {
   value: "",
   onChange: () => {},
   className: "",
+  placeholder: "Enter your text...",
   disabled: false,
 };
 
