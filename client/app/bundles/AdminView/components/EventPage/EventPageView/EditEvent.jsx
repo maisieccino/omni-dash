@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import * as Icon from "react-feather";
 
 import {
   fetchCompetition,
@@ -132,7 +133,7 @@ class EditEvent extends Component {
           </div>
           <p>
             <button disabled={isUpdating} onClick={e => this.onClickSave(e)}>
-              {isUpdating ? <i className="fa fa-refresh spinner" /> : "Save"}
+              {isUpdating ? <Icon.RefreshCw className="spinner" /> : "Save"}
             </button>
           </p>
         </form>

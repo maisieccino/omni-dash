@@ -1,13 +1,14 @@
 import React from "react";
+import * as Icon from "react-feather";
 
 const ItemActions = () => (
   <div className="button-group">
     <button>View</button>
     <button className="square">
-      <i className="fa fa-edit" />
+      <Icon.Edit2 />
     </button>
     <button className="square">
-      <i className="fa fa-trash" />
+      <Icon.Trash2 />
     </button>
   </div>
 );

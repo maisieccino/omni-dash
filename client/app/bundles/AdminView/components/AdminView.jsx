@@ -6,19 +6,19 @@ import { Switch } from "react-router-dom";
 
 import SettingsPage from "libs/components/SettingsPage";
 import ProfilePage from "libs/components/ProfilePage";
-import Navigation from "./Navigation";
+import Navigation, { TopNav } from "libs/components/Navigation";
+import routes from "./routes";
 import HomePage from "./HomePage";
 import UsersPage from "./UsersPage";
 import EventPage from "./EventPage";
 import CoursesPage from "./CoursesPage";
 import AddAttendeePage from "./AddAttendeePage";
 import AddEventPage from "./AddEventPage";
-import TopNav from "./Navigation/TopNav";
 
 const AdminView = ({ current_user: user, history }) => (
   <ConnectedRouter history={history}>
     <div>
-      <Navigation />
+      <Navigation routes={routes} />
       <div className="page">
         <TopNav />
         <Switch>

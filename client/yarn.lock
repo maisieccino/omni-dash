@@ -3062,6 +3062,10 @@ react-dom@^15.5.4:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
+react-feather@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-feather/-/react-feather-1.0.7.tgz#f2118f1d2402b0c1e6f23c732f9e7f9fd4ca61e2"
+
 react-on-rails@9.0.0:
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/react-on-rails/-/react-on-rails-9.0.0.tgz#a4fc20f590fba08d27d1792309f8fbcb6845f6a7"

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import * as Icon from "react-feather";
 import Modal from "libs/components/Modal";
 import { deleteUser } from "libs/actions/userActions";
 
@@ -61,7 +62,6 @@ class UserActions extends Component {
   ];
 
   render() {
-    const { userId, firstName, lastName, isDeleting } = this.props;
     if (this.state.deleteSuccess) {
       return (
         <td>
@@ -69,13 +69,14 @@ class UserActions extends Component {
         </td>
       );
     }
+    const { userId, firstName, lastName, isDeleting } = this.props;
     return (
       <td>
         <Link className="button" to={`/user/${userId}`}>
           View Profile
         </Link>
         <button title="Edit User" className="square">
-          <i className="fa fa-pencil" aria-label="Edit user" />
+          <Icon.Edit2 />
         </button>
         <button
           onClick={() => this.setState({ isModalVisible: true })}
@@ -83,12 +84,9 @@ class UserActions extends Component {
           className="square"
         >
           {isDeleting ? (
-            <i
-              className="fa fa-refresh spinner"
-              aria-label="Deleting User..."
-            />
+            <Icon.RefreshCw className="spinner" aria-label="Deleting User..." />
           ) : (
-            <i className="fa fa-trash" aria-label="Delete User" />
+            <Icon.Trash2 />
           )}
         </button>
         <Modal

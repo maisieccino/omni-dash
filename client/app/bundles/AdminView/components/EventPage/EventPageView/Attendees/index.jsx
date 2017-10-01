@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { generate } from "shortid";
 import { Link } from "react-router-dom";
+import * as Icon from "react-feather";
 import { fetchCompetitionAttendees } from "libs/actions/competitionActions";
 import { Modal } from "libs/components";
 
@@ -59,7 +60,7 @@ class Attendees extends Component {
             title="Add New Attendee"
             className="square button"
           >
-            <i className="fa fa-plus" />
+            <Icon.Plus />
           </Link>
           <button
             className="square"
@@ -67,16 +68,14 @@ class Attendees extends Component {
             onClick={() => this.props.fetchAttendees()}
             title="Refresh"
           >
-            <i
-              className={`fa fa-refresh ${this.props.isLoading && "spinner"}`}
-            />
+            <Icon.RefreshCw className={this.props.isLoading ? "spinner" : ""} />
           </button>
           <a
             className="square button"
             href="/competition/invites"
             title="View attendee JSON data"
           >
-            <i className="fa fa-code" />
+            <Icon.Server />
           </a>
         </div>
         {this.props.error && (

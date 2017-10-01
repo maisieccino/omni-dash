@@ -5,12 +5,12 @@ import { ConnectedRouter } from "react-router-redux";
 
 import SettingsPage from "libs/components/SettingsPage";
 import ProfilePage from "libs/components/ProfilePage";
-import Navigation from "./Navigation";
+import Navigation, { TopNav } from "libs/components/Navigation";
 import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
 import EventPage from "./EventPage";
 import NotificationsPage from "./NotificationsPage";
-import TopNav from "./Navigation/TopNav";
+import routes from "./routes";
 
 class HackerView extends Component {
   static propTypes = {
@@ -34,7 +34,7 @@ class HackerView extends Component {
     return (
       <ConnectedRouter history={history}>
         <div>
-          <Navigation />
+          <Navigation routes={routes} />
           <div className="page">
             <TopNav />
             <Route

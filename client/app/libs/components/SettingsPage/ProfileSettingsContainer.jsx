@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Prompt } from "react-router-dom";
 import { connect } from "react-redux";
+import * as Icon from "react-feather";
 import * as actions from "libs/actions/userActions";
 
 class ProfileSettingsContainer extends Component {
@@ -147,7 +148,7 @@ class ProfileSettingsContainer extends Component {
             <button disabled={isUpdating} onClick={() => this.saveForm()}>
               {!isUpdating && "Save"}
               {isUpdating && (
-                <i aria-label="Loading" className="fa fa-refresh spinner" />
+                <Icon.RefreshCw aria-label="Loading" className="spinner" />
               )}
             </button>
           </p>

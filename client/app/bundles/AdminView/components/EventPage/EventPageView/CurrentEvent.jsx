@@ -4,23 +4,20 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import marked from "marked";
 import moment from "moment";
+import * as Icon from "react-feather";
+import { generateMapsUrl } from "libs/utils/geo";
 
 marked.setOptions({
   sanitize: true,
   gfm: true,
 });
 
-const generateMapsUrl = (lat, long) => {
-  const query = encodeURIComponent(`${lat},${long}`);
-  return `https://www.google.com/maps/search/?api=1&query=${query}`;
-};
-
 const CurrentEvent = ({ competition }) => (
   <div className="splitview-pane">
     <div className="title-bar">
       <h1>Current Event</h1>
       <a href="/competition" className="square button" title="View raw data">
-        <i className="fa fa-code" />
+        <Icon.Server />
       </a>
     </div>
     <h2>{competition.name}</h2>
@@ -38,8 +35,9 @@ const CurrentEvent = ({ competition }) => (
       <a
         href={generateMapsUrl(competition.latitude, competition.longitude)}
         className="button"
+        target="_blank"
       >
-        View Map
+        View Map <Icon.Map />
       </a>
     </p>
     <h2>Description</h2>

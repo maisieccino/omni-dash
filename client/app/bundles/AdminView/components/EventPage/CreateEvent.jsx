@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { Route, Redirect } from "react-router-dom";
+import * as Icon from "react-feather";
 
 import MarkdownEditor from "libs/components/MarkdownEditor";
 
@@ -151,7 +152,7 @@ class CreateEvent extends Component {
         <p>
           <button onClick={() => this.props.onClickSave(this.state)}>
             {this.props.isSaving ? (
-              <i aria-label="Loading" className="fa fa-refresh spinner" />
+              <Icon.RefreshCw aria-label="Loading" className="spinner" />
             ) : (
               "Create"
             )}

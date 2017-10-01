@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
+import * as Icon from "react-feather";
 import * as pageNavActions from "libs/actions/pageNavActions";
 import { fetchUsers } from "../../actions/usersActions";
 
@@ -45,12 +46,12 @@ class UsersPage extends Component {
             title="Refresh"
             onClick={() => this.props.getUsers()}
           >
-            <i
-              className={`fa fa-refresh ${this.props.isFetching && "spinner"}`}
+            <Icon.RefreshCw
+              className={this.props.isFetching ? "spinner" : ""}
             />
           </button>
           <a href="/users" className="square button" title="View JSON Data">
-            <i className="fa fa-code" />
+            <Icon.Server />
           </a>
         </div>
         {this.props.isFetching ? (

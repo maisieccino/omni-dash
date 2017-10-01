@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { connect } from "react-redux";
+import * as Icon from "react-feather";
 import MarkdownEditor from "libs/components/MarkdownEditor";
 
 import { pageHasNavigated } from "libs/actions/pageNavActions";
@@ -131,9 +132,9 @@ class AddEventPage extends Component {
           <p>
             <button onClick={e => this.onClickSubmit(e)}>
               {this.props.isCreating && (
-                <i className="fa fa-refresh spinner" />
+                <Icon.RefreshCw className="spinner" />
               )}{" "}
-              Invite
+              Create
             </button>
           </p>
         </form>

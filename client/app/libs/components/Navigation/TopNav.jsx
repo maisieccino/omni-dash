@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import * as Icon from "react-feather";
 
 const TopNav = ({ href, visible }, { router }) => {
   const query = new URLSearchParams(router.history.location.search);
@@ -10,7 +11,7 @@ const TopNav = ({ href, visible }, { router }) => {
     <div>
       {visible && (
         <Link className="square button" to={backPath}>
-          <i className="fa fa-arrow-left" aria-label="Navigate back" />
+          <Icon.ArrowLeft />
         </Link>
       )}
     </div>

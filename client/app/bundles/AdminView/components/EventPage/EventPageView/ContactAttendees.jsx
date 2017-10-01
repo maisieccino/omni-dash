@@ -1,4 +1,5 @@
 import React from "react";
+import * as Icon from "react-feather";
 import MarkdownEditor from "libs/components/MarkdownEditor";
 
 const ContactAttendees = () => (
@@ -18,7 +19,7 @@ const ContactAttendees = () => (
       <MarkdownEditor id="message-body" />
       <p>
         <button>
-          Send <i className="fa fa-paper-plane" />
+          Send <Icon.ChevronsRight />
         </button>
       </p>
     </form>

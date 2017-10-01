@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as Icon from "react-feather";
 
 const Modal = ({ header, children, choices, onCloseButtonClick, when }) => {
   if (when) {
@@ -8,8 +9,8 @@ const Modal = ({ header, children, choices, onCloseButtonClick, when }) => {
         <div className="modal">
           <div className="modal-header">
             <h1>{header}</h1>
-            <button className="modal-close" onClick={onCloseButtonClick}>
-              <i className="fa fa-close" />
+            <button className="square" onClick={onCloseButtonClick}>
+              <Icon.X />
             </button>
           </div>
           <div className="modal-body">{children}</div>

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import * as Icon from "react-feather";
 
 import { pageHasNavigated } from "libs/actions/pageNavActions";
 import { inviteAttendee } from "libs/actions/competitionActions";
@@ -113,10 +114,8 @@ class AddAttendeePage extends Component {
           </p>
           <p>
             <button onClick={e => this.onClickSubmit(e)}>
-              {this.props.isInviting && (
-                <i className="fa fa-refresh spinner" />
-              )}{" "}
-              Invite
+              Invite{" "}
+              {this.props.isInviting && <Icon.RefreshCw className="spinner" />}
             </button>
           </p>
         </form>

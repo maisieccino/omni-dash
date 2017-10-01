@@ -26,7 +26,11 @@ class CompetitionController < ApplicationController
     # check email, see if user already exists.
     # if not, create a new InviteCode
     user = User.find_by(email: invite_params[:email])
-    invite_params[:user] = user if user
+    if user
+      invite_params[:user] = user
+      user.send_reset_password_instructions
+      user.update(deleted_at: nil)
+    end
     invite = @competition.invite_codes.create!(invite_params)
     json_response(invite, :created)
   end

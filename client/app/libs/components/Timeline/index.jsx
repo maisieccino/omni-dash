@@ -1,14 +1,14 @@
+/* eslint react/no-danger: 0 */
 import React, { Component } from "react";
 import moment from "moment";
 import { generate } from "shortid";
 import PropTypes from "prop-types";
+import * as Icon from "react-feather";
+import marked from "marked";
+import { remToPx } from "libs/utils/display";
 import ItemActions from "./ItemActions";
 import TimelineHeader from "./TimelineHeader";
 import TimelineItem from "./TimelineItem";
-
-// tales a CSS rem value and converts it to pixels.
-const remToPx = rem =>
-  rem * parseFloat(getComputedStyle(document.documentElement).fontSize);
 
 class Timeline extends Component {
   constructor(props) {
@@ -64,7 +64,11 @@ class Timeline extends Component {
             startTime={event.start_time}
             endTime={event.end_time}
           >
-            <p>{event.description || ""}</p>
+            <p
+              dangerouslySetInnerHTML={{
+                __html: marked(event.description || ""),
+              }}
+            />
             <ItemActions />
           </TimelineItem>
         )),
@@ -100,7 +104,7 @@ class Timeline extends Component {
               onClick={() => this.onAddButtonClick()}
               style={{ top: y }}
             >
-              <i className="fa fa-plus" />
+              <Icon.Plus />
             </button>
           )}
         </div>
