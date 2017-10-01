@@ -33,9 +33,11 @@ class Timeline extends Component {
 
   onAddButtonClick() {
     const { mouseButtonOpened, mouseY } = this.state;
-    if (!mouseButtonOpened) {
-      this.setState({ mouseY: mouseY - this.buttonBorderWidth });
-    }
+    this.setState({
+      mouseY: mouseButtonOpened
+        ? mouseY + this.buttonBorderWidth
+        : mouseY - this.buttonBorderWidth,
+    });
     this.setState({ mouseButtonOpened: !mouseButtonOpened });
   }
 
