@@ -4,18 +4,23 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import marked from "marked";
 import moment from "moment";
+import * as Icon from "react-feather";
+import { generateMapsUrl } from "libs/utils/geo";
 
 marked.setOptions({
   sanitize: true,
   gfm: true,
 });
 
-const CurrentEvent = ({ competition }) =>
+const CurrentEvent = ({ competition }) => (
   <div className="splitview-pane">
-    <h1>Current Event</h1>
-    <h2>
-      {competition.name}
-    </h2>
+    <div className="title-bar">
+      <h1>Current Event</h1>
+      <a href="/competition" className="square button" title="View raw data">
+        <Icon.Server />
+      </a>
+    </div>
+    <h2>{competition.name}</h2>
     <p>
       <strong>Start:</strong>{" "}
       {moment(competition.start_time).format("MMMM Do YYYY, h:mm a")}
@@ -25,8 +30,15 @@ const CurrentEvent = ({ competition }) =>
       {moment(competition.end_time).format("MMMM Do YYYY, h:mm a")}
     </p>
     <h2>Location</h2>
+    <p>{competition.location || <i>To be confirmed</i>}</p>
     <p>
-      {competition.location || <i>To be confirmed</i>}
+      <a
+        href={generateMapsUrl(competition.latitude, competition.longitude)}
+        className="button"
+        target="_blank"
+      >
+        View Map <Icon.Map />
+      </a>
     </p>
     <h2>Description</h2>
     <div
@@ -34,7 +46,8 @@ const CurrentEvent = ({ competition }) =>
         __html: marked(competition.description || ""),
       }}
     />
-  </div>;
+  </div>
+);
 
 CurrentEvent.propTypes = {
   competition: PropTypes.shape(),

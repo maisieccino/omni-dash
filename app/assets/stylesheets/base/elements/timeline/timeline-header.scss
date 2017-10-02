@@ -1,0 +1,8 @@
+.timeline-header {
+  @extend h1;
+  margin-left: 2.5rem;
+  font-size: 1.5rem;
+  font-style: italic;
+  color: lighten($color-fg, 10);
+  margin-top: 0.75rem;
+}

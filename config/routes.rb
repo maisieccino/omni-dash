@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   get "/users/me", to: "users#show_self", as: :user_me, via: :get
   put "/users/me", to: "users#update_self", as: :user_me_update, via: :put
+  get "/users/deleted", to: "users#index_deleted"
+  delete "/users/:id/destroy", to: "users#hard_destroy"
   resources :users
 
   get "/competition", to: "competition#show"
@@ -26,4 +28,9 @@ Rails.application.routes.draw do
   delete "/competition", to: "competition#destroy"
   get "/competition/invites", to: "competition#list_attendees"
   post "/competition/invites", to: "competition#invite_attendee"
+
+  get "/competition/events", to: "competition#list_events"
+  post "/competition/events", to: "competition#create_event"
+  put "/competition/event/:id", to: "competition#update_event", as: :competition_event
+  delete "/competition/event/:id", to: "competition#delete_event"
 end

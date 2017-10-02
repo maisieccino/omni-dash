@@ -2,16 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import * as Icon from "react-feather";
 
 const TopNav = ({ href, visible }, { router }) => {
   const query = new URLSearchParams(router.history.location.search);
   const backPath = query.get("backPath") || href;
   return (
     <div>
-      {visible &&
-        <Link className="button" to={backPath}>
-          Back
-        </Link>}
+      {visible && (
+        <Link className="square button" to={backPath}>
+          <Icon.ArrowLeft />
+        </Link>
+      )}
     </div>
   );
 };

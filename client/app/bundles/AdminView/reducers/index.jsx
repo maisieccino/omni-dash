@@ -9,6 +9,9 @@ import pageNavReducer, {
 import competitionReducer, {
   initialState as competitionState,
 } from "libs/reducers/competitionReducer";
+import eventsReducer, {
+  initialState as eventsState,
+} from "libs/reducers/eventsReducer";
 import usersReducer, { initialState as usersState } from "./usersReducer";
 
 export const initialStates = {
@@ -17,6 +20,7 @@ export const initialStates = {
   user: userState,
   users: usersState,
   pageNav: pageNavState,
+  events: eventsState,
 };
 
 export default combineReducers({
@@ -25,5 +29,6 @@ export default combineReducers({
   user: userReducer,
   users: usersReducer,
   pageNav: pageNavReducer,
+  events: eventsReducer,
   routerReducer,
 });

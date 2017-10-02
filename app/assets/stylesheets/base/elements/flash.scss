@@ -11,7 +11,7 @@
 
 .notice {
   @extend .flash;
-  $color: #67b9f5;
+  $color: $color-lightblue;
   background-color: $color;
   color: darken($color, 40);
   border-color: darken($color, 40);

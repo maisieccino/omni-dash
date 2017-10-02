@@ -4,6 +4,7 @@ export const initialState = {
   isFetching: false,
   users: [],
   error: "",
+  lastUpdated: null,
 };
 
 export default (state = initialState, action = null) => {
@@ -23,6 +24,7 @@ export default (state = initialState, action = null) => {
         ...state,
         isFetching: false,
         users,
+        lastUpdated: new Date(),
       };
     }
 

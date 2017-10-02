@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Prompt } from "react-router-dom";
 import { connect } from "react-redux";
+import * as Icon from "react-feather";
 import * as actions from "libs/actions/userActions";
 
 class ProfileSettingsContainer extends Component {
@@ -34,8 +35,9 @@ class ProfileSettingsContainer extends Component {
           />
           {!isUpdating &&
             !error &&
-            updateSuccess &&
-            <div className="success">Settings saved successfully!</div>}
+            updateSuccess && (
+              <div className="success">Settings saved successfully!</div>
+            )}
           <h1>Profile Settings</h1>
           <h2>Basic Information</h2>
           <label htmlFor="user-first-name">First Name</label>
@@ -145,8 +147,9 @@ class ProfileSettingsContainer extends Component {
           <p>
             <button disabled={isUpdating} onClick={() => this.saveForm()}>
               {!isUpdating && "Save"}
-              {isUpdating &&
-                <i aria-label="Loading" className="fa fa-refresh spinner" />}
+              {isUpdating && (
+                <Icon.RefreshCw aria-label="Loading" className="spinner" />
+              )}
             </button>
           </p>
         </form>
@@ -186,6 +189,7 @@ const mapStateToProps = (state, ownProps) => {
     error: state.user.error,
     updateSuccess: state.user.updateSuccess,
     userFields: {
+      bio: "",
       ...state.user.user,
       ...state.user.userChangedFields,
     },

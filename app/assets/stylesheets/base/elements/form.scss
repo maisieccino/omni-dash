@@ -23,14 +23,17 @@ input[type="number"] {
   font-family: $font-body;
   font-size: 1.1rem;
   transition: all 0.25s ease-in-out;
-  border: none;
-  border-bottom: $color-accent solid 0;
+  border: $color-fg solid 1px;
   outline: none;
   padding: 0.25rem;
   position: relative;
   display: inline;
   flex-grow: 1;
   background-color: transparent;
+
+  .input-group & {
+    border: none;
+  }
 
   &::selection {
     background-color: $color-accent;
@@ -65,7 +68,7 @@ textarea {
   flex-direction: row;
 
   @include respond-to(900px) {
-    display: inline-block;
+    width: 50%;
   }
 
   &.edited {

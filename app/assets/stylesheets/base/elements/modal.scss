@@ -47,6 +47,7 @@
 
     .modal-body {
       margin: 1rem 0;
+      font-size: 1.2rem;
     }
 
     .modal-footer {
@@ -56,6 +57,7 @@
       flex-direction: row;
 
       button {
+        margin: 0;
         flex: 1;
         border-radius: 0;
         &:nth-of-type(1) {
@@ -64,6 +66,18 @@
 
         &:last-of-type {
           border-radius: 0 0 $border-radius 0;
+        }
+
+        &:not(.primary) {
+          background-color: $color-card;
+          color: $color-fg;
+          &:hover {
+            background-color: lighten($color-card, 10);
+          }
+
+          &:active {
+            background-color: darken($color-card, 10);
+          }
         }
       }
     }

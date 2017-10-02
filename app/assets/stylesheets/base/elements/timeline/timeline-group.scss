@@ -1,0 +1,21 @@
+.timeline-group {
+  @extend .timeline-item;
+
+  .timeline-item {
+    border: none;
+    box-shadow: none;
+    margin-left: 0;
+    padding: 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 0.25rem dashed $color-card;
+
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    &::before,
+    &::after {
+      display: none;
+    }
+  }
+}

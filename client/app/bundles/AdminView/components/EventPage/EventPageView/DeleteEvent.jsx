@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import * as Icon from "react-feather";
 import { deleteCompetition } from "libs/actions/competitionActions";
 
 class DeleteEvent extends Component {
@@ -60,9 +61,11 @@ class DeleteEvent extends Component {
             disabled={!this.state.canDelete}
             onClick={() => this.props.deleteCompetition()}
           >
-            {this.props.isDeleting
-              ? <i aria-label="Loading" className="fa fa-refresh spinner" />
-              : "Delete"}
+            {this.props.isDeleting ? (
+              <Icon.RefreshCw aria-label="Loading" className="spinner" />
+            ) : (
+              "Delete"
+            )}
           </button>
         </p>
       </div>

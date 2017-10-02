@@ -1,4 +1,8 @@
 language: ruby
+cache:
+- bundler
+- yarn
+node_js: '8'
 rvm:
 - 2.4.1
 services:

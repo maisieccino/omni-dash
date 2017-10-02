@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :json_authenticate_user
-  before_action :admin_only, only: %i[create index destroy]
-  before_action :set_user, only: %i[show update destroy]
+  before_action :admin_only, only: %i[create index index_deleted destroy hard_destroy]
+  before_action :set_user, only: %i[show update destroy hard_destroy]
   before_action :user_not_deleted, only: %i[show update destroy]
 
   def create
@@ -11,6 +11,10 @@ class UsersController < ApplicationController
 
   def index
     json_response(User.all.select { |i| i.deleted_at.nil? }, :ok)
+  end
+
+  def index_deleted
+    json_response(User.where.not(deleted_at: nil), :ok)
   end
 
   def show
@@ -40,6 +44,11 @@ class UsersController < ApplicationController
 
   def destroy
     @user.soft_delete
+    head :no_content
+  end
+
+  def hard_destroy
+    @user.destroy
     head :no_content
   end
 

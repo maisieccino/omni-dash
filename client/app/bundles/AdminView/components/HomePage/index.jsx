@@ -25,7 +25,7 @@ class HomePage extends Component {
         <h1>
           Hello, <span className="accent">{user.first_name}</span>.
         </h1>
-        <h2>Admin Dashboard</h2>
+        <h2>Your Admin Dashboard</h2>
       </div>
     );
   }

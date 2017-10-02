@@ -39,14 +39,20 @@
     flex-direction: column;
     flex: 3 3 0px;
     justify-content: center;
+
+    h1 {
+      margin-top: 1rem;
+    }
   }
 
   .header-buttons {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 1rem;
 
-    button, .button {
+    button,
+    .button {
       min-width: 40%;
       width: auto !important;
 
@@ -59,12 +65,11 @@
 
 .profile-main {
   // just make it one column if mobile
-  margin-top: 2rem;
-  display: flex;
+  @extend .splitview-main;
   flex-direction: column-reverse;
 
   aside.profile-sidebar {
-    flex: none;
+    @extend .splitview-nav;
 
     .contact-info-item {
       h3 {
@@ -77,8 +82,7 @@
   }
 
   .profile-body {
-    flex: none;
-    margin-bottom: 1rem;
+    @extend .splitview-pane;
   }
 
   h2:not(.not-fancy) {
@@ -90,19 +94,5 @@
   p {
     font-size: 1.2rem;
     margin: 0.5rem 0;
-  }
-
-  @include respond-to(900px) {
-    // make sidebar a sidebar
-    flex-direction: row;
-
-    aside.profile-sidebar {
-      flex: 1 1 0px;
-      margin-bottom: 0;
-    }
-
-    .profile-body {
-      flex: 3 3 0px;
-    }
   }
 }

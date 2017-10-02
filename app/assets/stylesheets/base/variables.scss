@@ -1,8 +1,14 @@
 // colours
+$color-blue: #2d5bc9;
+$color-lightblue: #4a8dff;
+$color-yellow: #f7c238;
+$color-red: #f54e74;
+$color-mint: #43d4b2;
+
 $color-bg: #fffffe;
 $color-fg: #000000;
 $color-card: #ececec;
-$color-accent: #ff004c;
+$color-accent: $color-red;
 
 // typography
 $font-title: "Karla", "Arial", sans-serif;

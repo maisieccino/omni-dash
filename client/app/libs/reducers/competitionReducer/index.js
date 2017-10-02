@@ -7,6 +7,7 @@ export const initialState = {
   isFetching: false,
   isSaving: false,
   isDeleting: false,
+  isUpdating: false,
   competitionExists: true,
   competition: {},
   attendees: attendeesState,
@@ -80,7 +81,6 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isUpdating: false,
-        competition,
       };
     }
 
@@ -119,7 +119,10 @@ export default (state = initialState, action = null) => {
 
     case constants.SET_IS_FETCHING_COMPETITION_ATTENDEES:
     case constants.FETCH_COMPETITION_ATTENDEES_SUCCESS:
-    case constants.FETCH_COMPETITION_ATTENDEES_FAILURE: {
+    case constants.FETCH_COMPETITION_ATTENDEES_FAILURE:
+    case constants.SET_IS_INVITING_COMPETITION_ATTENDEE:
+    case constants.INVITE_COMPETITION_ATTENDEE_SUCCESS:
+    case constants.INVITE_COMPETITION_ATTENDEE_FAILURE: {
       return {
         ...state,
         attendees: attendeesReducer(state.attendees, action),

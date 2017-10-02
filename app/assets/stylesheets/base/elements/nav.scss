@@ -36,10 +36,11 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-content: center;
     margin: 0;
 
-    .nav-icon {
-      font-size: 1.25rem;
+    svg {
+      margin: 0 auto;
       margin-bottom: 0.2rem;
     }
 
@@ -75,7 +76,7 @@ nav {
       flex-basis: auto;
       flex-grow: 0;
 
-      .nav-icon {
+      svg {
         display: none;
       }
 

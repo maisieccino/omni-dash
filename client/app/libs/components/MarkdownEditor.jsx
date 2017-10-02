@@ -8,8 +8,16 @@ marked.setOptions({
   gfm: true,
 });
 
-const MarkdownEditor = ({ id, value, onChange }) =>
-  <div className="markdown-editor">
+const MarkdownEditor = ({
+  id,
+  value,
+  onChange,
+  className,
+  disabled,
+  placeholder,
+  ...rest
+}) => (
+  <div className="markdown-editor" {...rest}>
     <div>
       <div className="input-container">
         <p>
@@ -20,9 +28,11 @@ const MarkdownEditor = ({ id, value, onChange }) =>
         </p>
         <textarea
           id={id}
-          placeholder="Enter a description for this event..."
+          placeholder={placeholder}
           onChange={e => onChange(e.target.value)}
           value={value}
+          disabled={disabled}
+          className={className}
         />
       </div>
       <div className="preview-container">
@@ -35,17 +45,24 @@ const MarkdownEditor = ({ id, value, onChange }) =>
         />
       </div>
     </div>
-  </div>;
+  </div>
+);
 
 MarkdownEditor.propTypes = {
   value: PropTypes.string,
   onChange: PropTypes.func,
   id: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  placeholder: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 MarkdownEditor.defaultProps = {
   value: "",
   onChange: () => {},
+  className: "",
+  placeholder: "Enter your text...",
+  disabled: false,
 };
 
 export default MarkdownEditor;

@@ -1,11 +1,8 @@
-/* eslint react/prop-types: 0 */
-// @flow
 import React from "react";
 import PropTypes from "prop-types";
 import { generate } from "shortid";
-import routes from "./routes";
 
-const Navigation = ({ className, removeRoutes }) => {
+const Navigation = ({ className, removeRoutes, routes }) => {
   // filter routes down using the removeRoutes prop.
   // If removeRoutes is empty, skip this to save rendering.
   const navRoutes = removeRoutes
@@ -27,11 +24,15 @@ const Navigation = ({ className, removeRoutes }) => {
 Navigation.propTypes = {
   className: PropTypes.string,
   removeRoutes: PropTypes.arrayOf(PropTypes.string),
+  routes: PropTypes.arrayOf(PropTypes.node),
 };
 
 Navigation.defaultProps = {
   className: "",
   removeRoutes: [],
+  routes: [],
 };
 
 export default Navigation;
+export { default as NavItem } from "./NavItem";
+export { default as TopNav } from "./TopNav";

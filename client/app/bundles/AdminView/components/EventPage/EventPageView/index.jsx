@@ -1,25 +1,32 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import { generate } from "shortid";
 
 import NavItem from "libs/components/SplitViewNavItem";
 import CurrentEvent from "./CurrentEvent";
-import DeleteEvent from "./DeleteEvent";
+import EditEvent from "./EditEvent";
+import Timeline from "./Timeline";
 import Attendees from "./Attendees";
+import ContactAttendees from "./ContactAttendees";
+import DeleteEvent from "./DeleteEvent";
 
 const routes = [
   {
-    to: "/event/current",
+    to: "/event",
+    match: "/event/?$",
     label: "Current Event",
+    exact: true,
     component: CurrentEvent,
   },
   {
     to: "/event/edit",
     label: "Edit Details",
+    component: EditEvent,
   },
   {
     to: "/event/timeline",
     label: "Timeline",
+    component: Timeline,
   },
   {
     to: "/event/attendees",
@@ -29,6 +36,7 @@ const routes = [
   {
     to: "/event/email",
     label: "Contact Attendees",
+    component: ContactAttendees,
   },
   {
     to: "/event/delete",
@@ -37,7 +45,7 @@ const routes = [
   },
 ];
 
-const EventPageView = () =>
+const EventPageView = () => (
   <div className="splitview-main">
     <aside className="splitview-nav">
       {/* programmatically generate navbar from array */}
@@ -45,12 +53,13 @@ const EventPageView = () =>
     </aside>
 
     {/* programmatically generate routes from array */}
-    {routes.map(route => <Route key={generate()} path={route.to} {...route} />)}
-    <Route
-      exact
-      path="/event"
-      render={() => <Redirect to="/event/current" />}
-    />
-  </div>;
+    <Switch>
+      {routes.map(route => (
+        <Route key={generate()} path={route.to} {...route} />
+      ))}
+      <Route render={() => <Redirect to="/event" />} />
+    </Switch>
+  </div>
+);
 
 export default EventPageView;

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import moment from "moment";
+import * as Icon from "react-feather";
 import * as pageNavActions from "libs/actions/pageNavActions";
 import { fetchUsers } from "../../actions/usersActions";
 
@@ -12,11 +14,13 @@ class UsersPage extends Component {
     getUsers: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape()),
     isFetching: PropTypes.bool,
+    lastUpdated: PropTypes.shape(),
   };
 
   static defaultProps = {
     users: [],
     isFetching: false,
+    lastUpdated: null,
   };
 
   componentDidMount() {
@@ -25,19 +29,38 @@ class UsersPage extends Component {
   }
 
   render() {
+    const { lastUpdated } = this.props;
     return (
       <div>
-        <h1>Users</h1>
-        <p>
-          <button className="square" onClick={() => this.props.getUsers()}>
-            <i className="fa fa-refresh" />
+        <div className="title-bar">
+          <h1>Users</h1>
+          <p>
+            <i>
+              Last updated:{" "}
+              {lastUpdated ? moment(lastUpdated).format("HH:mm:ss") : "Never"}
+            </i>
+          </p>
+          <button
+            disabled={this.props.isFetching}
+            className="square"
+            title="Refresh"
+            onClick={() => this.props.getUsers()}
+          >
+            <Icon.RefreshCw
+              className={this.props.isFetching ? "spinner" : ""}
+            />
           </button>
-        </p>
-        <p>Manage Hatch users.</p>
+          <a href="/users" className="square button" title="View JSON Data">
+            <Icon.Server />
+          </a>
+        </div>
         {this.props.isFetching ? (
           <p>Loading users...</p>
         ) : (
-          <UsersTable users={this.props.users} />
+          <UsersTable
+            users={this.props.users}
+            refreshTable={() => this.props.getUsers()}
+          />
         )}
       </div>
     );
@@ -45,11 +68,12 @@ class UsersPage extends Component {
 }
 
 const mapStateToProps = state => {
-  const { isFetching, users } = state.users;
+  const { isFetching, users, lastUpdated } = state.users;
 
   return {
     isFetching,
     users,
+    lastUpdated,
   };
 };
 
