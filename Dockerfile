@@ -3,11 +3,10 @@
 # Use the barebones version of Ruby 2.4.1.
 FROM ruby:2.4.1-slim
 
-
 # Setting environment variables using sane defaults
 # These can be overwritten at run time
 
-ENV RAILS_DB_HOST localhost
+ENV RAILS_DB_HOSTNAME localhost
 ENV RAILS_DB_PORT 5432
 ENV RAILS_DB_USER postgres
 ENV RAILS_DB_PASS changeme
@@ -16,6 +15,8 @@ ENV RAILS_ADMIN_USER_EMAIL admin@example.com
 ENV RAILS_ADMIN_USER_FIRSTNAME Admin
 ENV RAILS_ADMIN_USER_LASTNAME User
 ENV RAILS_ADMIN_USER_PASS changeme
+
+ENV WORK_DIR /hatch_web
 
 # Install dependencies:
 # We need to add yarn to apt sources
@@ -30,20 +31,20 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get update && apt-get install -qq -y --no-install-recommends nodejs yarn
 
 # This sets the context of where commands will be ran
-RUN mkdir -p /hatch_web
-WORKDIR /hatch_web
+RUN mkdir -p $WORK_DIR
+WORKDIR $WORK_DIR
 
 # Use COPY for copying local files
 # relative paths are:
 # first arg: relative to the path passed to `docker build`
 # second arg: relative to WORKDIR
-COPY Gemfile Gemfile
+COPY ./Gemfile $WORK_DIR/Gemfile
 
 RUN bundle install
 RUN yarn --pure-lockfile
 
 # Copy the application code
-COPY . .
+COPY . $WORK_DIR/
 
 # Use VOLUME to specify directories where files are changed at runtime
 # if the app is down, these should still exist
@@ -51,13 +52,6 @@ COPY . .
 
 # commenting this because I don't know yet what these are
 #VOLUME ["/var/upload","/var/logs/hatch-site"]
-
-EXPOSE 3000
-
-COPY ./entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["bash"]
-CMD ["/entrypoint.sh"]
-
 
 ## Build (and tag) this image:
 #> docker build -t shecancode/hatch-site .

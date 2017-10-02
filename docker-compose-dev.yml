@@ -5,13 +5,11 @@ services:
   db:
     image: postgres:9.6 # explicit version to prevent breakage with updates
     environment:
-      # we need to set a password because 'trust' won't work as the two
-      # services are not considered to be on the same host by docker
       - POSTGRES_PASSWORD # value will be read from local environment when run
     volumes:
       - database:/var/lib/postgresql/data # default pg volume
   web:
-    image: shecancode/hatch-site # assumes image is on docker hub
+    image: hatchxucl/hatch-site-dev # assumes image is on docker hub
     environment:
       - RAILS_DB_HOST=db # db is both the service name and the host
       - RAILS_DB_PASS=${POSTGRES_PASSWORD}

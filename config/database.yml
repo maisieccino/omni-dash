@@ -11,9 +11,8 @@ default: &default
   timeout: 5000
   username: <%= ENV.fetch("RAILS_DB_USER") { "postgres" } %>
   password: <%= ENV.fetch("RAILS_DB_PASS") { "hunter2" } %>
-  hostname: <%= ENV.fetch("RAILS_DB_HOSTNAME") { "localhost" } %>
+  host: <%= ENV.fetch("RAILS_DB_HOSTNAME") { "localhost" } %>
   port: <%= ENV.fetch("RAILS_DB_PORT") { 5432 } %>
-  host:  <%= ENV.fetch("RAILS_DB_HOST") { "localhost" } %>
 
 development:
   <<: *default
