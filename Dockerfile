@@ -26,7 +26,7 @@ ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
 RUN apt-key add /tmp/yarn-pubkey.gpg && rm /tmp/yarn-pubkey.gpg
 RUN echo 'deb http://dl.yarnpkg.com/debian/ stable main' > /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -qq -y --no-install-recommends \
-      build-essential libpq-dev curl
+  build-essential libpq-dev curl
 RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
 RUN apt-get update && apt-get install -qq -y --no-install-recommends nodejs yarn
 
@@ -42,6 +42,8 @@ COPY ./Gemfile $WORK_DIR/Gemfile
 
 RUN bundle install
 RUN yarn --pure-lockfile
+
+RUN cd client && yarn run build:production
 
 # Copy the application code
 COPY . $WORK_DIR/
