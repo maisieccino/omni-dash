@@ -1,0 +1,9 @@
+.git
+.dockerignore
+Gemfile.lock
+tmp
+vendor
+.bundle
+.vscode
+public/webpack/*
+log

@@ -1,0 +1,50 @@
+version: '3.3' # compatible with docker engine -v 17.06
+# creates a private network between services
+# each service is one docker image, but can be scaled horizontally to several container
+services:
+  db:
+    image: postgres:9.6 # explicit version to prevent breakage with updates
+    environment:
+      - POSTGRES_PASSWORD # value will be read from local environment when run
+    volumes:
+      # add used volumes here...
+      - type: volume
+        source: dbdata
+        target: /data
+        volume:
+          nocopy: true
+    env_file:
+      - ".env.prod"
+  web:
+    build: .
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    environment:
+      - RAILS_DB_HOSTNAME=db # db is both the service name and the host
+      - RAILS_DB_PASS=${POSTGRES_PASSWORD}
+      - RAILS_ADMIN_USER_PASS # value will be read from local env when run
+    expose:
+      - "80"
+    ports:
+      - "80:3000"
+    depends_on:
+      - db
+    env_file:
+      - ".env.prod"
+# ...and here
+volumes:
+  #data-volume: uncomment once the volumes used by the app are clear
+  dbdata:
+
+## Deploy on server:
+
+#> git clone/pull <repo>   <-- To get the last version of this file
+#> export POSTGRES_PASSWORD="<secretpassword>"
+#> export RAILS_ADMIN_USER_PASS="<secretadminpassword>"
+#> docker-compose pull    <-- pulls images from the registry
+#> docker-compose up -d --force-recreate  <-- less downtime to switch versions
+
+
+## Maintenance:
+# Open a bash on the web or db container
+#> docker-compose exec web bash
+#> docker-compose exec db bash
