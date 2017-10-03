@@ -17,7 +17,6 @@ services:
       - ".env.prod"
   web:
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
     environment:
       - RAILS_DB_HOSTNAME=db # db is both the service name and the host
       - RAILS_DB_PASS=${POSTGRES_PASSWORD}
