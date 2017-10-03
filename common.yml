@@ -22,6 +22,8 @@ services:
       - RAILS_DB_HOSTNAME=db # db is both the service name and the host
       - RAILS_DB_PASS=${POSTGRES_PASSWORD}
       - RAILS_ADMIN_USER_PASS # value will be read from local env when run
+    expose:
+      - "80"
     ports:
       - "80:3000"
     depends_on:
