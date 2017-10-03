@@ -41,12 +41,13 @@ WORKDIR $WORK_DIR
 COPY ./Gemfile $WORK_DIR/Gemfile
 
 RUN bundle install
-RUN yarn --pure-lockfile
-
-RUN cd client && yarn run build:production
 
 # Copy the application code
 COPY . $WORK_DIR/
+
+RUN yarn --pure-lockfile
+
+RUN cd $WORK_DIR/client && yarn run build:production
 
 # Use VOLUME to specify directories where files are changed at runtime
 # if the app is down, these should still exist
