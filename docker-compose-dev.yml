@@ -1,41 +1,10 @@
-version: '3.3' # compatible with docker engine -v 17.06
-# creates a private network between services
-# each service is one docker image, but can be scaled horizontally to several container
+version: '3.3'
 services:
-  db:
-    image: postgres:9.6 # explicit version to prevent breakage with updates
-    environment:
-      - POSTGRES_PASSWORD # value will be read from local environment when run
-    volumes:
-      - database:/var/lib/postgresql/data # default pg volume
   web:
-    image: hatchxucl/hatch-site-dev # assumes image is on docker hub
+    image: mbellgb/hatch-site-dev # assumes image is on docker hub
+    build:
+      dockerfile: ./Dockerfile
+    command: run-dev.sh
     environment:
-      - RAILS_DB_HOST=db # db is both the service name and the host
-      - RAILS_DB_PASS=${POSTGRES_PASSWORD}
-      - RAILS_ADMIN_USER_PASS # value will be read from local env when run
-    ports:
-      - "80:3000"
-    depends_on:
-      - db
-    #volumes:
-      #add used volumes here...
-      #- data-volume:/var/logs/hatch-site
-# ...and here
-volumes:
-  #data-volume: uncomment once the volumes used by the app are clear
-  database:
+      - RAILS_ENV=development
 
-## Deploy on server:
-
-#> git clone/pull <repo>   <-- To get the last version of this file
-#> export POSTGRES_PASSWORD="<secretpassword>"
-#> export RAILS_ADMIN_USER_PASS="<secretadminpassword>"
-#> docker-compose pull    <-- pulls images from the registry
-#> docker-compose up -d --force-recreate  <-- less downtime to switch versions
-
-
-## Maintenance:
-# Open a bash on the web or db container
-#> docker-compose exec web bash
-#> docker-compose exec db bash

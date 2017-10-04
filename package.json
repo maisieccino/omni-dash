@@ -5,7 +5,10 @@
     "lint:force": "cd client && yarn run lint:force",
     "lint:staged": "lint-staged",
     "format": "cd client && yarn run format",
-    "precommit": "(cd client && yarn run precommit) && yarn run lint:staged"
+    "precommit": "(cd client && yarn run precommit) && yarn run lint:staged",
+    "build:test": "cd client && yarn run build:test",
+    "build:development": "cd client && yarn run build:development",
+    "build:production": "cd client && yarn run build:production"
   },
   "name": "hatch-site",
   "private": true,

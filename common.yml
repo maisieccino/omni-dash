@@ -28,7 +28,7 @@ services:
     depends_on:
       - db
     env_file:
-      - ".env.prod"
+      - ".env.final"
 # ...and here
 volumes:
   #data-volume: uncomment once the volumes used by the app are clear

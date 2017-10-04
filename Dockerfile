@@ -1,7 +1,7 @@
 # NAME: shecancode/hatch-site
 
 # Use the barebones version of Ruby 2.4.1.
-FROM ruby:2.4.1-slim
+FROM ruby:2.4.2-alpine
 
 # Setting environment variables using sane defaults
 # These can be overwritten at run time
@@ -40,13 +40,16 @@ WORKDIR $WORK_DIR
 # second arg: relative to WORKDIR
 COPY ./Gemfile $WORK_DIR/Gemfile
 
-RUN bundle install --without development test
+RUN bundle install
 
 # Copy the application code
 COPY . $WORK_DIR/
 
+COPY .env.final .env
+
 RUN yarn --pure-lockfile
 
+# TODO: Might need fixing
 RUN cd $WORK_DIR/client && yarn run build:production
 
 CMD ["run-prod.sh"]

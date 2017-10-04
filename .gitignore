@@ -16,7 +16,7 @@
 /tmp
 /public/assets
 .env
-.env.*.final
+.env*.final
 node_modules
 npm-debug.log*
 /coverage
