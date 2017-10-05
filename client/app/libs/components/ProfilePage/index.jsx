@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as userActions from "libs/actions/userActions";
-import * as pageNavActions from "libs/actions/pageNavActions";
 
 import ProfileViewPage from "./ProfileViewPage";
 
@@ -25,10 +24,6 @@ class ProfilePage extends Component {
 
   componentWillMount() {
     this.props.getUser();
-  }
-
-  componentDidMount() {
-    this.props.updateBackButton();
   }
 
   render() {
@@ -56,7 +51,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, { match }) => ({
   getUser: () => dispatch(userActions.fetchUser(match.params.id)),
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

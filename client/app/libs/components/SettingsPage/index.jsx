@@ -1,11 +1,10 @@
-// @flow
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { generate } from "shortid";
 import { setUpdateSuccess } from "libs/actions/userActions";
-import * as pageNavActions from "../../actions/pageNavActions";
+import { TopNav } from "libs/components/Navigation";
 
 import NavItem from "../SplitViewNavItem";
 import ProfileSettingsContainer from "./ProfileSettingsContainer";
@@ -46,7 +45,6 @@ const routes = [
 
 class SettingsPage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func.isRequired,
     setUserUpdateSuccess: PropTypes.func,
   };
 
@@ -55,13 +53,13 @@ class SettingsPage extends Component {
   };
 
   componentDidMount() {
-    this.props.updateBackButton();
     this.props.setUserUpdateSuccess(false);
   }
 
   render() {
     return (
       <div>
+        <TopNav title="Settings" href="/profile" />
         <div className="splitview-main">
           <aside className="splitview-nav">
             {/* programmatically generate navbar from array */}
@@ -69,13 +67,13 @@ class SettingsPage extends Component {
           </aside>
 
           {/* programmatically generate routes from array */}
-          {routes.map(route =>
+          {routes.map(route => (
             <Route
               key={generate()}
               path={route.to}
               component={route.component}
-            />,
-          )}
+            />
+          ))}
           <Route
             exact
             path="/settings"
@@ -90,8 +88,6 @@ class SettingsPage extends Component {
 const mapStateToProps = (state, ownProps) => ownProps;
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () =>
-    dispatch(pageNavActions.pageHasNavigated("/profile", true)),
   setUserUpdateSuccess: success => dispatch(setUpdateSuccess(success)),
 });
 

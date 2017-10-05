@@ -4,20 +4,18 @@ import moment from "moment";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
 import MarkdownEditor from "libs/components/MarkdownEditor";
+import { TopNav } from "libs/components/Navigation";
 
-import { pageHasNavigated } from "libs/actions/pageNavActions";
 import { createEvent } from "libs/actions/eventsActions";
 
 class AddEventPage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func,
     createEvent: PropTypes.func,
     isCreating: PropTypes.bool,
     error: PropTypes.string,
   };
 
   static defaultProps = {
-    updateBackButton: () => {},
     createEvent: () => {},
     isCreating: false,
     error: "",
@@ -34,10 +32,6 @@ class AddEventPage extends Component {
         .format(),
       success: false,
     };
-  }
-
-  componentDidMount() {
-    this.props.updateBackButton();
   }
 
   componentWillReceiveProps(newProps) {
@@ -78,7 +72,7 @@ class AddEventPage extends Component {
   render() {
     return (
       <div>
-        <h1>Add New Event</h1>
+        <TopNav title="Add New Event" href="/event/timeline" />
 
         {this.props.error && (
           <div className="alert flash">Error: {this.props.error}</div>
@@ -149,7 +143,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageHasNavigated("/event/timeline", true)),
   createEvent: params => dispatch(createEvent(params)),
 });
 

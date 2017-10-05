@@ -5,7 +5,7 @@ import { ConnectedRouter } from "react-router-redux";
 
 import SettingsPage from "libs/components/SettingsPage";
 import ProfilePage from "libs/components/ProfilePage";
-import Navigation, { TopNav } from "libs/components/Navigation";
+import Navigation from "libs/components/Navigation";
 import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
 import EventPage from "./EventPage";
@@ -36,7 +36,6 @@ class HackerView extends Component {
         <div>
           <Navigation routes={routes} />
           <div className="page">
-            <TopNav />
             <Route
               exact
               path="/"

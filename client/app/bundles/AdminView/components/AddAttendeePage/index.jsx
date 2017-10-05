@@ -2,13 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
+import { TopNav } from "libs/components/Navigation";
 
-import { pageHasNavigated } from "libs/actions/pageNavActions";
 import { inviteAttendee } from "libs/actions/competitionActions";
 
 class AddAttendeePage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func,
     inviteAttendee: PropTypes.func,
     isInviting: PropTypes.bool,
     error: PropTypes.string,
@@ -29,10 +28,6 @@ class AddAttendeePage extends Component {
       last_name: "",
       success: false,
     };
-  }
-
-  componentDidMount() {
-    this.props.updateBackButton();
   }
 
   componentWillReceiveProps(newProps) {
@@ -64,7 +59,7 @@ class AddAttendeePage extends Component {
   render() {
     return (
       <div>
-        <h1>Add New Attendee</h1>
+        <TopNav title="Add New Attendee" href="/event/attendees" />
 
         {this.props.error && (
           <div className="alert flash">Error: {this.props.error}</div>
@@ -142,7 +137,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageHasNavigated("/event/attendees", true)),
   inviteAttendee: params => dispatch(inviteAttendee(params)),
 });
 

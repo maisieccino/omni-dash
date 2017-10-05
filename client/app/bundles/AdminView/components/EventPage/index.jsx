@@ -1,7 +1,6 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import * as pageNavActions from "libs/actions/pageNavActions";
+import { connect } from "react-redux";
 import {
   fetchCompetition,
   saveCompetition,
@@ -12,7 +11,6 @@ import CreateEvent from "./CreateEvent";
 
 class EventPage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func.isRequired,
     getCompetition: PropTypes.func.isRequired,
     saveCompetition: PropTypes.func.isRequired,
     isSaving: PropTypes.bool,
@@ -27,7 +25,6 @@ class EventPage extends Component {
   };
 
   componentDidMount() {
-    this.props.updateBackButton();
     this.props.getCompetition();
   }
 
@@ -38,11 +35,11 @@ class EventPage extends Component {
           (not including if competition doesn't yet exist)
         */}
         {this.props.error &&
-        this.props.error !== "404 Not Found" && (
-          <div className="alert">
-            <strong>Error:</strong> {this.props.error}
-          </div>
-        )}
+          this.props.error !== "404 Not Found" && (
+            <div className="alert">
+              <strong>Error:</strong> {this.props.error}
+            </div>
+          )}
 
         <h1>Your Event</h1>
         <p>
@@ -71,7 +68,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
   getCompetition: () => dispatch(fetchCompetition()),
   saveCompetition: competition => dispatch(saveCompetition(competition)),
 });

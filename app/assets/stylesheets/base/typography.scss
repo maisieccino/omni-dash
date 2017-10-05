@@ -74,9 +74,33 @@ html {
   h2,
   h3 {
     flex: 1;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
 
   p {
     margin: 0 0.5rem !important;
   }
+
+  .button {
+    margin-left: 0.1rem !important;
+    margin-right: 0.1rem !important;
+  }
+
+  *:first-child {
+    margin-left: 0 !important;
+  }
+
+  *:last-child {
+    margin-right: 0 !important;
+  }
+}
+
+.help-text {
+  align-self: center;
+  text-align: center;
+  font-style: italic;
+  color: lighten($color-fg, 20);
+  text-transform: unset !important;
+  flex: 1;
 }
