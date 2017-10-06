@@ -7,7 +7,7 @@ import { setUpdateSuccess } from "libs/actions/userActions";
 import { TopNav } from "libs/components/Navigation";
 
 import NavItem from "../SplitViewNavItem";
-import ProfileSettingsContainer from "./ProfileSettingsContainer";
+import ProfileSettings from "./ProfileSettings";
 import TeamSettingsContainer from "./TeamSettingsContainer";
 import PrivacySettingsContainer from "./PrivacySettingsContainer";
 import NotificationsSettingsContainer from "./NotificationSettingsContainer";
@@ -18,7 +18,7 @@ const routes = [
   {
     to: "/settings/profile",
     label: "Profile",
-    component: ProfileSettingsContainer,
+    component: ProfileSettings,
   },
   { to: "/settings/team", label: "Team", component: TeamSettingsContainer },
   {
