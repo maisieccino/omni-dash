@@ -12,7 +12,6 @@ class ProfilePage extends Component {
     currentUser: PropTypes.shape().isRequired,
     isFetching: PropTypes.bool,
     getUser: PropTypes.func.isRequired,
-    updateBackButton: PropTypes.func.isRequired,
     match: PropTypes.shape(),
   };
 

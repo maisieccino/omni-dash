@@ -100,6 +100,13 @@ export default (state = initialState, action = null) => {
       };
     }
 
+    case constants.RESET_SETTING_VALUES: {
+      return {
+        ...state,
+        userChangedFields: {},
+      };
+    }
+
     default: {
       return state;
     }
