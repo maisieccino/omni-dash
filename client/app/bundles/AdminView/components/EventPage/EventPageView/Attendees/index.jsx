@@ -63,7 +63,7 @@ class Attendees extends Component {
             <Icon.Plus />
           </Link>
           <button
-            className="square"
+            className="mint square"
             disabled={this.props.isLoading}
             onClick={() => this.props.fetchAttendees()}
             title="Refresh"
@@ -71,9 +71,10 @@ class Attendees extends Component {
             <Icon.RefreshCw className={this.props.isLoading ? "spinner" : ""} />
           </button>
           <a
-            className="square button"
+            className="yellow square button"
             href="/competition/invites"
             title="View attendee JSON data"
+            target="_blank"
           >
             <Icon.Server />
           </a>

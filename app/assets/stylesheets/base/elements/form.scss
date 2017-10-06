@@ -19,7 +19,8 @@ input[type="email"],
 input[type="password"],
 input[type="date"],
 input[type="time"],
-input[type="number"] {
+input[type="number"],
+textarea {
   font-family: $font-body;
   font-size: 1.1rem;
   transition: all 0.25s ease-in-out;
@@ -41,13 +42,11 @@ input[type="number"] {
   }
 
   &:focus {
-    // border-bottom: $color-accent solid 0.2rem;
     background-color: rgba($color-fg, 0.1);
   }
 }
 
 textarea {
-  @extend input[type="text"];
   width: 100%;
   min-height: 5rem;
   border: $color-fg solid 1px;

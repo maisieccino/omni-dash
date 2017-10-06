@@ -39,7 +39,7 @@ class UsersPage extends Component {
           </p>
           <button
             disabled={this.props.isFetching}
-            className="square"
+            className="mint square"
             title="Refresh"
             onClick={() => this.props.getUsers()}
           >
@@ -47,7 +47,12 @@ class UsersPage extends Component {
               className={this.props.isFetching ? "spinner" : ""}
             />
           </button>
-          <a href="/users" className="square button" title="View JSON Data">
+          <a
+            href="/users"
+            className="yellow square button"
+            title="View JSON Data"
+            target="_blank"
+          >
             <Icon.Server />
           </a>
         </div>

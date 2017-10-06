@@ -1,0 +1,50 @@
+@mixin select-font-weight($bg) {
+  @if lightness($bg) > 50 {
+    font-weight: 400 !important;
+  } @else {
+    font-weight: 600 !important;
+  }
+}
+
+@mixin colorify($bg, $fg: $color-bg) {
+  background-color: $bg !important;
+  color: $fg !important;
+  @include select-font-weight($bg);
+
+  // this nasty syntax means that this color can be
+  // retroactively applied to buttons
+  @at-root &.button, button#{&} {
+    &:hover {
+      background-color: lighten($bg, 10) !important;
+    }
+
+    &:active {
+      background-color: darken($bg, 10) !important;
+    }
+  }
+
+  &:disabled,
+  &.disabled {
+    background-color: desaturate($bg, 50) !important;
+  }
+}
+
+.blue {
+  @include colorify($color-blue);
+}
+
+.lightblue {
+  @include colorify($color-lightblue);
+}
+
+.yellow {
+  @include colorify($color-yellow, $color-fg);
+}
+
+.red {
+  @include colorify($color-red);
+}
+
+.mint {
+  @include colorify($color-mint, $color-fg);
+}

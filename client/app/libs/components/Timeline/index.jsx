@@ -85,7 +85,6 @@ class Timeline extends Component {
     return (
       <div
         className="timeline"
-        onMouseMoveCapture={e => this.onMouseMove(e)}
         ref={el => {
           this.element = el;
         }}
@@ -96,6 +95,7 @@ class Timeline extends Component {
               className="timeline-side"
               onMouseEnter={() => this.setState({ showMouseButton: true })}
               onMouseLeave={() => this.setState({ showMouseButton: false })}
+              onMouseMoveCapture={e => this.onMouseMove(e)}
               key={0}
             >
               <div className="timeline-line" />

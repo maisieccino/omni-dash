@@ -5,7 +5,7 @@ import { TextField } from "libs/components/Form";
 import Modal from "libs/components/Modal";
 
 const modalChoices = (confirm, cancel) => [
-  <button key={0} className="primary" onClick={() => confirm()}>
+  <button key={0} className="red" onClick={() => confirm()}>
     Leave
   </button>,
   <button onClick={() => cancel()} key={1}>
@@ -31,10 +31,13 @@ const ProfileSettingsView = ({
     <Modal
       choices={modalChoices(onExitModalConfirm, onExitModalCancel)}
       onCloseButtonClick={() => onExitModalCancel()}
-      header="Are you sure you want to leave?"
+      header="You have unsaved changes"
       when={showExitModal}
     >
-      <p>Any unsaved changes will be lost.</p>
+      <p>
+        Are you sure you want to leave this page? You{"'"}ll lose anything you
+        haven{"'"}t saved.
+      </p>
     </Modal>
     <div className="title-bar">
       <h1>Profile Settings</h1>
@@ -83,20 +86,17 @@ const ProfileSettingsView = ({
           You can add your social media profiles here if you{"'"}d like other
           attendees to connect with you!
         </p>
-        <label htmlFor="user-contact-twitter">Twitter</label>
-        <div
-          className={`input-group ${userChangedFields.contact_twitter &&
-            "edited"}`}
+        <TextField
+          id="user-contact-twitter"
+          label="Twitter"
+          value={userFields.contact_twitter}
+          className={userChangedFields.contact_twitter ? "edited" : ""}
+          placeholder="jack"
+          onChange={val => updateValues({ contact_twitter: val })}
         >
           <span className="input-addon">@</span>
-          <input
-            id="user-first-name"
-            type="text"
-            placeholder="hatchucl"
-            value={userFields.contact_twitter}
-            onChange={e => updateValues({ contact_twitter: e.target.value })}
-          />
-        </div>
+        </TextField>
+
         <label htmlFor="user-contact-linkedin">LinkedIn</label>
         <div
           className={`input-group ${userChangedFields.contact_linkedin &&

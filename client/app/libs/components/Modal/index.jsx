@@ -9,7 +9,7 @@ const Modal = ({ header, children, choices, onCloseButtonClick, when }) => {
         <div className="modal">
           <div className="modal-header">
             <h1>{header}</h1>
-            <button className="square" onClick={onCloseButtonClick}>
+            <button className="yellow square" onClick={onCloseButtonClick}>
               <Icon.X />
             </button>
           </div>

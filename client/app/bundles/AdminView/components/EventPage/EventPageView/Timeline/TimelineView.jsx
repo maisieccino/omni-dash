@@ -18,12 +18,16 @@ const TimelineView = ({ error, events, fetchEvents, isFetching }) => (
       </Link>
       <button
         disabled={isFetching}
-        className="square"
+        className="mint square"
         onClick={() => fetchEvents()}
       >
         <Icon.RefreshCw className={isFetching ? "spinner" : ""} />
       </button>
-      <a className="square button" href="/competition/events">
+      <a
+        className="yellow square button"
+        href="/competition/events"
+        target="_blank"
+      >
         <Icon.Server />
       </a>
     </div>

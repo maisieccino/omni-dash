@@ -31,7 +31,7 @@ const Header = ({
         {isOwnProfile && [
           <Link
             to="/settings"
-            className="button square"
+            className="yellow button square"
             disabled={isFetching}
             title="Go To Settings"
             key={0}

@@ -7,7 +7,7 @@ const TopNav = ({ href, title, helpText }) => (
   <div className="title-bar">
     <Link
       to={href}
-      className="square button"
+      className="yellow square button"
       aria-label="Back button"
       title={helpText}
     >

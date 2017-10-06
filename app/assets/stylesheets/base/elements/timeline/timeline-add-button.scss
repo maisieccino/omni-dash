@@ -6,8 +6,8 @@
   min-width: 0;
   height: $size;
   position: absolute;
-  background-color: darken($color-card, 40);
-  color: $color-bg;
+  background-color: $color-mint;
+  color: $color-fg;
   border-radius: 50%;
   right: $line-thickness - ($size / 2);
   display: flex;
@@ -37,7 +37,7 @@
   &.active {
     right: $line-thickness - ($size / 2) - $border-width;
     border-width: 0.5rem;
-    background-color: $color-fg;
+    background-color: $color-yellow;
     transition: transform $speed ease-in-out, border-width $speed ease-in-out,
       right $speed ease-in-out, background-color $speed ease-in-out,
       top $speed ease-in-out;
