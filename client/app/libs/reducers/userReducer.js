@@ -46,7 +46,6 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isUpdating: false,
-        userChangedFields: {},
         updateSuccess: true,
       };
     }

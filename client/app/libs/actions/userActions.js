@@ -79,6 +79,7 @@ export const updateUser = (data = {}) => dispatch => {
       dispatch(updateUserSuccess());
       dispatch(fetchUser());
     })
+    .then(() => dispatch(resetSettingValues()))
     .catch(err => dispatch(updateUserFailure(err.message)));
 };
 
