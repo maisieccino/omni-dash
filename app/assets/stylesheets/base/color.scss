@@ -26,6 +26,9 @@
   &:disabled,
   &.disabled {
     background-color: desaturate($bg, 50) !important;
+    &:hover {
+      background-color: desaturate($bg, 50) !important;
+    }
   }
 }
 

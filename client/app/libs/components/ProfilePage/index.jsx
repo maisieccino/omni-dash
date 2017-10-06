@@ -37,6 +37,7 @@ class ProfilePage extends Component {
         user={user}
         isFetching={isFetching}
         isOwnProfile={id === undefined || id === String(currentId)}
+        onRefresh={() => this.props.getUser()}
       />
     );
   }

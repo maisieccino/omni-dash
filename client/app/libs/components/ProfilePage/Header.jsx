@@ -13,6 +13,7 @@ const Header = ({
   bio,
   isFetching,
   isOwnProfile,
+  onRefresh,
 }) => (
   <header className="profile-header">
     <div className="profile-image-container">
@@ -28,11 +29,18 @@ const Header = ({
         <h1>
           {first_name} {last_name} {admin && <Icon.Shield />}
         </h1>
+        <button
+          className="mint button square"
+          disabled={isFetching}
+          title="Refresh User"
+          onClick={() => onRefresh()}
+        >
+          <Icon.RefreshCw className={isFetching && "spinner"} />
+        </button>
         {isOwnProfile && [
           <Link
             to="/settings"
-            className="yellow button square"
-            disabled={isFetching}
+            className={`yellow button square ${isFetching ? "disabled" : ""}`}
             title="Go To Settings"
             key={0}
           >
@@ -61,15 +69,17 @@ Header.propTypes = {
   isFetching: PropTypes.bool,
   admin: PropTypes.bool,
   isOwnProfile: PropTypes.bool,
+  onRefresh: PropTypes.func,
 };
 
 Header.defaultProps = {
-  first_name: "",
+  first_name: "...",
   last_name: "",
   bio: "This user does not currently have a bio",
   isFetching: false,
   admin: false,
   isOwnProfile: false,
+  onRefresh: () => {},
 };
 
 export default Header;
