@@ -1,6 +1,7 @@
 import React from "react";
 import * as Icon from "react-feather";
 import moment from "moment";
+import Flash from "libs/components/Flash";
 import Timeline from "libs/components/Timeline";
 
 const events = [
@@ -55,6 +56,21 @@ const TestPage = () => (
     <Timeline events={events} />
     <h3>Modifiable Timeline</h3>
     <Timeline editable events={events} />
+
+    <h2>Flash</h2>
+    <Flash>This is an uncoloured flash.</Flash>
+    <Flash when type="notice">
+      This is a notice
+    </Flash>
+    <Flash when type="alert">
+      This is for errors.
+    </Flash>
+    <Flash when type="warning">
+      This is for warnings.
+    </Flash>
+    <Flash when type="success">
+      This is for successful actions!
+    </Flash>
   </div>
 );
 

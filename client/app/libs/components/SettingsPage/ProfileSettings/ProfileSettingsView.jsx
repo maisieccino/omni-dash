@@ -1,8 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as Icon from "react-feather";
+import Flash from "libs/components/Flash";
 import { TextField } from "libs/components/Form";
 import Modal from "libs/components/Modal";
+import MarkdownEditor from "libs/components/MarkdownEditor";
 
 const modalChoices = (confirm, cancel) => [
   <button key={0} className="red" onClick={() => confirm()}>
@@ -59,11 +61,10 @@ const ProfileSettingsView = ({
       </div>
     ) : (
       <form>
-        {!isUpdating &&
-          !error &&
-          updateSuccess && (
-            <div className="flash success">Settings saved successfully!</div>
-          )}
+        <Flash type="success" when={!isUpdating && !error && updateSuccess}>
+          Settings saved successfully!
+        </Flash>
+
         <h2>Basic Information</h2>
         <TextField
           id="user-first-name"
@@ -97,59 +98,49 @@ const ProfileSettingsView = ({
           <span className="input-addon">@</span>
         </TextField>
 
-        <label htmlFor="user-contact-linkedin">LinkedIn</label>
-        <div
-          className={`input-group ${userChangedFields.contact_linkedin &&
-            "edited"}`}
+        <TextField
+          id="user-contact-linkedin"
+          label="LinkedIn"
+          value={userFields.contact_linkedin}
+          className={userChangedFields.contact_linkedin ? "edited" : ""}
+          placeholder="janedoe"
+          onChange={val => updateValues({ contact_linkedin: val })}
         >
           <span className="input-addon">linkedin.com/in/</span>
-          <input
-            id="user-contact-linkedin"
-            type="text"
-            placeholder="Jane Doe"
-            value={userFields.contact_linkedin}
-            onChange={e => updateValues({ contact_linkedin: e.target.value })}
-          />
-        </div>
-        <label htmlFor="user-contact-devpost">Devpost</label>
-        <div
-          className={`input-group ${userChangedFields.contact_devpost &&
-            "edited"}`}
+        </TextField>
+
+        <TextField
+          id="user-contact-devpost"
+          label="Devpost"
+          value={userFields.contact_devpost}
+          className={userChangedFields.contact_devpost ? "edited" : ""}
+          placeholder="janedoe"
+          onChange={val => updateValues({ contact_devpost: val })}
         >
           <span className="input-addon">devpost.com/</span>
-          <input
-            id="user-contact-devpost"
-            type="text"
-            placeholder="Jane Doe"
-            value={userFields.contact_devpost}
-            onChange={e => updateValues({ contact_devpost: e.target.value })}
-          />
-        </div>
-        <label htmlFor="user-contact-github">GitHub</label>
-        <div
-          className={`input-group ${userChangedFields.contact_github &&
-            "edited"}`}
+        </TextField>
+
+        <TextField
+          id="user-contact-github"
+          label="GitHub"
+          value={userFields.contact_github}
+          className={userChangedFields.contact_github ? "edited" : ""}
+          placeholder="janedoe"
+          onChange={val => updateValues({ contact_github: val })}
         >
           <span className="input-addon">github.com/</span>
-          <input
-            id="user-contact-github"
-            type="text"
-            placeholder="Jane Doe"
-            value={userFields.contact_github}
-            onChange={e => updateValues({ contact_github: e.target.value })}
-          />
-        </div>
+        </TextField>
         <h2>Bio</h2>
         <p>
           Tell us a bit about what you do, and what excites you about tech!
           (This is visible to anyone visiting your profile.)
         </p>
         <label htmlFor="user-bio">Bio</label>
-        <textarea
+        <MarkdownEditor
           id="user-bio"
+          onChange={val => updateValues({ bio: val })}
+          value={userFields.bio || ""}
           placeholder="Enter your bio here..."
-          value={userFields.bio}
-          onChange={e => updateValues({ bio: e.target.value })}
         />
         <p>
           <button disabled={isUpdating} onClick={() => saveForm()}>
@@ -184,7 +175,15 @@ ProfileSettingsView.defaultProps = {
   isUpdating: false,
   error: "",
   updateSuccess: false,
-  userFields: {},
+  userFields: {
+    first_name: "",
+    last_name: "",
+    contact_twitter: "",
+    contact_linkedin: "",
+    contact_devpost: "",
+    contact_github: "",
+    bio: "",
+  },
   userChangedFields: {},
   updateValues: () => {},
   resetValues: () => {},

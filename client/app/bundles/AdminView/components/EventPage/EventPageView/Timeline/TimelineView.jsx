@@ -2,15 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
+import Flash from "libs/components/Flash";
 import Timeline from "libs/components/Timeline";
 
 const TimelineView = ({ error, events, fetchEvents, isFetching }) => (
   <div className="splitview-pane">
-    {error && (
-      <div className="flash danger">
-        <p>{error}</p>
-      </div>
-    )}
+    <Flash type="alert" when={error}>
+      {error}
+    </Flash>
     <div className="title-bar">
       <h1>Event Timeline</h1>
       <Link className="button square" to="/addEvent">

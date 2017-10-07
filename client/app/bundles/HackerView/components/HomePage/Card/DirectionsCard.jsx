@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as Icon from "react-feather";
 import { generateMapsUrl } from "libs/utils/geo";
 
 const DirectionsCard = ({ className, location, latitude, longitude }) => (
@@ -7,13 +8,12 @@ const DirectionsCard = ({ className, location, latitude, longitude }) => (
     <div className="card-body">
       <h2>Getting To The Event</h2>
       <p>Address: {location}</p>
-      <h3>View On Google Maps</h3>
       <a
-        className="button"
+        className="yellow button"
         href={generateMapsUrl(latitude, longitude)}
         target="_blank"
       >
-        Go to Google Maps
+        View Map <Icon.Map />
       </a>
     </div>
   </div>

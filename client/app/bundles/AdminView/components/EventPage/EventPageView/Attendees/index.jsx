@@ -6,6 +6,7 @@ import { generate } from "shortid";
 import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
 import { fetchCompetitionAttendees } from "libs/actions/competitionActions";
+import Flash from "libs/components/Flash";
 import { Modal } from "libs/components";
 
 import AttendeeTableHeader from "./AttendeeTableHeader";
@@ -79,9 +80,9 @@ class Attendees extends Component {
             <Icon.Server />
           </a>
         </div>
-        {this.props.error && (
-          <div className="flash alert">Error: {this.props.error}</div>
-        )}
+        <Flash type="alert" when={this.props.error}>
+          Error: {this.props.error}
+        </Flash>
         <table>
           <AttendeeTableHeader />
           <tbody>

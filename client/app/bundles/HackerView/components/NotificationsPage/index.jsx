@@ -3,9 +3,7 @@ import React from "react";
 const NotificationsPage = () => (
   <div>
     <h1>Your Notifications</h1>
-    <p>
-      <i>You have no notifications. Hooray!</i>
-    </p>
+    <h3 className="help-text">You have no notifications. Hooray!</h3>
   </div>
 );
 

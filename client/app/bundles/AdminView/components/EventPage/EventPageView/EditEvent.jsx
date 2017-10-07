@@ -7,6 +7,7 @@ import {
   fetchCompetition,
   updateCompetition,
 } from "libs/actions/competitionActions";
+import Flash from "libs/components/Flash";
 import MarkdownEditor from "libs/components/MarkdownEditor";
 
 class EditEvent extends Component {
@@ -94,9 +95,9 @@ class EditEvent extends Component {
       <div className="splitview-pane">
         <h1>Edit Event</h1>
 
-        {success && (
-          <div className="flash success">Successfully updated event!</div>
-        )}
+        <Flash type="success" when={success}>
+          Succesfully updated event!
+        </Flash>
 
         <form>
           <label htmlFor="competition-name">Event Name</label>

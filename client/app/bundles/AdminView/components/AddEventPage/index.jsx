@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
+import Flash from "libs/components/Flash";
 import MarkdownEditor from "libs/components/MarkdownEditor";
 import { TopNav } from "libs/components/Navigation";
 
@@ -77,10 +78,12 @@ class AddEventPage extends Component {
         {this.props.error && (
           <div className="alert flash">Error: {this.props.error}</div>
         )}
-
-        {this.state.success && (
-          <div className="success flash">Successfully invited user!</div>
-        )}
+        <Flash type="alert" when={this.props.error}>
+          Error: {this.props.error}
+        </Flash>
+        <Flash type="success" when={this.state.success}>
+          Successfully added event!
+        </Flash>
 
         <form>
           <label htmlFor="event-name">Name</label>

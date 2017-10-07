@@ -8,6 +8,14 @@
   border-style: solid;
   font-style: italic;
   border-radius: $border-radius;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  svg {
+    margin-right: 0.5rem;
+  }
 }
 
 .notice {
@@ -20,7 +28,7 @@
 
 .alert {
   @extend .flash;
-  $color: #c65f5f;
+  $color: $color-red;
   background-color: $color;
   color: darken($color, 40);
   border-color: darken($color, 40);
@@ -28,7 +36,7 @@
 
 .warning {
   @extend .flash;
-  $color: #d6b772;
+  $color: $color-yellow;
   background-color: $color;
   color: darken($color, 40);
   border-color: darken($color, 40);
@@ -36,7 +44,7 @@
 
 .success {
   @extend .flash;
-  $color: #7cf299;
+  $color: $color-mint;
   background-color: $color;
   color: darken($color, 40);
   border-color: darken($color, 40);

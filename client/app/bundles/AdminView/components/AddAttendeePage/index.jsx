@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
+import Flash from "libs/components/Flash";
+// import { TextField } from "libs/components/Form";
 import { TopNav } from "libs/components/Navigation";
 
 import { inviteAttendee } from "libs/actions/competitionActions";
@@ -61,13 +63,12 @@ class AddAttendeePage extends Component {
       <div>
         <TopNav title="Add New Attendee" href="/event/attendees" />
 
-        {this.props.error && (
-          <div className="alert flash">Error: {this.props.error}</div>
-        )}
-
-        {this.state.success && (
-          <div className="success flash">Successfully invited user!</div>
-        )}
+        <Flash type="alert" when={this.props.error}>
+          Error: {this.props.error}
+        </Flash>
+        <Flash type="success" when={this.state.success}>
+          Successfully invited user!
+        </Flash>
 
         <form>
           <label htmlFor="attendee-email">Email Address</label>

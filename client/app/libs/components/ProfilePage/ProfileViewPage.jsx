@@ -18,12 +18,20 @@ const ProfileViewPage = ({ user, isFetching, isOwnProfile, onRefresh }) => (
 
       {isOwnProfile ? (
         <div className="profile-body">
-          <h2>Your Team At Hatch</h2>
-          <p>
-            You don’t appear to have a team registered for hatch yet! Make sure
-            you create/join your team before hacking ends.
-          </p>
-          <button>Create A Team</button>
+          {user.admin ? (
+            <div>
+              <h2>You{"'"}re an admin.</h2>
+            </div>
+          ) : (
+            [
+              <h2 key={0}>Your Team At Hatch</h2>,
+              <p key={1}>
+                You don’t appear to have a team registered for hatch yet! Make
+                sure you create/join your team before hacking ends.
+              </p>,
+              <button key={2}>Create A Team</button>,
+            ]
+          )}
         </div>
       ) : (
         <div className="profile-body">

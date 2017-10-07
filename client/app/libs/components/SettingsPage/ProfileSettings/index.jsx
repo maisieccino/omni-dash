@@ -113,7 +113,6 @@ const mapStateToProps = (state, ownProps) => {
     error: state.user.error,
     updateSuccess: state.user.updateSuccess,
     userFields: {
-      bio: "",
       ...state.user.user,
       ...state.user.userChangedFields,
     },
