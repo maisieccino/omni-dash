@@ -93,6 +93,7 @@ class Attendees extends Component {
                 </td>
                 <td>{attendee.email}</td>
                 <td>{attendee.has_account ? "Y" : "N"}</td>
+                <td />
               </tr>
             ))}
           </tbody>

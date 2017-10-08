@@ -4,6 +4,7 @@ import moment from "moment";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
 import Flash from "libs/components/Flash";
+import { DateTimePicker, TextField } from "libs/components/Form";
 import MarkdownEditor from "libs/components/MarkdownEditor";
 import { TopNav } from "libs/components/Navigation";
 
@@ -75,9 +76,6 @@ class AddEventPage extends Component {
       <div>
         <TopNav title="Add New Event" href="/event/timeline" />
 
-        {this.props.error && (
-          <div className="alert flash">Error: {this.props.error}</div>
-        )}
         <Flash type="alert" when={this.props.error}>
           Error: {this.props.error}
         </Flash>
@@ -86,16 +84,13 @@ class AddEventPage extends Component {
         </Flash>
 
         <form>
-          <label htmlFor="event-name">Name</label>
-          <div className="input-group">
-            <input
-              id="event-name"
-              type="text"
-              placeholder="React Workshop"
-              onChange={e => this.setState({ name: e.target.value })}
-              value={this.state.name}
-            />
-          </div>
+          <TextField
+            id="event-name"
+            label="Name"
+            placeholder="React Workshop"
+            onChange={val => this.setState({ name: val })}
+            value={this.state.name}
+          />
 
           <MarkdownEditor
             id="event-description"
@@ -125,6 +120,7 @@ class AddEventPage extends Component {
               value={this.state.end_time}
             />
           </div>
+          <DateTimePicker />
 
           <p>
             <button onClick={e => this.onClickSubmit(e)}>

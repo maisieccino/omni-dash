@@ -1,7 +1,28 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const TextField = ({
+const inputPropTypes = {
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string,
+  placeholder: PropTypes.string,
+  onChange: PropTypes.func,
+  value: PropTypes.string,
+  className: PropTypes.string,
+  children: PropTypes.node,
+  type: PropTypes.string,
+};
+
+const inputDefaultProps = {
+  label: "",
+  placeholder: "",
+  onChange: () => {},
+  value: "",
+  className: "",
+  children: null,
+  type: "text",
+};
+
+const InputField = ({
   id,
   label,
   placeholder,
@@ -9,6 +30,7 @@ const TextField = ({
   value,
   className,
   children,
+  type,
   ...rest
 }) => (
   <div>
@@ -16,7 +38,7 @@ const TextField = ({
     <div className={`input-group ${className}`}>
       {children}
       <input
-        type="text"
+        type={type}
         id={id}
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
@@ -27,27 +49,12 @@ const TextField = ({
   </div>
 );
 
-TextField.propTypes = {
-  id: PropTypes.string.isRequired,
-  label: PropTypes.string,
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func,
-  value: PropTypes.string,
-  className: PropTypes.string,
-  children: PropTypes.node,
-};
+InputField.propTypes = inputPropTypes;
+InputField.defaultProps = inputDefaultProps;
 
-TextField.defaultProps = {
-  label: "",
-  placeholder: "",
-  onChange: () => {},
-  value: "",
-  className: "",
-  children: null,
-};
+const TextField = props => <InputField type="text" {...props} />;
+const EmailField = props => <InputField type="email" {...props} />;
+const PasswordField = props => <InputField type="password" {...props} />;
 
-export { TextField };
-
-export default {
-  TextField,
-};
+export { EmailField, InputField, PasswordField, TextField };
+export { default as DateTimePicker } from "./DateTimePicker";

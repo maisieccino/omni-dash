@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
 import Flash from "libs/components/Flash";
-// import { TextField } from "libs/components/Form";
+import { EmailField, TextField } from "libs/components/Form";
 import { TopNav } from "libs/components/Navigation";
 
 import { inviteAttendee } from "libs/actions/competitionActions";
@@ -63,7 +63,7 @@ class AddAttendeePage extends Component {
       <div>
         <TopNav title="Add New Attendee" href="/event/attendees" />
 
-        <Flash type="alert" when={this.props.error}>
+        <Flash type="alert" when={this.props.error.length > 0}>
           Error: {this.props.error}
         </Flash>
         <Flash type="success" when={this.state.success}>
@@ -71,38 +71,29 @@ class AddAttendeePage extends Component {
         </Flash>
 
         <form>
-          <label htmlFor="attendee-email">Email Address</label>
-          <div className="input-group">
-            <input
-              id="attendee-email"
-              type="email"
-              placeholder="test@example.com"
-              onChange={e => this.setState({ email: e.target.value })}
-              value={this.state.email}
-            />
-          </div>
+          <EmailField
+            id="attendee-email"
+            label="Email Address"
+            placeholder="test@example.com"
+            onChange={val => this.setState({ email: val })}
+            value={this.state.email}
+          />
 
-          <label htmlFor="attendee-first-name">First Name</label>
-          <div className="input-group">
-            <input
-              id="attendee-first-name"
-              type="text"
-              placeholder="John"
-              onChange={e => this.setState({ first_name: e.target.value })}
-              value={this.state.first_name}
-            />
-          </div>
+          <TextField
+            id="attendee-first-name"
+            label="First Name"
+            placeholder="John"
+            onChange={val => this.setState({ first_name: val })}
+            value={this.state.first_name}
+          />
 
-          <label htmlFor="attendee-last-name">Last Name</label>
-          <div className="input-group">
-            <input
-              id="attendee-last-name"
-              type="text"
-              placeholder="Smith"
-              onChange={e => this.setState({ last_name: e.target.value })}
-              value={this.state.last_name}
-            />
-          </div>
+          <TextField
+            id="attendee-last-name"
+            label="Last Name"
+            placeholder="Smith"
+            onChange={val => this.setState({ last_name: val })}
+            value={this.state.last_name}
+          />
 
           <p>
             We{"'"}ll send this person an email inviting them to create an
@@ -110,7 +101,7 @@ class AddAttendeePage extends Component {
           </p>
           <p>
             <button onClick={e => this.onClickSubmit(e)}>
-              Invite{" "}
+              Invite{"  "}
               {this.props.isInviting && <Icon.RefreshCw className="spinner" />}
             </button>
           </p>
