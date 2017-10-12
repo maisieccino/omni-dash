@@ -72,11 +72,14 @@ class AddEventPage extends Component {
   }
 
   render() {
+    const duration = moment.duration(
+      moment(this.state.end_time).diff(moment(this.state.start_time)),
+    );
     return (
       <div>
         <TopNav title="Add New Event" href="/event/timeline" />
 
-        <Flash type="alert" when={this.props.error}>
+        <Flash type="alert" when={!!this.props.error}>
           Error: {this.props.error}
         </Flash>
         <Flash type="success" when={this.state.success}>
@@ -98,29 +101,22 @@ class AddEventPage extends Component {
             value={this.state.description}
           />
 
-          {/* TODO: Create DateTime input component */}
-          <label htmlFor="event-startTime">Start Time</label>
-          <div className="input-group">
-            <input
-              id="event-startTime"
-              type="text"
-              placeholder="2017-01-01"
-              onChange={e => this.setState({ start_time: e.target.value })}
-              value={this.state.start_time}
-            />
-          </div>
+          <DateTimePicker
+            id="event-start"
+            placeholder="Event Start"
+            onChange={time => this.setState({ start_time: time })}
+            value={this.state.start_time}
+          />
 
-          <label htmlFor="event-endTime">End Time</label>
-          <div className="input-group">
-            <input
-              id="event-endTime"
-              type="text"
-              placeholder="2017-01-01"
-              onChange={e => this.setState({ end_time: e.target.value })}
-              value={this.state.end_time}
-            />
-          </div>
-          <DateTimePicker />
+          <DateTimePicker
+            id="event-end"
+            placeholder="Event End"
+            onChange={time => this.setState({ end_time: time })}
+            value={this.state.end_time}
+          />
+          <p>
+            Duration: {duration.hours()} hours, {duration.minutes()} minutes
+          </p>
 
           <p>
             <button onClick={e => this.onClickSubmit(e)}>
