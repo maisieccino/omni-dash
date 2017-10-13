@@ -15,13 +15,16 @@ const CountdownCard = ({ className, name, startTime }) => (
 CountdownCard.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
-  startTime: PropTypes.string,
+  startTime: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Date),
+  ]),
 };
 
 CountdownCard.defaultProps = {
   className: "",
-  name: "",
-  startTime: "",
+  name: "Event",
+  startTime: Date.now(),
 };
 
 export default CountdownCard;
