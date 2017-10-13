@@ -1,36 +1,42 @@
-import React from "react";
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { fetchEvents } from "libs/actions/eventsActions";
 
-const EventPage = () => (
-  <div>
-    <h1>Venue Map</h1>
-    <button className="yellow">View Full Map</button>
+import EventPageView from "./EventViewPage";
 
-    <h1>Live Event Page</h1>
-    <p>
-      A live event page, featuring DJ information, a timeline of events, and
-      most importantly a big countdown clock.
-    </p>
-    <button className="yellow">View Live Page</button>
+class EventPage extends Component {
+  static propTypes = {
+    events: PropTypes.arrayOf(PropTypes.shape()),
+    fetchEvents: PropTypes.func,
+  };
 
-    <h1>Request A Mentor</h1>
-    <p>
-      At Hatch, we have a team of mentors who will be happy to help you with any
-      technical problem you have!
-    </p>
-    <button className="mint">Get Support</button>
+  static defaultProps = {
+    events: [],
+    fetchEvents: () => {},
+  };
 
-    <h1>
-      Your Guide To <span className="accent">Hatch</span>.
-    </h1>
-    <p>
-      A complete guide to everything going on at hatch, including important
-      information about the venue as well as emergency contact information and
-      schedule.
-    </p>
-    <button className="yellow">View The Guide</button>
+  static mapStateToProps = state => ({
+    events: state.events.events,
+    isFetching: state.events.isFetching,
+  });
 
-    <h1>Timeline</h1>
-  </div>
+  static mapDispatchToProps = dispatch => ({
+    fetchEvents: () => dispatch(fetchEvents()),
+  });
+
+  componentDidMount() {
+    this.props.fetchEvents();
+  }
+
+  render() {
+    const events = this.props.events.filter(
+      x => Date.parse(x.end_time) >= Date.now(),
+    );
+    return <EventPageView events={events} />;
+  }
+}
+
+export default connect(EventPage.mapStateToProps, EventPage.mapDispatchToProps)(
+  EventPage,
 );
-
-export default EventPage;

@@ -12,6 +12,10 @@ const CurrentEventCard = ({
   competitionEnd,
 }) => {
   const duration = moment.duration(moment(competitionEnd).diff(moment()));
+  const fullDuration = moment.duration(
+    moment(competitionEnd).diff(moment(competitionStart)),
+  );
+  const progress = 100 - duration * 100 / fullDuration;
   return (
     <div className={className}>
       <div className="card-body">
@@ -44,7 +48,7 @@ const CurrentEventCard = ({
       </div>
       <div className="card-footer">
         <p>Hackathon Progress</p>
-        <progress value="9" max="24" />
+        <progress value={progress} max={100} />
         {<p>About {Math.floor(duration.asHours())} hours remaining</p>}
       </div>
     </div>

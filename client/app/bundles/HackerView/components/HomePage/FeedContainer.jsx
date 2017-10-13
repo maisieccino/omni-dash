@@ -36,12 +36,6 @@ class FeedContainer extends Component {
         startTime: competition.start_time || "",
         name: competition.name,
       });
-      feedItems.push({
-        type: "directions",
-        location: competition.location,
-        latitude: competition.latitude,
-        longitude: competition.longitude,
-      });
     } else {
       feedItems.push({
         type: "currentEvents",
@@ -52,14 +46,20 @@ class FeedContainer extends Component {
       });
     }
 
+    // feedItems.push({
+    //   type: "currentLesson",
+    //   currentLesson: {
+    //     courseName: "Intro To React",
+    //     lessonName: "Making Components",
+    //     lessonsCompleted: 5,
+    //     totalLessons: 7,
+    //   },
+    // });
     feedItems.push({
-      type: "currentLesson",
-      currentLesson: {
-        courseName: "Intro To React",
-        lessonName: "Making Components",
-        lessonsCompleted: 5,
-        totalLessons: 7,
-      },
+      type: "directions",
+      location: competition.location,
+      latitude: competition.latitude,
+      longitude: competition.longitude,
     });
 
     return feedItems;
@@ -85,7 +85,6 @@ class FeedContainer extends Component {
       <Card key={generate()} {...item} />
     ));
 
-    console.log(cards);
     if (this.props.isFetching) {
       return (
         <div>
