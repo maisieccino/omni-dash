@@ -53,7 +53,7 @@ class UserActions extends Component {
   }
 
   modalChoices = () => [
-    <button key={0} className="primary" onClick={() => this.onDeleteConfirm()}>
+    <button key={0} className="red" onClick={() => this.onDeleteConfirm()}>
       Delete
     </button>,
     <button onClick={() => this.setState({ isModalVisible: false })} key={1}>
@@ -72,7 +72,7 @@ class UserActions extends Component {
     const { userId, firstName, lastName, isDeleting } = this.props;
     return (
       <td>
-        <Link className="button" to={`/user/${userId}`}>
+        <Link className="yellow button" to={`/user/${userId}`}>
           View Profile
         </Link>
         <button title="Edit User" className="square">

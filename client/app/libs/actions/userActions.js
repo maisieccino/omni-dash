@@ -19,17 +19,27 @@ export const fetchUserFailure = error => ({
   error,
 });
 
-export const fetchUser = id => dispatch => {
+export const fetchUser = id => async dispatch => {
   dispatch(setIsFetching());
+  await new Promise(res => setTimeout(res, 1000));
   const uri = id ? `/users/${id}/` : constants.USER_ME_PATH;
-  return jsonGetRequest(uri)
-    .then(json => dispatch(fetchUserSuccess(json)))
-    .catch(error => dispatch(fetchUserFailure(error.message)));
+  try {
+    const json = await jsonGetRequest(uri);
+    return dispatch(fetchUserSuccess(json));
+  } catch (error) {
+    return dispatch(
+      fetchUserFailure(typeof error === "string" ? error : error.message),
+    );
+  }
 };
 
 export const changeSettingValues = values => ({
   type: constants.CHANGE_SETTING_VALUES,
   values,
+});
+
+export const resetSettingValues = () => ({
+  type: constants.RESET_SETTING_VALUES,
 });
 
 export const setIsUpdating = () => ({
@@ -69,6 +79,7 @@ export const updateUser = (data = {}) => dispatch => {
       dispatch(updateUserSuccess());
       dispatch(fetchUser());
     })
+    .then(() => dispatch(resetSettingValues()))
     .catch(err => dispatch(updateUserFailure(err.message)));
 };
 

@@ -46,7 +46,6 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isUpdating: false,
-        userChangedFields: {},
         updateSuccess: true,
       };
     }
@@ -97,6 +96,13 @@ export default (state = initialState, action = null) => {
           ...state.userChangedFields,
           ...updatedValues,
         },
+      };
+    }
+
+    case constants.RESET_SETTING_VALUES: {
+      return {
+        ...state,
+        userChangedFields: {},
       };
     }
 

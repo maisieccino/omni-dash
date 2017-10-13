@@ -20,14 +20,7 @@ class Competition < ApplicationRecord
   def attendees
     attendees = invite_codes
     attendees.map do |a|
-      print a.email
-      if a.user.nil?
-        return {
-          first_name: a.first_name, last_name: a.last_name, email: a.email, has_account: false
-        }
-      end
-      u = a.user
-      { first_name: u.first_name, last_name: u.last_name, email: u.email, has_account: true }
+      { first_name: a.first_name, last_name: a.last_name, email: a.email, has_account: !a.user.nil? }
     end
   end
 

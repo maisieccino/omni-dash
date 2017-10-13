@@ -1,22 +1,15 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import * as pageNavActions from "libs/actions/pageNavActions";
 
 class HomePage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func.isRequired,
     user: PropTypes.shape(),
   };
 
   static defaultProps = {
     user: {},
   };
-
-  componentDidMount() {
-    this.props.updateBackButton();
-  }
 
   render() {
     const { user } = this.props;
@@ -31,10 +24,4 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ownProps;
-
-const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default HomePage;

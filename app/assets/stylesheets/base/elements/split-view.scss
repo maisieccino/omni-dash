@@ -24,6 +24,7 @@
       &.active {
         background-color: $color-accent;
         color: $color-bg;
+        text-decoration: underline;
       }
     }
   }

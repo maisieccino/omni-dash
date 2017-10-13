@@ -16,7 +16,12 @@ const CurrentEvent = ({ competition }) => (
   <div className="splitview-pane">
     <div className="title-bar">
       <h1>Current Event</h1>
-      <a href="/competition" className="square button" title="View raw data">
+      <a
+        href="/competition"
+        className="yellow square button"
+        title="View raw data"
+        target="_blank"
+      >
         <Icon.Server />
       </a>
     </div>
@@ -34,7 +39,7 @@ const CurrentEvent = ({ competition }) => (
     <p>
       <a
         href={generateMapsUrl(competition.latitude, competition.longitude)}
-        className="button"
+        className="yellow button"
         target="_blank"
       >
         View Map <Icon.Map />

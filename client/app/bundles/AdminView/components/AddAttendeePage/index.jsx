@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
+import Flash from "libs/components/Flash";
+import { EmailField, TextField } from "libs/components/Form";
+import { TopNav } from "libs/components/Navigation";
 
-import { pageHasNavigated } from "libs/actions/pageNavActions";
 import { inviteAttendee } from "libs/actions/competitionActions";
 
 class AddAttendeePage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func,
     inviteAttendee: PropTypes.func,
     isInviting: PropTypes.bool,
     error: PropTypes.string,
@@ -29,10 +30,6 @@ class AddAttendeePage extends Component {
       last_name: "",
       success: false,
     };
-  }
-
-  componentDidMount() {
-    this.props.updateBackButton();
   }
 
   componentWillReceiveProps(newProps) {
@@ -64,49 +61,39 @@ class AddAttendeePage extends Component {
   render() {
     return (
       <div>
-        <h1>Add New Attendee</h1>
+        <TopNav title="Add New Attendee" href="/event/attendees" />
 
-        {this.props.error && (
-          <div className="alert flash">Error: {this.props.error}</div>
-        )}
-
-        {this.state.success && (
-          <div className="success flash">Successfully invited user!</div>
-        )}
+        <Flash type="alert" when={this.props.error.length > 0}>
+          Error: {this.props.error}
+        </Flash>
+        <Flash type="success" when={this.state.success}>
+          Successfully invited user!
+        </Flash>
 
         <form>
-          <label htmlFor="attendee-email">Email Address</label>
-          <div className="input-group">
-            <input
-              id="attendee-email"
-              type="email"
-              placeholder="test@example.com"
-              onChange={e => this.setState({ email: e.target.value })}
-              value={this.state.email}
-            />
-          </div>
+          <EmailField
+            id="attendee-email"
+            label="Email Address"
+            placeholder="test@example.com"
+            onChange={val => this.setState({ email: val })}
+            value={this.state.email}
+          />
 
-          <label htmlFor="attendee-first-name">First Name</label>
-          <div className="input-group">
-            <input
-              id="attendee-first-name"
-              type="text"
-              placeholder="John"
-              onChange={e => this.setState({ first_name: e.target.value })}
-              value={this.state.first_name}
-            />
-          </div>
+          <TextField
+            id="attendee-first-name"
+            label="First Name"
+            placeholder="John"
+            onChange={val => this.setState({ first_name: val })}
+            value={this.state.first_name}
+          />
 
-          <label htmlFor="attendee-last-name">Last Name</label>
-          <div className="input-group">
-            <input
-              id="attendee-last-name"
-              type="text"
-              placeholder="Smith"
-              onChange={e => this.setState({ last_name: e.target.value })}
-              value={this.state.last_name}
-            />
-          </div>
+          <TextField
+            id="attendee-last-name"
+            label="Last Name"
+            placeholder="Smith"
+            onChange={val => this.setState({ last_name: val })}
+            value={this.state.last_name}
+          />
 
           <p>
             We{"'"}ll send this person an email inviting them to create an
@@ -114,7 +101,7 @@ class AddAttendeePage extends Component {
           </p>
           <p>
             <button onClick={e => this.onClickSubmit(e)}>
-              Invite{" "}
+              Invite{"  "}
               {this.props.isInviting && <Icon.RefreshCw className="spinner" />}
             </button>
           </p>
@@ -142,7 +129,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageHasNavigated("/event/attendees", true)),
   inviteAttendee: params => dispatch(inviteAttendee(params)),
 });
 

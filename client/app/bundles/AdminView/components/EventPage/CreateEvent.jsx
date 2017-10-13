@@ -4,6 +4,7 @@ import moment from "moment";
 import { Route, Redirect } from "react-router-dom";
 import * as Icon from "react-feather";
 
+import { DateTimePicker } from "libs/components/Form";
 import MarkdownEditor from "libs/components/MarkdownEditor";
 
 class CreateEvent extends Component {
@@ -77,41 +78,19 @@ class CreateEvent extends Component {
           />
         </div>
 
-        <label htmlFor="competition-start_date">Start Time</label>
-        <div className="input-group">
-          <input
-            id="competition-start_date"
-            type="date"
-            value={this.state.start_time.format("YYYY-MM-DD")}
-            onChange={e => this.onStartDateChange(e)}
-            placeholder="Start Date..."
-          />
-          <input
-            id="competition-start_time"
-            type="time"
-            value={this.state.start_time.format("HH:mm")}
-            onChange={e => this.onStartTimeChange(e)}
-            placeholder="Start Time..."
-          />
-        </div>
+        <DateTimePicker
+          id="competition-start"
+          placeholder="Competition Start"
+          onChange={time => this.setState({ start_time: time })}
+          value={this.state.start_time}
+        />
 
-        <label htmlFor="competition-end_date">End Time</label>
-        <div className="input-group">
-          <input
-            id="competition-end_date"
-            type="date"
-            value={this.state.end_time.format("YYYY-MM-DD")}
-            onChange={e => this.onEndDateChange(e)}
-            placeholder="End Date..."
-          />
-          <input
-            id="competition-end_time"
-            type="time"
-            value={this.state.end_time.format("HH:mm")}
-            onChange={e => this.onEndTimeChange(e)}
-            placeholder="End Time..."
-          />
-        </div>
+        <DateTimePicker
+          id="competition-end"
+          placeholder="Competition End"
+          onChange={time => this.setState({ end_time: time })}
+          value={this.state.end_time}
+        />
 
         <label htmlFor="competition-description">Description</label>
         <MarkdownEditor

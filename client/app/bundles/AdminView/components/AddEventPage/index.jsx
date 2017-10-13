@@ -3,21 +3,21 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
+import Flash from "libs/components/Flash";
+import { DateTimePicker, TextField } from "libs/components/Form";
 import MarkdownEditor from "libs/components/MarkdownEditor";
+import { TopNav } from "libs/components/Navigation";
 
-import { pageHasNavigated } from "libs/actions/pageNavActions";
 import { createEvent } from "libs/actions/eventsActions";
 
 class AddEventPage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func,
     createEvent: PropTypes.func,
     isCreating: PropTypes.bool,
     error: PropTypes.string,
   };
 
   static defaultProps = {
-    updateBackButton: () => {},
     createEvent: () => {},
     isCreating: false,
     error: "",
@@ -34,10 +34,6 @@ class AddEventPage extends Component {
         .format(),
       success: false,
     };
-  }
-
-  componentDidMount() {
-    this.props.updateBackButton();
   }
 
   componentWillReceiveProps(newProps) {
@@ -76,29 +72,28 @@ class AddEventPage extends Component {
   }
 
   render() {
+    const duration = moment.duration(
+      moment(this.state.end_time).diff(moment(this.state.start_time)),
+    );
     return (
       <div>
-        <h1>Add New Event</h1>
+        <TopNav title="Add New Event" href="/event/timeline" />
 
-        {this.props.error && (
-          <div className="alert flash">Error: {this.props.error}</div>
-        )}
-
-        {this.state.success && (
-          <div className="success flash">Successfully invited user!</div>
-        )}
+        <Flash type="alert" when={!!this.props.error}>
+          Error: {this.props.error}
+        </Flash>
+        <Flash type="success" when={this.state.success}>
+          Successfully added event!
+        </Flash>
 
         <form>
-          <label htmlFor="event-name">Name</label>
-          <div className="input-group">
-            <input
-              id="event-name"
-              type="text"
-              placeholder="React Workshop"
-              onChange={e => this.setState({ name: e.target.value })}
-              value={this.state.name}
-            />
-          </div>
+          <TextField
+            id="event-name"
+            label="Name"
+            placeholder="React Workshop"
+            onChange={val => this.setState({ name: val })}
+            value={this.state.name}
+          />
 
           <MarkdownEditor
             id="event-description"
@@ -106,28 +101,22 @@ class AddEventPage extends Component {
             value={this.state.description}
           />
 
-          {/* TODO: Create DateTime input component */}
-          <label htmlFor="event-startTime">Start Time</label>
-          <div className="input-group">
-            <input
-              id="event-startTime"
-              type="text"
-              placeholder="2017-01-01"
-              onChange={e => this.setState({ start_time: e.target.value })}
-              value={this.state.start_time}
-            />
-          </div>
+          <DateTimePicker
+            id="event-start"
+            placeholder="Event Start"
+            onChange={time => this.setState({ start_time: time })}
+            value={this.state.start_time}
+          />
 
-          <label htmlFor="event-endTime">End Time</label>
-          <div className="input-group">
-            <input
-              id="event-endTime"
-              type="text"
-              placeholder="2017-01-01"
-              onChange={e => this.setState({ end_time: e.target.value })}
-              value={this.state.end_time}
-            />
-          </div>
+          <DateTimePicker
+            id="event-end"
+            placeholder="Event End"
+            onChange={time => this.setState({ end_time: time })}
+            value={this.state.end_time}
+          />
+          <p>
+            Duration: {duration.hours()} hours, {duration.minutes()} minutes
+          </p>
 
           <p>
             <button onClick={e => this.onClickSubmit(e)}>
@@ -149,7 +138,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageHasNavigated("/event/timeline", true)),
   createEvent: params => dispatch(createEvent(params)),
 });
 

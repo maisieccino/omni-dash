@@ -3,14 +3,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import moment from "moment";
 import * as Icon from "react-feather";
-import * as pageNavActions from "libs/actions/pageNavActions";
 import { fetchUsers } from "../../actions/usersActions";
 
 import UsersTable from "./UsersTable";
 
 class UsersPage extends Component {
   static propTypes = {
-    updateBackButton: PropTypes.func.isRequired,
     getUsers: PropTypes.func.isRequired,
     users: PropTypes.arrayOf(PropTypes.shape()),
     isFetching: PropTypes.bool,
@@ -24,7 +22,6 @@ class UsersPage extends Component {
   };
 
   componentDidMount() {
-    this.props.updateBackButton();
     this.props.getUsers();
   }
 
@@ -42,7 +39,7 @@ class UsersPage extends Component {
           </p>
           <button
             disabled={this.props.isFetching}
-            className="square"
+            className="mint square"
             title="Refresh"
             onClick={() => this.props.getUsers()}
           >
@@ -50,7 +47,12 @@ class UsersPage extends Component {
               className={this.props.isFetching ? "spinner" : ""}
             />
           </button>
-          <a href="/users" className="square button" title="View JSON Data">
+          <a
+            href="/users"
+            className="yellow square button"
+            title="View JSON Data"
+            target="_blank"
+          >
             <Icon.Server />
           </a>
         </div>
@@ -78,7 +80,6 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
   getUsers: () => dispatch(fetchUsers()),
 });
 

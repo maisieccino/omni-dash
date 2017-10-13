@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as userActions from "libs/actions/userActions";
-import * as pageNavActions from "libs/actions/pageNavActions";
 
 import ProfileViewPage from "./ProfileViewPage";
 
@@ -13,7 +12,6 @@ class ProfilePage extends Component {
     currentUser: PropTypes.shape().isRequired,
     isFetching: PropTypes.bool,
     getUser: PropTypes.func.isRequired,
-    updateBackButton: PropTypes.func.isRequired,
     match: PropTypes.shape(),
   };
 
@@ -25,10 +23,6 @@ class ProfilePage extends Component {
 
   componentWillMount() {
     this.props.getUser();
-  }
-
-  componentDidMount() {
-    this.props.updateBackButton();
   }
 
   render() {
@@ -43,6 +37,7 @@ class ProfilePage extends Component {
         user={user}
         isFetching={isFetching}
         isOwnProfile={id === undefined || id === String(currentId)}
+        onRefresh={() => this.props.getUser()}
       />
     );
   }
@@ -56,7 +51,6 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, { match }) => ({
   getUser: () => dispatch(userActions.fetchUser(match.params.id)),
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

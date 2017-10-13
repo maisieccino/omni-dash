@@ -6,6 +6,7 @@ import { generate } from "shortid";
 import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
 import { fetchCompetitionAttendees } from "libs/actions/competitionActions";
+import Flash from "libs/components/Flash";
 import { Modal } from "libs/components";
 
 import AttendeeTableHeader from "./AttendeeTableHeader";
@@ -63,7 +64,7 @@ class Attendees extends Component {
             <Icon.Plus />
           </Link>
           <button
-            className="square"
+            className="mint square"
             disabled={this.props.isLoading}
             onClick={() => this.props.fetchAttendees()}
             title="Refresh"
@@ -71,16 +72,17 @@ class Attendees extends Component {
             <Icon.RefreshCw className={this.props.isLoading ? "spinner" : ""} />
           </button>
           <a
-            className="square button"
+            className="yellow square button"
             href="/competition/invites"
             title="View attendee JSON data"
+            target="_blank"
           >
             <Icon.Server />
           </a>
         </div>
-        {this.props.error && (
-          <div className="flash alert">Error: {this.props.error}</div>
-        )}
+        <Flash type="alert" when={this.props.error}>
+          Error: {this.props.error}
+        </Flash>
         <table>
           <AttendeeTableHeader />
           <tbody>
@@ -91,6 +93,7 @@ class Attendees extends Component {
                 </td>
                 <td>{attendee.email}</td>
                 <td>{attendee.has_account ? "Y" : "N"}</td>
+                <td />
               </tr>
             ))}
           </tbody>

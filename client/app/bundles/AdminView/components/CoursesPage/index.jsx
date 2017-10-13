@@ -1,32 +1,12 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import * as pageNavActions from "libs/actions/pageNavActions";
+import React from "react";
+// import PropTypes from "prop-types";
 
-class EventsPage extends Component {
-  static propTypes = {
-    updateBackButton: PropTypes.func.isRequired,
-  };
+const CoursesPage = () => (
+  <div>
+    <h1>Courses</h1>
+    <p>Manage courses and their lessons.</p>
+    <h3>The courses feature isn{"'"}t yet ready. Come back soon!</h3>
+  </div>
+);
 
-  componentDidMount() {
-    this.props.updateBackButton();
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>Courses</h1>
-        <p>Manage courses and their lessons.</p>
-        <h3>The courses feature isn{"'"}t yet ready. Come back soon!</h3>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = (state, ownProps) => ownProps;
-
-const mapDispatchToProps = dispatch => ({
-  updateBackButton: () => dispatch(pageNavActions.pageHasNavigated("/", false)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(EventsPage);
+export default CoursesPage;

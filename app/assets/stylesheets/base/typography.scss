@@ -60,7 +60,7 @@ html {
   animation-name: spin;
   animation-duration: 700ms;
   animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  animation-timing-function: ease-in-out;
   margin: 0;
   padding: 0;
 }
@@ -70,13 +70,42 @@ html {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 0.5rem;
+
   h1,
   h2,
   h3 {
+    margin-top: 0;
+    margin-bottom: 0;
     flex: 1;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
   }
 
   p {
     margin: 0 0.5rem !important;
   }
+
+  button,
+  .button {
+    margin-left: 0.25rem !important;
+    margin-right: 0.25rem !important;
+  }
+
+  *:first-child {
+    margin-left: 0 !important;
+  }
+
+  *:last-child {
+    margin-right: 0 !important;
+  }
+}
+
+.help-text {
+  align-self: center;
+  text-align: center;
+  font-style: italic;
+  color: lighten($color-fg, 20);
+  text-transform: unset !important;
+  flex: 1;
 }

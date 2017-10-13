@@ -81,36 +81,48 @@ class Timeline extends Component {
   render() {
     const { editable } = this.props;
     const { mouseButtonOpened, showMouseButton, mouseY: y } = this.state;
+    const events = this.createEventsList();
     return (
       <div
         className="timeline"
-        onMouseMoveCapture={e => this.onMouseMove(e)}
         ref={el => {
           this.element = el;
         }}
       >
-        <div
-          className="timeline-side"
-          onMouseEnter={() => this.setState({ showMouseButton: true })}
-          onMouseLeave={() => this.setState({ showMouseButton: false })}
-        >
-          <div className="timeline-line" />
-          {editable && (
-            <button
-              className={`timeline-add-button ${mouseButtonOpened ||
-              showMouseButton
-                ? "visible"
-                : ""}
+        {events.length > 0 ? (
+          [
+            <div
+              className="timeline-side"
+              onMouseEnter={() => this.setState({ showMouseButton: true })}
+              onMouseLeave={() => this.setState({ showMouseButton: false })}
+              onMouseMoveCapture={e => this.onMouseMove(e)}
+              key={0}
+            >
+              <div className="timeline-line" />
+              {editable && (
+                <button
+                  className={`timeline-add-button ${mouseButtonOpened ||
+                  showMouseButton
+                    ? "visible"
+                    : ""}
                 ${mouseButtonOpened ? "active" : ""}
                 `}
-              onClick={() => this.onAddButtonClick()}
-              style={{ top: y }}
-            >
-              <Icon.Plus />
-            </button>
-          )}
-        </div>
-        <div className="timeline-content">{this.createEventsList()}</div>
+                  onClick={() => this.onAddButtonClick()}
+                  style={{ top: y }}
+                >
+                  <Icon.Plus />
+                </button>
+              )}
+            </div>,
+            <div className="timeline-content" key={1}>
+              {events}
+            </div>,
+          ]
+        ) : (
+          <h3 className="help-text">
+            There{"'"}s no events yet. {editable && "Why not add one?"}
+          </h3>
+        )}
       </div>
     );
   }
