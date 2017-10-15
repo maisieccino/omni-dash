@@ -1,0 +1,23 @@
+.flex {
+  display: flex;
+}
+
+.flex.horizontal {
+  flex-direction: row;
+  align-items: center;
+
+  & > * {
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0.25rem;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+
+  label {
+    font-weight: initial;
+    font-size: 1.1rem;
+  }
+}

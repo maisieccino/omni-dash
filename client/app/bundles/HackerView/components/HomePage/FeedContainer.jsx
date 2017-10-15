@@ -27,22 +27,41 @@ class FeedContainer extends Component {
   static generateFeedItems = competition => {
     const eventHasStarted =
       Date.now() - Date.parse(competition.start_time) >= 0;
-    // const eventHasEnded = Date.now() - Date.parse(competition.end_time) >= 0;
+    const eventHasEnded = Date.now() - Date.parse(competition.end_time) >= 0;
     const feedItems = [];
 
-    if (!eventHasStarted) {
+    if (!eventHasEnded) {
+      if (!eventHasStarted) {
+        feedItems.push({
+          type: "countdown",
+          startTime: competition.start_time || "",
+          name: competition.name,
+        });
+      } else {
+        feedItems.push({
+          type: "currentEvents",
+          competitionStart: competition.start_time || "",
+          competitionEnd: competition.end_time || "",
+          currentEvent: competition.current_event || {},
+          nextEvent: competition.next_event || {},
+        });
+      }
       feedItems.push({
-        type: "countdown",
-        startTime: competition.start_time || "",
-        name: competition.name,
+        type: "directions",
+        location: competition.location,
+        latitude: competition.latitude,
+        longitude: competition.longitude,
       });
     } else {
       feedItems.push({
-        type: "currentEvents",
-        competitionStart: competition.start_time || "",
-        competitionEnd: competition.end_time || "",
-        currentEvent: competition.current_event || {},
-        nextEvent: competition.next_event || {},
+        type: "informational",
+        title: `Thanks for attending ${competition.name}!`,
+        children: (
+          <p>
+            Photos and media will be on our website shortly. Keep an eye on our
+            social media for more information!
+          </p>
+        ),
       });
     }
 
@@ -55,12 +74,6 @@ class FeedContainer extends Component {
     //     totalLessons: 7,
     //   },
     // });
-    feedItems.push({
-      type: "directions",
-      location: competition.location,
-      latitude: competition.latitude,
-      longitude: competition.longitude,
-    });
 
     return feedItems;
   };

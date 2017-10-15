@@ -41,7 +41,7 @@ class Timeline extends Component {
     this.setState({ mouseButtonOpened: !mouseButtonOpened });
   }
 
-  createEventsList() {
+  createEventsList(editable = false) {
     const { events } = this.props;
     const dates = {};
     events.forEach(event => {
@@ -71,7 +71,7 @@ class Timeline extends Component {
                 __html: marked(event.description || ""),
               }}
             />
-            <ItemActions />
+            <ItemActions editable={editable} />
           </TimelineItem>
         )),
       ])
@@ -79,9 +79,9 @@ class Timeline extends Component {
   }
 
   render() {
-    const { editable } = this.props;
+    const { editable, helpText } = this.props;
     const { mouseButtonOpened, showMouseButton, mouseY: y } = this.state;
-    const events = this.createEventsList();
+    const events = this.createEventsList(editable);
     return (
       <div
         className="timeline"
@@ -120,7 +120,7 @@ class Timeline extends Component {
           ]
         ) : (
           <h3 className="help-text">
-            There{"'"}s no events yet. {editable && "Why not add one?"}
+            {helpText} {editable && "Why not add one?"}
           </h3>
         )}
       </div>
@@ -131,11 +131,13 @@ class Timeline extends Component {
 Timeline.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape()),
   editable: PropTypes.bool,
+  helpText: PropTypes.string,
 };
 
 Timeline.defaultProps = {
   events: [],
   editable: false,
+  helpText: "There's no events yet.",
 };
 
 export default Timeline;

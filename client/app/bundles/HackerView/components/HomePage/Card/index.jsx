@@ -4,6 +4,7 @@ import CurrentEventsCard from "./CurrentEventsCard";
 import CurrentLessonCard from "./CurrentLessonCard";
 import CountdownCard from "./CountdownCard";
 import DirectionsCard from "./DirectionsCard";
+import InformationalCard from "./InformationalCard";
 
 const Card = props => {
   const { type } = props;
@@ -19,6 +20,8 @@ const Card = props => {
       return <CountdownCard className={styles.join(" ")} {...props} />;
     case "directions":
       return <DirectionsCard className={styles.join(" ")} {...props} />;
+    case "informational":
+      return <InformationalCard className={styles.join(" ")} {...props} />;
     default:
       return <div />;
   }
