@@ -50,7 +50,7 @@ class CompetitionController < ApplicationController
   end
 
   def list_events
-    json_response(@competition.events, :ok)
+    json_response(@competition.events.order(:start_time, :end_time), :ok)
   end
 
   def create_event

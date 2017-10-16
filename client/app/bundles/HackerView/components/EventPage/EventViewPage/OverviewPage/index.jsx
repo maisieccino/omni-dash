@@ -8,6 +8,7 @@ import * as Icon from "react-feather";
 import { fetchCompetition } from "libs/actions/competitionActions";
 import { fetchEvents } from "libs/actions/eventsActions";
 import Timeline from "libs/components/Timeline";
+import EventProgress from "./EventProgress";
 
 class OverviewPage extends Component {
   static EVENT_COUNT_LIMIT = 5;
@@ -42,13 +43,23 @@ class OverviewPage extends Component {
     fetchEvents: () => dispatch(fetchEvents()),
   });
 
-  componentDidMount() {
-    if (!Object.keys(this.props.competition).length) {
-      this.props.fetchCompetition();
-    }
+  constructor(props) {
+    super(props);
+    // checks whether we have ran the initial fetches on
+    // these endpoints. prevents them repeatedly being
+    // fetched :D
+    this.state = {
+      initialCompetitionFetch: false,
+    };
+  }
 
-    if (!this.props.events.length) {
-      this.props.fetchEvents();
+  componentDidMount() {
+    if (
+      !this.state.initialCompetitionFetch &&
+      !Object.keys(this.props.competition).length
+    ) {
+      this.state.initialCompetitionFetch = true;
+      this.props.fetchCompetition();
     }
   }
 
@@ -56,10 +67,10 @@ class OverviewPage extends Component {
     const { competition, isFetchingCompetition, isFetchingEvents } = this.props;
 
     const {
-      name,
-      start_time: startTime,
-      end_time: endTime,
-      description,
+      name = "",
+      start_time: startTime = "",
+      end_time: endTime = "",
+      description = "",
     } = competition;
 
     // filter the events shown on the timeline to only future events,
@@ -102,14 +113,11 @@ class OverviewPage extends Component {
 
         <h2>Event Progress</h2>
         <h3 className="help-text">
-          {timeRemaining > 0 ? (
-            <span>
-              {timeRemaining.hours()} hours {timeRemaining.minutes()} minutes
-              remaining
-            </span>
-          ) : (
-            `${name} has finished. See you next time!`
-          )}
+          <EventProgress
+            startTime={startTime}
+            timeRemaining={timeRemaining}
+            eventName={name}
+          />
         </h3>
         <p>
           <progress value={progress} max={100} />

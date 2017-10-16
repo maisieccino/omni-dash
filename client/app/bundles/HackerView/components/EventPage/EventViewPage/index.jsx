@@ -29,7 +29,7 @@ const routes = [
   },
   {
     to: "/event/map",
-    label: "Vanue Map",
+    label: "Venue Map",
   },
   {
     to: "/event/guide",
