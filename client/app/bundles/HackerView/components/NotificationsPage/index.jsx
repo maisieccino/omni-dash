@@ -1,13 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
 
 const NotificationsPage = () => (
   <div>
     <div className="title-bar">
       <h1>Your Notifications</h1>
-      <button className="yellow square" title="View notification settings">
+      <Link
+        className="yellow square button"
+        title="View notification settings"
+        to="/settings/notifications"
+      >
         <Icon.Settings />
-      </button>
+      </Link>
     </div>
     <div className="feed">
       {/* <h3 className="help-text">You have no notifications. Hooray!</h3> */}

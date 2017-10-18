@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Route } from "react-router";
+import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
+import EventDetailPage from "libs/components/EventDetailPage";
 import SettingsPage from "libs/components/SettingsPage";
 import ProfilePage from "libs/components/ProfilePage";
 import Navigation from "libs/components/Navigation";
@@ -36,20 +37,26 @@ class HackerView extends Component {
         <div>
           <Navigation routes={routes} />
           <div className="page">
-            <Route
-              exact
-              path="/"
-              render={() => <HomePage user={currentUser} />}
-            />
-            <Route path="/courses" component={CoursesPage} />
-            <Route path="/event" component={EventPage} />
-            <Route path="/notifications" component={NotificationsPage} />
-            <Route path="/profile" component={ProfilePage} />
-            <Route
-              path="/user/:id"
-              render={props => <ProfilePage showBackButton {...props} />}
-            />
-            <Route path="/settings" component={SettingsPage} />
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => <HomePage user={currentUser} />}
+              />
+              <Route path="/courses" component={CoursesPage} />
+              <Route
+                path="/event/detail/:id"
+                render={props => <EventDetailPage {...props} />}
+              />
+              <Route path="/event" component={EventPage} />
+              <Route path="/notifications" component={NotificationsPage} />
+              <Route path="/profile" component={ProfilePage} />
+              <Route
+                path="/user/:id"
+                render={props => <ProfilePage {...props} />}
+              />
+              <Route path="/settings" component={SettingsPage} />
+            </Switch>
           </div>
         </div>
       </ConnectedRouter>
