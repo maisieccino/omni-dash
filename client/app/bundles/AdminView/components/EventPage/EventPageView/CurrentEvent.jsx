@@ -15,7 +15,7 @@ marked.setOptions({
 const CurrentEvent = ({ competition }) => (
   <div className="splitview-pane">
     <div className="title-bar">
-      <h1>Current Event</h1>
+      <h1>Your Event</h1>
       <a
         href="/competition"
         className="yellow square button"

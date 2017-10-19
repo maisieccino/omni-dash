@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import * as Icon from "react-feather";
 import marked from "marked";
 import { remToPx } from "libs/utils/display";
-import ItemActions from "./ItemActions";
 import TimelineHeader from "./TimelineHeader";
 import TimelineItem from "./TimelineItem";
 
@@ -62,16 +61,17 @@ class Timeline extends Component {
         dates[date].map(event => (
           <TimelineItem
             name={event.name}
+            id={event.id}
             key={generate()}
             startTime={event.start_time}
             endTime={event.end_time}
+            editable={editable}
           >
             <p
               dangerouslySetInnerHTML={{
                 __html: marked(event.description || ""),
               }}
             />
-            <ItemActions editable={editable} />
           </TimelineItem>
         )),
       ])

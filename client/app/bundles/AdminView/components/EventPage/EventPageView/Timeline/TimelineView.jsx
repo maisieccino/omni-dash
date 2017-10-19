@@ -7,7 +7,7 @@ import Timeline from "libs/components/Timeline";
 
 const TimelineView = ({ error, events, fetchEvents, isFetching }) => (
   <div className="splitview-pane">
-    <Flash type="alert" when={error}>
+    <Flash type="alert" when={error !== ""}>
       {error}
     </Flash>
     <div className="title-bar">

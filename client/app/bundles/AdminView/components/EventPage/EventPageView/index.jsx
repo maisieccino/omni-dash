@@ -14,7 +14,7 @@ const routes = [
   {
     to: "/event",
     match: "/event/?$",
-    label: "Current Event",
+    label: "Your Event",
     exact: true,
     component: CurrentEvent,
   },
