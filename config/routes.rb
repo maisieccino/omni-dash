@@ -31,6 +31,6 @@ Rails.application.routes.draw do
 
   get "/competition/events", to: "competition#list_events"
   post "/competition/events", to: "competition#create_event"
-  put "/competition/event/:id", to: "competition#update_event", as: :competition_event
-  delete "/competition/event/:id", to: "competition#delete_event"
+  put "/competition/events/:id", to: "competition#update_event", as: :competition_event
+  delete "/competition/events/:id", to: "competition#delete_event"
 end

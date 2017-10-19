@@ -13,7 +13,11 @@ class EventDetailsPage extends Component {
     return (
       <div>
         <div className="title-bar">
-          <button className="yellow square">
+          <button
+            className="yellow square"
+            title="Go back"
+            onClick={() => window.history.back()}
+          >
             <Icon.ArrowLeft />
           </button>
           <h1>Event Name</h1>

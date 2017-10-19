@@ -19,12 +19,14 @@ const ProfileViewPage = ({ user, isFetching, isOwnProfile, onRefresh }) => (
       {isOwnProfile ? (
         <div className="profile-body">
           {user.admin ? (
-            <div>
+            <div className="title-bar">
               <h2>You{"'"}re an admin.</h2>
             </div>
           ) : (
             [
-              <h2 key={0}>Your Team At Hatch</h2>,
+              <div key={0} className="title-bar">
+                <h2>Your Team At Hatch</h2>
+              </div>,
               <p key={1}>
                 You don’t appear to have a team registered for hatch yet! Make
                 sure you create/join your team before hacking ends.

@@ -4,19 +4,22 @@ import moment from "moment";
 
 const EventProgress = ({ startTime, timeRemaining, eventName }) => {
   const timeToStart = moment.duration(moment(startTime).diff(moment()));
+  const days = Math.floor(timeToStart.asDays());
+  const hours = timeToStart.minutes();
+  const minutes = timeToStart.minutes();
   if (Date.parse(startTime) > Date.now()) {
     return (
       <span>
-        {eventName} begins in {timeToStart.hours()} hours and{" "}
-        {timeToStart.minutes()} minutes!
+        {eventName} begins in {days && `${days} days,`}{" "}
+        {hours && `${hours} hours and`} {minutes && `${minutes} minutes`}!
       </span>
     );
   }
   if (timeRemaining > 0) {
     return (
       <span>
-        {timeRemaining.hours()} hours {timeRemaining.minutes()} minutes
-        remaining
+        {timeToStart.days()} days {timeRemaining.hours()} hours{" "}
+        {timeRemaining.minutes()} minutes remaining
       </span>
     );
   }

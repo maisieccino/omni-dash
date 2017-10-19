@@ -15,7 +15,6 @@ class OverviewPage extends Component {
 
   static propTypes = {
     competition: PropTypes.shape(),
-    isFetchingCompetition: PropTypes.bool,
     events: PropTypes.arrayOf(PropTypes.shape()),
     isFetchingEvents: PropTypes.bool,
     fetchCompetition: PropTypes.func,
@@ -24,7 +23,6 @@ class OverviewPage extends Component {
 
   static defaultProps = {
     competition: {},
-    isFetchingCompetition: false,
     events: [],
     isFetchingEvents: false,
     fetchCompetition: () => {},
@@ -33,7 +31,6 @@ class OverviewPage extends Component {
 
   static mapStateToProps = state => ({
     competition: state.competition.competition,
-    isFetchingCompetition: state.competition.isFetching,
     events: state.events.events,
     isFetchingEvents: state.events.isFetching,
   });
@@ -64,7 +61,7 @@ class OverviewPage extends Component {
   }
 
   render() {
-    const { competition, isFetchingCompetition, isFetchingEvents } = this.props;
+    const { competition, isFetchingEvents } = this.props;
 
     const {
       name = "",
@@ -89,16 +86,6 @@ class OverviewPage extends Component {
       <div className="splitview-pane">
         <div className="title-bar">
           <h1>Event Overview</h1>
-          <button
-            className="mint square"
-            title="Refresh Information"
-            disabled={isFetchingCompetition}
-            onClick={() => this.props.fetchCompetition()}
-          >
-            <Icon.RefreshCw
-              className={isFetchingCompetition ? "spinner" : ""}
-            />
-          </button>
         </div>
 
         <h2>{name}</h2>

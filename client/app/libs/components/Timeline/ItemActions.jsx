@@ -5,7 +5,7 @@ import * as Icon from "react-feather";
 
 const ItemActions = ({ editable, id }) => (
   <div className="button-group">
-    <Link className="yellow no-expand button" to={`/event/details/${id}`}>
+    <Link className="yellow no-expand button" to={`/timeline/item/${id}`}>
       View
     </Link>
     {editable && [

@@ -90,8 +90,6 @@ GEM
     faker (1.8.4)
       i18n (~> 0.5)
     ffi (1.9.18)
-    font-awesome-sass (4.7.0)
-      sass (>= 3.2)
     formatador (0.2.5)
     geocoder (1.4.4)
     globalid (0.4.0)
@@ -281,7 +279,6 @@ DEPENDENCIES
   dotenv-rails
   factory_girl_rails (~> 4.0)
   faker
-  font-awesome-sass
   geocoder
   guard
   guard-livereload (~> 2.5)

@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
+import { capitalise } from "libs/utils/text";
 
 const CountdownCard = ({ className, name, startTime }) => (
   <div className={className}>
     <div className="card-body">
       <h2>Countdown to {name}</h2>
-      <h3>{moment(startTime).fromNow(true)} to go!</h3>
+      <h3>{capitalise(moment(startTime).fromNow(true))} to go!</h3>
       <p>{moment(startTime).format("dddd DD MMMM YYYY")}</p>
     </div>
   </div>

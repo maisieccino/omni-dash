@@ -45,7 +45,7 @@ class HackerView extends Component {
               />
               <Route path="/courses" component={CoursesPage} />
               <Route
-                path="/event/detail/:id"
+                path="/timeline/item/:id"
                 render={props => <EventDetailPage {...props} />}
               />
               <Route path="/event" component={EventPage} />
