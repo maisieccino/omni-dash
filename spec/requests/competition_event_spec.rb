@@ -41,6 +41,28 @@ RSpec.describe "Competition Event API", type: :request do
     end
   end
 
+  describe "GET /competitions/events/:id" do
+    let!(:event) { create(:event, competition: competition) }
+
+    it "should be forbidden if not logged in" do
+      get competition_event_path(event[:id]), headers: json_headers
+      expect(response).to have_http_status(:forbidden)
+    end
+
+    it "should be successful if logged in as any user" do
+      sign_in user
+      get competition_event_path(event[:id]), headers: json_headers
+      expect(response).to have_http_status(:ok)
+      expect(json["name"]).to eq(event[:name])
+    end
+
+    it "should return 404 if event does not exist" do
+      sign_in user
+      get competition_event_path(10000), headers: json_headers
+      expect(response).to have_http_status(:not_found)
+    end
+  end
+
   describe "PUT /competitions/events/:id" do
     let!(:event) { create(:event, competition: competition) }
     let(:event_params) { { name: "My cool event" }.to_json }

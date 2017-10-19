@@ -29,7 +29,7 @@ html {
   &:after {
     position: absolute;
     content: "";
-    top: 125%;
+    bottom: -0.75rem;
     left: 0;
     width: 2rem;
     height: 0.4rem;
@@ -113,4 +113,8 @@ html {
   color: lighten($color-fg, 20);
   text-transform: unset !important;
   flex: 1;
+}
+
+.center {
+  text-align: center;
 }

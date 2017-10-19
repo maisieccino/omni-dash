@@ -25,13 +25,15 @@ const DirectionsCard = ({ className, location, latitude, longitude }) => (
         <h2>Getting To The Event</h2>
         <h3>Address</h3>
         <p>{location}</p>
-        <a
-          className="yellow button"
-          href={generateMapsUrl(latitude, longitude)}
-          target="_blank"
-        >
-          Google Maps <Icon.Map />
-        </a>
+        <p>
+          <a
+            className="yellow button"
+            href={generateMapsUrl(latitude, longitude)}
+            target="_blank"
+          >
+            Google Maps <Icon.Map />
+          </a>
+        </p>
       </section>
       <section className="card-section">
         {map(latitude, longitude, location)}

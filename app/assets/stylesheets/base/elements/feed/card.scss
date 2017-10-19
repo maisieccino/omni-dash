@@ -19,9 +19,12 @@
     font-size: 1.5rem;
   }
 
-  h3,
-  p {
+  h3 {
     margin: 0;
+  }
+
+  p {
+    margin: 0.2rem 0;
   }
 
   &.flex-card .card-body {

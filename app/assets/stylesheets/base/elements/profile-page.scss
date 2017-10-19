@@ -70,6 +70,7 @@
 
   aside.profile-sidebar {
     @extend .splitview-nav;
+    border-bottom: none;
 
     .contact-info-item {
       h3 {

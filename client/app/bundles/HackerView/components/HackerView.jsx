@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 
-import EventDetailPage from "libs/components/EventDetailPage";
+import TimelineItemPage from "libs/components/TimelineItemPage";
 import SettingsPage from "libs/components/SettingsPage";
 import ProfilePage from "libs/components/ProfilePage";
 import Navigation from "libs/components/Navigation";
@@ -46,7 +46,7 @@ class HackerView extends Component {
               <Route path="/courses" component={CoursesPage} />
               <Route
                 path="/timeline/item/:id"
-                render={props => <EventDetailPage {...props} />}
+                render={props => <TimelineItemPage {...props} />}
               />
               <Route path="/event" component={EventPage} />
               <Route path="/notifications" component={NotificationsPage} />
