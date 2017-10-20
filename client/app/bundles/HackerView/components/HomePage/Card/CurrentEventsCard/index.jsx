@@ -24,6 +24,7 @@ const CurrentEventCard = ({
             <h2>What{"'"}s On</h2>
             {Object.keys(currentEvent).length > 0 ? (
               <DisplayEvent
+                id={currentEvent.id}
                 name={currentEvent.name}
                 startTime={currentEvent.start_time}
                 endTime={currentEvent.end_time}
@@ -37,6 +38,7 @@ const CurrentEventCard = ({
           <h2>Coming Up Next</h2>
           {Object.keys(nextEvent).length > 0 ? (
             <DisplayEvent
+              id={currentEvent.id}
               name={nextEvent.name}
               startTime={nextEvent.start_time}
               endTime={nextEvent.end_time}

@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import moment from "moment";
 
-const DisplayEvent = ({ name, startTime, endTime, location }) => (
+const DisplayEvent = ({ id, name, startTime, endTime, location }) => (
   <div>
     <h3>{name}</h3>
     <p>
@@ -13,11 +14,14 @@ const DisplayEvent = ({ name, startTime, endTime, location }) => (
         : "TBA"}
     </p>
     <p>{location}</p>
-    <button>Learn More</button>
+    <Link to={`/timeline/item/${id}`} className="button yellow">
+      Details
+    </Link>
   </div>
 );
 
 DisplayEvent.propTypes = {
+  id: PropTypes.number,
   name: PropTypes.string,
   startTime: PropTypes.oneOfType([
     PropTypes.instanceOf(moment),
@@ -33,6 +37,7 @@ DisplayEvent.propTypes = {
 };
 
 DisplayEvent.defaultProps = {
+  id: 0,
   name: "Untitled Event",
   startTime: null,
   endTime: null,
