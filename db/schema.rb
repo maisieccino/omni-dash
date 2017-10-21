@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171021083832) do
+ActiveRecord::Schema.define(version: 20171021121112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,9 +58,13 @@ ActiveRecord::Schema.define(version: 20171021083832) do
   create_table "notifications", force: :cascade do |t|
     t.string "title"
     t.text "message"
-    t.string "type"
+    t.string "notification_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "seen"
+    t.boolean "dismissed"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -98,4 +102,5 @@ ActiveRecord::Schema.define(version: 20171021083832) do
   add_foreign_key "events", "competitions"
   add_foreign_key "invite_codes", "competitions"
   add_foreign_key "invite_codes", "users"
+  add_foreign_key "notifications", "users"
 end
