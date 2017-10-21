@@ -38,4 +38,6 @@ Rails.application.routes.draw do
   put "/notifications/:id/seen", to: "notifications#seen", as: :seen_notification
   put "/notifications/:id/dismiss", to: "notifications#dismiss", as: :dismiss_notification
   resources :notifications
+
+  mount ActionCable.server => "/cable"
 end

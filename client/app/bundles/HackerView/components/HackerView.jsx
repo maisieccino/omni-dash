@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Route, Switch } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
+import ActionCable from "actioncable";
 
 import TimelineItemPage from "libs/components/TimelineItemPage";
 import SettingsPage from "libs/components/SettingsPage";
 import ProfilePage from "libs/components/ProfilePage";
 import Navigation from "libs/components/Navigation";
+import Notifications from "libs/components/Notifications";
 import HomePage from "./HomePage";
 import CoursesPage from "./CoursesPage";
 import EventPage from "./EventPage";
@@ -26,8 +28,38 @@ class HackerView extends Component {
     history: {},
   };
 
+  constructor(props) {
+    super(props);
+    this.cable = null;
+    this.state = {
+      notifications: [],
+      notificationError: "",
+    };
+  }
+
   componentDidMount() {
     this.props.fetchCompetition();
+    this.subscribeChannel();
+  }
+
+  subscribeChannel() {
+    const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
+    const cableUrl = `${protocol}${window.location.hostname}:${window.location
+      .port}/cable`;
+    this.cable = ActionCable.createConsumer(cableUrl);
+    this.cable.subscriptions.create(
+      {
+        channel: "NotificationChannel",
+      },
+      {
+        disconnected: () =>
+          this.setState({ error: "Disconnected from notifications channel" }),
+        received: notification =>
+          this.setState({
+            notifications: [...this.state.notifications, notification],
+          }),
+      },
+    );
   }
 
   render() {
@@ -35,7 +67,11 @@ class HackerView extends Component {
     return (
       <ConnectedRouter history={history}>
         <div>
-          <Navigation routes={routes} />
+          <Notifications notifications={this.state.notifications} />
+          <Navigation
+            routes={routes}
+            notificationCount={this.state.notifications.length}
+          />
           <div className="page">
             <Switch>
               <Route
