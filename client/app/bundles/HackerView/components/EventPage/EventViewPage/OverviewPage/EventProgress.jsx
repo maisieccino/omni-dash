@@ -18,7 +18,7 @@ const EventProgress = ({ startTime, timeRemaining, eventName }) => {
   if (timeRemaining > 0) {
     return (
       <span>
-        {timeToStart.days()} days {timeRemaining.hours()} hours{" "}
+        {timeRemaining.days()} days {timeRemaining.hours()} hours{" "}
         {timeRemaining.minutes()} minutes remaining
       </span>
     );

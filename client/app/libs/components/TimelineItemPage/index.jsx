@@ -53,7 +53,7 @@ class TimelineItemPage extends Component {
     } else if (Date.parse(endTime) > Date.now()) {
       timeText = "Currently happening";
     } else {
-      timeText = `Finished ${moment(endTime).toNow()}`;
+      timeText = `Finished ${moment(endTime).fromNow()}`;
     }
 
     return (

@@ -5,6 +5,10 @@ import NavItem from "libs/components/SplitViewNavItem";
 
 import OverviewPage from "./OverviewPage";
 import TimelinePage from "./TimelinePage";
+import LiveEventPage from "./LiveEventPage";
+import RequestHelpPage from "./RequestHelpPage";
+import VenueMapPage from "./VenueMapPage";
+import GuidePage from "./GuidePage";
 
 const routes = [
   {
@@ -22,18 +26,22 @@ const routes = [
   {
     to: "/event/live",
     label: "Live Event Page",
+    component: LiveEventPage,
   },
   {
-    to: "/event/mentor",
-    label: "Request a mentor",
+    to: "/event/help",
+    label: "Request Help",
+    component: RequestHelpPage,
   },
   {
     to: "/event/map",
     label: "Venue Map",
+    component: VenueMapPage,
   },
   {
     to: "/event/guide",
     label: "Event Guide",
+    component: GuidePage,
   },
 ];
 
