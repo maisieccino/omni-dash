@@ -79,12 +79,20 @@ class Timeline extends Component {
   }
 
   render() {
-    const { editable, helpText } = this.props;
+    const { editable, isLoading, helpText } = this.props;
     const { mouseButtonOpened, showMouseButton, mouseY: y } = this.state;
     const events = this.createEventsList(editable);
+    if (isLoading) {
+      return (
+        <div className="timeline flex vertical center">
+          <h3 className="help-text">Loading events...</h3>
+          <Icon.RefreshCw className="spinner" />
+        </div>
+      );
+    }
     return (
       <div
-        className="timeline"
+        className={`timeline flex ${events.length <= 0 && "vertical"} `}
         ref={el => {
           this.element = el;
         }}
@@ -131,12 +139,14 @@ class Timeline extends Component {
 Timeline.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape()),
   editable: PropTypes.bool,
+  isLoading: PropTypes.bool,
   helpText: PropTypes.string,
 };
 
 Timeline.defaultProps = {
   events: [],
   editable: false,
+  isLoading: false,
   helpText: "There's no events yet.",
 };
 

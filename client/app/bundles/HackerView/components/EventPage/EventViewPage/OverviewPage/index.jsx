@@ -126,7 +126,11 @@ class OverviewPage extends Component {
           </button>
         </div>
 
-        <Timeline events={events} helpText="There's no upcoming events." />
+        <Timeline
+          events={events}
+          helpText="There's no upcoming events."
+          isLoading={isFetchingEvents}
+        />
       </div>
     );
   }
