@@ -29,8 +29,9 @@ Rails.application.routes.draw do
   get "/competition/invites", to: "competition#list_attendees"
   post "/competition/invites", to: "competition#invite_attendee"
 
-  get "/competition/events", to: "competition#list_events"
-  post "/competition/events", to: "competition#create_event"
-  put "/competition/event/:id", to: "competition#update_event", as: :competition_event
-  delete "/competition/event/:id", to: "competition#delete_event"
+  get "/competition/events", to: "competition_events#index"
+  post "/competition/events", to: "competition_events#create"
+  get "/competition/events/:id", to: "competition_events#show", as: :competition_event
+  put "/competition/events/:id", to: "competition_events#update"
+  delete "/competition/events/:id", to: "competition_events#destroy"
 end

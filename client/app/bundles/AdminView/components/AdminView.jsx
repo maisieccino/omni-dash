@@ -4,6 +4,7 @@ import { Route } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 import { Switch } from "react-router-dom";
 
+import TimelineItemPage from "libs/components/TimelineItemPage";
 import SettingsPage from "libs/components/SettingsPage";
 import ProfilePage from "libs/components/ProfilePage";
 import Navigation from "libs/components/Navigation";
@@ -28,6 +29,10 @@ const AdminView = ({ current_user: user, history }) => (
           <Route
             path="/user/:id"
             render={props => <ProfilePage showBackButton {...props} />}
+          />
+          <Route
+            path="/timeline/item/:id"
+            render={props => <TimelineItemPage {...props} />}
           />
           <Route path="/event/attendees/add" component={AddAttendeePage} />
           <Route path="/event" component={EventPage} />

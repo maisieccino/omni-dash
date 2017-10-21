@@ -25,10 +25,11 @@ nav {
   a {
     font-family: $font-title;
     text-decoration: none;
-    text-transform: lowercase;
+    // text-transform: lowercase;
     font-size: 0.8rem;
     color: $color-bg;
     max-width: none;
+    font-weight: 500;
     flex-grow: 1;
     flex-basis: 0;
     text-align: center;

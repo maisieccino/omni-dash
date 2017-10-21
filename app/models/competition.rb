@@ -24,6 +24,24 @@ class Competition < ApplicationRecord
     end
   end
 
+  def current_event
+    events.to_a
+          .select {|e| e.end_time >= Time.now && e.start_time <= Time.now }
+          .sort_by(&:start_time)
+          .first
+  end
+
+  def next_event
+    events.to_a
+          .select {|e| e.start_time > Time.now }
+          .sort_by(&:start_time)
+          .first
+  end
+
+  def as_json(options={})
+    super(include: %i[current_event next_event])
+  end
+
   private
 
   def full_address

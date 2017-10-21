@@ -1,51 +1,51 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { generate } from "shortid";
-
 import NavItem from "libs/components/SplitViewNavItem";
-import CurrentEvent from "./CurrentEvent";
-import EditEvent from "./EditEvent";
-import Timeline from "./Timeline";
-import Attendees from "./Attendees";
-import ContactAttendees from "./ContactAttendees";
-import DeleteEvent from "./DeleteEvent";
+
+import OverviewPage from "./OverviewPage";
+import TimelinePage from "./TimelinePage";
+import LiveEventPage from "./LiveEventPage";
+import RequestHelpPage from "./RequestHelpPage";
+import VenueMapPage from "./VenueMapPage";
+import GuidePage from "./GuidePage";
 
 const routes = [
   {
     to: "/event",
     match: "/event/?$",
-    label: "Your Event",
+    label: "Overview",
     exact: true,
-    component: CurrentEvent,
-  },
-  {
-    to: "/event/edit",
-    label: "Edit Details",
-    component: EditEvent,
+    component: OverviewPage,
   },
   {
     to: "/event/timeline",
     label: "Timeline",
-    component: Timeline,
+    component: TimelinePage,
   },
   {
-    to: "/event/attendees",
-    label: "Attendees",
-    component: Attendees,
+    to: "/event/live",
+    label: "Live Event Page",
+    component: LiveEventPage,
   },
   {
-    to: "/event/email",
-    label: "Contact Attendees",
-    component: ContactAttendees,
+    to: "/event/help",
+    label: "Request Help",
+    component: RequestHelpPage,
   },
   {
-    to: "/event/delete",
-    label: "Delete Event",
-    component: DeleteEvent,
+    to: "/event/map",
+    label: "Venue Map",
+    component: VenueMapPage,
+  },
+  {
+    to: "/event/guide",
+    label: "Event Guide",
+    component: GuidePage,
   },
 ];
 
-const EventPageView = () => (
+const EventViewPage = () => (
   <div className="splitview-main">
     <aside className="splitview-nav">
       {/* programmatically generate navbar from array */}
@@ -62,4 +62,4 @@ const EventPageView = () => (
   </div>
 );
 
-export default EventPageView;
+export default EventViewPage;

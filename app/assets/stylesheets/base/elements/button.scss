@@ -24,6 +24,11 @@ input[type="submit"],
     margin-left: 0.5rem;
   }
 
+  &.no-expand {
+    width: auto;
+    min-width: 0;
+  }
+
   &.square {
     width: 3rem;
     min-width: 3rem;
@@ -40,6 +45,7 @@ input[type="submit"],
 
   .button-group & {
     margin-right: 0.3rem;
+    margin-top: 0;
 
     &:last-of-type {
       margin-right: 0;

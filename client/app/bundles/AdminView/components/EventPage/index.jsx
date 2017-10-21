@@ -41,11 +41,6 @@ class EventPage extends Component {
             </div>
           )}
 
-        <h1>Your Event</h1>
-        <p>
-          Create/manage the current event along with its timetable, venue, and
-          any important information.
-        </p>
         {this.props.competitionExists ? (
           <EventPageView />
         ) : (

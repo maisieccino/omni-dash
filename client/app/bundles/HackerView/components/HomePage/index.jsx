@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import FeedContainer from "./FeedContainer";
 
 class HomePage extends Component {
@@ -25,6 +24,4 @@ class HomePage extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ownProps;
-
-export default connect(mapStateToProps)(HomePage);
+export default HomePage;

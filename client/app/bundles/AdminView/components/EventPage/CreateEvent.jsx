@@ -30,36 +30,6 @@ class CreateEvent extends Component {
     };
   }
 
-  onStartDateChange(e) {
-    const old = this.state.start_time;
-    const start = moment(
-      `${e.target.value} ${this.state.start_time.format("HH:mm")}`,
-    );
-    this.setState({ start_time: start.isValid() ? start : old });
-  }
-
-  onStartTimeChange(e) {
-    const start = moment(
-      `${this.state.start_time.format("YYYY-MM-DD")} ${e.target.value}`,
-    );
-    this.setState({ start_time: start });
-  }
-
-  onEndDateChange(e) {
-    const old = this.state.end_time;
-    const end = moment(
-      `${e.target.value} ${this.state.end_time.format("HH:mm")}`,
-    );
-    this.setState({ end_time: end.isValid() ? end : old });
-  }
-
-  onEndTimeChange(e) {
-    const end = moment(
-      `${this.state.end_time.format("YYYY-MM-DD")} ${e.target.value}`,
-    );
-    this.setState({ end_time: end });
-  }
-
   render() {
     return (
       <form>

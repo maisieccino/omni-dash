@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import * as Icon from "react-feather";
 import marked from "marked";
 import { remToPx } from "libs/utils/display";
-import ItemActions from "./ItemActions";
 import TimelineHeader from "./TimelineHeader";
 import TimelineItem from "./TimelineItem";
 
@@ -41,7 +40,7 @@ class Timeline extends Component {
     this.setState({ mouseButtonOpened: !mouseButtonOpened });
   }
 
-  createEventsList() {
+  createEventsList(editable = false) {
     const { events } = this.props;
     const dates = {};
     events.forEach(event => {
@@ -62,16 +61,17 @@ class Timeline extends Component {
         dates[date].map(event => (
           <TimelineItem
             name={event.name}
+            id={event.id}
             key={generate()}
             startTime={event.start_time}
             endTime={event.end_time}
+            editable={editable}
           >
             <p
               dangerouslySetInnerHTML={{
                 __html: marked(event.description || ""),
               }}
             />
-            <ItemActions />
           </TimelineItem>
         )),
       ])
@@ -79,12 +79,20 @@ class Timeline extends Component {
   }
 
   render() {
-    const { editable } = this.props;
+    const { editable, isLoading, helpText } = this.props;
     const { mouseButtonOpened, showMouseButton, mouseY: y } = this.state;
-    const events = this.createEventsList();
+    const events = this.createEventsList(editable);
+    if (isLoading) {
+      return (
+        <div className="timeline flex vertical center">
+          <h3 className="help-text">Loading events...</h3>
+          <Icon.RefreshCw className="spinner" />
+        </div>
+      );
+    }
     return (
       <div
-        className="timeline"
+        className={`timeline flex ${events.length <= 0 && "vertical"} `}
         ref={el => {
           this.element = el;
         }}
@@ -120,7 +128,7 @@ class Timeline extends Component {
           ]
         ) : (
           <h3 className="help-text">
-            There{"'"}s no events yet. {editable && "Why not add one?"}
+            {helpText} {editable && "Why not add one?"}
           </h3>
         )}
       </div>
@@ -131,11 +139,15 @@ class Timeline extends Component {
 Timeline.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape()),
   editable: PropTypes.bool,
+  isLoading: PropTypes.bool,
+  helpText: PropTypes.string,
 };
 
 Timeline.defaultProps = {
   events: [],
   editable: false,
+  isLoading: false,
+  helpText: "There's no events yet.",
 };
 
 export default Timeline;
