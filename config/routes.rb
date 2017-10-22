@@ -34,4 +34,10 @@ Rails.application.routes.draw do
   get "/competition/events/:id", to: "competition_events#show", as: :competition_event
   put "/competition/events/:id", to: "competition_events#update"
   delete "/competition/events/:id", to: "competition_events#destroy"
+
+  put "/notifications/:id/seen", to: "notifications#seen", as: :seen_notification
+  put "/notifications/:id/dismiss", to: "notifications#dismissed", as: :dismiss_notification
+  resources :notifications
+
+  mount ActionCable.server => "/cable"
 end

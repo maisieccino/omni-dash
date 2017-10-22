@@ -65,6 +65,11 @@
       flex-grow: 1;
       margin: 0 2%;
     }
+
+    .buttons {
+      display: flex;
+      flex-direction: row;
+    }
   }
 
   .leaflet-container {

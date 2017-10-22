@@ -3,16 +3,18 @@
   "private": true,
   "scripts": {
     "build:test": "NODE_ENV=test webpack --config webpack.config.js",
-    "build:production":
-      "NODE_ENV=production webpack --config webpack.config.js",
-    "build:development":
-      "NODE_ENV=development webpack -w --config webpack.config.js",
+    "build:production": "NODE_ENV=production webpack --config webpack.config.js",
+    "build:development": "NODE_ENV=development webpack -w --config webpack.config.js",
     "lint": "eslint ./ --ext .js --ext .jsx --cache --ignore-path .gitignore",
     "lint:force": "eslint ./ --ext .js --ext .jsx --ignore-path .gitignore",
     "precommit": "yarn run lint"
   },
-  "cacheDirectories": ["node_modules", "client/node_modules"],
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "dependencies": {
+    "actioncable": "^5.1.4",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",

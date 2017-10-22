@@ -11,6 +11,9 @@ const NavItem = ({ to, label, icon, ...rest }, { router }) => {
       to={to}
       className={router.history.location.pathname.match(match) ? "active" : ""}
     >
+      {typeof rest.notificationCount === "number" && (
+        <span className="notification-count">{rest.notificationCount}</span>
+      )}
       {icon}
       <span className="nav-label">{label}</span>
     </Link>

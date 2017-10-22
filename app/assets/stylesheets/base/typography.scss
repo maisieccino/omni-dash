@@ -114,6 +114,16 @@ html {
   text-transform: unset !important;
 }
 
+.icon {
+  @extend .button.square;
+  background: none !important;
+  min-width: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: darken($color-card, 30);
+}
+
 .center {
   text-align: center;
 }

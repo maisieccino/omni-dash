@@ -19,5 +19,6 @@ module HatchSite
     config.to_prepare do
       DeviseController.respond_to :html, :json
     end
+    config.action_cable.mount_path = "/cable"
   end
 end
