@@ -7,18 +7,18 @@ services:
     environment:
       - POSTGRES_PASSWORD # value will be read from local environment when run
     volumes:
-      # add used volumes here...
-      - type: volume
-        source: dbdata
-        target: /data
-        volume:
-          nocopy: true
+      - dbdata:/var/lib/postgresql/data
     env_file:
       - ".env.prod"
+  redis:
+    image: redis:3.2-alpine
+    volumes:
+    - redis:/data
   web:
     build: .
     environment:
       - RAILS_DB_HOSTNAME=db # db is both the service name and the host
+      - REDIS_HOST=redis
       - RAILS_DB_PASS=${POSTGRES_PASSWORD}
       - RAILS_ADMIN_USER_PASS # value will be read from local env when run
     expose:
@@ -27,12 +27,14 @@ services:
       - "80:3000"
     depends_on:
       - db
+      - redis
     env_file:
       - ".env.final"
 # ...and here
 volumes:
   #data-volume: uncomment once the volumes used by the app are clear
   dbdata:
+  redis:
 
 ## Deploy on server:
 

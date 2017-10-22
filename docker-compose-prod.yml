@@ -3,7 +3,7 @@ services:
   web:
     image: mbellgb/hatch-site-prod # assumes image is on docker hub
     build:
-      dockerfile: ./Dockerfile.prod
+      dockerfile: ./Dockerfile
     command: run-prod.sh
     environment:
       - RAILS_ENV=production

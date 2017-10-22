@@ -11,6 +11,7 @@ The one-stop shop for all information, news, and courses for the upcoming Hatch 
 * Ruby 2.3 or later (Matt is developing using 2.4.1)
 * Yarn or NPM (yarn is recommended)
 * PostgreSQL server, either local or otherwise (MacOS users use https://postgresapp.com/)
+* Redis server (required from 3b90062 onwards)
 
 Some gems you'll need beforehand:
 * `foreman` (for running webpack + rails + livereload)
