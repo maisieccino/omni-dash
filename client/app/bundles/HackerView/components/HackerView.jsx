@@ -18,12 +18,18 @@ import routes from "./routes";
 class HackerView extends Component {
   static propTypes = {
     fetchCompetition: PropTypes.func,
+    fetchNotifications: PropTypes.func,
+    onReceiveNotification: PropTypes.func,
+    notifications: PropTypes.arrayOf(PropTypes.shape()),
     current_user: PropTypes.shape(),
     history: PropTypes.shape(),
   };
 
   static defaultProps = {
     fetchCompetition: () => {},
+    fetchNotifications: () => {},
+    onReceiveNotification: () => {},
+    notifications: [],
     current_user: {},
     history: {},
   };
@@ -39,6 +45,7 @@ class HackerView extends Component {
 
   componentDidMount() {
     this.props.fetchCompetition();
+    this.props.fetchNotifications();
     this.subscribeChannel();
   }
 
@@ -55,22 +62,21 @@ class HackerView extends Component {
         disconnected: () =>
           this.setState({ error: "Disconnected from notifications channel" }),
         received: notification =>
-          this.setState({
-            notifications: [...this.state.notifications, notification],
-          }),
+          this.props.onReceiveNotification(notification),
       },
     );
   }
 
   render() {
-    const { current_user: currentUser, history } = this.props;
+    const { current_user: currentUser, history, notifications } = this.props;
+    const unreadNotifications = notifications.filter(x => !x.seen);
     return (
       <ConnectedRouter history={history}>
         <div>
-          <Notifications notifications={this.state.notifications} />
+          <Notifications notifications={unreadNotifications} />
           <Navigation
             routes={routes}
-            notificationCount={this.state.notifications.length}
+            notificationCount={unreadNotifications.length}
           />
           <div className="page">
             <Switch>

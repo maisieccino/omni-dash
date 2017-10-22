@@ -17,7 +17,7 @@ class NotificationsController < ApplicationController
     json_response(@notification, :ok)
   end
 
-  def dismiss
+  def dismissed
     @notification.dismissed = true
     @notification.save
     json_response(@notification, :ok)

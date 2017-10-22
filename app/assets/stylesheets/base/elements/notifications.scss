@@ -2,7 +2,6 @@
   position: fixed;
   left: 1rem;
   bottom: 1rem;
-  height: calc(100% - 2rem);
   width: 20rem;
   display: flex;
   flex-direction: column-reverse;
@@ -30,13 +29,6 @@
     .notification-buttons {
       display: flex;
       flex-direction: column;
-
-      .icon {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: darken($color-card, 30);
-      }
 
       button,
       .button,

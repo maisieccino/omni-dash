@@ -13,7 +13,7 @@ const getIcon = type => {
   }
 };
 
-const Notification = ({ title, message, type }) => (
+const Notification = ({ title, message, type, onCloseClick }) => (
   <div className="notification">
     <div className="notification-content">
       <p>
@@ -22,7 +22,7 @@ const Notification = ({ title, message, type }) => (
       <p>{message}</p>
     </div>
     <div className="notification-buttons">
-      <button>
+      <button onClick={() => onCloseClick()}>
         <Icon.X />
       </button>
       <div className="icon">{getIcon(type)}</div>
@@ -31,14 +31,17 @@ const Notification = ({ title, message, type }) => (
 );
 
 Notification.propTypes = {
+  // id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   message: PropTypes.string,
   type: PropTypes.oneOf(["event", "message", "generic"]),
+  onCloseClick: PropTypes.func,
 };
 
 Notification.defaultProps = {
   message: "",
   type: "generic",
+  onCloseClick: () => {},
 };
 
 export default Notification;
