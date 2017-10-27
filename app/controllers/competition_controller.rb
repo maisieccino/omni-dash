@@ -1,36 +1,13 @@
 class CompetitionController < ApplicationController
   before_action :json_authenticate_user
-  before_action :admin_only, only: %i[create list_attendees invite_attendee update destroy]
   before_action :admin_only, except: %i[show]
   before_action :set_competition, except: %i[create]
-  before_action :invite_attendee_params, only: :invite_attendees
 
   def create
     @competition = Competition.create!(competition_params)
     json_response(@competition, :created)
   rescue Competition::CompetitionExistsError
     json_response({ message: "Competition already exists" }, :bad_request)
-  end
-
-  def list_attendees
-    json_response(@competition.attendees, :ok)
-  end
-
-  def invite_attendee
-    # check to see if invitecode already exists
-    invite_params = invite_attendee_params
-    code = @competition.invite_codes.find_by(email: invite_params[:email])
-    return json_response({ message: "This email has already been invited" }, :bad_request) if code
-    # check email, see if user already exists.
-    # if not, create a new InviteCode
-    user = User.find_by(email: invite_params[:email])
-    if user
-      invite_params[:user] = user
-      user.send_reset_password_instructions
-      user.update(deleted_at: nil)
-    end
-    invite = @competition.invite_codes.create!(invite_params)
-    json_response(invite, :created)
   end
 
   def destroy
@@ -58,10 +35,6 @@ class CompetitionController < ApplicationController
       :location,
       :capacity
     )
-  end
-
-  def invite_attendee_params
-    params.permit(:email, :first_name, :last_name)
   end
 
   def set_competition
