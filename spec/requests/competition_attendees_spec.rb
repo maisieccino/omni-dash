@@ -11,19 +11,19 @@ RSpec.describe "Competition Attendees API", type: :request do
     let(:message_params) { { title: "Hellooo", message: "This is a test message" } }
 
     it "should be forbidden if not signed in" do
-      post competition_message_attendees_path, params: message_params.to_json, headers: json_headers
+      post competition_attendees_message_path, params: message_params.to_json, headers: json_headers
       expect(response).to have_http_status(:forbidden)
     end
 
     it "should be forbidden if signed in as non-admin user" do
       sign_in users[0]
-      post competition_message_attendees_path, params: message_params.to_json, headers: json_headers
+      post competition_attendees_message_path, params: message_params.to_json, headers: json_headers
       expect(response).to have_http_status(:forbidden)
     end
 
     it "should be successful if signed in as an admin user" do
       sign_in admin_user
-      post competition_message_attendees_path, params: message_params.to_json, headers: json_headers
+      post competition_attendees_message_path, params: message_params.to_json, headers: json_headers
       expect(response).to have_http_status(:ok)
 
       users.each do |u|

@@ -3,6 +3,7 @@ class CompetitionAttendeesController < ApplicationController
   before_action :admin_only
   before_action :set_competition
   before_action :invite_attendee_params, only: :invite_attendees
+  before_action :attendee_message_params, only: :message
 
   def list_attendees
     json_response(@competition.attendees, :ok)
@@ -25,10 +26,25 @@ class CompetitionAttendeesController < ApplicationController
     json_response(invite, :created)
   end
 
+  def message
+    @competition.attendees.each do |x|
+      user = User.find_by(email: x[:email])
+      break if user.nil?
+      user.notifications.create(title: attendee_message_params[:title],
+                                message: attendee_message_params[:message],
+                                notification_type: "message")
+    end
+    head :ok
+  end
+
   private
 
   def invite_attendee_params
     params.permit(:email, :first_name, :last_name)
+  end
+
+  def attendee_message_params
+    params.permit(:title, :message)
   end
 
   def set_competition
