@@ -24,7 +24,7 @@ RSpec.describe "Competition Attendees API", type: :request do
     it "should be successful if signed in as an admin user" do
       sign_in admin_user
       post competition_attendees_message_path, params: message_params.to_json, headers: json_headers
-      expect(response).to have_http_status(:ok)
+      expect(response).to have_http_status(:no_content)
 
       users.each do |u|
         expect(u.notifications.count).to eq(1)

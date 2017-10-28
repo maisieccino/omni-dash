@@ -24,7 +24,11 @@ export const fetchNotifications = () => async dispatch => {
   dispatch(setIsFetchingNotifications());
   try {
     const response = await jsonGetRequest(constants.NOTIFICATIONS_PATH);
-    return dispatch(fetchNotificationsSuccess(response));
+    return dispatch(
+      fetchNotificationsSuccess(
+        response.filter(notification => !notification.dismissed),
+      ),
+    );
   } catch (error) {
     return dispatch(
       fetchNotificationsFailure(

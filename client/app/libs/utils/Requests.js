@@ -96,7 +96,7 @@ export const jsonPostRequest = async (path, body, headers = {}) => {
     }),
     credentials: "include",
   });
-  const json = await res.json();
+  const json = res.status === 204 ? "" : await res.json();
   if (res.ok) {
     return json;
   }

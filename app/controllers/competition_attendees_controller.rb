@@ -30,11 +30,11 @@ class CompetitionAttendeesController < ApplicationController
     @competition.attendees.each do |x|
       user = User.find_by(email: x[:email])
       break if user.nil?
-      user.notifications.create(title: attendee_message_params[:title],
+      user.notifications.create(title: "Message from organisers: #{attendee_message_params[:title]}",
                                 message: attendee_message_params[:message],
                                 notification_type: "message")
     end
-    head :ok
+    head :no_content
   end
 
   private
