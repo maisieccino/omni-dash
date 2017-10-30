@@ -1,6 +1,5 @@
 .git
 .dockerignore
-Gemfile.lock
 tmp
 vendor
 .bundle

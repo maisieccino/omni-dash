@@ -4,6 +4,6 @@ services:
     image: mbellgb/hatch-site-prod # assumes image is on docker hub
     build:
       dockerfile: ./Dockerfile
-    command: run-prod.sh
+    command: ["sh", "run-prod.sh"]
     environment:
       - RAILS_ENV=production

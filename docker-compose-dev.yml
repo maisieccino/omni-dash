@@ -4,7 +4,7 @@ services:
     image: mbellgb/hatch-site-dev # assumes image is on docker hub
     build:
       dockerfile: ./Dockerfile
-    command: run-dev.sh
+    command: ["sh", "run-dev.sh"]
     environment:
       - RAILS_ENV=development
 
