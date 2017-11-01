@@ -9,7 +9,7 @@ services:
     volumes:
       - dbdata:/var/lib/postgresql/data
     env_file:
-      - ".env.prod"
+      - ".env"
   redis:
     image: redis:3.2-alpine
     volumes:
@@ -21,15 +21,11 @@ services:
       - REDIS_HOST=redis
       - RAILS_DB_PASS=${POSTGRES_PASSWORD}
       - RAILS_ADMIN_USER_PASS # value will be read from local env when run
-    expose:
-      - "80"
-    ports:
-      - "80:3000"
     depends_on:
       - db
       - redis
     env_file:
-      - ".env.final"
+      - ".env"
 # ...and here
 volumes:
   #data-volume: uncomment once the volumes used by the app are clear

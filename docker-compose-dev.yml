@@ -2,6 +2,8 @@ version: '3.3'
 services:
   web:
     image: mbellgb/hatch-site-dev # assumes image is on docker hub
+    ports:
+      - "80:3000"
     build:
       dockerfile: ./Dockerfile
     command: ["sh", "run-dev.sh"]
