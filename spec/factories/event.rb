@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   start = Faker::Time.between(Time.now, 1.day.since)
   event_length = 3600 + rand(7200)
   factory :event do

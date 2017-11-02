@@ -33,21 +33,37 @@
 }
 
 .blue {
-  @include colorify($color-blue);
-}
+  color: $color-blue;
 
+  @include not($text-elements) {
+    @include colorify($color-blue, $color-bg);
+  }
+}
 .lightblue {
-  @include colorify($color-lightblue);
-}
+  color: $color-lightblue;
 
+  @include not($text-elements) {
+    @include colorify($color-lightblue, $color-bg);
+  }
+}
 .yellow {
-  @include colorify($color-yellow, $color-fg);
-}
+  color: $color-yellow;
 
+  @include not($text-elements) {
+    @include colorify($color-yellow, $color-fg);
+  }
+}
 .red {
-  @include colorify($color-red);
-}
+  color: $color-red;
 
+  @include not($text-elements) {
+    @include colorify($color-red, $color-bg);
+  }
+}
 .mint {
-  @include colorify($color-mint, $color-fg);
+  color: $color-mint;
+
+  @include not($text-elements) {
+    @include colorify($color-mint, $color-fg);
+  }
 }

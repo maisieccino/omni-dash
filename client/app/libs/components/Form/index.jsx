@@ -10,6 +10,7 @@ const inputPropTypes = {
   className: PropTypes.string,
   children: PropTypes.node,
   type: PropTypes.string,
+  after: PropTypes.node,
 };
 
 const inputDefaultProps = {
@@ -20,6 +21,7 @@ const inputDefaultProps = {
   className: "",
   children: null,
   type: "text",
+  after: null,
 };
 
 const InputField = ({
@@ -31,6 +33,7 @@ const InputField = ({
   className,
   children,
   type,
+  after,
   ...rest
 }) => (
   <div>
@@ -45,6 +48,7 @@ const InputField = ({
         value={value}
         {...rest}
       />
+      {after}
     </div>
   </div>
 );

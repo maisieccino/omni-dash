@@ -12,6 +12,10 @@ label {
   background-color: darken($color-card, 10);
   font-size: 1.1rem;
   padding: 0.25rem 0.4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  transition: all 0.25s ease-in-out;
 }
 
 input[type="text"],
@@ -73,5 +77,20 @@ textarea {
   &.edited {
     border-color: $edited-fg;
     background-color: $edited-bg;
+
+    .input-addon {
+      background-color: $edited-fg;
+      color: $color-bg;
+    }
+  }
+
+  &.invalid {
+    border-color: $color-red;
+    background-color: lighten($color-red, 30);
+
+    .input-addon {
+      background-color: $color-red;
+      color: $color-bg;
+    }
   }
 }

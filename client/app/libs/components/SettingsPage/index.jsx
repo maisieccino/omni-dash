@@ -8,6 +8,7 @@ import { TopNav } from "libs/components/Navigation";
 
 import NavItem from "../SplitViewNavItem";
 import ProfileSettings from "./ProfileSettings";
+import ChangePassword from "./ChangePassword";
 import TeamSettingsContainer from "./TeamSettingsContainer";
 import PrivacySettingsContainer from "./PrivacySettingsContainer";
 import NotificationsSettingsContainer from "./NotificationSettingsContainer";
@@ -21,6 +22,11 @@ const routes = [
     component: ProfileSettings,
   },
   { to: "/settings/team", label: "Team", component: TeamSettingsContainer },
+  {
+    to: "/settings/password",
+    label: "Change Password",
+    component: ChangePassword,
+  },
   {
     to: "/settings/privacy",
     label: "Privacy",

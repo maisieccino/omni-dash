@@ -71,6 +71,8 @@ const TestPage = () => (
     <Flash when type="success">
       This is for successful actions!
     </Flash>
+
+    <span className="blue">blue</span>
   </div>
 );
 

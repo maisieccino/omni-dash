@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :notification do
     title { Faker::Lorem.sentence }
     notification_type { "Event" }
