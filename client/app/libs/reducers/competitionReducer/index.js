@@ -122,7 +122,10 @@ export default (state = initialState, action = null) => {
     case constants.FETCH_COMPETITION_ATTENDEES_FAILURE:
     case constants.SET_IS_INVITING_COMPETITION_ATTENDEE:
     case constants.INVITE_COMPETITION_ATTENDEE_SUCCESS:
-    case constants.INVITE_COMPETITION_ATTENDEE_FAILURE: {
+    case constants.INVITE_COMPETITION_ATTENDEE_FAILURE:
+    case constants.SET_IS_MESSAGING_ATTENDEES:
+    case constants.COMPETITION_MESSAGE_ATTENDEES_SUCCESS:
+    case constants.COMPETITION_MESSAGE_ATTENDEES_FAILURE: {
       return {
         ...state,
         attendees: attendeesReducer(state.attendees, action),

@@ -3,6 +3,7 @@ import * as constants from "../../constants/competitionConstants";
 export const initialState = {
   isFetching: false,
   isInviting: false,
+  isMessagingAttendees: false,
   error: "",
   attendees: [],
   lastUpdated: null,
@@ -58,6 +59,29 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isInviting: false,
+      };
+    }
+
+    case constants.SET_IS_MESSAGING_ATTENDEES: {
+      return {
+        ...state,
+        isMessagingAttendees: true,
+        error: "",
+      };
+    }
+
+    case constants.COMPETITION_MESSAGE_ATTENDEES_SUCCESS: {
+      return {
+        ...state,
+        isMessagingAttendees: false,
+      };
+    }
+
+    case constants.COMPETITION_MESSAGE_ATTENDEES_FAILURE: {
+      return {
+        ...state,
+        isMessagingAttendees: false,
+        error,
       };
     }
 

@@ -69,7 +69,9 @@ gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 gem "react_on_rails", "9.0.0"
 
-gem "mini_racer", platforms: :ruby
+# build mini_racer on alpine
+gem "libv8"
+gem "mini_racer", "~> 0.1.11", platforms: :ruby
 gem "webpacker"
 
 gem "devise"

@@ -29,6 +29,35 @@ export const fetchCompetitionAttendees = () => async dispatch => {
   }
 };
 
+export const setIsMessagingAttendees = () => ({
+  type: constants.SET_IS_MESSAGING_ATTENDEES,
+});
+
+export const messageAttendeesSuccess = () => ({
+  type: constants.COMPETITION_MESSAGE_ATTENDEES_SUCCESS,
+});
+
+export const messageAttendeesFailure = error => ({
+  type: constants.COMPETITION_MESSAGE_ATTENDEES_FAILURE,
+  error,
+});
+
+export const messageAttendees = (title = "", message) => async dispatch => {
+  dispatch(setIsMessagingAttendees());
+  if (!message) {
+    return dispatch(messageAttendeesFailure("You must provide a message"));
+  }
+  try {
+    await jsonPostRequest(constants.COMPETITION_MESSAGE_ATTENDEES_PATH, {
+      title,
+      message,
+    });
+    return dispatch(messageAttendeesSuccess());
+  } catch (error) {
+    return dispatch(fetchCompetitionAttendeesFailure(error.message));
+  }
+};
+
 export const setIsInvitingAttendee = () => ({
   type: constants.SET_IS_INVITING_COMPETITION_ATTENDEE,
 });

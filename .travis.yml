@@ -11,7 +11,7 @@ env:
 - RAILS_ENV=test
 install:
 - bundle install
-- nvm install stable && nvm alias default stable
+- nvm install $(cat .nvmrc)
 - npm install npm@latest -g
 - npm install -g yarn
 - npm --version
