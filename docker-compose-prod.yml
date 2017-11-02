@@ -53,7 +53,6 @@ services:
     environment:
       - RAILS_ENV=production
       - VIRTUAL_HOST=${SITE_HOSTNAME}
-      - VIRTUAL_NETWORK=nginx-proxy
       - VIRTUAL_PORT=3000
       - LETSENCRYPT_HOST=${SITE_HOSTNAME}
       - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}

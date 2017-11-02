@@ -45,7 +45,7 @@ RUN bundle install
 # Copy the application code
 COPY . $WORK_DIR/
 
-COPY .env.final .env
+COPY ./.env .env
 
 RUN yarn --pure-lockfile
 
