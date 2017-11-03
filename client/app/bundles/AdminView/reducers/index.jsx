@@ -6,6 +6,9 @@ import userReducer, {
 import competitionReducer, {
   initialState as competitionState,
 } from "libs/reducers/competitionReducer";
+import timelineItemReducer, {
+  initialState as timelineItemState,
+} from "libs/reducers/timelineItemReducer";
 import eventsReducer, {
   initialState as eventsState,
 } from "libs/reducers/eventsReducer";
@@ -17,6 +20,7 @@ export const initialStates = {
   user: userState,
   users: usersState,
   events: eventsState,
+  timelineItem: timelineItemState,
 };
 
 export default combineReducers({
@@ -25,5 +29,6 @@ export default combineReducers({
   user: userReducer,
   users: usersReducer,
   events: eventsReducer,
+  timelineItem: timelineItemReducer,
   routerReducer,
 });

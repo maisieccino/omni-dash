@@ -1,4 +1,7 @@
-import * as constants from "../constants/userConstants";
+import * as constants from "../../constants/userConstants";
+import changePasswordReducer, {
+  initialState as changePasswordState,
+} from "./changePasswordReducer";
 
 export const initialState = {
   isFetching: false,
@@ -8,6 +11,7 @@ export const initialState = {
   user: {},
   userChangedFields: {},
   error: "",
+  changePassword: changePasswordState,
 };
 
 export default (state = initialState, action = null) => {
@@ -103,6 +107,16 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         userChangedFields: {},
+      };
+    }
+
+    // password change reducer
+    case constants.CHANGE_PASSWORD_SUCCESS:
+    case constants.CHANGE_PASSWORD_FAILURE:
+    case constants.SET_IS_CHANGING_PASSWORD: {
+      return {
+        ...state,
+        changePassword: changePasswordReducer(state.changePassword, action),
       };
     }
 

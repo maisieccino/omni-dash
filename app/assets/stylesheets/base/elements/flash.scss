@@ -1,17 +1,23 @@
+@mixin flash-color($color) {
+  background-color: lighten($color, 5);
+  color: darken($color, 40);
+  border-color: darken($color, 40);
+}
+
 .flash {
   position: relative;
   left: 0;
   right: 0;
   padding: 0.5rem;
   font-size: 1.25rem;
-  border-width: 0.1rem;
+  border-width: 0;
   border-style: solid;
-  font-style: italic;
   border-radius: $border-radius;
   margin-bottom: 0.5rem;
   display: flex;
   flex-direction: row;
   align-items: center;
+  @include flash-color($color-lightblue);
 
   svg {
     margin-right: 0.5rem;
@@ -20,32 +26,20 @@
 
 .notice {
   @extend .flash;
-  $color: $color-lightblue;
-  background-color: $color;
-  color: darken($color, 40);
-  border-color: darken($color, 40);
+  @include flash-color($color-lightblue);
 }
 
 .alert {
   @extend .flash;
-  $color: $color-red;
-  background-color: $color;
-  color: darken($color, 40);
-  border-color: darken($color, 40);
+  @include flash-color($color-red);
 }
 
 .warning {
   @extend .flash;
-  $color: $color-yellow;
-  background-color: $color;
-  color: darken($color, 40);
-  border-color: darken($color, 40);
+  @include flash-color($color-yellow);
 }
 
 .success {
   @extend .flash;
-  $color: $color-mint;
-  background-color: $color;
-  color: darken($color, 40);
-  border-color: darken($color, 40);
+  @include flash-color($color-mint);
 }

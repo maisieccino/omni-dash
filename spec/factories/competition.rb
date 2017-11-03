@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :competition do
     name { "Hack #{Faker::Address.city}" }
     description { Faker::Lorem.paragraphs(2).join(" ") }

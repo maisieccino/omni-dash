@@ -59,9 +59,13 @@ end
 
 group :test do
   gem "database_cleaner"
-  gem "factory_girl_rails", "~> 4.0"
+  gem "factory_bot_rails"
   gem "faker"
   gem "shoulda-matchers", "~> 3.1"
+end
+
+group :production do
+  gem "mailgun-ruby", "~>1.1.6"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
