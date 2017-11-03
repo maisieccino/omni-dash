@@ -19,6 +19,7 @@ input[type="submit"],
   height: 3rem;
   justify-content: center;
   align-items: center;
+  transition: all 0.25s ease-in-out;
 
   svg {
     margin-left: 0.5rem;

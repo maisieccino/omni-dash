@@ -108,3 +108,5 @@ export const deleteUser = id => async dispatch => {
     );
   }
 };
+
+export * from "./passwordActions";

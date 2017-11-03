@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as Icon from "react-feather";
 
 const inputPropTypes = {
   id: PropTypes.string.isRequired,
@@ -11,6 +12,7 @@ const inputPropTypes = {
   children: PropTypes.node,
   type: PropTypes.string,
   after: PropTypes.node,
+  error: PropTypes.string,
 };
 
 const inputDefaultProps = {
@@ -22,6 +24,7 @@ const inputDefaultProps = {
   children: null,
   type: "text",
   after: null,
+  error: "",
 };
 
 const InputField = ({
@@ -34,11 +37,14 @@ const InputField = ({
   children,
   type,
   after,
+  error,
   ...rest
 }) => (
   <div>
     <label htmlFor={id}>{label || id}</label>
-    <div className={`input-group ${className}`}>
+    <div
+      className={`input-group ${error.length > 0 && "invalid"} ${className}`}
+    >
       {children}
       <input
         type={type}
@@ -48,8 +54,14 @@ const InputField = ({
         value={value}
         {...rest}
       />
-      {after}
+      {(error.length > 0 || after !== null) && (
+          <span className="input-addon">
+            {error.length > 0 && <Icon.AlertOctagon />}
+            {after}
+          </span>
+        )}
     </div>
+    {error.length > 0 && <p className="red">{error}</p>}
   </div>
 );
 

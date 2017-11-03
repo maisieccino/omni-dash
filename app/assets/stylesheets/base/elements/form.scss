@@ -1,6 +1,14 @@
 $edited-fg: #8f791d;
 $edited-bg: lighten($edited-fg, 50);
 
+form {
+  progress {
+    @include respond-to(900px) {
+      width: 50%;
+    }
+  }
+}
+
 label {
   display: block;
   font-weight: bold;
@@ -10,7 +18,7 @@ label {
 .input-addon {
   padding-right: 0.1rem;
   background-color: darken($color-card, 10);
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   padding: 0.25rem 0.4rem;
   display: flex;
   flex-direction: row;
@@ -26,7 +34,7 @@ input[type="time"],
 input[type="number"],
 textarea {
   font-family: $font-body;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   transition: all 0.25s ease-in-out;
   border: $color-fg solid 1px;
   outline: none;
@@ -87,6 +95,10 @@ textarea {
   &.invalid {
     border-color: $color-red;
     background-color: lighten($color-red, 30);
+
+    input {
+      color: darken($color-red, 10);
+    }
 
     .input-addon {
       background-color: $color-red;

@@ -45,10 +45,9 @@ class UsersController < ApplicationController
   def change_password
     return json_response({ message: "Password is incorrect" }, :bad_request) unless @user.valid_password?(password_params[:old_password])
     return json_response({ message: "New passwords do not match" }, :bad_request) unless password_params[:new_password] == password_params[:new_password_confirm]
-    @user.update({
-      password: password_params[:new_password],
-      password_confirmation: password_params[:new_password_confirm],
-    })
+    @user.update(password: password_params[:new_password],
+                 password_confirmation: password_params[:new_password_confirm])
+    bypass_sign_in @user
     head :no_content
   end
 

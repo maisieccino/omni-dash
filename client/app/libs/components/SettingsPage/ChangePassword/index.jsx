@@ -1,85 +1,69 @@
 import React, { Component } from "react";
-import * as Icon from "react-feather";
-import { PasswordField } from "libs/components/Form";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { changePassword } from "../../../actions/userActions";
+import ChangePasswordView from "./ChangePasswordView";
 
 class ChangePassword extends Component {
+  static propTypes = {
+    isChangingPassword: PropTypes.bool,
+    error: PropTypes.string,
+    changePassword: PropTypes.func,
+  };
+
+  static defaultProps = {
+    isChangingPassword: false,
+    error: "",
+    changePassword: () => {},
+  };
+
+  static mapStateToProps = state => ({
+    isChangingPassword: state.user.changePassword.isChangingPassword,
+    error: state.user.changePassword.error,
+  });
+
+  static mapDispatchToProps = dispatch => ({
+    changePassword: (...params) => dispatch(changePassword(...params)),
+  });
+
   constructor(props) {
     super(props);
     this.state = {
-      oldPassword: "",
-      newPassword: "",
-      newPasswordConfirm: "",
+      success: false,
     };
   }
 
-  resetForm() {
-    this.setState({
-      oldPassword: "",
-      newPassword: "",
-      newPasswordConfirm: "",
-    });
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.props.isChangingPassword &&
+      !nextProps.isChangingPassword &&
+      nextProps.error.length === 0
+    ) {
+      this.setState({ success: true });
+    }
+  }
+
+  submitForm(params) {
+    this.props.changePassword(
+      params.oldPassword,
+      params.newPassword,
+      params.newPasswordConfirm,
+    );
   }
 
   render() {
     return (
-      <div className="splitview-pane">
-        <div className="title-bar">
-          <h1>Change Your Password</h1>
-          <button
-            className="red square"
-            title="Reset fields"
-            onClick={() => this.resetForm()}
-          >
-            <Icon.RotateCcw />
-          </button>
-        </div>
-
-        <p>
-          You{"'"}ll receive an email confirming that your password has been
-          changed.
-        </p>
-
-        <form>
-          <PasswordField
-            id="oldPassword"
-            label="Old Password"
-            value={this.state.oldPassword}
-            onChange={val => this.setState({ oldPassword: val })}
-          />
-
-          <p>
-            We recommend that you use a password manager to generate and store
-            your passwords for maximum security.{" "}
-            <a href="https://www.howtogeek.com/141500/why-you-should-use-a-password-manager-and-how-to-get-started/">
-              Why?
-            </a>
-          </p>
-          <PasswordField
-            id="newPassword"
-            label="New Password"
-            value={this.state.newPassword}
-            onChange={val => this.setState({ newPassword: val })}
-            className="invalid"
-            after={
-              <span className="input-addon">
-                <Icon.AlertOctagon />
-              </span>
-            }
-          />
-          <p className="red">The passwords you entered do not match.</p>
-          <PasswordField
-            id="newPasswordConfirm"
-            label="Repeat Your New Password"
-            value={this.state.newPasswordConfirm}
-            onChange={val => this.setState({ newPasswordConfirm: val })}
-          />
-          <p>
-            <button type="submit">Update</button>
-          </p>
-        </form>
-      </div>
+      <ChangePasswordView
+        onSubmitClick={state => this.submitForm(state)}
+        success={this.state.success}
+        {...this.props}
+        isChangingPassword={this.state.isChanging}
+      />
     );
   }
 }
 
-export default ChangePassword;
+export default connect(
+  ChangePassword.mapStateToProps,
+  ChangePassword.mapDispatchToProps,
+)(ChangePassword);
