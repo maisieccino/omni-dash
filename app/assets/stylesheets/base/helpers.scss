@@ -38,7 +38,7 @@ $text-elements: h1, h2, h3, h4, h5, h6, p;
 }
 
 @mixin respond-to($breakpoint) {
-  @include respond-to-base($breakpoint, "landscape") {
+  @media (min-width: $breakpoint) {
     @content;
   }
 }
