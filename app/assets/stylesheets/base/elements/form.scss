@@ -106,3 +106,104 @@ textarea {
     }
   }
 }
+
+input[type="radio"],
+input[type="checkbox"] {
+  position: relative;
+  width: $input-radius;
+  height: $input-radius;
+  &::before,
+  &::after {
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    position: absolute;
+  }
+
+  &::before {
+    border: 0.1rem solid $color-fg;
+    background-color: $color-card;
+  }
+
+  &:focus::before {
+    border-color: #0000ff;
+    border-style: dashed;
+  }
+  &:disabled::before {
+    border-color: lighten($color-fg, 50);
+  }
+}
+
+input[type="radio"] {
+  &::before,
+  &::after {
+    box-sizing: border-box;
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  &::before {
+    width: $input-radius;
+    height: $input-radius;
+    left: calc(50% - #{$input-radius / 2});
+    top: calc(50% - #{$input-radius / 2});
+    border-radius: 50%;
+  }
+
+  &::after {
+    $size: $input-radius * 0.5;
+    width: $size;
+    height: $size;
+    background-color: $color-accent;
+    left: calc(50% - #{$size / 2});
+    top: calc(50% - #{$size / 2});
+    transition: transform 0.15s ease-in-out;
+    transform: scale(0);
+  }
+
+  &:checked::after {
+    transform: scale(1);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    ::after {
+      background-color: desaturate($color-red, 100);
+    }
+  }
+}
+
+input[type="checkbox"] {
+  &::before {
+    width: $input-radius;
+    height: $input-radius;
+    border-radius: $border-radius;
+  }
+  &::after {
+    $line-width: 0.2rem;
+    $height: $input-radius * 0.7;
+    $width: 0.5rem;
+    border-color: $color-accent;
+    border-style: solid;
+    border-width: 0 $line-width $line-width 0;
+    width: $width;
+    height: $height;
+
+    left: calc(50% - #{$width / 2});
+    top: calc(45% - #{$height / 2});
+    transition: opacity 0.1s ease-in-out;
+    transform: rotate(45deg);
+    opacity: 0;
+  }
+  &:checked::after {
+    opacity: 1;
+  }
+  &:disabled {
+    &::after {
+      border-color: desaturate($color-red, 100);
+    }
+  }
+  color: $color-accent;
+}

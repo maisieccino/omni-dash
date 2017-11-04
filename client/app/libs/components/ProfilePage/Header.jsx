@@ -29,6 +29,9 @@ const Header = ({
         <h1>
           {first_name} {last_name} {admin && <Icon.Shield />}
         </h1>
+      </div>
+      <p>{bioText(bio)}</p>
+      <div className="button-group flex horizontal">
         <button
           className="mint button square"
           disabled={isFetching}
@@ -57,7 +60,6 @@ const Header = ({
           </a>,
         ]}
       </div>
-      <p>{bioText(bio)}</p>
     </div>
   </header>
 );
