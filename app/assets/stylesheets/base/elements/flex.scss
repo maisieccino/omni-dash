@@ -22,6 +22,10 @@
   flex-direction: column;
 }
 
+.flex.right {
+  justify-content: flex-end;
+}
+
 .flex.horizontal {
   flex-direction: row;
 
