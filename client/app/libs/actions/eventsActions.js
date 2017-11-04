@@ -19,7 +19,6 @@ export const fetchEvents = () => async dispatch => {
   dispatch(setIsFetchingEvents());
   try {
     const events = await jsonGetRequest(constants.EVENTS_PATH);
-    await new Promise(res => setTimeout(res, 1000));
     return dispatch(fetchEventsSuccess(events));
   } catch (error) {
     return dispatch(
@@ -46,7 +45,6 @@ export const createEvent = params => async dispatch => {
   dispatch(setIsCreatingEvent());
   try {
     const event = await jsonPostRequest(constants.EVENTS_PATH, params);
-    await new Promise(res => setTimeout(res, 1000));
     return dispatch(createEventSuccess(event));
   } catch (error) {
     return dispatch(

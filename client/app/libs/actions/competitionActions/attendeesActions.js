@@ -19,8 +19,6 @@ export const fetchCompetitionAttendees = () => async dispatch => {
   dispatch(setIsFetchingCompetitionAttendees());
   try {
     const json = await jsonGetRequest(constants.COMPETITION_INVITES_PATH);
-    // TODO: Remove timeouts
-    await new Promise(res => setTimeout(res, 1000));
     return dispatch(
       fetchCompetitionAttendeesSuccess(json instanceof Array ? json : [json]),
     );
@@ -74,8 +72,6 @@ export const inviteAttendeeFailure = error => ({
 export const inviteAttendee = params => async dispatch => {
   dispatch(setIsInvitingAttendee());
   try {
-    // TODO: Remove timeouts
-    await new Promise(res => setTimeout(res, 1000));
     await jsonPostRequest(constants.COMPETITION_INVITES_PATH, params);
     return dispatch(inviteAttendeeSuccess());
   } catch (error) {

@@ -1,13 +1,14 @@
 import React from "react";
 
-const NotificationsSettingsContainer = () =>
+const NotificationsSettingsContainer = () => (
   <div className="splitview-pane">
-    <h1>Notifications Settings</h1>
+    <div className="title-bar">
+      <h1>Notifications Settings</h1>
+    </div>
     <p>
-      <em>
-        This feature isn{"'"}t quite ready yet. Come back later!
-      </em>
+      <em>This feature isn{"'"}t quite ready yet. Come back later!</em>
     </p>
-  </div>;
+  </div>
+);
 
 export default NotificationsSettingsContainer;

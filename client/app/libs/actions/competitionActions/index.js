@@ -79,7 +79,6 @@ export const updateCompetition = competition => async dispatch => {
   dispatch(setIsUpdatingCompetition());
   try {
     await jsonPutRequest(constants.COMPETITION_PATH, competition);
-    await new Promise(res => setTimeout(res, 1000));
     dispatch(updateCompetitionSuccess());
     return dispatch(fetchCompetition());
   } catch (error) {

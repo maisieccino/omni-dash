@@ -3,7 +3,9 @@ import * as Icon from "react-feather";
 
 const FeedbackContainer = () => (
   <div className="splitview-pane">
-    <h1>Submit Feedback</h1>
+    <div className="title-bar">
+      <h1>Submit Feedback</h1>
+    </div>
     <p>This feature isn{"'"}t quite ready yet. Come back later!</p>
 
     <h2>Bugs And Issues</h2>

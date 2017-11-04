@@ -4,6 +4,7 @@
 
 const webpack = require("webpack");
 const { resolve } = require("path");
+const Dotenv = require("dotenv-webpack");
 
 const ManifestPlugin = require("webpack-manifest-plugin");
 const webpackConfigLoader = require("react-on-rails/webpackConfigLoader");
@@ -50,6 +51,7 @@ const config = {
       publicPath: output.publicPath,
       writeToFileEmit: true,
     }),
+    new Dotenv({ path: "../.env" }),
   ],
 
   module: {

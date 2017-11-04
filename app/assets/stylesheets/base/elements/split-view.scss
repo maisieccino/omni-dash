@@ -44,6 +44,13 @@
         display: none;
       }
     }
+
+    img.icon {
+      width: 100%;
+      @include respond-to(600px) {
+        width: 25%;
+      }
+    }
   }
 
   @include respond-to(900px) {

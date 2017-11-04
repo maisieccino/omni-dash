@@ -21,7 +21,6 @@ export const fetchUserFailure = error => ({
 
 export const fetchUser = id => async dispatch => {
   dispatch(setIsFetching());
-  await new Promise(res => setTimeout(res, 1000));
   const uri = id ? `/users/${id}/` : constants.USER_ME_PATH;
   try {
     const json = await jsonGetRequest(uri);
@@ -65,22 +64,16 @@ export const updateUserFailure = error => ({
  * @param  {Object} [data={}] Updated information to send
  * @return {Promise}           Resolves or fails
  */
-export const updateUser = (data = {}) => dispatch => {
+export const updateUser = (data = {}) => async dispatch => {
   dispatch(setIsUpdating());
-  return jsonPutRequest(constants.USER_ME_PATH, data)
-    .then(
-      () =>
-        // fake delay
-        new Promise(res => {
-          setTimeout(() => res(), 1000);
-        }),
-    )
-    .then(() => {
-      dispatch(updateUserSuccess());
-      dispatch(fetchUser());
-    })
-    .then(() => dispatch(resetSettingValues()))
-    .catch(err => dispatch(updateUserFailure(err.message)));
+  try {
+    await jsonPutRequest(constants.USER_ME_PATH, data);
+    await dispatch(updateUserSuccess());
+    await dispatch(fetchUser());
+    return dispatch(resetSettingValues());
+  } catch (error) {
+    return dispatch(updateUserFailure(error.message));
+  }
 };
 
 export const setIsDeletingUser = () => ({
@@ -100,7 +93,6 @@ export const deleteUser = id => async dispatch => {
   dispatch(setIsDeletingUser());
   try {
     await jsonDeleteRequest(id ? `/users/${id}` : constants.USER_ME_PATH);
-    await new Promise(res => setTimeout(res, 1000));
     return dispatch(deleteUserSuccess());
   } catch (error) {
     return dispatch(
