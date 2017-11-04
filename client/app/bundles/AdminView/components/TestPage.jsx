@@ -72,7 +72,34 @@ const TestPage = () => (
       This is for successful actions!
     </Flash>
 
-    <span className="blue">blue</span>
+    <h2>Form Elements</h2>
+    <h3>Radio</h3>
+    <p className="flex horizontal center">
+      <input type="radio" name="radios" id="radios-1" />
+      <label htmlFor="radios-1">Option 1</label>
+    </p>
+    <p className="flex horizontal center">
+      <input type="radio" name="radios" id="radios-2" />
+      <label htmlFor="radios-2">Option 2</label>
+    </p>
+    <p className="flex horizontal center">
+      <input type="radio" name="radios" id="radios-3" />
+      <label htmlFor="radios-3">Option 3</label>
+    </p>
+
+    <h3>Check Boxes</h3>
+    <p className="flex horizontal center">
+      <input type="checkbox" name="checks" id="checks-1" />
+      <label htmlFor="checks-1">Option 1</label>
+    </p>
+    <p className="flex horizontal center">
+      <input type="checkbox" name="checks" id="checks-2" />
+      <label htmlFor="checks-2">Option 2</label>
+    </p>
+    <p className="flex horizontal center">
+      <input type="checkbox" name="checks" id="checks-3" />
+      <label htmlFor="checks-3">Option 3</label>
+    </p>
   </div>
 );
 
