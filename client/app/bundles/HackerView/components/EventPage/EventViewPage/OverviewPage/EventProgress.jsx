@@ -5,13 +5,14 @@ import moment from "moment";
 const EventProgress = ({ startTime, timeRemaining, eventName }) => {
   const timeToStart = moment.duration(moment(startTime).diff(moment()));
   const days = Math.floor(timeToStart.asDays());
-  const hours = timeToStart.minutes();
+  const hours = timeToStart.hours();
   const minutes = timeToStart.minutes();
   if (Date.parse(startTime) > Date.now()) {
     return (
       <span>
         {eventName} begins in {days && `${days} days,`}{" "}
-        {hours && `${hours} hours and`} {minutes && `${minutes} minutes`}!
+        {hours > 0 && `${hours} hours`}{" "}
+        {minutes > 0 && ` and ${minutes} minutes`}!
       </span>
     );
   }
