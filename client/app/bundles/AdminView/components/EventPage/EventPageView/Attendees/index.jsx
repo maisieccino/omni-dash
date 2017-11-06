@@ -54,12 +54,6 @@ class Attendees extends Component {
       <div className="splitview-pane">
         <div className="title-bar">
           <h1>Attendees </h1>
-          <p>
-            <i>
-              Last updated:{" "}
-              {lastUpdated ? moment(lastUpdated).format("HH:mm:ss") : "Never"}
-            </i>
-          </p>
           <Link
             to="/event/attendees/add"
             title="Add New Attendee"
@@ -84,11 +78,17 @@ class Attendees extends Component {
             <Icon.Server />
           </a>
         </div>
+        <p>
+          <i>
+            Last updated:{" "}
+            {lastUpdated ? moment(lastUpdated).format("HH:mm:ss") : "Never"}
+          </i>
+        </p>
         <Flash type="alert" when={this.props.error.length > 0}>
           Error: {this.props.error}
         </Flash>
 
-        <Table rows={attendees} columns={tableColumns} />
+        {<Table rows={attendees} columns={tableColumns} />}
       </div>
     );
   }
