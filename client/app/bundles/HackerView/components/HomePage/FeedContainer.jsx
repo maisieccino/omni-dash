@@ -65,6 +65,15 @@ class FeedContainer extends Component {
       });
     }
 
+    if ("Notification" in window) {
+      if (Notification.permission !== "granted") {
+        feedItems.push({
+          type: "notificationPermission",
+          onGranted: () => this.props.fetchCompetition(),
+        });
+      }
+    }
+
     // feedItems.push({
     //   type: "currentLesson",
     //   currentLesson: {

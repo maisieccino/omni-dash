@@ -37,16 +37,20 @@ class HackerView extends Component {
   constructor(props) {
     super(props);
     this.cable = null;
-    this.state = {
-      notifications: [],
-      notificationError: "",
-    };
   }
 
   componentDidMount() {
     this.props.fetchCompetition();
     this.props.fetchNotifications();
     this.subscribeChannel();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const notificationCount = nextProps.notifications.filter(x => !x.seen)
+      .length;
+    document.title = notificationCount
+      ? `Hatch Site (${notificationCount})`
+      : "Hatch Site";
   }
 
   subscribeChannel() {

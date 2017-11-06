@@ -8,6 +8,8 @@ import {
 } from "libs/actions/notificationsActions";
 import HackerView from "../components/HackerView";
 
+navigator.serviceWorker.register("/assets/sw.js");
+
 // Which part of the Redux global state does our component want to receive as props?
 const mapStateToProps = state => ({
   current_user: state.current_user,
