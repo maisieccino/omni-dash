@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import * as Icon from "react-feather";
 import FeedContainer from "./FeedContainer";
 
 class HomePage extends Component {
@@ -15,9 +16,14 @@ class HomePage extends Component {
     const { user } = this.props;
     return (
       <div>
-        <h1>
-          Hello, <span className="accent">{user.first_name}</span>.
-        </h1>
+        <div className="title-bar">
+          <h1>
+            Hello, <span className="accent">{user.first_name}</span>.
+          </h1>
+          <button className="square mint">
+            <Icon.RefreshCw />
+          </button>
+        </div>
         <FeedContainer />
       </div>
     );
