@@ -2,14 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import moment from "moment";
-import { generate } from "shortid";
 import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
 import { fetchCompetitionAttendees } from "libs/actions/competitionActions";
-import Flash from "libs/components/Flash";
-import { Modal } from "libs/components";
-
-import AttendeeTableHeader from "./AttendeeTableHeader";
+import { Flash, Table } from "libs/components";
 
 class Attendees extends Component {
   static propTypes = {
@@ -42,20 +38,22 @@ class Attendees extends Component {
   }
 
   render() {
-    const attendees = this.props.attendees.sort(
-      (a, b) => a.first_name > b.first_name,
-    );
+    const attendees = this.props.attendees
+      .sort((a, b) => a.first_name > b.first_name)
+      .map(attendee => [
+        `${attendee.first_name} ${attendee.last_name}`,
+        attendee.email,
+        attendee.has_account ? "Y" : "N",
+        "",
+      ]);
+    const tableColumns = ["Name", "Email", "Used Invite Code?", "Actions"];
+
     const { lastUpdated } = this.props;
+
     return (
       <div className="splitview-pane">
         <div className="title-bar">
           <h1>Attendees </h1>
-          <p>
-            <i>
-              Last updated:{" "}
-              {lastUpdated ? moment(lastUpdated).format("HH:mm:ss") : "Never"}
-            </i>
-          </p>
           <Link
             to="/event/attendees/add"
             title="Add New Attendee"
@@ -80,34 +78,17 @@ class Attendees extends Component {
             <Icon.Server />
           </a>
         </div>
-        <Flash type="alert" when={this.props.error}>
+        <p>
+          <i>
+            Last updated:{" "}
+            {lastUpdated ? moment(lastUpdated).format("HH:mm:ss") : "Never"}
+          </i>
+        </p>
+        <Flash type="alert" when={this.props.error.length > 0}>
           Error: {this.props.error}
         </Flash>
-        <table>
-          <AttendeeTableHeader />
-          <tbody>
-            {attendees.map(attendee => (
-              <tr key={generate()}>
-                <td>
-                  {attendee.first_name} {attendee.last_name}
-                </td>
-                <td>{attendee.email}</td>
-                <td>{attendee.has_account ? "Y" : "N"}</td>
-                <td />
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {this.state.isInviteModalOpen && (
-          <Modal
-            onCloseButtonClick={() =>
-              this.setState({ isInviteModalOpen: false })}
-            choices={[
-              <button className="primary">Okay</button>,
-              <button>Cancel</button>,
-            ]}
-          />
-        )}
+
+        {<Table rows={attendees} columns={tableColumns} />}
       </div>
     );
   }

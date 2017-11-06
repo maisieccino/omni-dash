@@ -1,35 +1,26 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { generate } from "shortid";
+import { Table } from "libs/components";
 
-import UsersTableHeader from "./UsersTableHeader";
 import UserActions from "./UserActions";
 
 const UsersTable = ({ users, refreshTable }) => {
-  const usersArray = users.sort((a, b) => a.id > b.id);
-  return (
-    <table>
-      <UsersTableHeader />
-      <tbody>
-        {usersArray.map(user => (
-          <tr key={generate()}>
-            <td>{user.id}</td>
-            <td>{user.first_name}</td>
-            <td>{user.last_name}</td>
-            <td>{user.email}</td>
-            <UserActions
-              userId={user.id}
-              firstName={user.first_name}
-              lastName={user.last_name}
-              onDeleteUser={() => {
-                refreshTable();
-              }}
-            />
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
+  const usersArray = users
+    .sort((a, b) => a.id > b.id)
+    .map(user => [
+      user.id,
+      user.first_name,
+      user.last_name,
+      user.email,
+      <UserActions
+        userId={user.id}
+        firstName={user.first_name}
+        lastName={user.last_name}
+        onDeleteUser={() => refreshTable()}
+      />,
+    ]);
+  const columns = ["ID", "First Name", "Last Name", "Email", "Actions"];
+  return <Table rows={usersArray} columns={columns} />;
 };
 
 UsersTable.propTypes = {
