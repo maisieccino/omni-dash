@@ -31,12 +31,6 @@ class UsersPage extends Component {
       <div>
         <div className="title-bar">
           <h1>Users</h1>
-          <p>
-            <i>
-              Last updated:{" "}
-              {lastUpdated ? moment(lastUpdated).format("HH:mm:ss") : "Never"}
-            </i>
-          </p>
           <button
             disabled={this.props.isFetching}
             className="mint square"
@@ -56,6 +50,12 @@ class UsersPage extends Component {
             <Icon.Server />
           </a>
         </div>
+        <p>
+          <i>
+            Last updated:{" "}
+            {lastUpdated ? moment(lastUpdated).format("HH:mm:ss") : "Never"}
+          </i>
+        </p>
         {this.props.isFetching ? (
           <p>Loading users...</p>
         ) : (
