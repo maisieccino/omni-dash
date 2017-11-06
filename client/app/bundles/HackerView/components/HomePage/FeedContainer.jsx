@@ -24,7 +24,21 @@ class FeedContainer extends Component {
     fetchCompetition: () => {},
   };
 
-  static generateFeedItems = competition => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      feedItems: this.generateFeedItems(props.competition),
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      feedItems: this.generateFeedItems(nextProps.competition),
+    });
+    this.forceUpdate();
+  }
+
+  generateFeedItems = competition => {
     const eventHasStarted =
       Date.now() - Date.parse(competition.start_time) >= 0;
     const eventHasEnded = Date.now() - Date.parse(competition.end_time) >= 0;
@@ -69,7 +83,10 @@ class FeedContainer extends Component {
       if (Notification.permission !== "granted") {
         feedItems.push({
           type: "notificationPermission",
-          onGranted: () => this.props.fetchCompetition(),
+          onGranted: () =>
+            this.setState({
+              feedItems: this.generateFeedItems(this.props.competition),
+            }),
         });
       }
     }
@@ -86,21 +103,6 @@ class FeedContainer extends Component {
 
     return feedItems;
   };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      feedItems: FeedContainer.generateFeedItems(props.competition),
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      feedItems: FeedContainer.generateFeedItems(nextProps.competition),
-    });
-    this.forceUpdate();
-  }
-
   render() {
     // map cards to their respective drawables.
     const cards = this.state.feedItems.map(item => (

@@ -2,16 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const requestPermission = done => {
-  console.log("Requesting notification permission...");
   Notification.requestPermission(permission => {
     if (permission === "granted") {
-      navigator.serviceWorker.ready.then(registration => {
-        registration.showNotification(
-          "Hi! Browser notifications are now enabled.",
-        );
-        console.log("done");
-        done();
-      });
+      new window.Notification("Hi! Browser notifications are now enabled."); // eslint-disable-line no-new
+      done();
     }
   });
 };

@@ -65,8 +65,13 @@ class HackerView extends Component {
       {
         disconnected: () =>
           this.setState({ error: "Disconnected from notifications channel" }),
-        received: notification =>
-          this.props.onReceiveNotification(notification),
+        received: notification => {
+          /* eslint-disable no-new */
+          this.props.onReceiveNotification(notification);
+          new window.Notification(notification.title, {
+            body: notification.message,
+          });
+        },
       },
     );
   }
