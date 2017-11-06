@@ -71,7 +71,7 @@ class UserActions extends Component {
     }
     const { userId, firstName, lastName, isDeleting } = this.props;
     return (
-      <td>
+      <span>
         <Link className="yellow button" to={`/user/${userId}`}>
           View Profile
         </Link>
@@ -99,7 +99,7 @@ class UserActions extends Component {
             Are you sure you want to delete {firstName} {lastName}?
           </p>
         </Modal>
-      </td>
+      </span>
     );
   }
 }
