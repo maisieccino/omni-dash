@@ -71,9 +71,13 @@ class UserActions extends Component {
     }
     const { userId, firstName, lastName, isDeleting } = this.props;
     return (
-      <span>
-        <Link className="yellow button" to={`/user/${userId}`}>
-          View Profile
+      <span className="button-group">
+        <Link
+          className="yellow square button"
+          to={`/user/${userId}`}
+          title="View User"
+        >
+          <Icon.User />
         </Link>
         <button title="Edit User" className="square">
           <Icon.Edit2 />

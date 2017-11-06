@@ -1,7 +1,10 @@
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
 table {
-  min-width: 100%;
-  overflow-x: scroll;
-
+  width: 100%;
   thead {
     background-color: $color-fg;
     color: $color-bg;

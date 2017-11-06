@@ -8,7 +8,7 @@ import Row from "./TableRow";
 const Table = ({ rows, columns }) => {
   const columnCount = columns.length;
   return (
-    <div>
+    <div className="table-wrapper">
       <table>
         <Header columns={columns} />
         <tbody>
