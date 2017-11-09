@@ -106,7 +106,8 @@ export const deleteCompetition = () => async dispatch => {
   dispatch(setIsDeletingCompetition());
   try {
     await jsonDeleteRequest(constants.COMPETITION_PATH);
-    return dispatch(deleteCompetitionSuccess());
+    await dispatch(deleteCompetitionSuccess());
+    return dispatch(fetchCompetition());
   } catch (error) {
     return dispatch(
       deleteCompetitionFailure(

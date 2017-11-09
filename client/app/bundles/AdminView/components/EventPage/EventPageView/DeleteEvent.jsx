@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
+import { Flash } from "libs/components";
 import {
   fetchCompetition,
   deleteCompetition,
@@ -11,7 +12,7 @@ class DeleteEvent extends Component {
   static propTypes = {
     eventName: PropTypes.string,
     isDeleting: PropTypes.bool,
-    // error: PropTypes.string,
+    error: PropTypes.string,
     deleteCompetition: PropTypes.func,
     fetchCompetition: PropTypes.func,
   };
@@ -51,6 +52,9 @@ class DeleteEvent extends Component {
     return (
       <div className="splitview-pane">
         <h1>Delete Event</h1>
+        <Flash type="alert" when={this.props.error.length > 0}>
+          {this.props.error}
+        </Flash>
         <p>
           This will delete the current event, along with any attendee details,
           all timeline data and any other associated data and files. This
