@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Route, Switch } from "react-router";
+import { Route } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
+import { Switch } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ActionCable from "actioncable";
 
 import TimelineItemPage from "libs/components/TimelineItemPage";
@@ -23,6 +25,7 @@ class HackerView extends Component {
     notifications: PropTypes.arrayOf(PropTypes.shape()),
     current_user: PropTypes.shape(),
     history: PropTypes.shape(),
+    location: PropTypes.shape(),
   };
 
   static defaultProps = {
@@ -32,6 +35,7 @@ class HackerView extends Component {
     notifications: [],
     current_user: {},
     history: {},
+    location: { pathname: "/" },
   };
 
   constructor(props) {
@@ -77,8 +81,16 @@ class HackerView extends Component {
   }
 
   render() {
-    const { current_user: currentUser, history, notifications } = this.props;
+    const {
+      current_user: currentUser,
+      history,
+      notifications,
+      location,
+    } = this.props;
     const unreadNotifications = notifications.filter(x => !x.seen);
+    const currentKey = location
+      ? this.props.location.pathname.split("/")[1]
+      : "/";
     return (
       <ConnectedRouter history={history}>
         <div>
@@ -87,28 +99,44 @@ class HackerView extends Component {
             routes={routes}
             notificationCount={unreadNotifications.length}
           />
-          <div className="page">
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={() => <HomePage user={currentUser} />}
-              />
-              <Route path="/courses" component={CoursesPage} />
-              <Route
-                path="/timeline/item/:id"
-                render={props => <TimelineItemPage {...props} />}
-              />
-              <Route path="/event" component={EventPage} />
-              <Route path="/notifications" component={NotificationsPage} />
-              <Route path="/profile" component={ProfilePage} />
-              <Route
-                path="/user/:id"
-                render={props => <ProfilePage {...props} />}
-              />
-              <Route path="/settings" component={SettingsPage} />
-            </Switch>
-          </div>
+          <TransitionGroup>
+            <CSSTransition
+              timeout={500}
+              key={currentKey}
+              classNames="fadeTranslate"
+              mountOnEnter
+              unmountOnExit
+              appear
+            >
+              <div className="page-wrapper">
+                <div className="page">
+                  <Switch location={location}>
+                    <Route
+                      exact
+                      path="/"
+                      render={() => <HomePage user={currentUser} />}
+                    />
+                    <Route path="/courses" component={CoursesPage} />
+                    <Route
+                      path="/timeline/item/:id"
+                      render={props => <TimelineItemPage {...props} />}
+                    />
+                    <Route path="/event" component={EventPage} />
+                    <Route
+                      path="/notifications"
+                      component={NotificationsPage}
+                    />
+                    <Route path="/profile" component={ProfilePage} />
+                    <Route
+                      path="/user/:id"
+                      render={props => <ProfilePage {...props} />}
+                    />
+                    <Route path="/settings" component={SettingsPage} />
+                  </Switch>
+                </div>
+              </div>
+            </CSSTransition>
+          </TransitionGroup>
         </div>
       </ConnectedRouter>
     );
