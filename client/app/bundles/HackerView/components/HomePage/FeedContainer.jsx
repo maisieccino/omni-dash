@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { generate } from "shortid";
-import * as Icon from "react-feather";
 import Feed from "./Feed";
 import Card from "./Card";
 
@@ -99,18 +98,14 @@ class FeedContainer extends Component {
       <Card key={generate()} {...item} />
     ));
 
-    if (this.props.isFetching) {
-      return (
-        <div>
+    return (
+      <div>
+        {this.props.isFetching && (
           <h3 className="help-text">Loading Feed...</h3>
-          <h3 className="help-text">
-            <Icon.RefreshCw className="spinner" />
-          </h3>
-          <h3 className="help-text">{JSON.stringify(this.props, "\n", 3)}</h3>
-        </div>
-      );
-    }
-    return <Feed>{cards}</Feed>;
+        )}
+        <Feed>{cards}</Feed>
+      </div>
+    );
   }
 }
 
