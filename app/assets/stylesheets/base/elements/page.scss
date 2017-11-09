@@ -1,20 +1,27 @@
 // main content container
 
-.page {
+.page-wrapper {
   margin: 2rem auto 0;
   padding: 0 $page-margin-horz calc(#{$bottom-nav-height} + 1rem);
-  max-width: $page-max-width;
-  z-index: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  top: 0;
+  bottom: 0;
   position: fixed;
+  z-index: 0;
+  max-width: $page-max-width;
   left: $page-margin-horz;
   width: calc(100vw - #{2 * $page-margin-horz});
   box-sizing: border-box;
 
   @include respond-to($navigation-switch-width) {
+    top: $top-nav-height;
     padding: 0 $page-margin-horz;
     left: calc(50% - #{($page-max-width / 2)} - #{$page-margin-horz});
   }
+}
 
+.page {
   // typography
   h1,
   h2,

@@ -33,29 +33,35 @@ const AdminView = ({ current_user: user, history, location }) => {
             unmountOnExit
             appear
           >
-            <div className="page">
-              <Switch location={location}>
-                <Route exact path="/" render={() => <HomePage user={user} />} />
-                <Route path="/profile" component={ProfilePage} />
-                <Route path="/users" component={UsersPage} />
-                <Route
-                  path="/user/:id"
-                  render={props => <ProfilePage showBackButton {...props} />}
-                />
-                <Route
-                  path="/timeline/item/:id"
-                  render={props => <TimelineItemPage {...props} />}
-                />
-                <Route
-                  path="/event/attendees/add"
-                  component={AddAttendeePage}
-                />
-                <Route path="/event" component={EventPage} />
-                <Route path="/addEvent" component={AddEventPage} />
-                <Route path="/courses" component={CoursesPage} />
-                <Route path="/settings" component={SettingsPage} />
-                <Route path="/test" component={TestPage} />
-              </Switch>
+            <div className="page-wrapper">
+              <div className="page">
+                <Switch location={location}>
+                  <Route
+                    exact
+                    path="/"
+                    render={() => <HomePage user={user} />}
+                  />
+                  <Route path="/profile" component={ProfilePage} />
+                  <Route path="/users" component={UsersPage} />
+                  <Route
+                    path="/user/:id"
+                    render={props => <ProfilePage showBackButton {...props} />}
+                  />
+                  <Route
+                    path="/timeline/item/:id"
+                    render={props => <TimelineItemPage {...props} />}
+                  />
+                  <Route
+                    path="/event/attendees/add"
+                    component={AddAttendeePage}
+                  />
+                  <Route path="/event" component={EventPage} />
+                  <Route path="/addEvent" component={AddEventPage} />
+                  <Route path="/courses" component={CoursesPage} />
+                  <Route path="/settings" component={SettingsPage} />
+                  <Route path="/test" component={TestPage} />
+                </Switch>
+              </div>
             </div>
           </CSSTransition>
         </TransitionGroup>
