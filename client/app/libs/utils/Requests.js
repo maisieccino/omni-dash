@@ -113,8 +113,8 @@ export const jsonPostRequest = async (path, body, headers = {}) => {
  * @param  {Object}  [headers={}] Additional headers to add to request
  * @return {Promise}              Promise that contains JSON response if successful
  */
-export const jsonDeleteRequest = async (path, headers = {}) =>
-  fetch(path, {
+export const jsonDeleteRequest = async (path, headers = {}) => {
+  const res = await fetch(path, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
@@ -125,10 +125,16 @@ export const jsonDeleteRequest = async (path, headers = {}) =>
       authenticity_token: getMetaContent("csrf-token"),
     }),
     credentials: "include",
-  }).then(
-    res =>
-      res.ok ? res.json() : Promise.reject(`${res.status} ${res.statusText}`),
-  );
+  });
+  const json = res.status === 204 ? "" : await res.json();
+  if (res.ok) {
+    return json;
+  }
+  if (json.message) {
+    throw new Error(`${res.status}: ${json.message}`);
+  }
+  throw new Error(`${res.status} ${res.statusText}`);
+};
 
 export default {
   getMetaContent,

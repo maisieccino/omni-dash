@@ -5,6 +5,7 @@ import {
   fetchCompetition,
   saveCompetition,
 } from "libs/actions/competitionActions";
+import { Flash } from "libs/components";
 
 import EventPageView from "./EventPageView";
 import CreateEvent from "./CreateEvent";
@@ -14,18 +15,39 @@ class EventPage extends Component {
     getCompetition: PropTypes.func.isRequired,
     saveCompetition: PropTypes.func.isRequired,
     isSaving: PropTypes.bool,
+    isDeleting: PropTypes.bool,
     error: PropTypes.string,
     competitionExists: PropTypes.bool,
   };
 
   static defaultProps = {
     isSaving: false,
+    isDeleting: false,
     error: "",
     competitionExists: true,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      deleteSuccess: false,
+    };
+  }
+
   componentDidMount() {
     this.props.getCompetition();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // set success to true if we just deleted an event
+    if (this.props.isDeleting && !nextProps.isDeleting && !nextProps.error) {
+      this.setState({ deleteSuccess: true });
+    }
+
+    // we just created an event
+    if (this.props.isSaving && !nextProps.isSaving && !nextProps.error) {
+      this.setState({ deleteSuccess: false });
+    }
   }
 
   render() {
@@ -34,18 +56,24 @@ class EventPage extends Component {
         {/* Show alert if there's an error fetching competition
           (not including if competition doesn't yet exist)
         */}
-        {this.props.error &&
-          this.props.error !== "404 Not Found" && (
-            <div className="alert">
-              <strong>Error:</strong> {this.props.error}
-            </div>
-          )}
+        <Flash
+          type="alert"
+          when={
+            this.props.error.length > 0 && !this.props.error.includes("404")
+          }
+        >
+          <strong>Error:</strong> {this.props.error}
+        </Flash>
+
+        <Flash type="success" when={this.state.deleteSuccess}>
+          Event successfully deleted!
+        </Flash>
 
         {this.props.competitionExists ? (
           <EventPageView />
         ) : (
           <div>
-            <h2>Create New Event</h2>
+            <h1>Create New Event</h1>
             <CreateEvent
               onClickSave={this.props.saveCompetition}
               isSaving={this.props.isSaving}
@@ -60,6 +88,7 @@ class EventPage extends Component {
 const mapStateToProps = state => ({
   error: state.competition.error,
   competitionExists: state.competition.competitionExists,
+  isDeleting: state.competition.isDeleting,
 });
 
 const mapDispatchToProps = dispatch => ({

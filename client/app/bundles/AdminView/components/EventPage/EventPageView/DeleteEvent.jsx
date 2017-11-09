@@ -2,14 +2,19 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
-import { deleteCompetition } from "libs/actions/competitionActions";
+import { Flash } from "libs/components";
+import {
+  fetchCompetition,
+  deleteCompetition,
+} from "libs/actions/competitionActions";
 
 class DeleteEvent extends Component {
   static propTypes = {
     eventName: PropTypes.string,
     isDeleting: PropTypes.bool,
-    // error: PropTypes.string,
+    error: PropTypes.string,
     deleteCompetition: PropTypes.func,
+    fetchCompetition: PropTypes.func,
   };
 
   static defaultProps = {
@@ -17,6 +22,7 @@ class DeleteEvent extends Component {
     isDeleting: false,
     error: "",
     deleteCompetition: () => {},
+    fetchCompetition: () => {},
   };
 
   constructor(props) {
@@ -25,6 +31,13 @@ class DeleteEvent extends Component {
       eventInputValue: "",
       canDelete: false,
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    // if deleted event
+    if (this.props.isDeleting && !nextProps.isDeleting) {
+      this.props.fetchCompetition();
+    }
   }
 
   onChangeEventName(e) {
@@ -39,6 +52,9 @@ class DeleteEvent extends Component {
     return (
       <div className="splitview-pane">
         <h1>Delete Event</h1>
+        <Flash type="alert" when={this.props.error.length > 0}>
+          {this.props.error}
+        </Flash>
         <p>
           This will delete the current event, along with any attendee details,
           all timeline data and any other associated data and files. This
@@ -80,6 +96,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  fetchCompetition: () => dispatch(fetchCompetition()),
   deleteCompetition: () => dispatch(deleteCompetition()),
 });
 
