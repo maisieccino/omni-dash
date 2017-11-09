@@ -1,27 +1,32 @@
 // main content container
 
 .page-wrapper {
-  margin: 2rem auto 0;
-  padding: 0 $page-margin-horz calc(#{$bottom-nav-height} + 1rem);
-  overflow-y: scroll;
+  // margin: 2rem auto 0;
+  padding: 0 $page-margin-horz;
+  overflow-y: visible;
   overflow-x: hidden;
   top: 0;
-  bottom: 0;
+  bottom: $bottom-nav-height;
   position: fixed;
   z-index: 0;
-  max-width: $page-max-width;
-  left: $page-margin-horz;
+  left: 0;
   width: calc(100vw - #{2 * $page-margin-horz});
+  width: 100%;
   box-sizing: border-box;
 
   @include respond-to($navigation-switch-width) {
     top: $top-nav-height;
-    padding: 0 $page-margin-horz;
-    left: calc(50% - #{($page-max-width / 2)} - #{$page-margin-horz});
+    bottom: 0;
   }
 }
 
 .page {
+  padding: 0 $page-margin-horz;
+  max-width: $page-max-width;
+  margin: 2rem auto 0;
+  @include respond-to($navigation-switch-width) {
+    padding: 0 $page-margin-horz;
+  }
   // typography
   h1,
   h2,
