@@ -12,6 +12,7 @@ import HackerView from "../components/HackerView";
 const mapStateToProps = state => ({
   current_user: state.current_user,
   notifications: state.notifications.notifications,
+  location: state.routerReducer.location,
 });
 
 const mapDispatchToProps = dispatch => ({

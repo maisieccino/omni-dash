@@ -38,6 +38,21 @@ class FeedContainer extends Component {
   }
 
   generateFeedItems = competition => {
+    if (!competition.name && !competition.start_time) {
+      return [
+        {
+          type: "informational",
+          title: "No event found",
+          children: (
+            <p>
+              It looks like you aren{"'"}t currently attending an event. Contact
+              an organiser if you think this isn{"'"}t the case.
+            </p>
+          ),
+        },
+      ];
+    }
+
     const eventHasStarted =
       Date.now() - Date.parse(competition.start_time) >= 0;
     const eventHasEnded = Date.now() - Date.parse(competition.end_time) >= 0;
@@ -59,12 +74,14 @@ class FeedContainer extends Component {
           nextEvent: competition.next_event || {},
         });
       }
-      feedItems.push({
-        type: "directions",
-        location: competition.location,
-        latitude: competition.latitude,
-        longitude: competition.longitude,
-      });
+      if (competition.location) {
+        feedItems.push({
+          type: "directions",
+          location: competition.location,
+          latitude: competition.latitude,
+          longitude: competition.longitude,
+        });
+      }
     } else {
       feedItems.push({
         type: "informational",

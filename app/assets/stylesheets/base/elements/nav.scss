@@ -81,7 +81,7 @@ nav {
   }
 
   @include respond-to($navigation-switch-width) {
-    height: 5rem;
+    height: $top-nav-height;
     position: inherit;
 
     div {
