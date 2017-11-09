@@ -35,7 +35,7 @@ class EventPage extends Component {
           (not including if competition doesn't yet exist)
         */}
         {this.props.error &&
-          this.props.error !== "404 Not Found" && (
+          !this.props.error.includes("404") && (
             <div className="alert">
               <strong>Error:</strong> {this.props.error}
             </div>
