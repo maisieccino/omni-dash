@@ -37,16 +37,20 @@ class HackerView extends Component {
   constructor(props) {
     super(props);
     this.cable = null;
-    this.state = {
-      notifications: [],
-      notificationError: "",
-    };
   }
 
   componentDidMount() {
     this.props.fetchCompetition();
     this.props.fetchNotifications();
     this.subscribeChannel();
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const notificationCount = nextProps.notifications.filter(x => !x.seen)
+      .length;
+    document.title = notificationCount
+      ? `Hatch Site (${notificationCount})`
+      : "Hatch Site";
   }
 
   subscribeChannel() {
@@ -61,8 +65,13 @@ class HackerView extends Component {
       {
         disconnected: () =>
           this.setState({ error: "Disconnected from notifications channel" }),
-        received: notification =>
-          this.props.onReceiveNotification(notification),
+        received: notification => {
+          /* eslint-disable no-new */
+          this.props.onReceiveNotification(notification);
+          new window.Notification(notification.title, {
+            body: notification.message,
+          });
+        },
       },
     );
   }
