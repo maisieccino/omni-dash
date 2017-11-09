@@ -91,16 +91,6 @@ class FeedContainer extends Component {
       }
     }
 
-    // feedItems.push({
-    //   type: "currentLesson",
-    //   currentLesson: {
-    //     courseName: "Intro To React",
-    //     lessonName: "Making Components",
-    //     lessonsCompleted: 5,
-    //     totalLessons: 7,
-    //   },
-    // });
-
     return feedItems;
   };
   render() {
