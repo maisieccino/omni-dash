@@ -74,12 +74,14 @@ class FeedContainer extends Component {
           nextEvent: competition.next_event || {},
         });
       }
-      feedItems.push({
-        type: "directions",
-        location: competition.location,
-        latitude: competition.latitude,
-        longitude: competition.longitude,
-      });
+      if (competition.location) {
+        feedItems.push({
+          type: "directions",
+          location: competition.location,
+          latitude: competition.latitude,
+          longitude: competition.longitude,
+        });
+      }
     } else {
       feedItems.push({
         type: "informational",

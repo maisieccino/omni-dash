@@ -1,6 +1,7 @@
 $fade-in: 300ms;
 $fade-out: 200ms;
-.fadeTranslate-enter {
+.fadeTranslate-enter,
+.fadeTranslate-appear {
   opacity: 0;
   transform: translate(-5vw, 0);
   position: fixed;

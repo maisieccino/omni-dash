@@ -101,7 +101,7 @@ class HackerView extends Component {
           />
           <TransitionGroup>
             <CSSTransition
-              timeout={500}
+              timeout={600}
               key={currentKey}
               classNames="fadeTranslate"
               mountOnEnter

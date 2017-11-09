@@ -26,7 +26,7 @@ const AdminView = ({ current_user: user, history, location }) => {
         <Navigation routes={routes} />
         <TransitionGroup>
           <CSSTransition
-            timeout={500}
+            timeout={600}
             key={currentKey}
             classNames="fadeTranslate"
             mountOnEnter
