@@ -18,41 +18,50 @@ import AddAttendeePage from "./AddAttendeePage";
 import AddEventPage from "./AddEventPage";
 import TestPage from "./TestPage";
 
-const AdminView = ({ current_user: user, history }) => (
-  <ConnectedRouter history={history}>
-    <div>
-      <Navigation routes={routes} />
-      <div className="page">
+const AdminView = ({ current_user: user, history, location }) => {
+  const currentKey = location ? location.pathname.split("/")[1] : "/";
+  return (
+    <ConnectedRouter history={history}>
+      <div>
+        <Navigation routes={routes} />
         <TransitionGroup>
           <CSSTransition
-            timeout={250}
-            key={history.location.key}
-            classNames="fade"
+            timeout={500}
+            key={currentKey}
+            classNames="fadeTranslate"
+            mountOnEnter
+            unmountOnExit
+            appear
           >
-            <Switch>
-              <Route exact path="/" render={() => <HomePage user={user} />} />
-              <Route path="/profile" component={ProfilePage} />
-              <Route path="/users" component={UsersPage} />
-              <Route
-                path="/user/:id"
-                render={props => <ProfilePage showBackButton {...props} />}
-              />
-              <Route
-                path="/timeline/item/:id"
-                render={props => <TimelineItemPage {...props} />}
-              />
-              <Route path="/event/attendees/add" component={AddAttendeePage} />
-              <Route path="/event" component={EventPage} />
-              <Route path="/addEvent" component={AddEventPage} />
-              <Route path="/courses" component={CoursesPage} />
-              <Route path="/settings" component={SettingsPage} />
-              <Route path="/test" component={TestPage} />
-            </Switch>
+            <div className="page">
+              <Switch location={location}>
+                <Route exact path="/" render={() => <HomePage user={user} />} />
+                <Route path="/profile" component={ProfilePage} />
+                <Route path="/users" component={UsersPage} />
+                <Route
+                  path="/user/:id"
+                  render={props => <ProfilePage showBackButton {...props} />}
+                />
+                <Route
+                  path="/timeline/item/:id"
+                  render={props => <TimelineItemPage {...props} />}
+                />
+                <Route
+                  path="/event/attendees/add"
+                  component={AddAttendeePage}
+                />
+                <Route path="/event" component={EventPage} />
+                <Route path="/addEvent" component={AddEventPage} />
+                <Route path="/courses" component={CoursesPage} />
+                <Route path="/settings" component={SettingsPage} />
+                <Route path="/test" component={TestPage} />
+              </Switch>
+            </div>
           </CSSTransition>
         </TransitionGroup>
       </div>
-    </div>
-  </ConnectedRouter>
-);
+    </ConnectedRouter>
+  );
+};
 
 export default AdminView;

@@ -18,6 +18,10 @@
 
   .button-group {
     margin-top: 0.5rem;
+    button,
+    .button {
+      margin-top: 0;
+    }
   }
 
   .profile-image-container {

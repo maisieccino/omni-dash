@@ -4,7 +4,10 @@ import { connect } from "react-redux";
 import AdminView from "../components/AdminView";
 
 // Which part of the Redux global state does our component want to receive as props?
-const mapStateToProps = state => ({ current_user: state.current_user });
+const mapStateToProps = state => ({
+  current_user: state.current_user,
+  location: state.routerReducer.location,
+});
 
 // Don't forget to actually use connect!
 // Note that we don't export HelloWorld, but the redux "connected" version of it.

@@ -5,9 +5,14 @@
   padding: 0 $page-margin-horz calc(#{$bottom-nav-height} + 1rem);
   max-width: $page-max-width;
   z-index: 0;
+  position: fixed;
+  left: $page-margin-horz;
+  width: calc(100vw - #{2 * $page-margin-horz});
+  box-sizing: border-box;
 
   @include respond-to($navigation-switch-width) {
     padding: 0 $page-margin-horz;
+    left: calc(50% - #{($page-max-width / 2)} - #{$page-margin-horz});
   }
 
   // typography
