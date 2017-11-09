@@ -40,7 +40,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isFetching: false,
-        competitionExists: false,
+        competitionExists: !error.includes("404"),
         error,
       };
     }
