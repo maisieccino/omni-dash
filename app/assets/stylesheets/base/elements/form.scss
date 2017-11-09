@@ -37,6 +37,7 @@ textarea {
   font-size: 1.1rem;
   transition: all 0.25s ease-in-out;
   border: $color-fg solid 1px;
+  border-radius: $border-radius;
   outline: none;
   padding: 0.25rem;
   position: relative;
@@ -62,6 +63,7 @@ textarea {
   width: 100%;
   min-height: 5rem;
   border: $color-fg solid 1px;
+  border-radius: $border-radius;
 
   &.edited {
     border-color: $edited-fg;
@@ -75,6 +77,7 @@ textarea {
 
 .input-group {
   border: $color-fg solid 1px;
+  border-radius: $border-radius;
   display: flex;
   flex-direction: row;
 
