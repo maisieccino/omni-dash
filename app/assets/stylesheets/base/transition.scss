@@ -2,7 +2,7 @@ $fade-in: 300ms;
 $fade-out: 200ms;
 .fadeTranslate-enter {
   opacity: 0;
-  transform: translate(-3vw, 0);
+  transform: translate(-5vw, 0);
   position: fixed;
 }
 
@@ -21,6 +21,6 @@ $fade-out: 200ms;
 
 .fadeTranslate-exit.fadeTranslate-exit-active {
   opacity: 0;
-  transform: translate(3vw, 0);
+  transform: translate(5vw, 0);
   transition: opacity $fade-out ease-in, transform $fade-out ease-in-out;
 }
