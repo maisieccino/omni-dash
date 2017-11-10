@@ -38,7 +38,7 @@ const Header = ({
           title="Refresh User"
           onClick={() => onRefresh()}
         >
-          <Icon.RefreshCw className={isFetching && "spinner"} />
+          <Icon.RefreshCw className={isFetching ? "spinner" : ""} />
         </button>
         {isOwnProfile && [
           <Link

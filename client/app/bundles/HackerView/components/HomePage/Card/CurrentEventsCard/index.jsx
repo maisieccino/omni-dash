@@ -38,7 +38,7 @@ const CurrentEventCard = ({
           <h2>Coming Up Next</h2>
           {Object.keys(nextEvent).length > 0 ? (
             <DisplayEvent
-              id={currentEvent.id}
+              id={nextEvent.id}
               name={nextEvent.name}
               startTime={nextEvent.start_time}
               endTime={nextEvent.end_time}

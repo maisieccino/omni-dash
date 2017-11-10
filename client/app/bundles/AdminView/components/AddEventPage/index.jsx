@@ -103,14 +103,14 @@ class AddEventPage extends Component {
 
           <DateTimePicker
             id="event-start"
-            placeholder="Event Start"
+            label="Event Start"
             onChange={time => this.setState({ start_time: time })}
             value={this.state.start_time}
           />
 
           <DateTimePicker
             id="event-end"
-            placeholder="Event End"
+            label="Event End"
             onChange={time => this.setState({ end_time: time })}
             value={this.state.end_time}
           />
