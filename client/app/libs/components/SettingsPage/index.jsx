@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { generate } from "shortid";
+import { FadeInOut, Stagger } from "react-animation-components";
 import { setUpdateSuccess } from "libs/actions/userActions";
 import { TopNav } from "libs/components/Navigation";
 
@@ -76,7 +77,13 @@ class SettingsPage extends Component {
         <div className="splitview-main">
           <aside className="splitview-nav">
             {/* programmatically generate navbar from array */}
-            {routes.map(route => <NavItem key={generate()} {...route} />)}
+            <Stagger delay={50}>
+              {routes.map(route => (
+                <FadeInOut>
+                  <NavItem key={generate()} {...route} />
+                </FadeInOut>
+              ))}
+            </Stagger>
           </aside>
 
           {/* programmatically generate routes from array */}
