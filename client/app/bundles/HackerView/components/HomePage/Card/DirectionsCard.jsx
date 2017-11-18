@@ -7,7 +7,7 @@ import { generateMapsUrl } from "libs/utils/geo";
 const map = (lat, long, location) => (
   <Map center={[lat, long]} zoom={13}>
     <TileLayer
-      url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
     />
     <Marker position={[lat, long]}>
