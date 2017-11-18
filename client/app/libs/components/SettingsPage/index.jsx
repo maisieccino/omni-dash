@@ -1,3 +1,4 @@
+/* eslint react/no-array-index-key: 0 */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Route, Redirect } from "react-router-dom";
@@ -78,9 +79,9 @@ class SettingsPage extends Component {
           <aside className="splitview-nav">
             {/* programmatically generate navbar from array */}
             <Stagger delay={50}>
-              {routes.map(route => (
-                <FadeInOut>
-                  <NavItem key={generate()} {...route} />
+              {routes.map((route, i) => (
+                <FadeInOut key={i}>
+                  <NavItem {...route} />
                 </FadeInOut>
               ))}
             </Stagger>
