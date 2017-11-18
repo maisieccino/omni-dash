@@ -38,6 +38,7 @@
     .preview {
       max-height: 20rem;
       border: 1px solid $color-fg;
+      border-radius: $border-radius;
       padding: 0.5rem;
       flex: 1;
       overflow-x: hidden;
