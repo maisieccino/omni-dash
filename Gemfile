@@ -81,3 +81,5 @@ gem "webpacker"
 gem "devise"
 
 gem "geocoder"
+
+gem "paperclip", "~> 5.0.0"

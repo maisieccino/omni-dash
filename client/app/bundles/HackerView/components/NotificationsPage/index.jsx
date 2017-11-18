@@ -1,9 +1,10 @@
+/* eslint react/no-array-index-key: 0 */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { generate } from "shortid";
 import * as Icon from "react-feather";
+import { FadeInOut, Stagger } from "react-animation-components";
 import {
   seenNotification,
   dismissNotification,
@@ -66,16 +67,19 @@ class NotificationsPage extends Component {
         {unreadNotifications.length > 0 && (
           <div className="feed">
             <h2 key={0}>Unread Notifications</h2>
-            {unreadNotifications.map(notification => (
-              <NotificationItem
-                {...notification}
-                type={notification.type}
-                time={notification.created_at}
-                onCloseClick={() =>
-                  this.props.dismissNotification(notification.id)}
-                key={generate()}
-              />
-            ))}
+            <Stagger delay={50}>
+              {unreadNotifications.map((notification, i) => (
+                <FadeInOut key={i}>
+                  <NotificationItem
+                    {...notification}
+                    type={notification.type}
+                    time={notification.created_at}
+                    onCloseClick={() =>
+                      this.props.dismissNotification(notification.id)}
+                  />
+                </FadeInOut>
+              ))}
+            </Stagger>
           </div>
         )}
 
@@ -83,16 +87,19 @@ class NotificationsPage extends Component {
         {readNotifications.length > 0 && (
           <div className="feed">
             <h2 key={0}>Other Notifications</h2>
-            {readNotifications.map(notification => (
-              <NotificationItem
-                {...notification}
-                type={notification.type}
-                time={notification.created_at}
-                onCloseClick={() =>
-                  this.props.dismissNotification(notification.id)}
-                key={generate()}
-              />
-            ))}
+            <Stagger delay={50}>
+              {readNotifications.map((notification, i) => (
+                <FadeInOut key={i}>
+                  <NotificationItem
+                    {...notification}
+                    type={notification.type}
+                    time={notification.created_at}
+                    onCloseClick={() =>
+                      this.props.dismissNotification(notification.id)}
+                  />
+                </FadeInOut>
+              ))}
+            </Stagger>
           </div>
         )}
 

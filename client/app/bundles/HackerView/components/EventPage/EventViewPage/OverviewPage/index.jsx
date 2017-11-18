@@ -7,6 +7,7 @@ import marked from "marked";
 import * as Icon from "react-feather";
 import { fetchCompetition } from "libs/actions/competitionActions";
 import { fetchEvents } from "libs/actions/eventsActions";
+import Progress from "libs/components/Progress";
 import Timeline from "libs/components/Timeline";
 import EventProgress from "./EventProgress";
 
@@ -107,7 +108,7 @@ class OverviewPage extends Component {
           />
         </h3>
         <p>
-          <progress value={progress} max={100} />
+          <Progress value={progress} max={100} />
         </p>
 
         <h2>Description</h2>

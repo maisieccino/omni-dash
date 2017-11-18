@@ -44,7 +44,7 @@ class DateTimePicker extends Component {
     const value = moment(this.props.value);
     return (
       <div>
-        <label htmlFor={`${id}_date`}>Start Time</label>
+        <label htmlFor={`${id}_date`}>{label}</label>
         <div className="input-group">
           <input
             id={`${id}_date`}

@@ -25,3 +25,21 @@ $fade-out: 200ms;
   transform: translate(5vw, 0);
   transition: opacity $fade-out ease-in, transform $fade-out ease-in-out;
 }
+
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity $fade-in ease-in-out;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity $fade-in ease-in-out;
+}

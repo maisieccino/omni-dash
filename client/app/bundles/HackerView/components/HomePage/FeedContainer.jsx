@@ -31,10 +31,16 @@ class FeedContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      feedItems: this.generateFeedItems(nextProps.competition),
-    });
-    this.forceUpdate();
+    if (nextProps.isFetching && !this.props.isFetching) {
+      this.setState({ feedItems: [] });
+    }
+
+    if (!nextProps.isFetching && this.props.isFetching) {
+      this.setState({
+        feedItems: this.generateFeedItems(nextProps.competition),
+      });
+      this.forceUpdate();
+    }
   }
 
   generateFeedItems = competition => {

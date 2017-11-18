@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { CSSTransition } from "react-transition-group";
 import * as Icon from "react-feather";
 
-const Modal = ({ header, children, choices, onCloseButtonClick, when }) => {
-  if (when) {
-    return (
+const Modal = ({ header, children, choices, onCloseButtonClick, when }) => (
+  <CSSTransition timeout={300} classNames="fade" in={when}>
+    {when ? (
       <div className="modal-wrapper" role="dialog">
         <div className="modal">
           <div className="modal-header">
@@ -23,10 +24,11 @@ const Modal = ({ header, children, choices, onCloseButtonClick, when }) => {
           </div>
         </div>
       </div>
-    );
-  }
-  return <div />;
-};
+    ) : (
+      <div />
+    )}
+  </CSSTransition>
+);
 
 Modal.propTypes = {
   header: PropTypes.string,

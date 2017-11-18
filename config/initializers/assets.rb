@@ -22,4 +22,8 @@ Rails.application.config.assets.paths << Rails.root.join("node_modules")
 
 # Add folder with webpack generated assets to assets.paths
 Rails.application.config.assets.paths << Rails.root.join("public", "webpack", Rails.env)
-Rails.application.config.assets.precompile += %w("manifest.json")
+Rails.application.config.assets.precompile += %w[manifest.json]
+
+Dir.glob("#{Rails.root}/app/assets/images/**/").each do |path|
+  Rails.application.config.assets.paths << path
+end

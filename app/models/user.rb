@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_one :invite_code, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
+  has_attached_file :avatar, styles: { medium: "512x512>", thumb: "128x128>" }, default_url: "/images/:style/missing.png"
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
   def public_attributes_to_json
     to_json(only:
     %i[

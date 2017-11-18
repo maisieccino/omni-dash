@@ -1,6 +1,8 @@
+/* eslint react/no-array-index-key: 0 */
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { generate } from "shortid";
+import { FadeInOut, Stagger } from "react-animation-components";
 
 import NavItem from "libs/components/SplitViewNavItem";
 import CurrentEvent from "./CurrentEvent";
@@ -49,7 +51,13 @@ const EventPageView = () => (
   <div className="splitview-main">
     <aside className="splitview-nav">
       {/* programmatically generate navbar from array */}
-      {routes.map(route => <NavItem key={generate()} {...route} />)}
+      <Stagger delay={50}>
+        {routes.map((route, i) => (
+          <FadeInOut key={i}>
+            <NavItem key={generate()} {...route} />
+          </FadeInOut>
+        ))}
+      </Stagger>
     </aside>
 
     {/* programmatically generate routes from array */}
