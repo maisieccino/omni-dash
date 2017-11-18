@@ -6,12 +6,8 @@
   position: relative;
   z-index: 0;
   box-shadow: 0 3px 5px $color-card;
-  margin-top: 1rem;
+  margin: 0.5rem 0;
   border-radius: $border-radius;
-
-  &:first-child {
-    margin-top: 0;
-  }
 
   // dotted line
   &::before {

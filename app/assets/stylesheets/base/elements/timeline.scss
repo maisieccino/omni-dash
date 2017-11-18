@@ -30,6 +30,10 @@
     flex-basis: 5;
     flex: 5;
 
+    & > * {
+      margin-left: 2rem;
+    }
+
     @import "timeline/timeline-item";
     @import "timeline/timeline-group";
     @import "timeline/timeline-header";
