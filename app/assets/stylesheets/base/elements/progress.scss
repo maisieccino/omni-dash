@@ -20,6 +20,12 @@ progress {
   &::-webkit-progress-bar {
     background-color: $bg;
     border-radius: $br;
+    width: 100%;
+    transition: width 0.75s ease-in-out;
+  }
+
+  &.hidden::-webkit-progress-bar {
+    width: 0;
   }
 
   &::-webkit-progress-value {

@@ -1,10 +1,10 @@
-/* eslint react/no-danger: 0 */
+/* eslint react/no-danger: 0, react/no-array-index-key: 0 */
 import React, { Component } from "react";
 import moment from "moment";
-import { generate } from "shortid";
 import PropTypes from "prop-types";
 import * as Icon from "react-feather";
 import marked from "marked";
+import { FadeInOut, Stagger } from "react-animation-components";
 import { remToPx } from "libs/utils/display";
 import TimelineHeader from "./TimelineHeader";
 import TimelineItem from "./TimelineItem";
@@ -55,24 +55,25 @@ class Timeline extends Component {
     return Object.keys(dates)
       .sort((a, b) => moment(a) > moment(b))
       .map(date => [
-        <TimelineHeader key={generate()}>
-          {moment(date).format("dddd Do MMMM")}
-        </TimelineHeader>,
+        <FadeInOut key={date}>
+          <TimelineHeader>{moment(date).format("dddd Do MMMM")}</TimelineHeader>
+        </FadeInOut>,
         dates[date].map(event => (
-          <TimelineItem
-            name={event.name}
-            id={event.id}
-            key={generate()}
-            startTime={event.start_time}
-            endTime={event.end_time}
-            editable={editable}
-          >
-            <p
-              dangerouslySetInnerHTML={{
-                __html: marked(event.description || ""),
-              }}
-            />
-          </TimelineItem>
+          <FadeInOut key={event.id}>
+            <TimelineItem
+              name={event.name}
+              id={event.id}
+              startTime={event.start_time}
+              endTime={event.end_time}
+              editable={editable}
+            >
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: marked(event.description || ""),
+                }}
+              />
+            </TimelineItem>
+          </FadeInOut>
         )),
       ])
       .reduce((bigArray, array) => [...bigArray, ...array], []);
@@ -123,7 +124,7 @@ class Timeline extends Component {
               )}
             </div>,
             <div className="timeline-content" key={1}>
-              {events}
+              <Stagger delay={50}>{events}</Stagger>
             </div>,
           ]
         ) : (

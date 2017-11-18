@@ -2,6 +2,7 @@ import React from "react";
 import * as Icon from "react-feather";
 import moment from "moment";
 import Flash from "libs/components/Flash";
+import Progress from "libs/components/Progress";
 import Timeline from "libs/components/Timeline";
 
 const events = [
@@ -16,6 +17,9 @@ const TestPage = () => (
   <div>
     <h1>Component Test Page</h1>
     <p>Use for testing styling of components and elements.</p>
+
+    <h2>Progress</h2>
+    <Progress value={50} max={100} />
 
     <h2>Buttons</h2>
     <h3>Text Buttons</h3>
@@ -100,6 +104,8 @@ const TestPage = () => (
       <input type="checkbox" name="checks" id="checks-3" />
       <label htmlFor="checks-3">Option 3</label>
     </p>
+
+    <p>Body text</p>
   </div>
 );
 

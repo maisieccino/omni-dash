@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
+import Progress from "libs/components/Progress";
 
 import DisplayEvent from "./DisplayEvent";
 
@@ -50,7 +51,7 @@ const CurrentEventCard = ({
       </div>
       <div className="card-footer">
         <p>Hackathon Progress</p>
-        <progress value={progress} max={100} />
+        <Progress value={progress} max={100} />
         {<p>About {Math.floor(duration.asHours())} hours remaining</p>}
       </div>
     </div>
