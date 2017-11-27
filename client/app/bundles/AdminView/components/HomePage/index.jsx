@@ -15,9 +15,11 @@ class HomePage extends Component {
     const { user } = this.props;
     return (
       <div>
-        <h1>
-          Hello, <span className="accent">{user.first_name}</span>.
-        </h1>
+        <div className="title-bar">
+          <h1>
+            Hello, <span className="accent">{user.first_name}</span>.
+          </h1>
+        </div>
         <h2>Your Admin Dashboard</h2>
       </div>
     );

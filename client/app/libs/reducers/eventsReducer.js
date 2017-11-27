@@ -3,13 +3,14 @@ import * as constants from "libs/constants/eventsConstants";
 export const initialState = {
   isFetching: false,
   isCreating: false,
+  isDeleting: false,
   events: [],
   event: {},
   error: "",
 };
 
 const eventsReducer = (state = initialState, action = null) => {
-  const { type, error, events } = action;
+  const { type, error, events, eventId } = action;
 
   switch (type) {
     case constants.SET_IS_FETCHING_EVENTS: {
@@ -57,6 +58,31 @@ const eventsReducer = (state = initialState, action = null) => {
         ...state,
         isCreating: false,
         event,
+      };
+    }
+
+    case constants.SET_IS_DELETING_EVENT: {
+      return {
+        ...state,
+        isDeleting: true,
+        error: "",
+      };
+    }
+
+    case constants.DELETE_EVENT_SUCCESS: {
+      return {
+        ...state,
+        isDeleting: false,
+        // remove this event from state.
+        events: state.events.filter(event => event.id !== eventId),
+      };
+    }
+
+    case constants.DELETE_EVENT_FAILURE: {
+      return {
+        ...state,
+        isDeleting: false,
+        error,
       };
     }
 

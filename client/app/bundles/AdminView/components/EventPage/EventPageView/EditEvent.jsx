@@ -93,7 +93,9 @@ class EditEvent extends Component {
     const { name, description, location, success } = this.state;
     return (
       <div className="splitview-pane">
-        <h1>Edit Event</h1>
+        <div className="title-bar">
+          <h1>Edit Event</h1>
+        </div>
 
         <Flash type="success" when={success}>
           Succesfully updated event!

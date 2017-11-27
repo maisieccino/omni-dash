@@ -51,7 +51,9 @@ class DeleteEvent extends Component {
   render() {
     return (
       <div className="splitview-pane">
-        <h1>Delete Event</h1>
+        <div className="title-bar">
+          <h1>Delete Event</h1>
+        </div>
         <Flash type="alert" when={this.props.error.length > 0}>
           {this.props.error}
         </Flash>
