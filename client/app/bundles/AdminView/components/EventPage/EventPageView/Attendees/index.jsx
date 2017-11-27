@@ -57,7 +57,7 @@ class Attendees extends Component {
           <Link
             to="/event/attendees/add"
             title="Add New Attendee"
-            className="square button"
+            className="red square button"
           >
             <Icon.Plus />
           </Link>

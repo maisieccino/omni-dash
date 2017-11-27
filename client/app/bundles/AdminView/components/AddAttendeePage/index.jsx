@@ -100,7 +100,7 @@ class AddAttendeePage extends Component {
             account to see their dashboard.
           </p>
           <p>
-            <button onClick={e => this.onClickSubmit(e)}>
+            <button className="red" onClick={e => this.onClickSubmit(e)}>
               Invite{"  "}
               {this.props.isInviting && <Icon.RefreshCw className="spinner" />}
             </button>

@@ -52,7 +52,7 @@ const Header = ({
           <a
             href="/auth/sign_out"
             data-method="delete"
-            className="button square"
+            className="red square button"
             title="Log Out"
             key={1}
           >

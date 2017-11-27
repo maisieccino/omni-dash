@@ -4,6 +4,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  def event_name
+    if Competition.first.nil?
+      @event_name = ENV.fetch("SITE_NAME") { "Hackathon" }
+    else
+      @event_name = Competition.first.name
+    end
+  end
+
   protected
 
   def json_authenticate_user

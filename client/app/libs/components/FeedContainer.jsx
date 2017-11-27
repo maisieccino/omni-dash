@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { generate } from "shortid";
-import Feed from "./Feed";
-import Card from "./Card";
+import Card from "libs/components/Card";
+import Feed from "libs/components/Feed";
 
 class FeedContainer extends Component {
   static mapStateToProps = state => ({
@@ -15,12 +15,14 @@ class FeedContainer extends Component {
     competition: PropTypes.shape(),
     isFetching: PropTypes.bool,
     fetchCompetition: PropTypes.func,
+    isAdmin: PropTypes.bool,
   };
 
   static defaultProps = {
     competition: {},
     isFetching: false,
     fetchCompetition: () => {},
+    isAdmin: false,
   };
 
   constructor(props) {
@@ -49,7 +51,12 @@ class FeedContainer extends Component {
         {
           type: "informational",
           title: "No event found",
-          children: (
+          children: this.props.isAdmin ? (
+            <p>
+              It looks like you haven{"'"}t yet created an event. Go to the{" "}
+              {'"'}event{'"'} tab to create one!
+            </p>
+          ) : (
             <p>
               It looks like you aren{"'"}t currently attending an event. Contact
               an organiser if you think this isn{"'"}t the case.
@@ -63,6 +70,19 @@ class FeedContainer extends Component {
       Date.now() - Date.parse(competition.start_time) >= 0;
     const eventHasEnded = Date.now() - Date.parse(competition.end_time) >= 0;
     const feedItems = [];
+
+    if (this.props.isAdmin) {
+      feedItems.push({
+        type: "informational",
+        title: "You're an admin",
+        children: (
+          <p>
+            You can use this dashboard to manage attendees, send messages, and
+            manage information with your attendees.
+          </p>
+        ),
+      });
+    }
 
     if (!eventHasEnded) {
       if (!eventHasStarted) {
@@ -80,7 +100,7 @@ class FeedContainer extends Component {
           nextEvent: competition.next_event || {},
         });
       }
-      if (competition.location) {
+      if (competition.location && !this.props.isAdmin) {
         feedItems.push({
           type: "directions",
           location: competition.location,
@@ -88,7 +108,7 @@ class FeedContainer extends Component {
           longitude: competition.longitude,
         });
       }
-    } else {
+    } else if (!this.props.isAdmin) {
       feedItems.push({
         type: "informational",
         title: `Thanks for attending ${competition.name}!`,
@@ -98,6 +118,12 @@ class FeedContainer extends Component {
             social media for more information!
           </p>
         ),
+      });
+    } else {
+      feedItems.push({
+        type: "informational",
+        title: `Congratulations on running ${competition.name}!`,
+        children: <p>We hope it was good.</p>,
       });
     }
 

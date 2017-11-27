@@ -92,6 +92,7 @@ class ContactAttendees extends Component {
                 this.props.messageAttendees(title, message);
               }}
               disabled={isMessagingAttendees}
+              className="red"
             >
               {isMessagingAttendees ? (
                 <Icon.RefreshCw className="spinner" />

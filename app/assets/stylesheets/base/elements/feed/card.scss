@@ -76,5 +76,12 @@
     width: 100%;
     border-radius: $border-radius;
     z-index: 0;
+    background-color: $color-bg;
+    color: $color-bg;
+    padding: 0.1rem;
+
+    a {
+      color: $color-blue;
+    }
   }
 }
