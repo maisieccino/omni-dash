@@ -8,7 +8,7 @@ $color-mint: #43d4b2;
 $color-bg: #fffffe;
 $color-fg: #000000;
 $color-card: #ececec;
-$color-accent: $color-lightblue;
+$color-accent: <%= ENV.fetch("ACCENT_COLOR") { "$color-lightblue" } %>;
 
 // typography
 $font-title: "Apercu", "Roboto", "Arial", sans-serif;

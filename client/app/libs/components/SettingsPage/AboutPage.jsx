@@ -4,7 +4,7 @@ import * as Icon from "react-feather";
 const AboutPage = () => (
   <div className="splitview-pane">
     <div className="title-bar">
-      <h1>About Hatch Dashboard</h1>
+      <h1>About Omni Dash</h1>
     </div>
 
     <h2>Version</h2>
@@ -26,7 +26,7 @@ const AboutPage = () => (
     </p>
     <p>
       <a
-        href="https://github.com/hatchucl/hatchsite"
+        href="https://github.com/mbellgb/omni-dash"
         className="button yellow"
         rel="noopener noreferrer"
         target="_blank"

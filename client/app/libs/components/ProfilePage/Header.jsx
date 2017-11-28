@@ -19,7 +19,7 @@ const Header = ({
     <div className="profile-image-container">
       <div
         style={{
-          backgroundImage: "url(/assets/hatch_logo.png)",
+          backgroundImage: "url(/assets/user_missing.png)",
         }}
         className="profile-image"
       />
