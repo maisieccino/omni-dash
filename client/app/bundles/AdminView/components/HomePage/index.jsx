@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
 import { fetchCompetition } from "libs/actions/competitionActions";
-import FeedContainer from "libs/components/FeedContainer";
+import { FeedContainer } from "libs/components";
 
 class HomePage extends Component {
   static propTypes = {
