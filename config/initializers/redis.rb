@@ -1,1 +1,1 @@
-$redis = Redis::Namespace.new("hatch-site", redis: Redis.new)
+$redis = Redis::Namespace.new("omni-dash", redis: Redis.new)

@@ -1,4 +1,5 @@
 #!/bin/sh -e
+export RAILS_DB_NAME=$RAILS_DB_NAME
 export POSTGRES_PASSWORD=$POSTGRES_PASSWORD
 test $POSTGRES_PASSWORD
 bundle exec rake db:create

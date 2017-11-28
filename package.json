@@ -10,7 +10,7 @@
     "build:development": "cd client && yarn run build:development",
     "build:production": "cd client && yarn run build:production"
   },
-  "name": "hatch-site",
+  "name": "omni-dash",
   "private": true,
   "dependencies": {},
   "devDependencies": {

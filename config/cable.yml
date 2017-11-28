@@ -9,4 +9,4 @@ test:
 
 production:
   <<: *redis
-  channel_prefix: hatch-site_production
+  channel_prefix: omni-dash_production

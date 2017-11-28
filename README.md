@@ -1,8 +1,9 @@
-# Hatch Site
-[![Build Status](https://travis-ci.org/hatchucl/hatch-site.svg?branch=master)](https://travis-ci.org/hatchucl/hatch-site)
-[![Code Climate](https://codeclimate.com/github/hatchucl/hatch-site/badges/gpa.svg)](https://codeclimate.com/github/hatchucl/hatch-site)
+# Omni Dash
+[![Build Status](https://travis-ci.org/mbellgb/omni-dash.svg?branch=master)](https://travis-ci.org/mbellgb/omni-dash)
+[![Code Climate](https://codeclimate.com/github/mbellgb/omni-dash/badges/gpa.svg)](https://codeclimate.com/github/mbellgb/omni-dash)
 
-The one-stop shop for all information, news, and courses for the upcoming Hatch hackathon.
+A one-stop shop for all information, news, and courses for your event.
+Originally created for the Hatch London event.
 
 # Getting up and running
 
