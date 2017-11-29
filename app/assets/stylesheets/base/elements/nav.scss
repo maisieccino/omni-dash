@@ -42,8 +42,8 @@ nav {
     position: relative;
 
     .notification-count {
-      background: $color-accent;
-      color: $color-bg;
+      background: $color-yellow;
+      color: $color-fg;
       width: 1.5rem;
       height: 1.5rem;
       border-radius: $border-radius;
@@ -73,8 +73,10 @@ nav {
 
       .notification-count {
         background: $color-fg;
+        color: $color-bg;
         @include respond-to(600px) {
-          background: $color-accent;
+          background: $color-yellow;
+          color: $color-fg;
         }
       }
     }
