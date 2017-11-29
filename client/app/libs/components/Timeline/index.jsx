@@ -1,21 +1,37 @@
 /* eslint react/no-danger: 0, react/no-array-index-key: 0 */
 import React, { Component } from "react";
 import moment from "moment";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import * as Icon from "react-feather";
 import marked from "marked";
 import { FadeInOut, Stagger } from "react-animation-components";
+import { CSSTransition } from "react-transition-group";
+import { deleteEvent } from "libs/actions/eventsActions";
+import Modal from "libs/components/Modal";
 import { remToPx } from "libs/utils/display";
 import TimelineHeader from "./TimelineHeader";
 import TimelineItem from "./TimelineItem";
+import QuickAdd from "./QuickAdd";
 
 class Timeline extends Component {
+  static mapStateToProps = state => ({
+    isDeleting: state.events.isDeleting,
+    error: state.events.error,
+  });
+
+  static mapDispatchToProps = dispatch => ({
+    deleteEvent: id => dispatch(deleteEvent(id)),
+  });
+
   constructor(props) {
     super(props);
     this.state = {
       mouseY: 0,
       showMouseButton: false,
       mouseButtonOpened: false,
+      itemToDelete: -1,
+      showModal: false,
     };
     this.buttonBorderWidth = remToPx(0.5);
     this.paddingSize = remToPx(2);
@@ -39,6 +55,24 @@ class Timeline extends Component {
     });
     this.setState({ mouseButtonOpened: !mouseButtonOpened });
   }
+
+  onDeleteModalConfirm() {
+    this.props.deleteEvent(this.state.itemToDelete);
+    this.setState({ showModal: false });
+  }
+
+  onDeleteModalCancel() {
+    this.setState({ itemToDelete: -1, showModal: false });
+  }
+
+  modalChoices = () => [
+    <button key={0} className="red" onClick={() => this.onDeleteModalConfirm()}>
+      Delete
+    </button>,
+    <button onClick={() => this.onDeleteModalCancel()} key={1}>
+      Cancel
+    </button>,
+  ];
 
   createEventsList(editable = false) {
     const { events } = this.props;
@@ -66,6 +100,11 @@ class Timeline extends Component {
               startTime={event.start_time}
               endTime={event.end_time}
               editable={editable}
+              onDeleteClick={() =>
+                this.setState({ itemToDelete: event.id, showModal: true })}
+              isDeleting={
+                this.props.isDeleting && event.id === this.state.itemToDelete
+              }
             >
               <p
                 dangerouslySetInnerHTML={{
@@ -81,7 +120,13 @@ class Timeline extends Component {
 
   render() {
     const { editable, isLoading, helpText } = this.props;
-    const { mouseButtonOpened, showMouseButton, mouseY: y } = this.state;
+    const {
+      mouseButtonOpened,
+      showMouseButton,
+      mouseY: y,
+      itemToDelete,
+      showModal,
+    } = this.state;
     const events = this.createEventsList(editable);
     if (isLoading) {
       return (
@@ -98,6 +143,18 @@ class Timeline extends Component {
           this.element = el;
         }}
       >
+        <Modal
+          choices={this.modalChoices()}
+          onCloseButtonClick={() => this.onDeleteModalCancel()}
+          header="Delete this item?"
+          when={showModal}
+        >
+          <p>
+            Are you sure you want to delete item {itemToDelete}? This is an
+            irreversable action.
+          </p>
+        </Modal>
+
         {events.length > 0 ? (
           [
             <div
@@ -122,6 +179,15 @@ class Timeline extends Component {
                   <Icon.Plus />
                 </button>
               )}
+
+              <CSSTransition
+                timeout={300}
+                classNames="fade"
+                in={editable && mouseButtonOpened}
+                mountOnEnter
+              >
+                <QuickAdd y={y} />
+              </CSSTransition>
             </div>,
             <div className="timeline-content" key={1}>
               <Stagger delay={50}>{events}</Stagger>
@@ -141,17 +207,23 @@ Timeline.propTypes = {
   events: PropTypes.arrayOf(PropTypes.shape()),
   editable: PropTypes.bool,
   isLoading: PropTypes.bool,
+  isDeleting: PropTypes.bool,
   helpText: PropTypes.string,
+  deleteEvent: PropTypes.func,
 };
 
 Timeline.defaultProps = {
   events: [],
   editable: false,
   isLoading: false,
+  isDeleting: false,
   helpText: "There's no events yet.",
+  deleteEvent: () => {},
 };
 
-export default Timeline;
+export default connect(Timeline.mapStateToProps, Timeline.mapDispatchToProps)(
+  Timeline,
+);
 export { default as TimelineItem } from "./TimelineItem";
 export { default as TimelineGroup } from "./TimelineGroup";
 export { default as TimelineHeader } from "./TimelineHeader";

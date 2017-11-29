@@ -4,20 +4,23 @@ import { Map, Marker, Popup, TileLayer } from "react-leaflet";
 import * as Icon from "react-feather";
 import { generateMapsUrl } from "libs/utils/geo";
 
-const map = (lat, long, location) => (
-  <Map center={[lat, long]} zoom={13}>
-    <TileLayer
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-    />
-    <Marker position={[lat, long]}>
-      <Popup>
-        <span>{location}</span>
-      </Popup>
-    </Marker>
-  </Map>
-);
-
+const map = (lat, long, location) => {
+  const latitude = lat || 0.0;
+  const longitude = long || 0.0;
+  return (
+    <Map center={[latitude, longitude]} zoom={13}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution="&copy; <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+      />
+      <Marker position={[latitude, longitude]}>
+        <Popup>
+          <span>{location}</span>
+        </Popup>
+      </Marker>
+    </Map>
+  );
+};
 const DirectionsCard = ({ className, location, latitude, longitude }) => (
   <div className={`flex-card ${className}`}>
     <div className="card-body">

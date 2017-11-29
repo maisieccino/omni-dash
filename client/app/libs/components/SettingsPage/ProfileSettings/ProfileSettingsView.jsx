@@ -46,7 +46,7 @@ const ProfileSettingsView = ({
       <button
         onClick={() => resetValues()}
         title="Reset form"
-        className="square"
+        className="red square"
         type="button"
       >
         <Icon.RotateCcw />
@@ -143,7 +143,11 @@ const ProfileSettingsView = ({
           placeholder="Enter your bio here..."
         />
         <p>
-          <button disabled={isUpdating} onClick={() => saveForm()}>
+          <button
+            className="red"
+            disabled={isUpdating}
+            onClick={() => saveForm()}
+          >
             {!isUpdating && "Save"}
             {isUpdating && (
               <Icon.RefreshCw aria-label="Loading" className="spinner" />

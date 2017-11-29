@@ -1,5 +1,9 @@
 import * as constants from "libs/constants/eventsConstants";
-import { jsonGetRequest, jsonPostRequest } from "libs/utils/Requests";
+import {
+  jsonGetRequest,
+  jsonPostRequest,
+  jsonDeleteRequest,
+} from "libs/utils/Requests";
 
 export const setIsFetchingEvents = () => ({
   type: constants.SET_IS_FETCHING_EVENTS,
@@ -49,6 +53,32 @@ export const createEvent = params => async dispatch => {
   } catch (error) {
     return dispatch(
       createEventFailure(typeof error === "string" ? error : error.message),
+    );
+  }
+};
+
+export const setIsSDeletingEvent = () => ({
+  type: constants.SET_IS_DELETING_EVENT,
+});
+
+export const deleteEventSuccess = eventId => ({
+  type: constants.DELETE_EVENT_SUCCESS,
+  eventId,
+});
+
+export const deleteEventFailure = error => ({
+  type: constants.DELETE_EVENT_FAILURE,
+  error,
+});
+
+export const deleteEvent = eventId => async dispatch => {
+  await dispatch(setIsSDeletingEvent());
+  try {
+    await jsonDeleteRequest(`${constants.EVENTS_PATH}/${eventId}`);
+    return dispatch(deleteEventSuccess(eventId));
+  } catch (error) {
+    return dispatch(
+      deleteEventFailure(typeof error === "string" ? error : error.message),
     );
   }
 };

@@ -79,13 +79,13 @@ class UserActions extends Component {
         >
           <Icon.User />
         </Link>
-        <button title="Edit User" className="square">
+        <button title="Edit User" className="red square">
           <Icon.Edit2 />
         </button>
         <button
           onClick={() => this.setState({ isModalVisible: true })}
           title="Delete User"
-          className="square"
+          className="red square"
         >
           {isDeleting ? (
             <Icon.RefreshCw className="spinner" aria-label="Deleting User..." />

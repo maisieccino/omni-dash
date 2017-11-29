@@ -12,6 +12,7 @@
   h3 {
     text-transform: none;
     font-family: $font-body;
+    font-weight: 500;
     font-size: 1.5rem;
   }
 
@@ -75,5 +76,12 @@
     width: 100%;
     border-radius: $border-radius;
     z-index: 0;
+    background-color: $color-bg;
+    color: $color-bg;
+    padding: 0.1rem;
+
+    a {
+      color: $color-blue;
+    }
   }
 }

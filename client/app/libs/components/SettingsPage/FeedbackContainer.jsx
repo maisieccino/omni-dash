@@ -15,7 +15,7 @@ const FeedbackContainer = () => (
     </p>
     <p>
       <a
-        href="https://github.com/hatchucl/hatch-site/issues"
+        href="https://github.com/mbellgb/omni-dash/issues"
         className="button yellow"
         rel="noopener noreferrer"
         target="_blank"

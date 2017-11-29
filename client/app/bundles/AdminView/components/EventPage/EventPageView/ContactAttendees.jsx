@@ -58,7 +58,9 @@ class ContactAttendees extends Component {
     const { title, message, success } = this.state;
     return (
       <div className="splitview-pane">
-        <h1>Contact Attendees</h1>
+        <div className="title-bar">
+          <h1>Contact Attendees</h1>
+        </div>
         <Flash when={!isMessagingAttendees && error.length > 0} type="alert">
           {error}
         </Flash>
@@ -90,6 +92,7 @@ class ContactAttendees extends Component {
                 this.props.messageAttendees(title, message);
               }}
               disabled={isMessagingAttendees}
+              className="red"
             >
               {isMessagingAttendees ? (
                 <Icon.RefreshCw className="spinner" />

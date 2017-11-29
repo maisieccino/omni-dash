@@ -12,7 +12,7 @@ const TimelineView = ({ error, events, fetchEvents, isFetching }) => (
     </Flash>
     <div className="title-bar">
       <h1>Event Timeline</h1>
-      <Link className="button square" to="/addEvent">
+      <Link className="red square button" to="/addEvent">
         <Icon.Plus />
       </Link>
       <button

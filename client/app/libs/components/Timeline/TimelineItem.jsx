@@ -3,19 +3,35 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import ItemActions from "./ItemActions";
 
-const TimelineItem = ({ id, name, startTime, endTime, children, editable }) => {
+const TimelineItem = ({
+  id,
+  name,
+  startTime,
+  endTime,
+  children,
+  editable,
+  onDeleteClick,
+  isDeleting,
+}) => {
   const start = startTime ? moment(startTime).format("HH:mm") : null;
   const end = endTime ? moment(endTime).format("HH:mm") : "TBC";
   const timeText = start ? `${start} - ${end}` : "Time TBC";
   return (
     <div className="timeline-item">
       <div className="timeline-item-header">
-        <h1>{name}</h1>
+        <h1>
+          {editable && `#${id}:`} {name}
+        </h1>
         <h2>{timeText}</h2>
       </div>
       <div className="timeline-item-content">
         {children}
-        <ItemActions editable={editable} id={id} />
+        <ItemActions
+          onDeleteClick={onDeleteClick}
+          editable={editable}
+          id={id}
+          isDeleting={isDeleting}
+        />
       </div>
     </div>
   );
@@ -34,6 +50,8 @@ TimelineItem.propTypes = {
   ]),
   children: PropTypes.node,
   editable: PropTypes.bool,
+  onDeleteClick: PropTypes.func,
+  isDeleting: PropTypes.bool,
 };
 
 TimelineItem.defaultProps = {
@@ -46,6 +64,8 @@ TimelineItem.defaultProps = {
     </p>
   ),
   editable: false,
+  onDeleteClick: () => {},
+  isDeleting: false,
 };
 
 export default TimelineItem;

@@ -6,7 +6,7 @@ import * as Icon from "react-feather";
 import moment from "moment";
 import marked from "marked";
 import { fetchTimelineItem } from "libs/actions/timelineItemActions";
-import Flash from "libs/components/Flash";
+import { Flash, Progress } from "libs/components";
 
 class TimelineItemPage extends Component {
   static propTypes = {
@@ -56,6 +56,9 @@ class TimelineItemPage extends Component {
       timeText = `Finished ${moment(endTime).fromNow()}`;
     }
 
+    const timeSince = moment.duration(moment().diff(moment(startTime)));
+    const duration = moment.duration(moment(endTime).diff(moment(startTime)));
+
     return (
       <div>
         <div className="title-bar">
@@ -85,6 +88,21 @@ class TimelineItemPage extends Component {
         {!error && (
           <div>
             <h3>{timeText}</h3>
+            {Date.parse(endTime) > Date.now() &&
+              Date.parse(startTime) <= Date.now() && (
+                <div>
+                  <p>
+                    <Progress
+                      value={Math.floor(timeSince.asSeconds())}
+                      max={Math.floor(duration.asSeconds())}
+                    />
+                  </p>
+                  <p>
+                    {timeSince.hours()} hours, {timeSince.minutes()} minutes
+                    elapsed
+                  </p>
+                </div>
+              )}
             <h3>
               {moment(startTime).format("dddd Mo MMMM, HH:mm")} -{" "}
               {moment(endTime).format("HH:mm")}

@@ -26,6 +26,7 @@ class HackerView extends Component {
     current_user: PropTypes.shape(),
     history: PropTypes.shape(),
     location: PropTypes.shape(),
+    competition: PropTypes.shape(),
   };
 
   static defaultProps = {
@@ -36,6 +37,7 @@ class HackerView extends Component {
     current_user: {},
     history: {},
     location: { pathname: "/" },
+    competition: {},
   };
 
   constructor(props) {
@@ -52,9 +54,10 @@ class HackerView extends Component {
   componentWillReceiveProps(nextProps) {
     const notificationCount = nextProps.notifications.filter(x => !x.seen)
       .length;
+    const eventName = nextProps.competition.name || "Event";
     document.title = notificationCount
-      ? `Hatch Site (${notificationCount})`
-      : "Hatch Site";
+      ? `${eventName} Dashboard (${notificationCount})`
+      : `${eventName} Dashboard`;
   }
 
   subscribeChannel() {

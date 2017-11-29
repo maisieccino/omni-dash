@@ -1,4 +1,4 @@
-# NAME: shecancode/hatch-site
+# NAME: mbellgb/omnidash
 
 # Use the barebones version of Ruby 2.4.1.
 FROM ruby:2.4.2-slim
@@ -16,7 +16,7 @@ ENV RAILS_ADMIN_USER_FIRSTNAME Admin
 ENV RAILS_ADMIN_USER_LASTNAME User
 ENV RAILS_ADMIN_USER_PASS changeme
 
-ENV WORK_DIR /hatch_web
+ENV WORK_DIR /dashboard
 
 # Install dependencies:
 ADD https://dl.yarnpkg.com/debian/pubkey.gpg /tmp/yarn-pubkey.gpg
@@ -59,10 +59,10 @@ CMD ["sh", "run-prod.sh"]
 # eg: /tmp, /log, /uploads ...
 
 # commenting this because I don't know yet what these are
-#VOLUME ["/var/upload","/var/logs/hatch-site"]
+#VOLUME ["/var/upload","/var/logs/omnidash"]
 
 ## Build (and tag) this image:
-#> docker build -t shecancode/hatch-site .
+#> docker build -t mbellgb/omnidash-prod .
 
 ## Publish to registry (necessary to deploy)
-#> docker push shecancode/hatch-site
+#> docker push mbellgb/omnidash-prod

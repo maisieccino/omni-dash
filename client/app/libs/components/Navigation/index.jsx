@@ -23,7 +23,7 @@ const Navigation = ({ className, removeRoutes, routes, notificationCount }) => {
   return (
     <nav className={className}>
       <div>
-        <img alt="" src="/assets/hatch_logo.png" />
+        <img alt="" src="/assets/event_logo.png" />
         {navRoutes}
       </div>
     </nav>

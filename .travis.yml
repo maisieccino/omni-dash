@@ -2,7 +2,6 @@ language: ruby
 cache:
 - bundler
 - yarn
-node_js: '8'
 rvm:
 - 2.4.1
 services:
@@ -12,7 +11,6 @@ env:
 install:
 - bundle install
 - nvm install $(cat .nvmrc)
-- npm install npm@latest -g
 - npm install -g yarn
 - npm --version
 - yarn install

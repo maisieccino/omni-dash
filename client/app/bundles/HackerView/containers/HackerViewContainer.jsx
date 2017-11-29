@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
   current_user: state.current_user,
   notifications: state.notifications.notifications,
   location: state.routerReducer.location,
+  competition: state.competition.competition,
 });
 
 const mapDispatchToProps = dispatch => ({

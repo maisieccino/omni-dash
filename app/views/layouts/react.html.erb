@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hatch</title>
+    <title><%= @event_name %></title>
     <%= csrf_meta_tags %>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,10 +12,10 @@
     <link rel="manifest" href="/assets/icons/manifest.json">
     <link rel="mask-icon" href="/assets/icons/safari-pinned-tab.svg" color="#f54e74">
     <link rel="shortcut icon" href="/assets/icons/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="Hatch Dashboard">
-    <meta name="application-name" content="Hatch Dashboard">
+    <meta name="apple-mobile-web-app-title" content="<%= @event_name %> Dashboard">
+    <meta name="application-name" content="<%= @event_name %> Dashboard">
     <meta name="msapplication-config" content="/assets/icons/browserconfig.xml">
-    <meta name="theme-color" content="#f54e74">
+    <meta name="theme-color" content="<%= ENV.fetch ("ACCENT_COLOR") { "#f54e74" } %>">
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"

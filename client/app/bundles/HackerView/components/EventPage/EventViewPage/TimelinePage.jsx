@@ -46,7 +46,7 @@ class TimelinePage extends Component {
           </button>
         </div>
         <Timeline events={events} helpText="There's no events." />
-        <span className="flex horizontal">
+        <span className="flex horizontal center">
           <button
             id="goToTopButton"
             className="mint square"

@@ -1,0 +1,13 @@
+.timeline-quick-add {
+  position: absolute;
+  z-index: 10;
+  left: 10rem;
+  background-color: $color-card;
+  border-radius: $border-radius;
+  padding: 0.5rem;
+  width: 15rem;
+
+  h1 {
+    margin: 0.25rem 0;
+  }
+}
