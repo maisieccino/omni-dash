@@ -21,12 +21,12 @@ ActiveRecord::Schema.define(version: 20171110182113) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer "capacity"
+    t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "deleted_at"
     t.float "latitude"
     t.float "longitude"
-    t.string "location"
   end
 
   create_table "events", force: :cascade do |t|
