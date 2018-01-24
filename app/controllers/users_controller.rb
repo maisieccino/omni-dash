@@ -90,7 +90,8 @@ class UsersController < ApplicationController
       :contact_linkedin,
       :contact_devpost,
       :contact_github,
-      :bio
+      :bio,
+      :pronouns
     )
   end
 
@@ -108,7 +109,8 @@ class UsersController < ApplicationController
       :contact_devpost,
       :contact_github,
       :bio,
-      :avatar
+      :avatar,
+      :pronouns
     )
   end
 

@@ -85,6 +85,14 @@ const ProfileSettingsView = ({
           placeholder="Last Name..."
           onChange={val => updateValues({ last_name: val })}
         />
+        <TextField
+          id="user-pronouns"
+          label="Pronouns"
+          value={userFields.pronouns}
+          className={userChangedFields.pronouns ? "edited" : ""}
+          placeholder="He/Him, She/Her, They/Them, etc..."
+          onChange={val => updateValues({ pronouns: val })}
+        />
         <h2>Your Social Media Profiles</h2>
         <p>
           You can add your social media profiles here if you{"'"}d like other
@@ -185,6 +193,7 @@ ProfileSettingsView.defaultProps = {
   userFields: {
     first_name: "",
     last_name: "",
+    pronouns: "",
     contact_twitter: "",
     contact_linkedin: "",
     contact_devpost: "",
