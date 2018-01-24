@@ -1,0 +1,46 @@
+.image {
+  height: 5rem;
+  width: 5rem;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 0.1rem solid $color-fg;
+
+  &.round {
+    border-radius: 50%;
+    background-size: cover;
+  }
+
+  &.large {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  &.blur {
+    position: relative;
+    z-index: 0;
+    &::before, &::after {
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      position: absolute;
+      display: block;
+      content: "";
+      border-radius: inherit;
+    }
+    &::before {
+      filter: blur(5px);
+      z-index: 1;
+      background: inherit;
+      overflow: hidden;
+    }
+    &::after {
+      border: inherit;
+      z-index: 2;
+    }
+    & > * {
+      z-index: 4;
+    }
+  }
+}

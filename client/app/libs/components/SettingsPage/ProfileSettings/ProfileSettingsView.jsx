@@ -5,6 +5,7 @@ import Flash from "libs/components/Flash";
 import { TextField } from "libs/components/Form";
 import Modal from "libs/components/Modal";
 import MarkdownEditor from "libs/components/MarkdownEditor";
+import AvatarChooser from "./AvatarChooser";
 
 const modalChoices = (confirm, cancel) => [
   <button key={0} className="red" onClick={() => confirm()}>
@@ -12,7 +13,7 @@ const modalChoices = (confirm, cancel) => [
   </button>,
   <button onClick={() => cancel()} key={1}>
     Stay
-  </button>
+  </button>,
 ];
 
 const ProfileSettingsView = ({
@@ -27,7 +28,7 @@ const ProfileSettingsView = ({
   showExitModal,
   onExitModalConfirm,
   onExitModalCancel,
-  saveForm
+  saveForm,
 }) => (
   <div className="splitview-pane">
     <Modal
@@ -64,6 +65,8 @@ const ProfileSettingsView = ({
         <Flash type="success" when={!isUpdating && !error && updateSuccess}>
           Settings saved successfully!
         </Flash>
+
+        <AvatarChooser />
 
         <h2>Basic Information</h2>
         <TextField
@@ -171,7 +174,7 @@ ProfileSettingsView.propTypes = {
   showExitModal: PropTypes.bool,
   onExitModalConfirm: PropTypes.func,
   onExitModalCancel: PropTypes.func,
-  saveForm: PropTypes.func
+  saveForm: PropTypes.func,
 };
 
 ProfileSettingsView.defaultProps = {
@@ -186,7 +189,7 @@ ProfileSettingsView.defaultProps = {
     contact_linkedin: "",
     contact_devpost: "",
     contact_github: "",
-    bio: ""
+    bio: "",
   },
   userChangedFields: {},
   updateValues: () => {},
@@ -194,7 +197,7 @@ ProfileSettingsView.defaultProps = {
   showExitModal: false,
   onExitModalConfirm: () => {},
   onExitModalCancel: () => {},
-  saveForm: () => {}
+  saveForm: () => {},
 };
 
 export default ProfileSettingsView;

@@ -11,6 +11,10 @@
   align-items: center;
 }
 
+.flex.fullwidth {
+  width: 100%;
+}
+
 .flex.center-items {
   justify-content: center;
   & > * {

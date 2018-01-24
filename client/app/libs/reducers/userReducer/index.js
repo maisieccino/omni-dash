@@ -7,6 +7,7 @@ export const initialState = {
   isFetching: false,
   isUpdating: false,
   isDeleting: false,
+  isUploadingAvatar: false,
   updateSuccess: false,
   user: {},
   userChangedFields: {},
@@ -107,6 +108,29 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         userChangedFields: {},
+      };
+    }
+
+    case constants.SET_IS_UPLOADING_AVATAR: {
+      return {
+        ...state,
+        error: "",
+        isUploadingAvatar: true,
+      };
+    }
+
+    case constants.UPLOAD_AVATAR_SUCCESS: {
+      return {
+        ...state,
+        isUploadingAvatar: false,
+      };
+    }
+
+    case constants.UPLOAD_AVATAR_FAILURE: {
+      return {
+        ...state,
+        isUploadingAvatar: false,
+        error,
       };
     }
 

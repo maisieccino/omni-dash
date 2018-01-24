@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_attached_file :avatar, styles: { medium: "512x512>", thumb: "128x128>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: %r{\Aimage\/.*\z}
 
+  attr_accessor :avatar_url
+
   def public_attributes_to_json
     to_json(only:
     %i[
@@ -27,7 +29,15 @@ class User < ApplicationRecord
       contact_github
       admin
       mentor
-    ])
+    ], methods: %i[ avatar_url ])
+  end
+
+  def private_attributes_to_json
+    to_json(methods: %i[ avatar_url ])
+  end
+
+  def avatar_url
+    avatar.url(:medium)
   end
 
   def update_invite_code
