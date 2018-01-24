@@ -1,4 +1,3 @@
-/* eslint react/prop-types: 0 */
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -48,7 +47,7 @@ class HomePage extends Component {
           </button>
         </div>
         <h2>Your Admin Dashboard</h2>
-        <FeedContainer isAdmin />
+        <FeedContainer isAdmin={user.admin} />
       </div>
     );
   }

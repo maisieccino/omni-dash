@@ -6,6 +6,9 @@ import userReducer, {
 import competitionReducer, {
   initialState as competitionState,
 } from "libs/reducers/competitionReducer";
+import notificationsReducer, {
+  initialState as notificationsState,
+} from "libs/reducers/notificationsReducer";
 import timelineItemReducer, {
   initialState as timelineItemState,
 } from "libs/reducers/timelineItemReducer";
@@ -17,6 +20,7 @@ import usersReducer, { initialState as usersState } from "./usersReducer";
 export const initialStates = {
   competition: competitionState,
   current_user: {},
+  notifications: notificationsState,
   user: userState,
   users: usersState,
   events: eventsState,
@@ -26,6 +30,7 @@ export const initialStates = {
 export default combineReducers({
   competition: competitionReducer,
   current_user: (state = {}) => state,
+  notifications: notificationsReducer,
   user: userReducer,
   users: usersReducer,
   events: eventsReducer,

@@ -2,8 +2,8 @@
 import React from "react";
 import { Provider } from "react-redux";
 import createHistory from "history/createBrowserHistory";
-import configureStore from "../store/adminViewStore";
-import AppContainer from "../containers/AppContainer";
+import configureStore from "../store/appStore";
+import AppContainer from "./AppContainer";
 import { initialStates } from "../reducers";
 
 const App = props => {
