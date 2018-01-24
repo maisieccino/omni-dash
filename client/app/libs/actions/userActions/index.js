@@ -2,6 +2,7 @@ import {
   jsonGetRequest,
   jsonPutRequest,
   jsonDeleteRequest,
+  getMetaContent,
 } from "libs/utils/Requests";
 import * as constants from "libs/constants/userConstants";
 
@@ -97,6 +98,42 @@ export const deleteUser = id => async dispatch => {
   } catch (error) {
     return dispatch(
       deleteUserFailure(typeof error === "string" ? error : error.message),
+    );
+  }
+};
+
+export const setIsUploadingAvatar = () => ({
+  type: constants.SET_IS_UPLOADING_AVATAR,
+});
+
+export const uploadAvatarSuccess = () => ({
+  type: constants.UPLOAD_AVATAR_SUCCESS,
+});
+
+export const uploadAvatarFailure = error => ({
+  type: constants.UPLOAD_AVATAR_FAILURE,
+  error,
+});
+
+export const uploadAvatar = file => async dispatch => {
+  await dispatch(setIsUploadingAvatar());
+  try {
+    const data = new FormData();
+    data.append("avatar", file, file.name);
+    data.append("authenticity_token", getMetaContent("csrf-token"));
+    const res = await fetch(constants.USER_ME_PATH, {
+      method: "put",
+      body: data,
+      credentials: "include",
+    });
+    if (res.ok) {
+      await dispatch(uploadAvatarSuccess());
+      return dispatch(fetchUser());
+    }
+    throw new Error(await res.text());
+  } catch (error) {
+    return dispatch(
+      uploadAvatarFailure(typeof error === "string" ? error : error.message),
     );
   }
 };

@@ -21,14 +21,14 @@ class UsersController < ApplicationController
 
   def show
     if current_user[:id] == @user[:id] || current_user.admin?
-      json_response(@user, :ok)
+    json_response(@user.private_attributes_to_json, :ok)
     else
       json_response(@user.public_attributes_to_json)
     end
   end
 
   def show_self
-    json_response(@user)
+    json_response(@user.private_attributes_to_json)
   end
 
   def update
@@ -90,7 +90,8 @@ class UsersController < ApplicationController
       :contact_linkedin,
       :contact_devpost,
       :contact_github,
-      :bio
+      :bio,
+      :pronouns
     )
   end
 
@@ -107,7 +108,9 @@ class UsersController < ApplicationController
       :contact_linkedin,
       :contact_devpost,
       :contact_github,
-      :bio
+      :bio,
+      :avatar,
+      :pronouns
     )
   end
 

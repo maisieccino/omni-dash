@@ -5,6 +5,7 @@ import Flash from "libs/components/Flash";
 import { TextField } from "libs/components/Form";
 import Modal from "libs/components/Modal";
 import MarkdownEditor from "libs/components/MarkdownEditor";
+import AvatarChooser from "./AvatarChooser";
 
 const modalChoices = (confirm, cancel) => [
   <button key={0} className="red" onClick={() => confirm()}>
@@ -65,6 +66,8 @@ const ProfileSettingsView = ({
           Settings saved successfully!
         </Flash>
 
+        <AvatarChooser />
+
         <h2>Basic Information</h2>
         <TextField
           id="user-first-name"
@@ -81,6 +84,14 @@ const ProfileSettingsView = ({
           className={userChangedFields.last_name ? "edited" : ""}
           placeholder="Last Name..."
           onChange={val => updateValues({ last_name: val })}
+        />
+        <TextField
+          id="user-pronouns"
+          label="Pronouns"
+          value={userFields.pronouns}
+          className={userChangedFields.pronouns ? "edited" : ""}
+          placeholder="He/Him, She/Her, They/Them, etc..."
+          onChange={val => updateValues({ pronouns: val })}
         />
         <h2>Your Social Media Profiles</h2>
         <p>
@@ -182,6 +193,7 @@ ProfileSettingsView.defaultProps = {
   userFields: {
     first_name: "",
     last_name: "",
+    pronouns: "",
     contact_twitter: "",
     contact_linkedin: "",
     contact_devpost: "",

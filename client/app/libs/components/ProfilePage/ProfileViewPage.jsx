@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 
+const bioText = bio => bio || <i>This user has not yet provided a bio.</i>;
+
 const ProfileViewPage = ({ user, isFetching, isOwnProfile, onRefresh }) => (
   <div>
     <Header
@@ -34,6 +36,8 @@ const ProfileViewPage = ({ user, isFetching, isOwnProfile, onRefresh }) => (
               <button key={2}>Create A Team</button>,
             ]
           )}
+          <h2>Bio</h2>
+          <p>{bioText(user.bio)}</p>
         </div>
       ) : (
         <div className="profile-body">

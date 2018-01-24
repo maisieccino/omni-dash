@@ -4,22 +4,21 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
 
-const bioText = bio => bio || <i>This user has not yet provided a bio.</i>;
-
 const Header = ({
   admin,
   first_name,
   last_name,
-  bio,
+  pronouns,
   isFetching,
   isOwnProfile,
   onRefresh,
+  avatar_url: avatarUrl,
 }) => (
   <header className="profile-header">
     <div className="profile-image-container">
       <div
         style={{
-          backgroundImage: "url(/assets/user_missing.png)",
+          backgroundImage: `url(${avatarUrl})`,
         }}
         className="profile-image"
       />
@@ -30,7 +29,7 @@ const Header = ({
           {first_name} {last_name} {admin && <Icon.Shield />}
         </h1>
       </div>
-      <p>{bioText(bio)}</p>
+      <p>{pronouns}</p>
       <div className="button-group flex horizontal">
         <button
           className="mint button square"
@@ -67,21 +66,23 @@ const Header = ({
 Header.propTypes = {
   first_name: PropTypes.string,
   last_name: PropTypes.string,
-  bio: PropTypes.string,
+  pronouns: PropTypes.string,
   isFetching: PropTypes.bool,
   admin: PropTypes.bool,
   isOwnProfile: PropTypes.bool,
   onRefresh: PropTypes.func,
+  avatar_url: PropTypes.string,
 };
 
 Header.defaultProps = {
   first_name: "...",
   last_name: "",
-  bio: "This user does not currently have a bio",
+  pronouns: "",
   isFetching: false,
   admin: false,
   isOwnProfile: false,
   onRefresh: () => {},
+  avatar_url: "/assets/user_missing.png",
 };
 
 export default Header;
