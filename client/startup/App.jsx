@@ -3,7 +3,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import createHistory from "history/createBrowserHistory";
 import configureStore from "../store/adminViewStore";
-import AdminViewContainer from "../containers/AdminViewContainer";
+import AppContainer from "../containers/AppContainer";
 import { initialStates } from "../reducers";
 
 const App = props => {
@@ -15,7 +15,7 @@ const App = props => {
 
   return (
     <Provider store={store}>
-      <AdminViewContainer history={history} />
+      <AppContainer history={history} />
     </Provider>
   );
 };

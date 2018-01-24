@@ -1,5 +1,6 @@
-/* eslint react/prop-types: 0 */
 import React from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { Route } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 import { Switch } from "react-router-dom";
@@ -9,16 +10,21 @@ import TimelineItemPage from "libs/components/TimelineItemPage";
 import SettingsPage from "libs/components/SettingsPage";
 import ProfilePage from "libs/components/ProfilePage";
 import Navigation from "libs/components/Navigation";
-import routes from "./routes";
-import HomePage from "./HomePage";
-import UsersPage from "./UsersPage";
-import EventPage from "./EventPage";
-import CoursesPage from "./CoursesPage";
-import AddAttendeePage from "./AddAttendeePage";
-import AddEventPage from "./AddEventPage";
-import TestPage from "./TestPage";
+import routes from "../components/routes";
+import HomePage from "../screens/HomePage";
+import UsersPage from "../screens/UsersPage";
+import EventPage from "../screens/EventPage";
+import CoursesPage from "../screens/CoursesPage";
+import AddAttendeePage from "../screens/AddAttendeePage";
+import AddEventPage from "../screens/AddEventPage";
+import TestPage from "../screens/TestPage";
 
-const AdminView = ({ current_user: user, history, location }) => {
+const mapStateToProps = state => ({
+  current_user: state.current_user,
+  location: state.routerReducer.location,
+});
+
+const NavigationComponent = ({ current_user: user, history, location }) => {
   const currentKey = location ? location.pathname.split("/")[1] : "/";
   return (
     <ConnectedRouter history={history}>
@@ -70,4 +76,18 @@ const AdminView = ({ current_user: user, history, location }) => {
   );
 };
 
-export default AdminView;
+NavigationComponent.propTypes = {
+  current_user: PropTypes.shape(),
+  is_admin: PropTypes.boolean,
+  history: PropTypes.shape(),
+  location: PropTypes.shape(),
+};
+
+NavigationComponent.defaultProps = {
+  current_user: {},
+  is_admin: false,
+  history: {},
+  location: {},
+};
+
+export default connect(mapStateToProps)(NavigationComponent);
