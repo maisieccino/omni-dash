@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
-import Modal from "libs/components/Modal";
-import { deleteUser } from "libs/actions/userActions";
+import Modal from "../../components/Modal";
+import { deleteUser } from "../../actions/userActions";
 
 class UserActions extends Component {
   static propTypes = {

@@ -4,8 +4,8 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
-import { fetchCompetitionAttendees } from "libs/actions/competitionActions";
-import { Flash, Table } from "libs/components";
+import { fetchCompetitionAttendees } from "../../../../actions/competitionActions";
+import { Flash, Table } from "../../../../components";
 
 class Attendees extends Component {
   static propTypes = {

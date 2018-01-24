@@ -4,8 +4,8 @@ import moment from "moment";
 import { Route, Redirect } from "react-router-dom";
 import * as Icon from "react-feather";
 
-import { DateTimePicker } from "libs/components/Form";
-import MarkdownEditor from "libs/components/MarkdownEditor";
+import { DateTimePicker } from "../../components/Form";
+import MarkdownEditor from "../../components/MarkdownEditor";
 
 class CreateEvent extends Component {
   static propTypes = {

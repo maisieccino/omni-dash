@@ -1,6 +1,6 @@
 import React from "react";
 import * as Icon from "react-feather";
-import { NavItem } from "libs/components/Navigation";
+import { NavItem } from "../components/Navigation";
 
 export default isAdmin =>
   isAdmin

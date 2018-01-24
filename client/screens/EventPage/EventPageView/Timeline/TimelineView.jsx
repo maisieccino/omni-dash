@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
-import Flash from "libs/components/Flash";
-import Timeline from "libs/components/Timeline";
+import Flash from "../../../../components/Flash";
+import Timeline from "../../../../components/Timeline";
 
 const TimelineView = ({ error, events, fetchEvents, isFetching }) => (
   <div className="splitview-pane">

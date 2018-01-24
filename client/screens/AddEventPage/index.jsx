@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
-import Flash from "libs/components/Flash";
-import { DateTimePicker, TextField } from "libs/components/Form";
-import MarkdownEditor from "libs/components/MarkdownEditor";
-import { TopNav } from "libs/components/Navigation";
+import Flash from "../../components/Flash";
+import { DateTimePicker, TextField } from "../../components/Form";
+import MarkdownEditor from "../../components/MarkdownEditor";
+import { TopNav } from "../../components/Navigation";
 
-import { createEvent } from "libs/actions/eventsActions";
+import { createEvent } from "../../actions/eventsActions";
 
 class AddEventPage extends Component {
   static propTypes = {

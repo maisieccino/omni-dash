@@ -8,7 +8,7 @@ import { FadeInOut, Stagger } from "react-animation-components";
 import {
   seenNotification,
   dismissNotification,
-} from "libs/actions/notificationsActions";
+} from "../../actions/notificationsActions";
 import NotificationItem from "./NotificationItem";
 
 class NotificationsPage extends Component {

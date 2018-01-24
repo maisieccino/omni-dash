@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import marked from "marked";
 import moment from "moment";
 import * as Icon from "react-feather";
-import { generateMapsUrl } from "libs/utils/geo";
+import { generateMapsUrl } from "../../../utils/geo";
 
 marked.setOptions({
   sanitize: true,

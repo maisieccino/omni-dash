@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { fetchEvents } from "libs/actions/eventsActions";
+import { fetchEvents } from "../../actions/eventsActions";
 
 import EventPageView from "./EventViewPage";
 

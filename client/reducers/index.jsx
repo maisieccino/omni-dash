@@ -1,20 +1,16 @@
 import { combineReducers } from "redux";
 import { routerReducer } from "react-router-redux";
-import userReducer, {
-  initialState as userState,
-} from "libs/reducers/userReducer";
+import userReducer, { initialState as userState } from "./userReducer";
 import competitionReducer, {
   initialState as competitionState,
-} from "libs/reducers/competitionReducer";
+} from "./competitionReducer";
 import notificationsReducer, {
   initialState as notificationsState,
-} from "libs/reducers/notificationsReducer";
+} from "./notificationsReducer";
 import timelineItemReducer, {
   initialState as timelineItemState,
-} from "libs/reducers/timelineItemReducer";
-import eventsReducer, {
-  initialState as eventsState,
-} from "libs/reducers/eventsReducer";
+} from "./timelineItemReducer";
+import eventsReducer, { initialState as eventsState } from "./eventsReducer";
 import usersReducer, { initialState as usersState } from "./usersReducer";
 
 export const initialStates = {

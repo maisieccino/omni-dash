@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 import moment from "moment";
 import marked from "marked";
 import * as Icon from "react-feather";
-import { fetchCompetition } from "libs/actions/competitionActions";
-import { fetchEvents } from "libs/actions/eventsActions";
-import Progress from "libs/components/Progress";
-import Timeline from "libs/components/Timeline";
+import { fetchCompetition } from "../../../../actions/competitionActions";
+import { fetchEvents } from "../../../../actions/eventsActions";
+import Progress from "../../../../components/Progress";
+import Timeline from "../../../../components/Timeline";
 import EventProgress from "./EventProgress";
 
 class OverviewPage extends Component {

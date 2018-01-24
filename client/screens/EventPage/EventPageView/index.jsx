@@ -4,7 +4,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import { generate } from "shortid";
 import { FadeInOut, Stagger } from "react-animation-components";
 
-import NavItem from "libs/components/SplitViewNavItem";
+import NavItem from "../../../components/SplitViewNavItem";
 import CurrentEvent from "./CurrentEvent";
 import EditEvent from "./EditEvent";
 import Timeline from "./Timeline";

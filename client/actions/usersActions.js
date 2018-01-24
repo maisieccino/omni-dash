@@ -1,4 +1,4 @@
-import { jsonGetRequest } from "libs/utils/Requests";
+import { jsonGetRequest } from "../utils/Requests";
 import * as constants from "../constants/usersConstants";
 
 export const setIsFetchingUsers = () => ({

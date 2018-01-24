@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
-import { messageAttendees } from "libs/actions/competitionActions";
-import Flash from "libs/components/Flash";
-import { InputField } from "libs/components/Form";
-import MarkdownEditor from "libs/components/MarkdownEditor";
+import { messageAttendees } from "../../../actions/competitionActions";
+import Flash from "../../../components/Flash";
+import { InputField } from "../../../components/Form";
+import MarkdownEditor from "../../../components/MarkdownEditor";
 
 class ContactAttendees extends Component {
   static propTypes = {

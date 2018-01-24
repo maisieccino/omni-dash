@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
-import { Flash } from "libs/components";
+import { Flash } from "../../../components";
 import {
   fetchCompetition,
   deleteCompetition,
-} from "libs/actions/competitionActions";
+} from "../../../actions/competitionActions";
 
 class DeleteEvent extends Component {
   static propTypes = {

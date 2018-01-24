@@ -6,9 +6,9 @@ import * as Icon from "react-feather";
 import {
   fetchCompetition,
   updateCompetition,
-} from "libs/actions/competitionActions";
-import Flash from "libs/components/Flash";
-import MarkdownEditor from "libs/components/MarkdownEditor";
+} from "../../../actions/competitionActions";
+import Flash from "../../../components/Flash";
+import MarkdownEditor from "../../../components/MarkdownEditor";
 
 class EditEvent extends Component {
   static propTypes = {

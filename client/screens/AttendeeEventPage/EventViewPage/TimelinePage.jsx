@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
-import { fetchEvents } from "libs/actions/eventsActions";
-import Timeline from "libs/components/Timeline";
+import { fetchEvents } from "../../../actions/eventsActions";
+import Timeline from "../../../components/Timeline";
 
 class TimelinePage extends Component {
   static propTypes = {

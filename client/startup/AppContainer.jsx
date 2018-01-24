@@ -7,16 +7,16 @@ import { Switch } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ActionCable from "actioncable";
 
-import { fetchCompetition } from "libs/actions/competitionActions";
+import { fetchCompetition } from "../actions/competitionActions";
 import {
   onReceiveNotification,
   fetchNotifications,
-} from "libs/actions/notificationsActions";
-import TimelineItemPage from "libs/components/TimelineItemPage";
-import SettingsPage from "libs/components/SettingsPage";
-import ProfilePage from "libs/components/ProfilePage";
-import Navigation from "libs/components/Navigation";
-import Notifications from "libs/components/Notifications";
+} from "../actions/notificationsActions";
+import TimelineItemPage from "../screens/TimelineItemPage";
+import SettingsPage from "../screens/SettingsPage";
+import ProfilePage from "../screens/ProfilePage";
+import Navigation from "../components/Navigation";
+import Notifications from "../components/Notifications";
 import routes from "../components/routes";
 import HomePage from "../screens/HomePage";
 import UsersPage from "../screens/UsersPage";

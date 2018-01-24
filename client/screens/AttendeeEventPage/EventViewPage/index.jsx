@@ -3,7 +3,7 @@ import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { generate } from "shortid";
 import { FadeInOut, Stagger } from "react-animation-components";
-import NavItem from "libs/components/SplitViewNavItem";
+import NavItem from "../../../components/SplitViewNavItem";
 
 import OverviewPage from "./OverviewPage";
 import TimelinePage from "./TimelinePage";

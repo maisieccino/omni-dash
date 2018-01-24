@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
-import { fetchCompetition } from "libs/actions/competitionActions";
-import { FeedContainer } from "libs/components";
+import { fetchCompetition } from "../../actions/competitionActions";
+import { FeedContainer } from "../../components";
 
 class HomePage extends Component {
   static propTypes = {

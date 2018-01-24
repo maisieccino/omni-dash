@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Icon from "react-feather";
-import Flash from "libs/components/Flash";
-import { EmailField, TextField } from "libs/components/Form";
-import { TopNav } from "libs/components/Navigation";
+import Flash from "../../components/Flash";
+import { EmailField, TextField } from "../../components/Form";
+import { TopNav } from "../../components/Navigation";
 
-import { inviteAttendee } from "libs/actions/competitionActions";
+import { inviteAttendee } from "../../actions/competitionActions";
 
 class AddAttendeePage extends Component {
   static propTypes = {

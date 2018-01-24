@@ -1,9 +1,9 @@
 import React from "react";
 import * as Icon from "react-feather";
 import moment from "moment";
-import Flash from "libs/components/Flash";
-import Progress from "libs/components/Progress";
-import Timeline from "libs/components/Timeline";
+import Flash from "../components/Flash";
+import Progress from "../components/Progress";
+import Timeline from "../components/Timeline";
 
 const events = [
   {

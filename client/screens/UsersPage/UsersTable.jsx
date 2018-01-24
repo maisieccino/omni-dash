@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Table } from "libs/components";
+import { Table } from "../../components";
 
 import UserActions from "./UserActions";
 

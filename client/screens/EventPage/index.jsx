@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import {
   fetchCompetition,
   saveCompetition,
-} from "libs/actions/competitionActions";
-import { Flash } from "libs/components";
+} from "../../actions/competitionActions";
+import { Flash } from "../../components";
 
 import EventPageView from "./EventPageView";
 import CreateEvent from "./CreateEvent";
