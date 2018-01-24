@@ -130,6 +130,10 @@ html {
   color: darken($color-card, 30);
 }
 
+.inverted {
+  color: $color-bg;
+}
+
 .center {
   text-align: center;
 }

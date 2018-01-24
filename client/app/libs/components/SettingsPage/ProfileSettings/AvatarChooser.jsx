@@ -52,6 +52,14 @@ class AvatarChooser extends Component {
     reader.readAsDataURL(file);
   }
 
+  onClearClick(e) {
+    e.preventDefault();
+    this.setState({
+      file: null,
+      imageUrl: "",
+    });
+  }
+
   onSaveClick(e) {
     e.preventDefault();
     this.props.uploadImage(this.state.file);
@@ -72,27 +80,33 @@ class AvatarChooser extends Component {
               }}
               className="image large round"
             />
-            <h3>Old Image</h3>
+            <h3>Current Image</h3>
           </div>
-          <div>
-            <h3>
-              <Icon.ArrowRight />
-            </h3>
-          </div>
-          <div>
-            <div
-              style={{
-                backgroundImage: `url(${imageUrl ||
-                  "/assets/user_missing.png"})`,
-              }}
-              className={`image large round flex center center-items ${isUploadingAvatar
-                ? "blur"
-                : ""}`}
-            >
-              {isUploadingAvatar && <Icon.RefreshCw className="spinner" />}
-            </div>
-            <h3>New Image</h3>
-          </div>
+          {imageUrl && (
+            <Fragment>
+              <div>
+                <h3>
+                  <Icon.ArrowRight />
+                </h3>
+              </div>
+              <div>
+                <div
+                  style={{
+                    backgroundImage: `url(${imageUrl ||
+                      "/assets/user_missing.png"})`,
+                  }}
+                  className={`image large round flex center center-items blur ${isUploadingAvatar
+                    ? ""
+                    : "unblur"}`}
+                >
+                  {isUploadingAvatar && (
+                    <Icon.RefreshCw className="spinner inverted" />
+                  )}
+                </div>
+                <h3>New Image</h3>
+              </div>
+            </Fragment>
+          )}
         </div>
         <input
           type="file"
@@ -100,9 +114,13 @@ class AvatarChooser extends Component {
           accept="image/*"
           multiple={false}
         />
-        <p>
-          <button onClick={e => this.onSaveClick(e)}>Save</button>
-        </p>
+        <div className="button-group">
+          <button className="red" onClick={e => this.onSaveClick(e)}>
+            Save
+          </button>
+          <button onClick={e => this.onClearClick(e)}>Clear</button>
+        </div>
+        <hr />
       </Fragment>
     );
   }
