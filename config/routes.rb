@@ -10,11 +10,8 @@ Rails.application.routes.draw do
     get "is_signed_in", to: "auth#signed_in?"
   end
 
-  get "hackers", to: "hacker_view#index"
-  match "hackers/*path", to: "hacker_view#index", via: :all
-
-  get "admin", to: "admin_view#index"
-  match "admin/*path", to: "admin_view#index", via: :all
+  get "home", to: "app#index"
+  match "home/*path", to: "app#index", via: :all
 
   get "/users/me", to: "users#show_self", as: :user_me
   put "/users/me", to: "users#update_self", as: :user_me_update

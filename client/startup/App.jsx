@@ -6,10 +6,10 @@ import configureStore from "../store/adminViewStore";
 import AdminViewContainer from "../containers/AdminViewContainer";
 import { initialStates } from "../reducers";
 
-const AdminViewApp = props => {
+const App = props => {
   const store = configureStore(Object.assign({}, initialStates, props));
   const history = createHistory({
-    basename: "/admin",
+    basename: "/home",
     forceRefresh: false,
   });
 
@@ -20,4 +20,4 @@ const AdminViewApp = props => {
   );
 };
 
-export default AdminViewApp;
+export default App;

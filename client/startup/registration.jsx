@@ -1,7 +1,7 @@
 // @flow
 import ReactOnRails from "react-on-rails";
-import AdminViewApp from "./AdminViewApp";
+import App from "./App";
 
 ReactOnRails.register({
-  AdminViewApp,
+  App,
 });
