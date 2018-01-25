@@ -22,8 +22,7 @@ const config = {
       "es5-shim/es5-shim",
       "es5-shim/es5-sham",
       "babel-polyfill",
-      "./app/bundles/HackerView/startup/registration",
-      "./app/bundles/AdminView/startup/registration",
+      "./startup/registration",
     ],
   },
 
