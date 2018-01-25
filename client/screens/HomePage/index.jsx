@@ -46,7 +46,7 @@ class HomePage extends Component {
             <Icon.RefreshCw className={isFetching ? "spinner" : ""} />
           </button>
         </div>
-        <h2>Your Admin Dashboard</h2>
+        <h2>Your {user.admin ? "Admin" : "Attendee"} Dashboard</h2>
         <FeedContainer isAdmin={user.admin} />
       </div>
     );
