@@ -15,10 +15,17 @@ import TestPage from "../screens/TestPage";
 import AttendeeCoursesPage from "../screens/AttendeeCoursesPage";
 import AttendeeEventPage from "../screens/AttendeeEventPage";
 import NotificationsPage from "../screens/NotificationsPage";
+import IndexPage from "../screens/IndexPage";
+import SignInPage from "../screens/Auth/SignInPage";
 
 const Routes = ({ user }) => {
   if (!Object.keys(user).length) {
-    return null;
+    return (
+      <Fragment>
+        <Route exact path="/" component={IndexPage} />
+        <Route path="/auth/signin" component={SignInPage} />
+      </Fragment>
+    );
   }
   return (
     <Fragment>

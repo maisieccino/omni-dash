@@ -138,4 +138,46 @@ export const uploadAvatar = file => async dispatch => {
   }
 };
 
+export const setIsSigningIn = () => ({
+  type: constants.SET_IS_SIGNING_IN,
+});
+
+export const signInSuccess = () => ({
+  type: constants.SIGN_IN_SUCCESS,
+});
+
+export const signInFailure = error => ({
+  type: constants.SIGN_IN_FAILURE,
+  error,
+});
+
+export const signIn = (email, password) => async dispatch => {
+  await dispatch(setIsSigningIn());
+  if (!email) {
+    return dispatch(signInFailure("You need to provide an email address."));
+  }
+  if (!password) {
+    return dispatch(signInFailure("You need to provide a password."));
+  }
+
+  try {
+    const data = new FormData();
+    data.append("email", email);
+    data.append("password", password);
+    data.append("authenticity_token", getMetaContent("csrf-token"));
+    const res = await fetch(constants.SIGN_IN_PATH, {
+      method: "POST",
+      body: data,
+      credentials: "include",
+    });
+    if (res.ok) {
+      await dispatch(signInSuccess());
+      return dispatch(fetchUser());
+    }
+    return dispatch(signInFailure(await res.text()));
+  } catch (error) {
+    return dispatch(signInFailure(error.message));
+  }
+};
+
 export * from "./passwordActions";

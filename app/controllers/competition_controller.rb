@@ -1,5 +1,5 @@
 class CompetitionController < ApplicationController
-  before_action :json_authenticate_user
+  before_action :json_authenticate_user, except: %i[ show ]
   before_action :admin_only, except: %i[show]
   before_action :set_competition, except: %i[create]
 

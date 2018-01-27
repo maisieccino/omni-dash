@@ -8,6 +8,8 @@ export const initialState = {
   isUpdating: false,
   isDeleting: false,
   isUploadingAvatar: false,
+  isSigningIn: false,
+  signInError: "",
   updateSuccess: false,
   user: {},
   userChangedFields: {},
@@ -131,6 +133,29 @@ export default (state = initialState, action = null) => {
         ...state,
         isUploadingAvatar: false,
         error,
+      };
+    }
+
+    case constants.SET_IS_SIGNING_IN: {
+      return {
+        ...state,
+        isSigningIn: true,
+        signInError: "",
+      };
+    }
+
+    case constants.SIGN_IN_SUCCESS: {
+      return {
+        ...state,
+        isSigningIn: false,
+      };
+    }
+
+    case constants.SIGN_IN_FAILURE: {
+      return {
+        ...state,
+        isSigningIn: false,
+        signInError: error,
       };
     }
 
