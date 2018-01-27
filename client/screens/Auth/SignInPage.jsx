@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { EmailField, PasswordField } from "../../components/Form";
+import { Redirect } from "react-router-dom";
 import { signIn } from "../../actions/userActions";
+import { EmailField, PasswordField } from "../../components/Form";
+import Flash from "../../components/Flash";
 
 class SignInPage extends Component {
   static mapStateToProps = state => ({
-    competition: state.competition.competition,
+    error: state.user.signInError,
+    isSigningIn: state.user.isSigningIn,
   });
 
   static mapDispatchToProps = dispatch => ({
@@ -15,30 +18,49 @@ class SignInPage extends Component {
 
   static propTypes = {
     signIn: PropTypes.func,
+    error: PropTypes.string,
+    isSigningIn: PropTypes.bool,
   };
 
   static defaultProps = {
-    competition: {},
     signIn: () => {},
+    error: "",
+    isSigningIn: false,
   };
 
   state = {
     email: "",
     password: "",
+    redirect: false,
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      this.props.isSigningIn &&
+      !nextProps.isSigningIn &&
+      !nextProps.error.length
+    ) {
+      // signed in!
+      this.setState({ redirect: true });
+    }
+  }
 
   onSignInClick(e) {
     e.preventDefault();
     const { email, password } = this.state;
-    console.log("hello");
     this.props.signIn(email, password);
   }
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, redirect } = this.state;
+    const { error } = this.props;
     return (
       <div>
+        {redirect && <Redirect to="/" />}
         <h1>Sign In</h1>
+        <Flash when={error.length > 0} type="alert">
+          {error}
+        </Flash>
         <form>
           <EmailField
             id="email"

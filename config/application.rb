@@ -20,5 +20,6 @@ module OmniDash
       DeviseController.respond_to :html, :json
     end
     config.action_cable.mount_path = "/cable"
+    config.autoload_paths << Rails.root.join("lib")
   end
 end

@@ -17,13 +17,13 @@ import {
   fetchNotifications,
 } from "../actions/notificationsActions";
 
-class HackerView extends Component {
+class AppContainer extends Component {
   static propTypes = {
     fetchCompetition: PropTypes.func,
     fetchNotifications: PropTypes.func,
     onReceiveNotification: PropTypes.func,
     notifications: PropTypes.arrayOf(PropTypes.shape()),
-    current_user: PropTypes.shape(),
+    user: PropTypes.shape(),
     history: PropTypes.shape(),
     location: PropTypes.shape(),
     competition: PropTypes.shape(),
@@ -34,14 +34,14 @@ class HackerView extends Component {
     fetchNotifications: () => {},
     onReceiveNotification: () => {},
     notifications: [],
-    current_user: {},
+    user: {},
     history: {},
     location: { pathname: "/" },
     competition: {},
   };
 
   static mapStateToProps = state => ({
-    current_user: state.current_user,
+    user: state.user.user,
     notifications: state.notifications.notifications,
     location: state.routerReducer.location,
     competition: state.competition.competition,
@@ -98,7 +98,7 @@ class HackerView extends Component {
   }
 
   render() {
-    const { current_user: user, history, notifications, location } = this.props;
+    const { user, history, notifications, location } = this.props;
     const unreadNotifications = notifications.filter(x => !x.seen);
     const currentKey = location
       ? this.props.location.pathname.split("/")[1]
@@ -122,9 +122,7 @@ class HackerView extends Component {
             >
               <div className="page-wrapper">
                 <div className="page">
-                  <Switch location={location}>
-                    <Routes user={user} />
-                  </Switch>
+                  <Switch location={location}>{Routes(user)}</Switch>
                 </div>
               </div>
             </CSSTransition>
@@ -136,6 +134,6 @@ class HackerView extends Component {
 }
 
 export default connect(
-  HackerView.mapStateToProps,
-  HackerView.mapDispatchToProps,
-)(HackerView);
+  AppContainer.mapStateToProps,
+  AppContainer.mapDispatchToProps,
+)(AppContainer);

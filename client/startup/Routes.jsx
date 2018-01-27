@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 import { Route } from "react-router";
+import { Redirect } from "react-router-dom";
 
 import TimelineItemPage from "../screens/TimelineItemPage";
 import SettingsPage from "../screens/SettingsPage";
@@ -18,7 +18,7 @@ import NotificationsPage from "../screens/NotificationsPage";
 import IndexPage from "../screens/IndexPage";
 import SignInPage from "../screens/Auth/SignInPage";
 
-const Routes = ({ user }) => {
+const Routes = user => {
   if (!Object.keys(user).length) {
     return (
       <Fragment>
@@ -57,16 +57,9 @@ const Routes = ({ user }) => {
           <Route path="/event" component={AttendeeEventPage} />
         </Fragment>
       )}
+      <Route path="/auth" render={() => <Redirect to="/" />} />
     </Fragment>
   );
-};
-
-Routes.propTypes = {
-  user: PropTypes.shape(),
-};
-
-Routes.defaultProps = {
-  user: {},
 };
 
 export default Routes;

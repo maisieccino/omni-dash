@@ -161,18 +161,34 @@ export const signIn = (email, password) => async dispatch => {
   }
 
   try {
-    const data = new FormData();
-    data.append("email", email);
-    data.append("password", password);
-    data.append("authenticity_token", getMetaContent("csrf-token"));
+    const json = {
+      user: {
+        email,
+        password,
+        remember_me: 0,
+      },
+      utf8: "✓",
+      commit: "Log in",
+      authenticity_token: getMetaContent("csrf-token"),
+    };
     const res = await fetch(constants.SIGN_IN_PATH, {
       method: "POST",
-      body: data,
+      body: JSON.stringify(json),
+      headers: {
+        "Content-Type": "application/json",
+      },
       credentials: "include",
     });
     if (res.ok) {
-      await dispatch(signInSuccess());
-      return dispatch(fetchUser());
+      await dispatch(fetchUser());
+      return dispatch(signInSuccess());
+    }
+    if (res.status === 401) {
+      return dispatch(
+        signInFailure(
+          "Either your email or password is incorrect. Make sure they're correct, and try again.",
+        ),
+      );
     }
     return dispatch(signInFailure(await res.text()));
   } catch (error) {
