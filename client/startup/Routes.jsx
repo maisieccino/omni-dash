@@ -17,13 +17,15 @@ import AttendeeEventPage from "../screens/AttendeeEventPage";
 import NotificationsPage from "../screens/NotificationsPage";
 import IndexPage from "../screens/IndexPage";
 import SignInPage from "../screens/Auth/SignInPage";
+import ForgotPasswordPage from "../screens/Auth/ForgotPasswordPage";
 
 const Routes = user => {
   if (!Object.keys(user).length) {
     return (
       <Fragment>
         <Route exact path="/" component={IndexPage} />
-        <Route path="/auth/signin" component={SignInPage} />
+        <Route path="/sign_in" component={SignInPage} />
+        <Route path="/forgot_password" component={ForgotPasswordPage} />
       </Fragment>
     );
   }

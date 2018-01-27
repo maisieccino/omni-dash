@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import * as Icon from "react-feather";
 import { signIn } from "../../actions/userActions";
 import { EmailField, PasswordField } from "../../components/Form";
 import Flash from "../../components/Flash";
@@ -53,9 +54,9 @@ class SignInPage extends Component {
 
   render() {
     const { email, password, redirect } = this.state;
-    const { error } = this.props;
+    const { error, isSigningIn } = this.props;
     return (
-      <div>
+      <Fragment>
         {redirect && <Redirect to="/" />}
         <h1>Sign In</h1>
         <Flash when={error.length > 0} type="alert">
@@ -76,13 +77,17 @@ class SignInPage extends Component {
             onChange={val => this.setState({ password: val })}
             value={password}
           />
-          <p>
+          <div className="button-group">
             <button type="submit" onClick={e => this.onSignInClick(e)}>
-              Sign In
+              {isSigningIn ? <Icon.RefreshCw className="spinner" /> : "Sign In"}
             </button>
-          </p>
+            <Link className="button" to="forgot_password">
+              Forgot Your Password?
+            </Link>
+          </div>
+          <hr />
         </form>
-      </div>
+      </Fragment>
     );
   }
 }

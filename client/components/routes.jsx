@@ -6,7 +6,7 @@ export default (user = {}, isAdmin = false) => {
   if (!Object.keys(user).length) {
     return [
       <NavItem to="/" match="^/$" label="Home" icon={<Icon.Home />} />,
-      <NavItem to="/auth/signin" label="Sign In" icon={<Icon.LogIn />} />,
+      <NavItem to="/sign_in" label="Sign In" icon={<Icon.LogIn />} />,
     ];
   }
   return isAdmin

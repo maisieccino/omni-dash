@@ -23,7 +23,9 @@ export const UPLOAD_AVATAR_FAILURE = "UPLOAD_AVATAR_FAILURE";
 export const USER_PATH = "/api/users";
 export const USER_ME_PATH = `${USER_PATH}/me`;
 export const CHANGE_PASSWORD_PATH = `${USER_ME_PATH}/change_password`;
-export const SIGN_IN_PATH = "/auth/sign_in";
+export const AUTH_PATH = "/auth";
+export const SIGN_IN_PATH = `${AUTH_PATH}/sign_in`;
+export const RESET_PASSWORD_PATH = `${AUTH_PATH}/password`;
 
 export const SET_IS_SIGNING_IN = "SET_IS_SIGNING_IN";
 export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS";

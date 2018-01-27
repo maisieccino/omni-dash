@@ -3,6 +3,7 @@ import {
   jsonPutRequest,
   jsonDeleteRequest,
   getMetaContent,
+  jsonPostRequest,
 } from "../../utils/Requests";
 import * as constants from "../../constants/userConstants";
 
@@ -161,7 +162,7 @@ export const signIn = (email, password) => async dispatch => {
   }
 
   try {
-    const json = {
+    const res = await jsonPostRequest(constants.SIGN_IN_PATH, {
       user: {
         email,
         password,
@@ -170,14 +171,6 @@ export const signIn = (email, password) => async dispatch => {
       utf8: "✓",
       commit: "Log in",
       authenticity_token: getMetaContent("csrf-token"),
-    };
-    const res = await fetch(constants.SIGN_IN_PATH, {
-      method: "POST",
-      body: JSON.stringify(json),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
     });
     if (res.ok) {
       await dispatch(fetchUser());
@@ -192,7 +185,9 @@ export const signIn = (email, password) => async dispatch => {
     }
     return dispatch(signInFailure(await res.text()));
   } catch (error) {
-    return dispatch(signInFailure(error.message));
+    return dispatch(
+      signInFailure(typeof error === "string" ? error : error.message),
+    );
   }
 };
 
