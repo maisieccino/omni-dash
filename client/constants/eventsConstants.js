@@ -1,4 +1,4 @@
-export const EVENTS_PATH = "/competition/events";
+export const EVENTS_PATH = "/api/competition/events";
 
 export const SET_IS_FETCHING_EVENTS = "SET_IS_FETCHING_EVENTS";
 export const FETCH_EVENTS_SUCCESS = "FETCH_EVENTS_SUCCESS";

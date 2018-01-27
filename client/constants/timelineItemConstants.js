@@ -1,4 +1,4 @@
-export const TIMELINE_ITEMS_PATH = "/competition/events";
+export const TIMELINE_ITEMS_PATH = "/api/competition/events";
 export const FETCH_TIMELINE_ITEM = "FETCH_TIMELINE_ITEM";
 export const SET_IS_FETCHING_TIMELINE_ITEM = "SET_IS_FETCHING_TIMELINE_ITEM";
 export const FETCH_TIMELINE_ITEM_SUCCESS = "FETCH_TIMELINE_ITEM_SUCCESS";

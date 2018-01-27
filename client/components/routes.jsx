@@ -2,8 +2,11 @@ import React from "react";
 import * as Icon from "react-feather";
 import { NavItem } from "../components/Navigation";
 
-export default isAdmin =>
-  isAdmin
+export default (user = {}, isAdmin = false) => {
+  if (!Object.keys(user).length) {
+    return null;
+  }
+  return isAdmin
     ? [
         <NavItem to="/" match="^/$" label="Home" icon={<Icon.Home />} />,
         <NavItem to="/users" label="Users" icon={<Icon.Users />} />,
@@ -27,3 +30,4 @@ export default isAdmin =>
         />,
         <NavItem to="/profile" label="Profile" icon={<Icon.User />} />,
       ];
+};

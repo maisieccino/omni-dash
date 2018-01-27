@@ -9,7 +9,7 @@ import { initialStates } from "../reducers";
 const App = props => {
   const store = configureStore(Object.assign({}, initialStates, props));
   const history = createHistory({
-    basename: "/home",
+    basename: "/",
     forceRefresh: false,
   });
 

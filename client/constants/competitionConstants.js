@@ -34,7 +34,7 @@ export const COMPETITION_MESSAGE_ATTENDEES_FAILURE =
   "COMPETITION_MESSAGE_ATTENDEES_FAILURE";
 export const SET_IS_MESSAGING_ATTENDEES = "SET_IS_MESSAGING_ATTENDEES";
 
-export const COMPETITION_PATH = "/competition/";
+export const COMPETITION_PATH = "/api/competition/";
 export const COMPETITION_INVITES_PATH = "/competition/invites";
 export const COMPETITION_MESSAGE_ATTENDEES_PATH =
   "/competition/attendees/message";
