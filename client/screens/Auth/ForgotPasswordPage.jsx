@@ -4,14 +4,14 @@ import * as Icon from "react-feather";
 import { RESET_PASSWORD_PATH } from "../../constants/userConstants";
 import { EmailField } from "../../components/Form";
 import Flash from "../../components/Flash";
-import { getMetaContent } from "../../utils/Requests";
+import { jsonPostRequest } from "../../utils/Requests";
 
 class ForgotPasswordPage extends Component {
   state = {
     email: "",
     error: "",
     sending: false,
-    success: false,
+    success: false
   };
 
   async onResetClick(e) {
@@ -20,34 +20,26 @@ class ForgotPasswordPage extends Component {
     await this.setState({ error: "", success: false, sending: true });
     if (email.length) {
       try {
-        const data = new FormData();
-        data.append("user[email]", email);
-        data.append("authenticity_token", getMetaContent("csrf-token"));
-        const res = await fetch(RESET_PASSWORD_PATH, {
-          body: data,
-          method: "POST",
-          credentials: "include",
+        await jsonPostRequest(RESET_PASSWORD_PATH, {
+          user: {
+            email
+          },
+          commit: "Send me reset password instructions",
+          utf8: "✓"
         });
-        if (!res.ok) {
-          return this.setState({
-            sending: false,
-            success: false,
-            error: await res.text(),
-          });
-        }
         return this.setState({ success: true, sending: false, email: "" });
       } catch (error) {
         return this.setState({
           error: typeof error === "string" ? error : error.message,
           sending: false,
-          success: false,
+          success: false
         });
       }
     }
     return this.setState({
       error: "You need to enter a password",
       sending: false,
-      success: false,
+      success: false
     });
   }
 

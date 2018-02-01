@@ -25,8 +25,13 @@ export const USER_ME_PATH = `${USER_PATH}/me`;
 export const CHANGE_PASSWORD_PATH = `${USER_ME_PATH}/change_password`;
 export const AUTH_PATH = "/auth";
 export const SIGN_IN_PATH = `${AUTH_PATH}/sign_in`;
+export const SIGN_OUT_PATH = `${AUTH_PATH}/sign_out`;
 export const RESET_PASSWORD_PATH = `${AUTH_PATH}/password`;
 
 export const SET_IS_SIGNING_IN = "SET_IS_SIGNING_IN";
 export const SIGN_IN_SUCCESS = "SIGN_IN_SUCCESS";
 export const SIGN_IN_FAILURE = "SIGN_IN_FAILURE";
+
+export const SET_IS_SIGNING_OUT = "SET_IS_SIGNING_OUT";
+export const SIGN_OUT_SUCCESS = "SIGN_OUT_SUCCESS";
+export const SIGN_OUT_FAILURE = "SIGN_OUT_FAILURE";

@@ -1,22 +1,29 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import HomePage from "./HomePage";
 
 class IndexPage extends Component {
   static mapStateToProps = state => ({
     competition: state.competition.competition,
+    user: state.user.user
   });
 
   static propTypes = {
     competition: PropTypes.shape(),
+    user: PropTypes.shape()
   };
 
   static defaultProps = {
     competition: {},
+    user: {}
   };
 
   render() {
-    const { competition } = this.props;
+    const { competition, user } = this.props;
+    if (Object.keys(user).length) {
+      return <HomePage user={user} />;
+    }
     return (
       <div>
         <h1>

@@ -1,12 +1,14 @@
 import * as constants from "../../constants/userConstants";
 import changePasswordReducer, {
-  initialState as changePasswordState,
+  initialState as changePasswordState
 } from "./changePasswordReducer";
 
 export const initialState = {
   isFetching: false,
   isUpdating: false,
   isDeleting: false,
+  isSigningOut: false,
+  signOutError: "",
   isUploadingAvatar: false,
   isSigningIn: false,
   signInError: "",
@@ -14,7 +16,7 @@ export const initialState = {
   user: {},
   userChangedFields: {},
   error: "",
-  changePassword: changePasswordState,
+  changePassword: changePasswordState
 };
 
 export default (state = initialState, action = null) => {
@@ -23,21 +25,21 @@ export default (state = initialState, action = null) => {
   switch (type) {
     case constants.SET_IS_FETCHING: {
       return Object.assign({}, state, {
-        isFetching: true,
+        isFetching: true
       });
     }
 
     case constants.FETCH_USER_SUCCESS: {
       return Object.assign({}, state, {
         isFetching: false,
-        user,
+        user
       });
     }
 
     case constants.FETCH_USER_FAILURE: {
       return Object.assign({}, state, {
         isFetching: false,
-        error,
+        error
       });
     }
 
@@ -45,7 +47,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isUpdating: true,
-        updateSuccess: false,
+        updateSuccess: false
       };
     }
 
@@ -53,7 +55,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isUpdating: false,
-        updateSuccess: true,
+        updateSuccess: true
       };
     }
 
@@ -61,14 +63,14 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isUpdating: false,
-        error,
+        error
       };
     }
 
     case constants.SET_UPDATE_SUCCESS: {
       return {
         ...state,
-        updateSuccess: success,
+        updateSuccess: success
       };
     }
 
@@ -76,7 +78,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isDeleting: true,
-        error,
+        error
       };
     }
 
@@ -84,7 +86,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isDeleting: false,
-        error: "",
+        error: ""
       };
     }
 
@@ -92,7 +94,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isDeleting: false,
-        error: true,
+        error: true
       };
     }
 
@@ -101,15 +103,15 @@ export default (state = initialState, action = null) => {
         ...state,
         userChangedFields: {
           ...state.userChangedFields,
-          ...updatedValues,
-        },
+          ...updatedValues
+        }
       };
     }
 
     case constants.RESET_SETTING_VALUES: {
       return {
         ...state,
-        userChangedFields: {},
+        userChangedFields: {}
       };
     }
 
@@ -117,14 +119,14 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         error: "",
-        isUploadingAvatar: true,
+        isUploadingAvatar: true
       };
     }
 
     case constants.UPLOAD_AVATAR_SUCCESS: {
       return {
         ...state,
-        isUploadingAvatar: false,
+        isUploadingAvatar: false
       };
     }
 
@@ -132,7 +134,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isUploadingAvatar: false,
-        error,
+        error
       };
     }
 
@@ -140,14 +142,14 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isSigningIn: true,
-        signInError: "",
+        signInError: ""
       };
     }
 
     case constants.SIGN_IN_SUCCESS: {
       return {
         ...state,
-        isSigningIn: false,
+        isSigningIn: false
       };
     }
 
@@ -155,7 +157,31 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isSigningIn: false,
-        signInError: error,
+        signInError: error
+      };
+    }
+
+    case constants.SET_IS_SIGNING_OUT: {
+      return {
+        ...state,
+        isSigningOut: true,
+        signOutError: ""
+      };
+    }
+
+    case constants.SIGN_OUT_SUCCESS: {
+      return {
+        ...state,
+        isSigningOut: false,
+        user: {}
+      };
+    }
+
+    case constants.SIGN_OUT_FAILURE: {
+      return {
+        ...state,
+        isSigningOut: false,
+        signOutError: error
       };
     }
 
@@ -165,7 +191,7 @@ export default (state = initialState, action = null) => {
     case constants.SET_IS_CHANGING_PASSWORD: {
       return {
         ...state,
-        changePassword: changePasswordReducer(state.changePassword, action),
+        changePassword: changePasswordReducer(state.changePassword, action)
       };
     }
 

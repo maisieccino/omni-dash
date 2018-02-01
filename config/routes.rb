@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   root "app#index"
 
   devise_for :users, path: "auth", controllers: {
+    registrations: "users/registrations",
     sessions: "users/sessions",
-    registrations: "users/registrations"
   }
 
   scope :auth do

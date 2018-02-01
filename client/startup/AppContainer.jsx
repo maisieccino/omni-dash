@@ -1,57 +1,85 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Route } from "react-router";
+import { Redirect, Switch } from "react-router-dom";
+
 import { connect } from "react-redux";
 import { ConnectedRouter } from "react-router-redux";
-import { Switch } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import ActionCable from "actioncable";
 
 import Navigation from "../components/Navigation";
 import Notifications from "../components/Notifications";
-import Routes from "./Routes";
+// import Routes from "./Routes";
 import routes from "../components/routes";
 
 import { fetchCompetition } from "../actions/competitionActions";
 import {
   onReceiveNotification,
-  fetchNotifications,
+  fetchNotifications
 } from "../actions/notificationsActions";
+import { fetchUser } from "../actions/userActions";
+
+import TimelineItemPage from "../screens/TimelineItemPage";
+import SettingsPage from "../screens/SettingsPage";
+import ProfilePage from "../screens/ProfilePage";
+import HomePage from "../screens/HomePage";
+import UsersPage from "../screens/UsersPage";
+import EventPage from "../screens/EventPage";
+import CoursesPage from "../screens/CoursesPage";
+import AddAttendeePage from "../screens/AddAttendeePage";
+import AddEventPage from "../screens/AddEventPage";
+import TestPage from "../screens/TestPage";
+import AttendeeCoursesPage from "../screens/AttendeeCoursesPage";
+import AttendeeEventPage from "../screens/AttendeeEventPage";
+import NotificationsPage from "../screens/NotificationsPage";
+import IndexPage from "../screens/IndexPage";
+import SignInPage from "../screens/Auth/SignInPage";
+import ForgotPasswordPage from "../screens/Auth/ForgotPasswordPage";
+
+const isAuthed = user => {
+  console.log(Object.keys(user).length > 0);
+  return Object.keys(user).length > 0;
+};
 
 class AppContainer extends Component {
   static propTypes = {
     fetchCompetition: PropTypes.func,
+    fetchUser: PropTypes.func,
     fetchNotifications: PropTypes.func,
     onReceiveNotification: PropTypes.func,
     notifications: PropTypes.arrayOf(PropTypes.shape()),
     user: PropTypes.shape(),
     history: PropTypes.shape(),
     location: PropTypes.shape(),
-    competition: PropTypes.shape(),
+    competition: PropTypes.shape()
   };
 
   static defaultProps = {
     fetchCompetition: () => {},
+    fetchUser: () => {},
     fetchNotifications: () => {},
     onReceiveNotification: () => {},
     notifications: [],
     user: {},
     history: {},
     location: { pathname: "/" },
-    competition: {},
+    competition: {}
   };
 
   static mapStateToProps = state => ({
     user: state.user.user,
     notifications: state.notifications.notifications,
     location: state.routerReducer.location,
-    competition: state.competition.competition,
+    competition: state.competition.competition
   });
 
   static mapDispatchToProps = dispatch => ({
     fetchCompetition: () => dispatch(fetchCompetition()),
+    fetchUser: () => dispatch(fetchUser()),
     fetchNotifications: () => dispatch(fetchNotifications()),
     onReceiveNotification: notification =>
-      dispatch(onReceiveNotification(notification)),
+      dispatch(onReceiveNotification(notification))
   });
 
   constructor(props) {
@@ -61,6 +89,7 @@ class AppContainer extends Component {
 
   componentDidMount() {
     this.props.fetchCompetition();
+    this.props.fetchUser();
     this.props.fetchNotifications();
     this.subscribeChannel();
   }
@@ -76,12 +105,13 @@ class AppContainer extends Component {
 
   subscribeChannel() {
     const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
-    const cableUrl = `${protocol}${window.location.hostname}:${window.location
-      .port}/cable`;
+    const cableUrl = `${protocol}${window.location.hostname}:${
+      window.location.port
+    }/cable`;
     this.cable = ActionCable.createConsumer(cableUrl);
     this.cable.subscriptions.create(
       {
-        channel: "NotificationChannel",
+        channel: "NotificationChannel"
       },
       {
         disconnected: () =>
@@ -90,10 +120,10 @@ class AppContainer extends Component {
           /* eslint-disable no-new */
           this.props.onReceiveNotification(notification);
           new window.Notification(notification.title, {
-            body: notification.message,
+            body: notification.message
           });
-        },
-      },
+        }
+      }
     );
   }
 
@@ -122,7 +152,54 @@ class AppContainer extends Component {
             >
               <div className="page-wrapper">
                 <div className="page">
-                  <Switch location={location}>{Routes(user)}</Switch>
+                  <Switch location={location}>
+                    <Route
+                      path="/sign_in"
+                      render={() =>
+                        isAuthed(user) ? <Redirect to="/" /> : <SignInPage />
+                      }
+                    />
+                    <Route
+                      path="/forgot_password"
+                      render={() =>
+                        isAuthed(user) ? (
+                          <Redirect to="/" />
+                        ) : (
+                          <ForgotPasswordPage />
+                        )
+                      }
+                    />
+                    <Route exact path="/" component={IndexPage} />
+                    <Route
+                      path="/timeline/item/:id"
+                      render={props => <TimelineItemPage {...props} />}
+                    />
+                    <Route
+                      path="/notifications"
+                      component={NotificationsPage}
+                    />
+                    <Route path="/profile" component={ProfilePage} />
+                    <Route
+                      path="/user/:id"
+                      render={props => <ProfilePage {...props} />}
+                    />
+                    <Route path="/settings" component={SettingsPage} />
+
+                    <Route path="/test" component={TestPage} />
+                    {/* admin-specific pages */}
+                    <Route path="/event" component={EventPage} />
+                    <Route path="/addEvent" component={AddEventPage} />
+                    <Route path="/courses" component={CoursesPage} />
+                    <Route path="/users" component={UsersPage} />
+                    <Route
+                      path="/event/attendees/add"
+                      component={AddAttendeePage}
+                    />
+                    {/* user-specific pages */}
+                    <Route path="/courses" component={AttendeeCoursesPage} />
+                    <Route path="/event" component={AttendeeEventPage} />
+                    <Route path="/auth" render={() => <Redirect to="/" />} />
+                  </Switch>
                 </div>
               </div>
             </CSSTransition>
@@ -135,5 +212,5 @@ class AppContainer extends Component {
 
 export default connect(
   AppContainer.mapStateToProps,
-  AppContainer.mapDispatchToProps,
+  AppContainer.mapDispatchToProps
 )(AppContainer);

@@ -23,9 +23,9 @@ export const jsonGetRequest = async (path, headers = {}) => {
   const res = await fetch(path, {
     headers: {
       Accept: "application/json",
-      ...headers,
+      ...headers
     },
-    credentials: "include",
+    credentials: "include"
   });
   const json = await res.json();
   if (res.ok) {
@@ -51,13 +51,13 @@ export const jsonPutRequest = async (path, body, headers = {}) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      ...headers,
+      ...headers
     },
     body: JSON.stringify({
       ...body,
-      authenticity_token: getMetaContent("csrf-token"),
+      authenticity_token: getMetaContent("csrf-token")
     }),
-    credentials: "include",
+    credentials: "include"
   });
   let json;
   try {
@@ -88,13 +88,13 @@ export const jsonPostRequest = async (path, body, headers = {}) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      ...headers,
+      ...headers
     },
     body: JSON.stringify({
       ...body,
-      authenticity_token: getMetaContent("csrf-token"),
+      authenticity_token: getMetaContent("csrf-token")
     }),
-    credentials: "include",
+    credentials: "include"
   });
   const json = res.status === 204 ? "" : await res.json();
   if (res.ok) {
@@ -113,18 +113,19 @@ export const jsonPostRequest = async (path, body, headers = {}) => {
  * @param  {Object}  [headers={}] Additional headers to add to request
  * @return {Promise}              Promise that contains JSON response if successful
  */
-export const jsonDeleteRequest = async (path, headers = {}) => {
+export const jsonDeleteRequest = async (path, body = {}, headers = {}) => {
   const res = await fetch(path, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      ...headers,
+      ...headers
     },
     body: JSON.stringify({
-      authenticity_token: getMetaContent("csrf-token"),
+      ...body,
+      authenticity_token: getMetaContent("csrf-token")
     }),
-    credentials: "include",
+    credentials: "include"
   });
   const json = res.status === 204 ? "" : await res.json();
   if (res.ok) {
@@ -141,5 +142,5 @@ export default {
   jsonGetRequest,
   jsonPutRequest,
   jsonPostRequest,
-  jsonDeleteRequest,
+  jsonDeleteRequest
 };

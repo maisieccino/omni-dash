@@ -1,8 +1,9 @@
 /* eslint camelcase: 0 */
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
+import SignOutButton from "./SignOutButton";
 
 const Header = ({
   admin,
@@ -12,13 +13,13 @@ const Header = ({
   isFetching,
   isOwnProfile,
   onRefresh,
-  avatar_url: avatarUrl,
+  avatar_url: avatarUrl
 }) => (
   <header className="profile-header">
     <div className="profile-image-container">
       <div
         style={{
-          backgroundImage: `url(${avatarUrl})`,
+          backgroundImage: `url(${avatarUrl})`
         }}
         className="profile-image"
       />
@@ -39,25 +40,18 @@ const Header = ({
         >
           <Icon.RefreshCw className={isFetching ? "spinner" : ""} />
         </button>
-        {isOwnProfile && [
-          <Link
-            to="/settings"
-            className={`yellow button square ${isFetching ? "disabled" : ""}`}
-            title="Go To Settings"
-            key={0}
-          >
-            <Icon.Settings />
-          </Link>,
-          <a
-            href="/auth/sign_out"
-            data-method="delete"
-            className="red square button"
-            title="Log Out"
-            key={1}
-          >
-            <Icon.LogOut />
-          </a>,
-        ]}
+        {isOwnProfile && (
+          <Fragment>
+            <Link
+              to="/settings"
+              className={`yellow button square ${isFetching ? "disabled" : ""}`}
+              title="Go To Settings"
+            >
+              <Icon.Settings />
+            </Link>
+            <SignOutButton />
+          </Fragment>
+        )}
       </div>
     </div>
   </header>
@@ -71,7 +65,7 @@ Header.propTypes = {
   admin: PropTypes.bool,
   isOwnProfile: PropTypes.bool,
   onRefresh: PropTypes.func,
-  avatar_url: PropTypes.string,
+  avatar_url: PropTypes.string
 };
 
 Header.defaultProps = {
@@ -82,7 +76,7 @@ Header.defaultProps = {
   admin: false,
   isOwnProfile: false,
   onRefresh: () => {},
-  avatar_url: "/assets/user_missing.png",
+  avatar_url: "/assets/user_missing.png"
 };
 
 export default Header;
