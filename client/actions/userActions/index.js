@@ -3,6 +3,7 @@ import {
   jsonPutRequest,
   jsonDeleteRequest,
   getMetaContent,
+  setMetaContent,
   jsonPostRequest
 } from "../../utils/Requests";
 import * as constants from "../../constants/userConstants";
@@ -167,10 +168,7 @@ export const signIn = (email, password) => async dispatch => {
         email,
         password,
         remember_me: 0
-      },
-      utf8: "✓",
-      commit: "Log in",
-      authenticity_token: getMetaContent("csrf-token")
+      }
     });
     await dispatch(fetchUser());
     return dispatch(signInSuccess());
@@ -198,13 +196,11 @@ export const signOut = () => async dispatch => {
   await dispatch(setIsSigningOut());
   console.log("Signing out...");
   try {
-    await fetch(constants.SIGN_OUT_PATH, {
-      method: "DELETE",
-      body: {
-        utf8: "✓",
-        commit: "Sign out"
-      }
-    });
+    await jsonDeleteRequest(constants.SIGN_OUT_PATH);
+    // update CSRF stuff
+    // const json = await res.json();
+    // document.cookie = `csrf-token=${json.csrfToken}`;
+    // setMetaContent("csrf-token", json.csrfToken);
     return dispatch(signOutSuccess());
   } catch (error) {
     return dispatch(

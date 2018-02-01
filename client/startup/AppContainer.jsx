@@ -20,6 +20,7 @@ import {
 } from "../actions/notificationsActions";
 import { fetchUser } from "../actions/userActions";
 
+import RouteIf from "../components/RouteIf";
 import TimelineItemPage from "../screens/TimelineItemPage";
 import SettingsPage from "../screens/SettingsPage";
 import ProfilePage from "../screens/ProfilePage";
@@ -36,10 +37,19 @@ import NotificationsPage from "../screens/NotificationsPage";
 import IndexPage from "../screens/IndexPage";
 import SignInPage from "../screens/Auth/SignInPage";
 import ForgotPasswordPage from "../screens/Auth/ForgotPasswordPage";
+import UnauthorisedPage from "../screens/UnauthorisedPage";
 
-const isAuthed = user => {
-  console.log(Object.keys(user).length > 0);
-  return Object.keys(user).length > 0;
+const isAuthed = user => Object.keys(user).length > 0;
+
+const adminGate = (
+  user,
+  adminView,
+  nonAdminView = <UnauthorisedPage />
+) => () => {
+  if (!Object.keys(user).length) {
+    return <UnauthorisedPage />;
+  }
+  return user.admin ? adminView : nonAdminView;
 };
 
 class AppContainer extends Component {
@@ -184,10 +194,22 @@ class AppContainer extends Component {
                       render={props => <ProfilePage {...props} />}
                     />
                     <Route path="/settings" component={SettingsPage} />
-
                     <Route path="/test" component={TestPage} />
                     {/* admin-specific pages */}
-                    <Route path="/event" component={EventPage} />
+                    {/* <Route
+                      path="/event"
+                      render={adminGate(
+                        user,
+                        <EventPage />,
+                        <AttendeeEventPage />
+                      )}
+                    /> */}
+                    <RouteIf
+                      condition={(() => isAuthed(user) && user.admin)()}
+                      path="/event"
+                      component={EventPage}
+                      elseComponent={AttendeeEventPage}
+                    />
                     <Route path="/addEvent" component={AddEventPage} />
                     <Route path="/courses" component={CoursesPage} />
                     <Route path="/users" component={UsersPage} />
@@ -199,6 +221,7 @@ class AppContainer extends Component {
                     <Route path="/courses" component={AttendeeCoursesPage} />
                     <Route path="/event" component={AttendeeEventPage} />
                     <Route path="/auth" render={() => <Redirect to="/" />} />
+                    )}
                   </Switch>
                 </div>
               </div>

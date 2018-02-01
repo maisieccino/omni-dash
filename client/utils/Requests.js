@@ -1,16 +1,20 @@
+export const getMetaElement = name => {
+  const metas = document.getElementsByTagName("meta");
+  const metaArray = Array.prototype.slice.call(metas, 0);
+
+  return metaArray.filter(meta => meta.getAttribute("name") === name)[0];
+};
+
 /**
  * Grab meta content from the DOM.
  * @param  {String} name Name/key of the meta content to fetch
  * @return {String}      Value of the meta content
  */
-export const getMetaContent = name => {
-  const metas = document.getElementsByTagName("meta");
-  const metaArray = Array.prototype.slice.call(metas, 0);
+export const getMetaContent = name =>
+  getMetaElement(name).getAttribute("content");
 
-  return metaArray
-    .filter(meta => meta.getAttribute("name") === name)[0]
-    .getAttribute("content");
-};
+export const setMetaContent = (name, value) =>
+  getMetaElement(name).setAttribute("content", value);
 
 /**
  * Send a JSON-encoded GET request to an endpoint. Also deals with Rails CSRF
@@ -23,6 +27,7 @@ export const jsonGetRequest = async (path, headers = {}) => {
   const res = await fetch(path, {
     headers: {
       Accept: "application/json",
+      "X-CSRF-Token": getMetaContent("csrf-token"),
       ...headers
     },
     credentials: "include"
@@ -51,12 +56,10 @@ export const jsonPutRequest = async (path, body, headers = {}) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      "X-CSRF-Token": getMetaContent("csrf-token"),
       ...headers
     },
-    body: JSON.stringify({
-      ...body,
-      authenticity_token: getMetaContent("csrf-token")
-    }),
+    body: JSON.stringify(body),
     credentials: "include"
   });
   let json;
@@ -88,15 +91,13 @@ export const jsonPostRequest = async (path, body, headers = {}) => {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
+      "X-CSRF-Token": getMetaContent("csrf-token"),
       ...headers
     },
-    body: JSON.stringify({
-      ...body,
-      authenticity_token: getMetaContent("csrf-token")
-    }),
+    body: JSON.stringify(body),
     credentials: "include"
   });
-  const json = res.status === 204 ? "" : await res.json();
+  const json = res.status === 204 ? {} : await res.json();
   if (res.ok) {
     return json;
   }
@@ -113,21 +114,19 @@ export const jsonPostRequest = async (path, body, headers = {}) => {
  * @param  {Object}  [headers={}] Additional headers to add to request
  * @return {Promise}              Promise that contains JSON response if successful
  */
-export const jsonDeleteRequest = async (path, body = {}, headers = {}) => {
+export const jsonDeleteRequest = async (path, body, headers = {}) => {
   const res = await fetch(path, {
     method: "DELETE",
     headers: {
       Accept: "application/json",
-      "Content-Type": "application/json",
+      "Content-Type": body ? "application/json" : "",
+      "X-CSRF-Token": getMetaContent("csrf-token"),
       ...headers
     },
-    body: JSON.stringify({
-      ...body,
-      authenticity_token: getMetaContent("csrf-token")
-    }),
+    body: body ? JSON.stringify(body) : null,
     credentials: "include"
   });
-  const json = res.status === 204 ? "" : await res.json();
+  const json = res.status === 204 ? {} : await res.json();
   if (res.ok) {
     return json;
   }
