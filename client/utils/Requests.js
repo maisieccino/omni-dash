@@ -119,7 +119,7 @@ export const jsonDeleteRequest = async (path, body, headers = {}) => {
     method: "DELETE",
     headers: {
       Accept: "application/json",
-      "Content-Type": body ? "application/json" : "",
+      "Content-Type": "application/json",
       "X-CSRF-Token": getMetaContent("csrf-token"),
       ...headers
     },

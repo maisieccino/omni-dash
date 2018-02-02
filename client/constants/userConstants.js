@@ -26,6 +26,7 @@ export const CHANGE_PASSWORD_PATH = `${USER_ME_PATH}/change_password`;
 export const AUTH_PATH = "/auth";
 export const SIGN_IN_PATH = `${AUTH_PATH}/sign_in`;
 export const SIGN_OUT_PATH = `${AUTH_PATH}/sign_out`;
+export const TOKEN_PATH = `${AUTH_PATH}/token`;
 export const RESET_PASSWORD_PATH = `${AUTH_PATH}/password`;
 
 export const SET_IS_SIGNING_IN = "SET_IS_SIGNING_IN";

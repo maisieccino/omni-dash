@@ -198,9 +198,9 @@ export const signOut = () => async dispatch => {
   try {
     await jsonDeleteRequest(constants.SIGN_OUT_PATH);
     // update CSRF stuff
-    // const json = await res.json();
-    // document.cookie = `csrf-token=${json.csrfToken}`;
-    // setMetaContent("csrf-token", json.csrfToken);
+    const json = await jsonGetRequest(constants.TOKEN_PATH);
+    document.cookie = `csrf-token=${json.token}`;
+    setMetaContent("csrf-token", json.token);
     return dispatch(signOutSuccess());
   } catch (error) {
     return dispatch(

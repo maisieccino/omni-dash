@@ -3,8 +3,12 @@ Rails.application.routes.draw do
 
   devise_for :users, path: "auth", controllers: {
     registrations: "users/registrations",
-    sessions: "users/sessions",
+    sessions: "users/sessions"
   }
+
+  devise_scope :user do
+    get "/auth/token", to: "users/sessions#get_token"
+  end
 
   scope :auth do
     get "is_signed_in", to: "auth#signed_in?"

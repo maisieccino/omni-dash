@@ -2,6 +2,13 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   respond_to :json
 
+  def get_token
+    render json: {
+      token: form_authenticity_token,
+      param: request_forgery_protection_token
+    }
+  end
+
   # GET /resource/sign_in
   # def new
   #   super
