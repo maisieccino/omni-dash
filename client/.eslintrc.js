@@ -16,6 +16,9 @@ module.exports = {
   },
   plugins: ["react", "jsx-a11y", "import"],
   globals: {},
+  rules: {
+    "comma-dangle": ["error", "always-multiline"],
+  },
   settings: {
     "import/resolver": {
       webpack: {

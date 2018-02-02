@@ -6,17 +6,17 @@ import HomePage from "./HomePage";
 class IndexPage extends Component {
   static mapStateToProps = state => ({
     competition: state.competition.competition,
-    user: state.user.user
+    user: state.user.user,
   });
 
   static propTypes = {
     competition: PropTypes.shape(),
-    user: PropTypes.shape()
+    user: PropTypes.shape(),
   };
 
   static defaultProps = {
     competition: {},
-    user: {}
+    user: {},
   };
 
   render() {

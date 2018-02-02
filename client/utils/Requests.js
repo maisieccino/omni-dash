@@ -28,9 +28,9 @@ export const jsonGetRequest = async (path, headers = {}) => {
     headers: {
       Accept: "application/json",
       "X-CSRF-Token": getMetaContent("csrf-token"),
-      ...headers
+      ...headers,
     },
-    credentials: "include"
+    credentials: "include",
   });
   const json = await res.json();
   if (res.ok) {
@@ -57,10 +57,10 @@ export const jsonPutRequest = async (path, body, headers = {}) => {
       Accept: "application/json",
       "Content-Type": "application/json",
       "X-CSRF-Token": getMetaContent("csrf-token"),
-      ...headers
+      ...headers,
     },
     body: JSON.stringify(body),
-    credentials: "include"
+    credentials: "include",
   });
   let json;
   try {
@@ -92,10 +92,10 @@ export const jsonPostRequest = async (path, body, headers = {}) => {
       Accept: "application/json",
       "Content-Type": "application/json",
       "X-CSRF-Token": getMetaContent("csrf-token"),
-      ...headers
+      ...headers,
     },
     body: JSON.stringify(body),
-    credentials: "include"
+    credentials: "include",
   });
   const json = res.status === 204 ? {} : await res.json();
   if (res.ok) {
@@ -121,10 +121,10 @@ export const jsonDeleteRequest = async (path, body, headers = {}) => {
       Accept: "application/json",
       "Content-Type": "application/json",
       "X-CSRF-Token": getMetaContent("csrf-token"),
-      ...headers
+      ...headers,
     },
     body: body ? JSON.stringify(body) : null,
-    credentials: "include"
+    credentials: "include",
   });
   const json = res.status === 204 ? {} : await res.json();
   if (res.ok) {
@@ -141,5 +141,5 @@ export default {
   jsonGetRequest,
   jsonPutRequest,
   jsonPostRequest,
-  jsonDeleteRequest
+  jsonDeleteRequest,
 };

@@ -13,13 +13,13 @@ const Header = ({
   isFetching,
   isOwnProfile,
   onRefresh,
-  avatar_url: avatarUrl
+  avatar_url: avatarUrl,
 }) => (
   <header className="profile-header">
     <div className="profile-image-container">
       <div
         style={{
-          backgroundImage: `url(${avatarUrl})`
+          backgroundImage: `url(${avatarUrl})`,
         }}
         className="profile-image"
       />
@@ -65,7 +65,7 @@ Header.propTypes = {
   admin: PropTypes.bool,
   isOwnProfile: PropTypes.bool,
   onRefresh: PropTypes.func,
-  avatar_url: PropTypes.string
+  avatar_url: PropTypes.string,
 };
 
 Header.defaultProps = {
@@ -76,7 +76,7 @@ Header.defaultProps = {
   admin: false,
   isOwnProfile: false,
   onRefresh: () => {},
-  avatar_url: "/assets/user_missing.png"
+  avatar_url: "/assets/user_missing.png",
 };
 
 export default Header;

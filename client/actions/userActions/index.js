@@ -4,22 +4,22 @@ import {
   jsonDeleteRequest,
   getMetaContent,
   setMetaContent,
-  jsonPostRequest
+  jsonPostRequest,
 } from "../../utils/Requests";
 import * as constants from "../../constants/userConstants";
 
 export const setIsFetching = () => ({
-  type: constants.SET_IS_FETCHING
+  type: constants.SET_IS_FETCHING,
 });
 
 export const fetchUserSuccess = data => ({
   type: constants.FETCH_USER_SUCCESS,
-  user: data
+  user: data,
 });
 
 export const fetchUserFailure = error => ({
   type: constants.FETCH_USER_FAILURE,
-  error
+  error,
 });
 
 export const fetchUser = id => async dispatch => {
@@ -30,36 +30,36 @@ export const fetchUser = id => async dispatch => {
     return dispatch(fetchUserSuccess(json));
   } catch (error) {
     return dispatch(
-      fetchUserFailure(typeof error === "string" ? error : error.message)
+      fetchUserFailure(typeof error === "string" ? error : error.message),
     );
   }
 };
 
 export const changeSettingValues = values => ({
   type: constants.CHANGE_SETTING_VALUES,
-  values
+  values,
 });
 
 export const resetSettingValues = () => ({
-  type: constants.RESET_SETTING_VALUES
+  type: constants.RESET_SETTING_VALUES,
 });
 
 export const setIsUpdating = () => ({
-  type: constants.SET_IS_UPDATING
+  type: constants.SET_IS_UPDATING,
 });
 
 export const setUpdateSuccess = (success = false) => ({
   type: constants.SET_UPDATE_SUCCESS,
-  success
+  success,
 });
 
 export const updateUserSuccess = () => ({
-  type: constants.UPDATE_USER_SUCCESS
+  type: constants.UPDATE_USER_SUCCESS,
 });
 
 export const updateUserFailure = error => ({
   type: constants.UPDATE_USER_FAILURE,
-  error
+  error,
 });
 
 /**
@@ -80,16 +80,16 @@ export const updateUser = (data = {}) => async dispatch => {
 };
 
 export const setIsDeletingUser = () => ({
-  type: constants.SET_IS_DELETING_USER
+  type: constants.SET_IS_DELETING_USER,
 });
 
 export const deleteUserSuccess = () => ({
-  type: constants.DELETE_USER_SUCCESS
+  type: constants.DELETE_USER_SUCCESS,
 });
 
 export const deleteUserFailure = error => ({
   type: constants.DELETE_USER_FAILURE,
-  error
+  error,
 });
 
 export const deleteUser = id => async dispatch => {
@@ -99,22 +99,22 @@ export const deleteUser = id => async dispatch => {
     return dispatch(deleteUserSuccess());
   } catch (error) {
     return dispatch(
-      deleteUserFailure(typeof error === "string" ? error : error.message)
+      deleteUserFailure(typeof error === "string" ? error : error.message),
     );
   }
 };
 
 export const setIsUploadingAvatar = () => ({
-  type: constants.SET_IS_UPLOADING_AVATAR
+  type: constants.SET_IS_UPLOADING_AVATAR,
 });
 
 export const uploadAvatarSuccess = () => ({
-  type: constants.UPLOAD_AVATAR_SUCCESS
+  type: constants.UPLOAD_AVATAR_SUCCESS,
 });
 
 export const uploadAvatarFailure = error => ({
   type: constants.UPLOAD_AVATAR_FAILURE,
-  error
+  error,
 });
 
 export const uploadAvatar = file => async dispatch => {
@@ -126,7 +126,7 @@ export const uploadAvatar = file => async dispatch => {
     const res = await fetch(constants.USER_ME_PATH, {
       method: "put",
       body: data,
-      credentials: "include"
+      credentials: "include",
     });
     if (res.ok) {
       await dispatch(uploadAvatarSuccess());
@@ -135,22 +135,22 @@ export const uploadAvatar = file => async dispatch => {
     throw new Error(await res.text());
   } catch (error) {
     return dispatch(
-      uploadAvatarFailure(typeof error === "string" ? error : error.message)
+      uploadAvatarFailure(typeof error === "string" ? error : error.message),
     );
   }
 };
 
 export const setIsSigningIn = () => ({
-  type: constants.SET_IS_SIGNING_IN
+  type: constants.SET_IS_SIGNING_IN,
 });
 
 export const signInSuccess = () => ({
-  type: constants.SIGN_IN_SUCCESS
+  type: constants.SIGN_IN_SUCCESS,
 });
 
 export const signInFailure = error => ({
   type: constants.SIGN_IN_FAILURE,
-  error
+  error,
 });
 
 export const signIn = (email, password) => async dispatch => {
@@ -167,8 +167,8 @@ export const signIn = (email, password) => async dispatch => {
       user: {
         email,
         password,
-        remember_me: 0
-      }
+        remember_me: 0,
+      },
     });
     await dispatch(fetchUser());
     // get new CSRF token
@@ -178,22 +178,22 @@ export const signIn = (email, password) => async dispatch => {
     return dispatch(signInSuccess());
   } catch (error) {
     return dispatch(
-      signInFailure(typeof error === "string" ? error : error.message)
+      signInFailure(typeof error === "string" ? error : error.message),
     );
   }
 };
 
 export const setIsSigningOut = () => ({
-  type: constants.SET_IS_SIGNING_OUT
+  type: constants.SET_IS_SIGNING_OUT,
 });
 
 export const signOutSuccess = () => ({
-  type: constants.SIGN_OUT_SUCCESS
+  type: constants.SIGN_OUT_SUCCESS,
 });
 
 export const signOutFailure = error => ({
   type: constants.SIGN_OUT_FAILURE,
-  error
+  error,
 });
 
 export const signOut = () => async dispatch => {
@@ -207,7 +207,7 @@ export const signOut = () => async dispatch => {
     return dispatch(signOutSuccess());
   } catch (error) {
     return dispatch(
-      signOutFailure(typeof error === "string" ? error : error.message)
+      signOutFailure(typeof error === "string" ? error : error.message),
     );
   }
 };

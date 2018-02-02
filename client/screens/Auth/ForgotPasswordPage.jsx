@@ -11,7 +11,7 @@ class ForgotPasswordPage extends Component {
     email: "",
     error: "",
     sending: false,
-    success: false
+    success: false,
   };
 
   async onResetClick(e) {
@@ -22,24 +22,24 @@ class ForgotPasswordPage extends Component {
       try {
         await jsonPostRequest(RESET_PASSWORD_PATH, {
           user: {
-            email
+            email,
           },
           commit: "Send me reset password instructions",
-          utf8: "✓"
+          utf8: "✓",
         });
         return this.setState({ success: true, sending: false, email: "" });
       } catch (error) {
         return this.setState({
           error: typeof error === "string" ? error : error.message,
           sending: false,
-          success: false
+          success: false,
         });
       }
     }
     return this.setState({
       error: "You need to enter a password",
       sending: false,
-      success: false
+      success: false,
     });
   }
 
