@@ -16,15 +16,13 @@ import routes from "../components/routes";
 import { fetchCompetition } from "../actions/competitionActions";
 import {
   onReceiveNotification,
-  fetchNotifications
+  fetchNotifications,
 } from "../actions/notificationsActions";
 import { fetchUser } from "../actions/userActions";
 
-import RouteIf from "../components/RouteIf";
 import TimelineItemPage from "../screens/TimelineItemPage";
 import SettingsPage from "../screens/SettingsPage";
 import ProfilePage from "../screens/ProfilePage";
-import HomePage from "../screens/HomePage";
 import UsersPage from "../screens/UsersPage";
 import EventPage from "../screens/EventPage";
 import CoursesPage from "../screens/CoursesPage";
@@ -32,7 +30,6 @@ import AddAttendeePage from "../screens/AddAttendeePage";
 import AddEventPage from "../screens/AddEventPage";
 import TestPage from "../screens/TestPage";
 import AttendeeCoursesPage from "../screens/AttendeeCoursesPage";
-import AttendeeEventPage from "../screens/AttendeeEventPage";
 import NotificationsPage from "../screens/NotificationsPage";
 import IndexPage from "../screens/IndexPage";
 import SignInPage from "../screens/Auth/SignInPage";
@@ -41,16 +38,7 @@ import UnauthorisedPage from "../screens/UnauthorisedPage";
 
 const isAuthed = user => Object.keys(user).length > 0;
 
-const adminGate = (
-  user,
-  adminView,
-  nonAdminView = <UnauthorisedPage />
-) => () => {
-  if (!Object.keys(user).length) {
-    return <UnauthorisedPage />;
-  }
-  return user.admin ? adminView : nonAdminView;
-};
+const isAdmin = user => user.admin;
 
 class AppContainer extends Component {
   static propTypes = {
@@ -62,7 +50,7 @@ class AppContainer extends Component {
     user: PropTypes.shape(),
     history: PropTypes.shape(),
     location: PropTypes.shape(),
-    competition: PropTypes.shape()
+    competition: PropTypes.shape(),
   };
 
   static defaultProps = {
@@ -74,14 +62,14 @@ class AppContainer extends Component {
     user: {},
     history: {},
     location: { pathname: "/" },
-    competition: {}
+    competition: {},
   };
 
   static mapStateToProps = state => ({
     user: state.user.user,
     notifications: state.notifications.notifications,
     location: state.routerReducer.location,
-    competition: state.competition.competition
+    competition: state.competition.competition,
   });
 
   static mapDispatchToProps = dispatch => ({
@@ -89,7 +77,7 @@ class AppContainer extends Component {
     fetchUser: () => dispatch(fetchUser()),
     fetchNotifications: () => dispatch(fetchNotifications()),
     onReceiveNotification: notification =>
-      dispatch(onReceiveNotification(notification))
+      dispatch(onReceiveNotification(notification)),
   });
 
   constructor(props) {
@@ -115,13 +103,12 @@ class AppContainer extends Component {
 
   subscribeChannel() {
     const protocol = window.location.protocol === "https:" ? "wss://" : "ws://";
-    const cableUrl = `${protocol}${window.location.hostname}:${
-      window.location.port
-    }/cable`;
+    const cableUrl = `${protocol}${window.location.hostname}:${window.location
+      .port}/cable`;
     this.cable = ActionCable.createConsumer(cableUrl);
     this.cable.subscriptions.create(
       {
-        channel: "NotificationChannel"
+        channel: "NotificationChannel",
       },
       {
         disconnected: () =>
@@ -130,10 +117,10 @@ class AppContainer extends Component {
           /* eslint-disable no-new */
           this.props.onReceiveNotification(notification);
           new window.Notification(notification.title, {
-            body: notification.message
+            body: notification.message,
           });
-        }
-      }
+        },
+      },
     );
   }
 
@@ -163,12 +150,7 @@ class AppContainer extends Component {
               <div className="page-wrapper">
                 <div className="page">
                   <Switch location={location}>
-                    <Route
-                      path="/sign_in"
-                      render={() =>
-                        isAuthed(user) ? <Redirect to="/" /> : <SignInPage />
-                      }
-                    />
+                    <Route path="/sign_in" component={SignInPage} />
                     <Route
                       path="/forgot_password"
                       render={() =>
@@ -176,8 +158,7 @@ class AppContainer extends Component {
                           <Redirect to="/" />
                         ) : (
                           <ForgotPasswordPage />
-                        )
-                      }
+                        )}
                     />
                     <Route exact path="/" component={IndexPage} />
                     <Route
@@ -196,32 +177,25 @@ class AppContainer extends Component {
                     <Route path="/settings" component={SettingsPage} />
                     <Route path="/test" component={TestPage} />
                     {/* admin-specific pages */}
-                    {/* <Route
-                      path="/event"
-                      render={adminGate(
-                        user,
-                        <EventPage />,
-                        <AttendeeEventPage />
-                      )}
-                    /> */}
-                    <RouteIf
-                      condition={(() => isAuthed(user) && user.admin)()}
-                      path="/event"
-                      component={EventPage}
-                      elseComponent={AttendeeEventPage}
+                    <Route path="/event" component={EventPage} />
+                    <Route
+                      path="/addEvent"
+                      render={() =>
+                        isAdmin(user) ? <AddEventPage /> : <UnauthorisedPage />}
                     />
-                    <Route path="/addEvent" component={AddEventPage} />
                     <Route path="/courses" component={CoursesPage} />
-                    <Route path="/users" component={UsersPage} />
+                    <Route
+                      path="/users"
+                      render={() =>
+                        isAdmin(user) ? <UsersPage /> : <UnauthorisedPage />}
+                    />
                     <Route
                       path="/event/attendees/add"
                       component={AddAttendeePage}
                     />
                     {/* user-specific pages */}
                     <Route path="/courses" component={AttendeeCoursesPage} />
-                    <Route path="/event" component={AttendeeEventPage} />
                     <Route path="/auth" render={() => <Redirect to="/" />} />
-                    )}
                   </Switch>
                 </div>
               </div>
@@ -235,5 +209,5 @@ class AppContainer extends Component {
 
 export default connect(
   AppContainer.mapStateToProps,
-  AppContainer.mapDispatchToProps
+  AppContainer.mapDispatchToProps,
 )(AppContainer);

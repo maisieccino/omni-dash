@@ -9,26 +9,26 @@ class SignOutButton extends Component {
   static propTypes = {
     signOut: PropTypes.func,
     isSigningOut: PropTypes.bool,
-    error: PropTypes.string
+    error: PropTypes.string,
   };
 
   static defaultProps = {
     signOut: () => {},
     isSigningOut: false,
-    error: ""
+    error: "",
   };
 
   static mapStateToProps = state => ({
     isSigningOut: state.user.isSigningOut,
-    error: state.user.signOutError
+    error: state.user.signOutError,
   });
 
   static mapDispatchToProps = dispatch => ({
-    signOut: () => dispatch(signOut())
+    signOut: () => dispatch(signOut()),
   });
 
   state = {
-    signedOut: false
+    signedOut: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -38,9 +38,6 @@ class SignOutButton extends Component {
       !nextProps.error.length
     ) {
       this.setState({ signedOut: true });
-    }
-    if (nextProps.error.length) {
-      console.error(nextProps.error);
     }
   }
 
@@ -63,5 +60,5 @@ class SignOutButton extends Component {
 
 export default connect(
   SignOutButton.mapStateToProps,
-  SignOutButton.mapDispatchToProps
+  SignOutButton.mapDispatchToProps,
 )(SignOutButton);

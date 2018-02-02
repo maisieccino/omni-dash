@@ -5,19 +5,24 @@ import {
   fetchCompetition,
   saveCompetition,
 } from "../../actions/competitionActions";
+import { fetchEvents } from "../../actions/eventsActions";
 import { Flash } from "../../components";
 
-import EventPageView from "./EventPageView";
+import AdminEventPageView from "./EventPageView";
+import AttendeeEventPageView from "./EventViewPage";
 import CreateEvent from "./CreateEvent";
 
 class EventPage extends Component {
   static propTypes = {
     getCompetition: PropTypes.func.isRequired,
     saveCompetition: PropTypes.func.isRequired,
+    fetchEvents: PropTypes.func.isRequired,
     isSaving: PropTypes.bool,
     isDeleting: PropTypes.bool,
     error: PropTypes.string,
     competitionExists: PropTypes.bool,
+    events: PropTypes.arrayOf(PropTypes.shape()),
+    user: PropTypes.shape(),
   };
 
   static defaultProps = {
@@ -25,6 +30,8 @@ class EventPage extends Component {
     isDeleting: false,
     error: "",
     competitionExists: true,
+    events: [],
+    user: {},
   };
 
   constructor(props) {
@@ -36,6 +43,7 @@ class EventPage extends Component {
 
   componentDidMount() {
     this.props.getCompetition();
+    this.props.fetchEvents();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,6 +59,15 @@ class EventPage extends Component {
   }
 
   render() {
+    if (!this.props.user) {
+      return <div>{JSON.stringify(this.props)}</div>;
+    }
+    if (!this.props.user.admin) {
+      const events = this.props.events.filter(
+        x => Date.parse(x.end_time) >= Date.now(),
+      );
+      return <AttendeeEventPageView events={events} />;
+    }
     return (
       <div>
         {/* Show alert if there's an error fetching competition
@@ -70,7 +87,7 @@ class EventPage extends Component {
         </Flash>
 
         {this.props.competitionExists ? (
-          <EventPageView />
+          <AdminEventPageView />
         ) : (
           <div>
             <h1>Create New Event</h1>
@@ -89,11 +106,14 @@ const mapStateToProps = state => ({
   error: state.competition.error,
   competitionExists: state.competition.competitionExists,
   isDeleting: state.competition.isDeleting,
+  user: state.user.user,
+  events: state.events.events,
 });
 
 const mapDispatchToProps = dispatch => ({
   getCompetition: () => dispatch(fetchCompetition()),
   saveCompetition: competition => dispatch(saveCompetition(competition)),
+  fetchEvents: () => dispatch(fetchEvents()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(EventPage);

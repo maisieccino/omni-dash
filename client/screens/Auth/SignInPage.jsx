@@ -11,6 +11,7 @@ class SignInPage extends Component {
   static mapStateToProps = state => ({
     error: state.user.signInError,
     isSigningIn: state.user.isSigningIn,
+    user: state.user.user,
   });
 
   static mapDispatchToProps = dispatch => ({
@@ -21,12 +22,14 @@ class SignInPage extends Component {
     signIn: PropTypes.func,
     error: PropTypes.string,
     isSigningIn: PropTypes.bool,
+    user: PropTypes.shape(),
   };
 
   static defaultProps = {
     signIn: () => {},
     error: "",
     isSigningIn: false,
+    user: {},
   };
 
   state = {
@@ -57,7 +60,9 @@ class SignInPage extends Component {
     const { error, isSigningIn } = this.props;
     return (
       <Fragment>
-        {redirect && <Redirect to="/" />}
+        {(redirect || Object.keys(this.props.user).length > 0) && (
+            <Redirect to="/" />
+          )}
         <h1>Sign In</h1>
         <Flash when={error.length > 0} type="alert">
           {error}

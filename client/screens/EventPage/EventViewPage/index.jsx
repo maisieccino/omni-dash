@@ -54,7 +54,7 @@ const EventViewPage = () => (
       <Stagger delay={50}>
         {routes.map((route, i) => (
           <FadeInOut key={i}>
-            <NavItem {...route} />
+            <NavItem key={generate()} {...route} />
           </FadeInOut>
         ))}
       </Stagger>
