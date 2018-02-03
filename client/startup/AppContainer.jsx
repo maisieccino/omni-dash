@@ -35,6 +35,7 @@ import IndexPage from "../screens/IndexPage";
 import SignInPage from "../screens/Auth/SignInPage";
 import ForgotPasswordPage from "../screens/Auth/ForgotPasswordPage";
 import UnauthorisedPage from "../screens/UnauthorisedPage";
+import NotFoundPage from "../screens/NotFoundPage";
 
 const isAuthed = user => Object.keys(user).length > 0;
 
@@ -195,7 +196,7 @@ class AppContainer extends Component {
                     />
                     {/* user-specific pages */}
                     <Route path="/courses" component={AttendeeCoursesPage} />
-                    <Route path="/auth" render={() => <Redirect to="/" />} />
+                    <Route path="*" component={NotFoundPage} />
                   </Switch>
                 </div>
               </div>
