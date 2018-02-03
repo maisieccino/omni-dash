@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
 import Flash from "../../../../components/Flash";
 import Timeline from "../../../../components/Timeline";
+import { EVENTS_PATH } from "../../../../constants/eventsConstants";
 
 const TimelineView = ({ error, events, fetchEvents, isFetching }) => (
   <div className="splitview-pane">
@@ -22,11 +23,7 @@ const TimelineView = ({ error, events, fetchEvents, isFetching }) => (
       >
         <Icon.RefreshCw className={isFetching ? "spinner" : ""} />
       </button>
-      <a
-        className="yellow square button"
-        href="/competition/events"
-        target="_blank"
-      >
+      <a className="yellow square button" href={EVENTS_PATH} target="_blank">
         <Icon.Server />
       </a>
     </div>

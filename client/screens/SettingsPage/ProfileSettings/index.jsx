@@ -107,13 +107,13 @@ const mapStateToProps = (state, ownProps) => {
   const isUnsaved = Object.keys(state.user.userChangedFields).length > 0;
   return {
     ...ownProps,
-    user: state.user.user,
+    user: state.user.currentUser,
     isFetching: state.user.isFetching,
     isUpdating: state.user.isUpdating,
     error: state.user.error,
     updateSuccess: state.user.updateSuccess,
     userFields: {
-      ...state.user.user,
+      ...state.user.currentUser,
       ...state.user.userChangedFields,
     },
     userChangedFields: state.user.userChangedFields,

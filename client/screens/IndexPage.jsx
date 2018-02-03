@@ -6,7 +6,7 @@ import HomePage from "./HomePage";
 class IndexPage extends Component {
   static mapStateToProps = state => ({
     competition: state.competition.competition,
-    user: state.user.user,
+    user: state.user.currentUser,
   });
 
   static propTypes = {

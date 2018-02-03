@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import moment from "moment";
 import * as Icon from "react-feather";
 import { fetchUsers } from "../../actions/usersActions";
+import { USERS_PATH } from "../../constants/usersConstants";
 
 import UsersTable from "./UsersTable";
 
@@ -42,7 +43,7 @@ class UsersPage extends Component {
             />
           </button>
           <a
-            href="/users"
+            href={USERS_PATH}
             className="yellow square button"
             title="View JSON Data"
             target="_blank"

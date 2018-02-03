@@ -6,7 +6,7 @@ class AppController < ApplicationController
       format.json { render json: {}.to_json }
       format.html do
         @event_name = event_name
-        @props = { user: {user: current_user || {}} }
+        @props = { user: {currentUser: current_user || {}} }
       end
     end
   end

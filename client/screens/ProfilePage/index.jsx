@@ -45,7 +45,7 @@ class ProfilePage extends Component {
 
 const mapStateToProps = state => ({
   user: state.user.user,
-  currentUser: state.current_user,
+  currentUser: state.user.currentUser,
   isFetching: state.user.isFetching,
 });
 

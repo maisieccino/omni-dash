@@ -66,7 +66,7 @@ class AppContainer extends Component {
   };
 
   static mapStateToProps = state => ({
-    user: state.user.user,
+    user: state.user.currentUser,
     notifications: state.notifications.notifications,
     location: state.routerReducer.location,
     competition: state.competition.competition,
@@ -177,6 +177,10 @@ class AppContainer extends Component {
                     <Route path="/settings" component={SettingsPage} />
                     <Route path="/test" component={TestPage} />
                     {/* admin-specific pages */}
+                    <Route
+                      path="/event/attendees/add"
+                      component={AddAttendeePage}
+                    />
                     <Route path="/event" component={EventPage} />
                     <Route
                       path="/addEvent"
@@ -188,10 +192,6 @@ class AppContainer extends Component {
                       path="/users"
                       render={() =>
                         isAdmin(user) ? <UsersPage /> : <UnauthorisedPage />}
-                    />
-                    <Route
-                      path="/event/attendees/add"
-                      component={AddAttendeePage}
                     />
                     {/* user-specific pages */}
                     <Route path="/courses" component={AttendeeCoursesPage} />

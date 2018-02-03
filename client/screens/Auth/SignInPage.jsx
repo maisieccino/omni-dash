@@ -11,7 +11,7 @@ class SignInPage extends Component {
   static mapStateToProps = state => ({
     error: state.user.signInError,
     isSigningIn: state.user.isSigningIn,
-    user: state.user.user,
+    user: state.user.currentUser,
   });
 
   static mapDispatchToProps = dispatch => ({

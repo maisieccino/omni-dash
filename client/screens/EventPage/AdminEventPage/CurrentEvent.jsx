@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import marked from "marked";
 import moment from "moment";
 import * as Icon from "react-feather";
+import { COMPETITION_PATH } from "../../../constants/competitionConstants";
 import { generateMapsUrl } from "../../../utils/geo";
 
 marked.setOptions({
@@ -17,7 +18,7 @@ const CurrentEvent = ({ competition }) => (
     <div className="title-bar">
       <h1>Your Event</h1>
       <a
-        href="/competition"
+        href={COMPETITION_PATH}
         className="yellow square button"
         title="View raw data"
         target="_blank"

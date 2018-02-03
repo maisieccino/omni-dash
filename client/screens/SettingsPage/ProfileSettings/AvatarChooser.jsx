@@ -25,7 +25,7 @@ class AvatarChooser extends Component {
   };
 
   static mapStateToProps = state => ({
-    user: state.user.user,
+    user: state.user.currentUser,
     isUploadingAvatar: state.user.isUploadingAvatar,
   });
 

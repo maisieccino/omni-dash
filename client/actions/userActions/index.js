@@ -6,15 +6,17 @@ import {
   setMetaContent,
   jsonPostRequest,
 } from "../../utils/Requests";
+import { USERS_PATH } from "../../constants/usersConstants";
 import * as constants from "../../constants/userConstants";
 
 export const setIsFetching = () => ({
   type: constants.SET_IS_FETCHING,
 });
 
-export const fetchUserSuccess = data => ({
+export const fetchUserSuccess = (data, isCurrentUser = false) => ({
   type: constants.FETCH_USER_SUCCESS,
   user: data,
+  isCurrentUser,
 });
 
 export const fetchUserFailure = error => ({
@@ -22,12 +24,12 @@ export const fetchUserFailure = error => ({
   error,
 });
 
-export const fetchUser = id => async dispatch => {
+export const fetchUser = (id, isCurrentUser = false) => async dispatch => {
   dispatch(setIsFetching());
-  const uri = id ? `/users/${id}/` : constants.USER_ME_PATH;
+  const uri = id ? `${USERS_PATH}/${id}/` : constants.USER_ME_PATH;
   try {
     const json = await jsonGetRequest(uri);
-    return dispatch(fetchUserSuccess(json));
+    return dispatch(fetchUserSuccess(json, isCurrentUser));
   } catch (error) {
     return dispatch(
       fetchUserFailure(typeof error === "string" ? error : error.message),
@@ -170,7 +172,7 @@ export const signIn = (email, password) => async dispatch => {
         remember_me: 0,
       },
     });
-    await dispatch(fetchUser());
+    await dispatch(fetchUser(null, true));
     // get new CSRF token
     const json = await jsonGetRequest(constants.TOKEN_PATH, {});
     document.cookie = `csrf-token=${json.token}`;

@@ -14,13 +14,21 @@ export const initialState = {
   signInError: "",
   updateSuccess: false,
   user: {},
+  currentUser: {},
   userChangedFields: {},
   error: "",
   changePassword: changePasswordState,
 };
 
 export default (state = initialState, action = null) => {
-  const { type, user, error, success, values: updatedValues } = action;
+  const {
+    type,
+    user,
+    error,
+    success,
+    values: updatedValues,
+    isCurrentUser,
+  } = action;
 
   switch (type) {
     case constants.SET_IS_FETCHING: {
@@ -30,9 +38,10 @@ export default (state = initialState, action = null) => {
     }
 
     case constants.FETCH_USER_SUCCESS: {
+      const userObj = isCurrentUser ? { currentUser: user } : { user };
       return Object.assign({}, state, {
         isFetching: false,
-        user,
+        ...userObj,
       });
     }
 
@@ -173,7 +182,7 @@ export default (state = initialState, action = null) => {
       return {
         ...state,
         isSigningOut: false,
-        user: {},
+        currentUser: {},
       };
     }
 

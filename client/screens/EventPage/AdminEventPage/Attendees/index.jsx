@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import * as Icon from "react-feather";
 import { fetchCompetitionAttendees } from "../../../../actions/competitionActions";
 import { Flash, Table } from "../../../../components";
+import { COMPETITION_INVITES_PATH } from "../../../../constants/competitionConstants";
 
 class Attendees extends Component {
   static propTypes = {
@@ -71,7 +72,7 @@ class Attendees extends Component {
           </button>
           <a
             className="yellow square button"
-            href="/competition/invites"
+            href={COMPETITION_INVITES_PATH}
             title="View attendee JSON data"
             target="_blank"
           >

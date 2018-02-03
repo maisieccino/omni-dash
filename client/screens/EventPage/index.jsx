@@ -8,8 +8,8 @@ import {
 import { fetchEvents } from "../../actions/eventsActions";
 import { Flash } from "../../components";
 
-import AdminEventPageView from "./EventPageView";
-import AttendeeEventPageView from "./EventViewPage";
+import AdminEventPage from "./AdminEventPage";
+import AttendeeEventPage from "./AttendeeEventPage";
 import CreateEvent from "./CreateEvent";
 
 class EventPage extends Component {
@@ -66,7 +66,7 @@ class EventPage extends Component {
       const events = this.props.events.filter(
         x => Date.parse(x.end_time) >= Date.now(),
       );
-      return <AttendeeEventPageView events={events} />;
+      return <AttendeeEventPage events={events} />;
     }
     return (
       <div>
@@ -87,7 +87,7 @@ class EventPage extends Component {
         </Flash>
 
         {this.props.competitionExists ? (
-          <AdminEventPageView />
+          <AdminEventPage />
         ) : (
           <div>
             <h1>Create New Event</h1>
@@ -106,7 +106,7 @@ const mapStateToProps = state => ({
   error: state.competition.error,
   competitionExists: state.competition.competitionExists,
   isDeleting: state.competition.isDeleting,
-  user: state.user.user,
+  user: state.user.currentUser,
   events: state.events.events,
 });
 
